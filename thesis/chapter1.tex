@@ -1,7 +1,103 @@
-\chapter{Chapter 1}
+\chapter{Introduction \label{section_introduction}}
+Volume visualization is an active branch of scientific visualization. It is a method of extracting meaningful information from volumetric data (3D discretely sampled data sets) using interactive graphics and imaging (see Section~\ref{volume_rendering}). The study of volume visualization involves volume data representation, modelling, manipulation and rendering \cite{kaufman_volume_1997}.
+First introduced by Levoy \cite{levoy_display_1988} for visualization of volume data, volume visualization has been widely used in various sciences to create insightful visualizations from both simulated and measured data.
+Volume visualization is a powerful technique which aims to visualize the 3D structures in volume data sets and thus facilitates the user's exploration into the data. It has become an important technique for various applications such as medical imaging and scientific visualization and is especially useful in diagnostics for physicians in medicine.
+%Visualization of large-scale time-varying volumetric datasets has become one of the most challenging problems in scientific visualization.
+With the advance of various data acquisition hardware,
+%such as CT, MRI, fMRI, 
+time-varying volumetric datasets are increasing dramatically both in size and complexity. However, the visualization of time-varying volume data remains a challenging problem due to the large size and the dynamic nature of the underlying information.
+Previously established techniques, such as in flow visualization, struggle to deal with the increasing complexity of the most recent datasets.
+%Researchers have proposed various techniques to analyse and visualize volume data.
 
-...
+The rendering of volume data requires every sample value (also called voxel, which is a volume element (or volumetric pixel)) to be mapped to visual properties (e.g. opacity and colour). This mapping is done with a transfer function, which can be a simple ramp, a piecewise linear function or an arbitrary table.
+The design of an effective transfer function (see Section~\ref{literature_of_transfer_function} for details) is essential for visualizing volume data. A wealth of techniques have been developed for transfer function design for static volume data \cite{kindlmann_semi-automatic_1998} \cite{pfister_transfer_2001} \cite{kniss_multidimensional_2002} \cite{bernardon_transfer-function_2008} \cite{arens_survey_2010}. However, transfer function design for time-varying volume data has not been studied thoroughly. % as in static volume data.
+A fundamental challenge in the analysis and classification of time-varying volume data is the lack of capability to %observe and 
+track data change or evolution over time \cite{gu_transgraph_2011}.
 
-	\section{Section 1.1}
+%Historically, most volume rendering techniques are designed to produce photorealistic images (e.g. volume ray-casting technique, which is an approximation of casting rays through the volume data).
+Much of the work in the field of volume visualization has been focused on the synthesis of photorealistic images to assist in the visualization of structures contained in volume data sets.
+However, traditional depictions of the same types of data, such as those found in medical textbooks, deliberately use non-realistic techniques to draw the viewer's attention to important aspects \cite{bruckner_style_2007}. Using abstraction, visual overload is prevented and thus result in a more effective visualization.
 
-	...
+NPR techniques are effective forms of abstraction. They are commonly inspired by artistic styles and techniques that do not focus on a realistic depiction of scenes and objects, therefore, they can express features that cannot be shown using physically correct light transport. Non-photorealistic images are used in preference to photorealistic images in specific circumstances. For instance, an empirical study \cite{schumann_assessing_1996} reported that, when asked to compare a computer-produced sketch against a photorealistically rendered CAD image, architects showed a great preference for the sketch.
+NPR models were adopted in visualization and hence formed the field of illustrative visualization.
+Although illustrative visualization is a relatively novel category of visualization approaches, it has been successfully employed in medical and other visualization sub-fields \cite{svakhine_illustration_2005} \cite{svakhine_illustration-inspired_2009}.
+Illustrative visualization has proven its usefulness in revealing 3D structures due to its ability to hide less relevant details while emphasizing important details. The goal of illustrative visualization is to gain clarity compared to photo-realistic rendering by emphasizing important features and improving data exploration. In order to obtain more comprehensive images, it is necessary to highlight important aspects and omit less relevant details.
+
+%In recent years, illustrative styles have been adopted in scientific visualization to enhance expressiveness of renderings. Approaches for illustrative volume visualization frequently employ non-photorealistic rendering techniques to mimic the style of traditional illustrations.
+%Although illustrative visualization is a relatively novel category of visualization approaches, it has been successfully employed in medical and other visualization sub-fields \cite{svakhine_illustration_2005} \cite{svakhine_illustration-inspired_2009}.
+%
+%Illustrative visualization has proven its usefulness in revealing 3D structures due to its ability to hide less relevant details while emphasizing important features. The goal of illustrative visualization is to gain clarity compared to photo-realistic rendering by emphasizing important features and improving data exploration. In order to gain more comprehensive images, it is necessary to highlight important aspects and omit less relevant details.
+
+\section{Motivation \label{motivation}}
+Understanding and analysing complex volumetrically varying data is a challenging problem.
+Many visualization techniques have had only limited success in succinctly portraying the structure of 3D time-varying volume data.
+%There are only limited success have been reported about various visualization techniques which succinctly portray the structure of 3D time-varying volume data.
+The main goal of our research is to investigate the optimization of visualization parameters (in particular transfer functions) and the use of NPR techniques, and develop a methodology which incorporates these two types of techniques to facilitate the user's exploration of the data sets. NPR techniques are effective forms of abstraction and they have proven their usefulness in expressing features that cannot be shown using realistic depiction of scenes and objects. The combination of standard volume visualization and NPR techniques will bring the opportunity to provide expressive visualization and assist the user in accomplishing his/her task efficiently.
+
+We hypothesise that the importance of voxels (sample values in volume data) are associated with their information content. Therefore, the transfer functions of volume visualization can be optimized based on the information within the data sets and user input which indicates the user's interest.
+In addition, we investigate the feasibility of propagating the optimization approach from static volume data to time-varying data.
+
+%A small number of approaches have been proposed for using information theory in volume visualization. However, most available approaches are not designed for the visualization of time-varying data and thus they have not taken the coherence issues into account.
+
+\section{Scope}
+This thesis focuses on methods for enhancing user understanding of volume data by optimizing visualization parameters and incorporating NPR techniques.
+We investigate the optimization of transfer functions by exploiting the information inherent within the volume data and input from user interaction.
+In addition, we investigate NPR techniques which we believe are well suited for highlighting important details as well as simplifying less important details. Hence we combine the optimization of visualization parameters and NPR techniques in order to provide meaningful exploration of complex data.
+
+In this research, we focus on the visualization of both static and time-varying volume data, particularly those scalar data acquired from CT, MRI and 4D MRI. Flow data which are often in the form of vector fields are not under the focus of our research.
+Furthermore, we investigate techniques which are applicable to consumer level devices rather than expensive dedicated visualization hardware. As such, this constrains the amount of memory and processing power available, and therefore fast techniques with low memory requirement are necessary.
+
+%\section{Research Question and Design \label{section_research_question}}
+%\paragraph{Research Question}
+%Visualization is concerned with the creation of images from data to enhance the user's ability to reason and understand properties related to the user's underlying problem.
+%This research project focuses on methods to optimize important parameters of volume visualization (in particular transfer functions) and utilize NPR techniques in order to facilitate the user's exploration and understanding of the volume data. We address the following problem in volume visualization.
+%
+%\begin{itemize}
+%\item How do we improve the understanding of volume data by optimization of visualization parameters and through the use of NPR techniques?
+%	\begin{itemize}
+%	\item We investigate techniques that will allow us to exploit the information inherent within the volume data to automatically and also semi-automatically (in user driven ways) optimise the transfer function in volume visualization. 
+%%	Additionally we explore illustrative rendering strategies to enhance the perception of structures within the volume data.
+%	
+%	Additionally we explore illustrative rendering strategies to enhance the perception of structures within the volume data as well as depict the dynamic aspects of time-varying volume data.
+%%	How do we exploit the information in the volume data to optimize the transfer function in volume visualization and enhance the perception of structures using illustrations?
+%	\end{itemize}
+%%\item How do we convey motion information of time-varying volume data through non-photorealistic techniques?
+%%	\begin{itemize}
+%%	\item How do we exploit illustrations and painterly stylization (such as stroke orientation, size and colour) to express motion information (such as direction and speed)?
+%%	\end{itemize}
+%\end{itemize}
+%
+%%\paragraph{Sub-questions stem from the overall research questions}
+%%
+%%\begin{itemize}
+%%\item How de we identify features of interest in volume data?
+%%\item How do we extract a succinct representation from a time-step of time-varying volume data?
+%%\\How do we design coherent transfer functions for time-varying volume rendering?
+%%\item How do we track features through a series of time-steps in time-varying volume data?
+%%\\How does clustering techniques help gain insights into time-varying volume data?
+%%\item How do we enhance time-invariant features of volume data with illustrative techniques such as boundary enhancement and oriented feature enhancement?
+%%\item How do we enhance temporal features of time-varying volume data with illustration-inspired techniques?
+%%\item How do we render time-varying time-varying volume data with coherence?
+%%\\How do we tackle the coherence issues in transfer function design and illustrative rendering for time-varying volume data?
+%%\item How do we evaluate the effectiveness of our approaches?
+%%\end{itemize}
+%
+%\paragraph{Research Design}
+%In this thesis, we use entropy from information theory to measure the information content associated with sample values in volume data and establish importance measurements based on information within the volume data as well as input from user-driven techniques.
+%
+%NPR techniques are adopted in our approaches to visualize both static and time-varying data in order to enhance the expressiveness of the visualization. The combination of standard volume rendering techniques and NPR techniques provides us with the freedom to depict data content as abstraction according to its importance.
+%
+%The most fundamental objective of visualization is to enhance the user's ability to reason and understand properties related to the underlying problem. Therefore, we will conduct user studies that will measure the user's task performance and accuracy in order to evaluate the effectiveness of the proposed visualization approaches.
+
+%\section{Methodology}
+%\section{Scope}
+
+\section{Contributions}
+
+\section{Summary of Chapters}
+
+%...
+%
+%	\section{Section 1.1}
+%
+%	...

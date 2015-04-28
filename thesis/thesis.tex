@@ -28,6 +28,20 @@
 \documentclass[a4paper, 12pt, oneside]{report}         %% LaTeX2e document.
 \usepackage {tcdthesis}              %% Preamble.
 
+\usepackage{lmodern} %Type1-font for non-english texts and characters
+\usepackage{graphicx} %%For loading graphic files
+%% Math Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+%% subfigure
+\usepackage{caption}
+\usepackage{subcaption}
+%% bookmark
+\usepackage{hyperref}
+%% url
+\usepackage{url}
+
 % \mastersthesis                     %% Uncomment one of these; if you don't
 \phdthesis                         %% use either, the default is \phdthesis.
 
@@ -128,35 +142,72 @@
 %\end{thesisacknowledgments}                       %% allowed in LaTeX2e par-mode.
 
 \begin{thesisabstract}
-...ABSTRACT...
+Volume data is widely used in scientific and medical research, and volume visualization has been proven to be an effective and flexible method for visualizing complex structures. This thesis examines the methods for exploring of volume data by optimization of visualization parameters and through the use of focus and context visualization techniques by selectively enhancing important parts of the data sets.
+
+
+%Volume data is widely used in scientific and medical research, and volume visualization has been proven to be an effective and flexible method for visualizing complex structures within volume data.
+%In recent years, volume visualization has received increasing attention in the analysis of dynamics and evolution of phenomena in a variety of application domains, including medicine, meteorology, astrophysics and engineering.
+%However, the size and complexity of the parameter space controlling the rendering process makes it challenging to generate an informative rendering.
+%In particular, the specification of the transfer function (which is a mapping from data values to visual properties ) is frequently a time-consuming and unintuitive task.
+
+%We propose a novel approach to optimise the transfer functions in volume visualization by exploiting the information inherent within the volume data.
+%We hypothesise that the importance of voxels (sample values in volume data) are associated with their information content. Therefore, the transfer functions of volume visualization can be optimized based on the information within the data sets. The user's interests are also taken into account in this approach through interactive input (such as user-selected regions).
+%This optimization approach reduces the occlusion in the resulting images, and thus improves the perception of structures in the rendered images.
+%In particular we believe our approach will be useful in visualizing time-varying details by adaptively optimizing the visualization parameters according to the changes over time.
+%
+%NPR techniques are effective forms of abstraction and they have proven useful in expressing features that are difficult to display using realistic depiction of scenes and objects.
+%We explore the use of NPR techniques to enhance the perception of structures within the volume data by highlighting important details and simplifying less important details, as well as depicting the dynamic aspects of time-varying volume data.
+%We argue that the combination of standard volume visualization and NPR techniques can provide opportunities to deliver meaningful visualization and assist users in accomplishing their underlying problems efficiently.
+%
+
+
+
+Volume visualization is a powerful technique for depicting layered structures in 3D volume data sets. However, it is a major challenge to obtain clear visualizations of a volume with layers clearly revealed.
+In particular, the specification of the transfer function is frequently a time-consuming and unintuitive task in volume rendering.
+We describe a global optimization and two user-driven refinement methods for modulating transfer functions in order to assist the exploration of volume data.
+This optimization is dependent on the distribution of scalar values of the volume data set and is designed to reduce general occlusion and improve the clarity of layers of structures in the resulting images.
+The user can explore a volume by interactively specifying different priority intensity ranges and observe which layers of structures are revealed. In addition we show how the technique can be applied for time-varying volume data sets by adaptively refining the transfer function based on the histogram of each time-step. 
+Experimental results on various data sets are presented to demonstrate the effectiveness of our method.
+
+
+
+
+
+Time-varying volume data is used in many areas of science and engineering. However visualizations of such data are not easy for users to visually process due to the amount of information that can be presented simultaneously. We propose a novel visualization approach which modulates focus, emphasizing important information, by adjusting saturation and brightness of voxels based on an importance measure derived from temporal and multivariate information. By conducting a voxel-wise analysis of a number of consecutive frames, we acquire a volatility measure of each voxel. We then use intensity, volatility and additional multivariate information to determine opacity, saturation and brightness of the voxels. The method was tested in visualizing a multivariate hurricane data set. The results suggest that our approach can give the user a deeper understanding of the data by presenting multivariate information variables in one self-contained visualization.
 \end{thesisabstract}
 
 \tableofcontents                                  %% Generate table of contents.
-\listoftables                                     %% Uncomment this to generate list of tables.
-\listoffigures                                    %% Uncomment this to generate list of figures.
+%\listoftables                                     %% Uncomment this to generate list of tables.
+%\listoffigures                                    %% Uncomment this to generate list of figures.
 
 %%
 %% Include thesis chapters here...
 %%
-  \include{chapter1}                                
-  \include{chapter2}                                
-%   \include{chapter3}
-%   \include{chapter4}
-%   \include{chapter5}
+\include{chapter1}                                
+\include{chapter2}                                
+\include{chapter3}
+\include{chapter4}
+\include{chapter5}
+\include{chapter6}
 
 
-\addcontentsline {toc}{chapter}{Appendices}       %% Force Appendices to appear in contents
-\begin{appendix}
- \include{appendix1}
-% \include{appendix2}
-\end{appendix}
+%\addcontentsline {toc}{chapter}{Appendices}       %% Force Appendices to appear in contents
+%\begin{appendix}
+% \include{appendix1}
+%% \include{appendix2}
+%\end{appendix}
 
 
 %\addcontentsline {toc}{chapter}{Bibliography}     %% Force Bibliography to appear in contents
 
-\begin{thebibliography}{ieeetr}                   %% Start your bibliography here; you can
-\bibliography{refs}                               %% also use the \bibliography command
-\end{thebibliography}                             %% to generate your bibliography.
+%\begin{thebibliography}{ieeetr}                   %% Start your bibliography here; you can
+%%\bibliography{refs}                               %% also use the \bibliography command
+%\end{thebibliography}                             %% to generate your bibliography.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% BIBLIOGRAPHY AND OTHER LISTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliographystyle{ieeetr}
+\bibliography{bibliography}
 
 \end{document}                                    %% END THE DOCUMENT
