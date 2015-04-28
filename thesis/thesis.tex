@@ -28,12 +28,8 @@
 \documentclass[a4paper, 12pt, oneside]{report}         %% LaTeX2e document.
 \usepackage {tcdthesis}              %% Preamble.
 
-\usepackage{lmodern} %Type1-font for non-english texts and characters
-\usepackage{graphicx} %%For loading graphic files
-%% Math Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{amsmath}
-\usepackage{amsthm}
-\usepackage{amsfonts}
+%%For loading graphic files
+\usepackage{graphicx}
 %% subfigure
 \usepackage{caption}
 \usepackage{subcaption}
@@ -41,6 +37,16 @@
 \usepackage{hyperref}
 %% url
 \usepackage{url}
+\usepackage{textgreek}
+%% image path
+\graphicspath{{../img/TransferReport/}{../img/TransferReport/images/}{../img/EurasiaGraphics2014/images/}{../img/EurasiaGraphics2014/images1/}{../img/EurasiaGraphics2014/images2/}{../img/EurasiaGraphics2014/images3/}{../img/EurasiaGraphics2014/images4/}}
+\usepackage{lmodern} %Type1-font for non-english texts and characters
+
+%% Math Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+
 
 % \mastersthesis                     %% Uncomment one of these; if you don't
 \phdthesis                         %% use either, the default is \phdthesis.
