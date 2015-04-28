@@ -757,7 +757,7 @@ Figure~\ref{fig:vortex_time_histogram} shows the intensity histograms of the two
 \label{fig:vortex_time_histogram}
 \end{figure}
 
-\section{Conclusion}
+\section{Conclusions}
 %The global optimization aims at alleviating occlusion problems in volume rendering. For example, large obstacles, which are common in CT scans of anatomical structures, tend to occlude the rest of structures in the data. If the obstacles has enough opacity, the final image would be dominated by the obstacles. Instead of refining the transfer function based on visibility contribution of voxels \cite{correa_visibility_2011} \cite{ruiz_automatic_2011}, we address this problem by introducing probability distribution from the occurrence of intensity values. Our approach is view-independent and does not required to perform another pass of volume rendering to compute the accumulated opacity for each voxel. Therefore our approach is lightweight and should has better performance compared to approaches which rely on view-dependent visibility distribution.
 
 In this paper, the global optimization aims to alleviate excessive occlusion problems in volume rendering. However, instead of computing the view-dependent visibility of each voxel as is necessitated in other similar approaches \cite{correa_visibility_2011} \cite{ruiz_automatic_2011}, we achieve this by balancing the opacity of voxels based on the distribution of intensity values. Our view-independent approach is relatively lightweight and should have better performance in contrast to other techniques.
