@@ -179,7 +179,11 @@ The user can explore a volume by interactively specifying different priority int
 Experimental results on various data sets are presented to demonstrate the effectiveness of our method.
 
 
-
+Volume visualization has been widely used to depict complicated 3D structures in volume data sets.
+However, obtaining clear visualization of the features of interest in a volume is still a major challenge.
+The clarity of features depends on the transfer function, the viewpoint and the spatial distribution of features in the volume data set.
+We propose visibility-weighted saliency as a measure of visual saliency of features in volume rendered images, in order to assist users in choosing suitable viewpoints and designing effective transfer functions to visualize the features of interest. Visibility-weighted saliency is based on a computational measure of perceptual importance of voxels and the visibility of features in volume rendered images.
+The effectiveness of this scheme is demonstrated by test results on two volume data sets.
 
 
 Time-varying volume data is used in many areas of science and engineering. However visualizations of such data are not easy for users to visually process due to the amount of information that can be presented simultaneously. We propose a novel visualization approach which modulates focus, emphasizing important information, by adjusting saturation and brightness of voxels based on an importance measure derived from temporal and multivariate information. By conducting a voxel-wise analysis of a number of consecutive frames, we acquire a volatility measure of each voxel. We then use intensity, volatility and additional multivariate information to determine opacity, saturation and brightness of the voxels. The method was tested in visualizing a multivariate hurricane data set. The results suggest that our approach can give the user a deeper understanding of the data by presenting multivariate information variables in one self-contained visualization.
