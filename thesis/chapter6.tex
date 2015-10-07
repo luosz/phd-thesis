@@ -1,16 +1,13 @@
-\chapter{Experiment}
+\chapter{Transfer Function Optimization Using Visibility-Weighted Saliency}
 
 \section{Introduction}
-To judge the performance of the proposed approach, a human study was conducted to construct a subjective data set for assessing visual saliency of features in volume visualization as perceived by human users. The aim of this set of experiments is to gather human rating of visual saliency data and gather eye tracking data to evaluate and improve a proposed computational visual saliency metric for volume visualization.
-
-\section{Source Images and Participants}
-This section describes the human study and experiments performed using it.
-The images used for the study were rendered by Voreen \cite{meyer-spradow_voreen:_2009} with a variety of transfer functions highlighting different features in various viewpoints.
-** females and ** males participated in the experiment all aged between ** and ** years.
-
-\section{Methods and Measurements}
-Participants would sit in front of a computer display viewing images generated from volume visualization. The first part of the experiment would investigate how participants perceive the visual saliency of different objects in the images. The participants’ task would be to score the images on the scale of 1 to 5 by keyboard input. In the next part of the experiment, the participants would be asked to score the quality (in terms of sharpness and contrast) of the images (also by keyboard input) and their eye movements would be tracked by a head mounted eye tracker (EyeLink II by SR Research). In both parts of the experiment, each image would be shown to the participant for approximately 10 seconds. The experiment would last approximately 30 minutes. There would be a break scheduled midway through the experiment to allow the participant to rest.
+Volume visualization has proven to be an effective means of discovering meaningful features in volume data sets. By specifying appropriate opacity values for various features, the exterior and interior features can be simultaneously revealed in a semi-transparent manner.
 
 %-------------------------------------------------------------------------
+\section{Method}
+In Chapter \ref{visibility-weighted_saliency}, visibility-weighted saliency was proposed as a measure of visual saliency of features in volume rendered images, in order to assist users in choosing suitable viewpoints and designing effective transfer functions to visualize the features of interest. In this chapter, we describe a transfer function optimization approach based on the visibility-weighted saliency metric, which indicates the perceptual importance of voxels and the visibility of features in volume rendered images.
+
+The approach described in Chapter \ref{transfer_function_refinement} is an automated method of optimizing transfer functions, based on the intensity distribution of voxels in the volume data set. However, this approach does not take into account the spatial distribution of voxels and the viewpoint of the visualization. Visibility-weighted saliency, on the other hand, takes into account both of these two aspects. The visibility-weighted saliency consists of two component fields, i.e. saliency field and visiblity fields. Saliency fields are essentially difference of Gaussians, which include the information of local neighborhoods of voxels, and visibility fields are computed from opacity contribution of voxels to volume rendered images, which indicate viewpoint dependent occlusions of the voxels.
 
 %-------------------------------------------------------------------------
+\section{Conclusions}
