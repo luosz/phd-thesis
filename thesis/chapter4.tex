@@ -20,7 +20,7 @@ Several computational measures of visual saliency that model human attention hav
 Kim and Varshney \cite{kim_saliency-guided_2006} introduced the saliency field, which measures visual saliency of voxels using the center-surround operator based on the difference of Gaussian-weighted averages at a fine and a coarse scale.
 However, salient voxels may be occluded by other voxels close to the viewer in certain viewpoints and thus these salient voxels become invisible in the volume rendered image. In order to measure the visual saliency of features in volume rendered images, it is necessary to consider both the saliency and the visibility of the voxels which form the feature.
 
-In this paper, we propose visibility-weighted saliency as an improved measure of the visual saliency of features in volume rendered images. Visibility-weighted saliency is a combination of feature visibility \cite{wang_efficient_2011} and the saliency field \cite{kim_saliency-guided_2006}.
+In this chapter, we propose visibility-weighted saliency as an improved measure of the visual saliency of features in volume rendered images. Visibility-weighted saliency is a combination of feature visibility \cite{wang_efficient_2011} and the saliency field \cite{kim_saliency-guided_2006}.
 Feature visibility measures the contribution of each feature to the volume rendered image and saliency field measures the visual saliency of each voxel in its local neighborhood.
 The visibility-weighted saliency are presented in two different ways, i.e. visibility-weighted saliency fields and feature saliency histograms. Visibility-weighted saliency fields display the spatial distribution of visual saliency of features and feature saliency histograms provide quantitative information about the perceptual importance of the features.
 With visibility-weighted saliency, the saliency of features rendered in different viewpoints with different transfer functions can be measured in a quantitative and fully automated way.
@@ -192,10 +192,10 @@ $ S_{F} $ can be used as a score to indicate the saliency of feature $ F $ in te
 Features can be defined by user-specified transfer functions or segmentation of the volume data.
 Figure~\ref{fig:disks_visibility_saliency_fields} illustrates the visibility-weighted saliency fields of the three disk-like features.
 
-\subsection{Weighted Feature Saliency Histograms \label{weighted_feature_saliency}}
+\subsection{Visibility-Weighted Feature Saliency Histograms \label{weighted_feature_saliency}}
 As mentioned in Section~\ref{saliency_fields}, the saliency field can be computed from different appearance attributes.
 Multiple saliency fields computed from different appearance attributes can be combined together in order to represent different aspects of the visual saliency of voxels.
-In our implementation, we use brightness and saturation respectively to compute visibility-weighted saliency fields and define the weighted sum of the two sets of feature saliency as weighted feature saliency.
+In our implementation, we use brightness and saturation respectively to compute visibility-weighted saliency fields and define the weighted sum of the two sets of feature saliency as visibility-weighted feature saliency.
 
 %Similar to the visibility-weighted saliency in the previous section, the visibility-weighted saliency from brightness for voxel $ i $ is
 %$ W_{F}(O_{b},i,\sigma) $ $ W_{F}(O_{s},i,\sigma) $
@@ -210,9 +210,9 @@ where $ u_{1}$ and $ u_{2}$ are weights of different appearance attributes. $ u_
 
 Figure~\ref{fig:disks_saliency_chart_left} and Figure~\ref{fig:disks_saliency_chart_right} display bar charts of our visibility-weighted saliency of the three features and the feature visibility by Wang et al. \cite{wang_efficient_2011} for comparison.
 We compute the saliency fields using brightness and saturation respectively and thus acquire two sets of feature saliency of the three features in the synthetic data set.
-In Figure~\ref{fig:disks_saliency_chart_left} and Figure~\ref{fig:disks_saliency_chart_right}, the feature saliency from brightness shows similar patterns as the feature visibility. However, the feature saliency from saturation gives the highest score to the middle disk (magenta color), which means the middle disk is significantly more salient than the other two (light green and dark green) in terms of saturation. The weighted feature saliency combines the feature saliency from brightness and saturation with user-specified weights. 
+In Figure~\ref{fig:disks_saliency_chart_left} and Figure~\ref{fig:disks_saliency_chart_right}, the feature saliency from brightness shows similar patterns as the feature visibility. However, the feature saliency from saturation gives the highest score to the middle disk (magenta color), which means the middle disk is significantly more salient than the other two (light green and dark green) in terms of saturation. The visibility-weighted feature saliency combines the feature saliency from brightness and saturation with user-specified weights. 
 %which combines the saliency fields derived from brightness and saturation of voxels.
-The weighted feature saliency can be used as a measure to indicate the saliency of features in volume rendered images.
+The visibility-weighted feature saliency can be used as a measure to indicate the saliency of features in volume rendered images.
 The weights of different appearance attributes should be adjusted according to the user's need in specific tasks.
 
 \begin{figure}
