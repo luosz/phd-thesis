@@ -12,43 +12,132 @@ The approach described in Chapter~\ref{transfer_function_refinement} is an autom
 
 \subsection{Objective Function}
 Users define target importance values for each feature defined in the transfer function domain.
-Our approach adjusts the transfer function to match the visibility-weighted saliency with the user-defined target importance values.
+Our approach adjusts the transfer function to match the visibility-weighted saliency with the user-defined target saliency values.
 Multiple saliency fields computed from different appearance attributes can be combined together in order to represent different aspects of the visual saliency of voxels.
 In our implementation, brightness and saturation are used respectively to compute visibility-weighted saliency fields and define the weighted sum of the two sets of feature saliency as visibility-weighted feature saliency.
 The objective function is defined as the root mean square of the differences of the visibility-weighted saliency and target importance of each feature.
-\[ E=\sqrt{ \frac{\sum_{i=1}^{n} (W_{i}-t_{i})^{2}}{n} } 
+\[ f=\sqrt{ \frac{\sum_{i=1}^{n} (W_{i}-t_{i})^{2}}{n} } 
 \addtag \]
-where \[ W_{F}=u_{1}W_{F}(O_{b},i,\sigma)+u_{2}W_{F}(O_{s},i,\sigma) \] is the visibility-weighted saliency of feature $ i $, as previously described in Section~\ref{weighted_feature_saliency}. $ t_{i} $ is the user-defined importance of feature $ i $. These user-defined importance values are normalized and they add up to 1, in other words, $ t_{i} \in [0.1] $ and $ \sum_{i=1}^{n} t_{i} = 1 $.
+where \[ W_{F}=u_{1}W_{F}(O_{b},i,\sigma)+u_{2}W_{F}(O_{s},i,\sigma) \] is the visibility-weighted saliency of feature $ i $, as previously described in Section~\ref{weighted_feature_saliency}. $ t_{i} $ is the user-defined importance of feature $ i $. These user-defined saliency values are normalized and they add up to 1, in other words, $ t_{i} \in [0.1] $ and $ \sum_{i=1}^{n} t_{i} = 1 $.
 
 However, the visibility-weighted saliency $ W_{i} $ is not a variable that can be directed modified. Instead, $ W_{i} $ is a complicated function dependent on the opacity values of features, the spatial distribution of voxels and the viewpoint of the visualization.
 
-A nucleon data set \cite{website:Voreen_datasets_2013} to demonstrate how the visibility-weighted saliency of features change when the feature opacity values (mapped to $ x, y and z $ axes) change.
+We use a nucleon data set \cite{website:Voreen_datasets_2013} to demonstrate how the visibility-weighted saliency of features change when the feature opacity values change. As displayed in Figure~\ref{fig:nucleon_naive}, three features are defined in the transfer function for the nucleon data set and the opacity values of the three features are mapped to $ x, y and z $ axes.
 
 \begin{figure}
 \centering
-	\begin{minipage}{.25\textwidth}
+	\begin{minipage}{.3\textwidth}
 	\includegraphics[width=1\linewidth]{images/nucleon_naive}
 	\caption{a}	
 	\end{minipage}~
-	\begin{minipage}{.25\textwidth}
+	\begin{minipage}{.3\textwidth}
 	\includegraphics[width=1\linewidth]{images/tf_nucleon_naive}
-	\caption{b}	
+	\caption{b}
 	\end{minipage}
 	\label{fig:nucleon_naive}
 \end{figure}
 
+\begin{figure}
+	\centering
+	\begin{minipage}{.3\textwidth}
+		\includegraphics[width=1\linewidth]{images/densityplot1}
+		\caption{a}	
+	\end{minipage}~
+	\begin{minipage}{.3\textwidth}
+		\includegraphics[width=1\linewidth]{images/densityplot2}
+		\caption{b}	
+	\end{minipage}
+	\begin{minipage}{.3\textwidth}
+		\includegraphics[width=1\linewidth]{images/densityplot3}
+		\caption{b}	
+	\end{minipage}
+	\label{fig:nucleon_densityplot}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{minipage}{.6\textwidth}
+		\includegraphics[width=1\linewidth]{images/searchspace}
+	\end{minipage}
+	\caption{The value of the objective function $  f $ is displayed as the density in the search space. Target saliency values are set to 0.1, 0.3 and 0.6 for the features respectively.}
+	\label{fig:nucleon_searchspace}
+\end{figure}
 
 
 \subsection{Optimization Algorithm}
 
 
 \subsection{Adaptive Step Size with Line Search}
-
+Line search is a procedure to adapt the step size in gradient descent in order to achieve a reduction in the objective fuction while still making sufficiently fast progress. Line search in employed in many multivariate optimization algorithms.
+The input to a line search is an objective function $ f $, an initial point $ x $, direction $ d $ and an initial step size $ s $.
 
 \subsection{Adaptive Step Size with Parallel Search}
+Parallel computation has overhead.
+It's worthy to perform line search in parallel when the evaluation of the objective function is computational expensive.
+Computing the visibility fields is require to perform a pass of slice-based volume rendering, which is computational expensive.
 
 %-------------------------------------------------------------------------
 \section{Results and Discussions}
+
+\begin{figure}
+	\centering
+	\begin{minipage}{.9\textwidth}
+		\includegraphics[width=1\linewidth]{images/searchspace_annotated}
+	\end{minipage}
+	\caption{Search space}
+	\label{fig:nucleon_searchspace_path}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{minipage}{.3\textwidth}
+		\includegraphics[width=1\linewidth]{images/saliency_fixed}
+		\caption{a}	
+	\end{minipage}~
+	\begin{minipage}{.3\textwidth}
+		\includegraphics[width=1\linewidth]{images/saliency_linesearch}
+		\caption{b}	
+	\end{minipage}
+	\begin{minipage}{.3\textwidth}
+		\includegraphics[width=1\linewidth]{images/saliency_parallelsearch}
+		\caption{b}	
+	\end{minipage}
+	\label{fig:nucleon_saliency}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{minipage}{.3\textwidth}
+		\includegraphics[width=1\linewidth]{images/opacity_fixed}
+		\caption{a}	
+	\end{minipage}~
+	\begin{minipage}{.3\textwidth}
+		\includegraphics[width=1\linewidth]{images/opacity_linesearch}
+		\caption{b}	
+	\end{minipage}
+	\begin{minipage}{.3\textwidth}
+		\includegraphics[width=1\linewidth]{images/opacity_parallelsearch}
+		\caption{b}	
+	\end{minipage}
+	\label{fig:nucleon_opacity}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{minipage}{.3\textwidth}
+		\includegraphics[width=1\linewidth]{images/rms_fixed}
+		\caption{a}	
+	\end{minipage}~
+	\begin{minipage}{.3\textwidth}
+		\includegraphics[width=1\linewidth]{images/rms_linesearch}
+		\caption{b}	
+	\end{minipage}
+	\begin{minipage}{.3\textwidth}
+		\includegraphics[width=1\linewidth]{images/rms_parallelsearch}
+		\caption{b}	
+	\end{minipage}
+	\label{fig:nucleon_rms}
+\end{figure}
 
 %-------------------------------------------------------------------------
 \section{Conclusions}
