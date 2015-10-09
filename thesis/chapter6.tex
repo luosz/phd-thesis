@@ -32,7 +32,7 @@ However, the visibility-weighted saliency $ W_{i} $ is not a variable that can b
 We use a nucleon data set to demonstrate how the visibility-weighted saliency of features change when the feature opacity values change. As displayed in Figure~\ref{fig:nucleon_naive}, three features are defined in the transfer function for the nucleon data set.
 In order to provide an intuitive overview of the relationship between the feature opacity values and the visibility-weighted saliency values, the 3 feature opacity values are mapped to $ x, y, z $ axes. Feature 1 (purple) in Figure~\ref{fig:nucleon_naive} is the exterior of the nucleon data set, the visibility-weighted saliency of this feature is shown in the 3D scalar fields in the same color at the left in Figure~\ref{fig:nucleon_densityplot}. The visibility-weighted saliency of feature 1 increases as the opacity increases, as shown in the figure that the brightness and opacity increase along $ x $ axis. Because feature 1 is the exterior, its visibility-weighted saliency is almost not affected by the opacity of other features. On the other hand, the visibility-weighted saliency of feature 2 (red) in Figure~\ref{fig:nucleon_naive} is affected by both the opacity of feature 1 and feature 2. In addition, the visibility-weighted saliency of feature 3 (green) in Figure~\ref{fig:nucleon_naive} is affected by the opacity of feature 1, feature 2 and feature 3.
 
-In order to demonstrate the distribution of the objective function in the parameter space $ x \in [0,1] $, $ y \in [0,1] $ and $ z \in [0,1] $, we sample the parameter space with sampling interval $ 0.1 $, from 0 to 1 along each axis. There are 11 sampling points along each axis, which results in 1331 sampling points in the parameter space. In Figure~\ref{fig:nucleon_searchspace}, the parameter space is rendered as a density plot with a temperate color map which gradually changes from orange to blue.
+In order to demonstrate the distribution of the objective function in the parameter space $ x \in [0,1] $, $ y \in [0,1] $ and $ z \in [0,1] $, we sample the parameter space with sampling interval $ 0.1 $, from 0 to 1 along each axis. There are 11 sampling points along each axis, which results in 1331 sampling points in the parameter space. In Figure~\ref{fig:nucleon_parameterspace}, the parameter space is rendered as a density plot with a temperate color map which gradually changes from orange to blue.
 
 \begin{figure}
 \centering
@@ -64,10 +64,10 @@ In order to demonstrate the distribution of the objective function in the parame
 \begin{figure}
 	\centering
 	\begin{minipage}{.6\textwidth}
-		\includegraphics[width=1\linewidth]{images/searchspace}
+		\includegraphics[width=1\linewidth]{images/parameterspace}
 	\end{minipage}
-	\caption{The value of the objective function $  f $ is displayed as the density in the parameter space (with sampling interval $ 0.1 $). Target saliency values are set to 0.1, 0.3 and 0.6 for the 3 features respectively.}
-	\label{fig:nucleon_searchspace}
+	\caption{The values of the objective function $  f $ is displayed as the density in the parameter space (with sampling interval $ 0.1 $). Target saliency values are set to 0.1, 0.3 and 0.6 for the 3 features respectively. Only the high and low values are visible and the data range in the middle is set to transparent.}
+	\label{fig:nucleon_parameterspace}
 \end{figure}
 
 
@@ -81,6 +81,8 @@ These constraints are based on our assumption that the intensity intervals assoc
 Line search is a procedure to adapt the step size in gradient descent in order to achieve a reduction in the objective function while still making sufficiently fast progress. Line search in employed in many multivariate optimization algorithms.
 The input to a line search is an objective function $ f $, an initial point $ x $, direction $ d $ and an initial step size $ s $.
 
+Figure~\ref{fig:nucleon_parameterspace_path}
+
 \subsection{Adaptive Step Size with Parallel Search}
 Parallel computation has overhead.
 It's worthy to perform line search in parallel when the evaluation of the objective function is computational expensive.
@@ -92,10 +94,10 @@ Computing the visibility fields is require to perform a pass of slice-based volu
 \begin{figure}
 	\centering
 	\begin{minipage}{.9\textwidth}
-		\includegraphics[width=1\linewidth]{images/searchspace_path}
+		\includegraphics[width=1\linewidth]{images/parameterspace_path}
 	\end{minipage}
-	\caption{Search space}
-	\label{fig:nucleon_searchspace_path}
+	\caption{The footprints of gradient descent methods with fixed step size and adaptive step size are shown in the parameter space in Figure~\ref{fig:nucleon_parameterspace}}
+	\label{fig:nucleon_parameterspace_path}
 \end{figure}
 
 \begin{figure}
