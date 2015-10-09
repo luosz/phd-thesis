@@ -75,11 +75,15 @@ In order to demonstrate the distribution of the objective function in the parame
 Constraints are introduced in the search of the parameter space. Control points would only be moved vertically in the transfer function domain. In other words, only the opacity associated with control points would be changed. The intensity of control points remains the same. Also, those control points that are marked as constant would not be updated in the optimization process.
 These constraints are based on our assumption that the intensity intervals associated with control points are the user's intensity intervals of interest. The user has explored the volume data and set up the transfer function according to his/her needs. Our algorithm aims to help the user reduce occlusion while preserving the user's knowledge or judgments of the data set.
 
-
+Gradient descent
+\[ f(x)=f(x_{1})+f(x_{1})(-x_{1})+O(||x-x_{1}||^{2}) \]
 
 \subsection{Adaptive Step Size with Line Search}
 Line search is a procedure to adapt the step size in gradient descent in order to achieve a reduction in the objective function while still making sufficiently fast progress. Line search in employed in many multivariate optimization algorithms.
 The input to a line search is an objective function $ f $, an initial point $ x $, direction $ d $ and an initial step size $ s $.
+
+\[ f(x+ \gamma d)<f(x) \]
+\[ \gamma_{n}=\gamma_{1}2^{n} \]
 
 Figure~\ref{fig:nucleon_parameterspace_path}
 
