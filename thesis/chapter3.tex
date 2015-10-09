@@ -291,8 +291,8 @@ Consequently, minimizing the energy function is equivalent to flattening the cur
 
 \subsection{Optimizer}
 \label{sec:optimizer}
-Constraints are introduced in the search of the parameter space. Control points would only be moved vertically in the transfer function space. In other words, only the opacity associated with control points would be changed. The intensity of control points remains the same. Also, those control points that are marked as constant would not be updated in the optimization process.
-These constraints are based on our assumption that the intensity intervals associated with control points are the user's intensity intervals of interest. The user has explored the volume data and set up the transfer function according to his/her needs. Our algorithm aims to help the user reduce occlusion while preserving the user's knowledge or judgements of the data set.
+Constraints are introduced in the search of the parameter space. Control points would only be moved vertically in the transfer function domain. In other words, only the opacity associated with control points would be changed. The intensity of control points remains the same. Also, those control points that are marked as constant would not be updated in the optimization process.
+These constraints are based on our assumption that the intensity intervals associated with control points are the user's intensity intervals of interest. The user has explored the volume data and set up the transfer function according to his/her needs. Our algorithm aims to help the user reduce occlusion while preserving the user's knowledge or judgments of the data set.
 
 A greedy strategy is employed in our algorithm to minimize the energy function. In each iteration, two operations are performed:
 \begin{itemize}
