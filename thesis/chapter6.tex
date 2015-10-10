@@ -11,6 +11,8 @@ The saliency of a feature in the final image depends on the opacity value assign
 
 Therefore, it is desirable to have an automated method to assist the user in the design of transfer functions. In this chapter, we propose an optimization approach to automatically refine a user-defined transfer function towards target saliency levels specified by the user.
 
+\section{Related Work}
+
 %-------------------------------------------------------------------------
 \section{Method}
 In Chapter~\ref{visibility-weighted_saliency}, visibility-weighted saliency was proposed as a measure of visual saliency of features in volume rendered images, in order to assist users in choosing suitable viewpoints and designing effective transfer functions to visualize the features of interest. In this chapter, we describe a transfer function optimization approach based on the visibility-weighted saliency metric, which indicates the perceptual importance of voxels and the visibility of features in volume rendered images.
@@ -77,16 +79,23 @@ In order to demonstrate the distribution of the objective function in the parame
 \subsection{Gradient Descent}
 Gradient descent is a first-order optimization algorithm. It is based on the observation that if an objective function $ f(x) $ is defined and differentiable in a neighborhood of a point $ x_{1} $, then $ f(x) $ decreases fastest in the direction of the negative gradient of the objective function \cite{chong_introduction_2013}.
 
-Given a continuously differentiable function $ f(x) $ with $ x \in \mathbb{R}^{n} $, let $ x_{k} $ be the current iteration point and $ \nabla f(x_{k}) $ be the gradient vector at $ x_{k} $. The gradient descent method defines the next iteration point by
-\[ x_{k+1}=x_{k}- \alpha_{k} \nabla f(x_{k}) , k \geq 0 \]
-for $ \alpha_{k} $ small enough, then $ f(x_{k+1}) \leq f(x_{k}) $. The gradient varies as the iteration proceeds, tending to zero as it approaches a local minimum. When the gradient decreases, the iteration step sizes also decrease. So hopefully the sequence converges to the desired local minimum after performing the iteration.
+Given a continuously differentiable function $ f(x) $ with $ x \in \mathbb{R}^{n} $, let $ x_{k} $ be the current iteration point and $ g_{k}=g(x_{k})= \nabla f(x_{k}) $ be the gradient of $ f(x) $ at $ x_{k} $. The gradient descent method defines the next iteration point by
+\[ x_{k+1}=x_{k}- \alpha_{k} g_{k} , k \geq 0 \]
+for $ \alpha_{k} $ small enough, then $ f(x_{k+1}) \leq f(x_{k}) $. The gradient varies as the iteration proceeds, tending to zero as it approaches a local minimum. When the gradient decreases, the iteration step sizes also decrease. So hopefully the sequence $ {x_{k}} $ converges to the desired local minimum after performing the iteration.
 
 In gradient descent methods, we can either take very small step sizes and reevaluate the gradient at every steps, or take large steps each time. If the step size is too small, it may end up in a laborious situation that the objective function converges very slowly. If the step size is too large, it results in a more zigzag path and may have the risk of missing the local minimum and thus cannot converge.
 
 \subsection{Adaptive Step Size with Line Search}
-Various approaches have been proposed regarding the choices of step sizes, which lead to various gradient algorithms. Line search is a procedure to adapt the step size in gradient descent in order to achieve a reduction in the objective function while still making sufficiently fast progress. Line search in employed in many multivariate optimization algorithms.
-The exact line search algorithm chooses the next iteration point by achieving the least objective function value. However, exact line search turns out to be a bad method because it often converges very slowly \cite{yuan_step-sizes_2008}.
+Various approaches have been proposed regarding the choices of step sizes, which lead to various gradient algorithms \cite{yuan_step-sizes_2008}.
 
+The line search strategy adapts the step size in gradient descent in order to achieve a reduction in the objective function while still making sufficiently fast progress. Line search in employed in many multivariate optimization algorithms.
+
+\[ h(\alpha_{k})=f(x_{k}+\alpha_{k} g_{k}) \]
+
+The exact line search algorithm chooses the next iteration point by achieving the least objective function value. However, despite the optimal properties, exact line search often behave poorly and tend to zigzag in two orthogonal directions, which usually implies deteriorations in converge \cite{zhou_gradient_2006}.
+
+\cite{vrahatis_class_2000}
+\cite{armijo_minimization_1966}
 
 The input to a line search is an objective function $ f $, an initial point $ x $, direction $ d $ and an initial step size $ s $.
 
