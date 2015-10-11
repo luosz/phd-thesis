@@ -12,6 +12,8 @@ The saliency of a feature in the final image depends on the opacity value assign
 Therefore, it is desirable to have an automated method to assist the user in the design of transfer functions. In this chapter, we propose an optimization approach to automatically refine a user-defined transfer function towards target saliency levels specified by the user.
 
 \section{Related Work}
+% line search \cite{armijo_minimization_1966}
+% conjugate gradient descent \cite{shewchuk_introduction_1994}
 
 %-------------------------------------------------------------------------
 \section{Method}
@@ -27,7 +29,7 @@ Users define target importance values for each feature defined in the transfer f
 Our approach adjusts the transfer function to match the visibility-weighted saliency with the user-defined target saliency values.
 Multiple saliency fields computed from different appearance attributes can be combined together in order to represent different aspects of the visual saliency of voxels.
 In our implementation, brightness and saturation are used respectively to compute visibility-weighted saliency fields and define the weighted sum of the two sets of feature saliency as visibility-weighted feature saliency.
-The objective function is defined as the root mean square of the differences of the visibility-weighted saliency and target importance of each feature.
+The objective function $ f $ is defined as the root mean square of the differences of the visibility-weighted saliency and target importance of each feature.
 \[ f=\sqrt{ \frac{\sum_{i=1}^{n} (W_{i}-t_{i})^{2}}{n} } 
 \addtag \]
 where $ W_{F}=u_{1}W_{F}(O_{b},i,\sigma)+u_{2}W_{F}(O_{s},i,\sigma) $ is the visibility-weighted saliency of feature $ i $, and $ t_{i} $ is the user-defined importance of feature $ i $. These user-defined saliency values are normalized and they add up to 1, in other words, $ t_{i} \in [0.1] $ and $ \sum_{i=1}^{n} t_{i} = 1 $.
@@ -91,54 +93,74 @@ In order to demonstrate the distribution of the objective function in the parame
 	\label{fig:nucleon_parameterspace}
 \end{figure}
 
-\subsection{Optimization Algorithm}
+\subsection{Gradient Estimation}
+As discussed in the previous section, the visibility-weighted saliency of a feature increases as its feature opacity increases. The visibility-weighted saliency of a feature is a monotonic function of the opacity of the feature. However, the relationship between the visibility-weighted saliency and the opacity of a feature also depends the viewpoint of rendering and the spatial distribution of voxels of every features in the volume data set. An exact derivative of the visibility-weighted saliency with respect to the opacity of the feature cannot be determined in advance.
+
+In terms of gradient estimation, the two methods we have studied are as follows.
+
+\subsubsection{Finite Difference}
+The first method is to estimate the gradient with a backward difference divided by a small step.
+\[ \frac{\nabla_{h}[f](x)}{h}=\frac{f(x)-f(x-h)}{h} \]
+where $ h $ is nonzero number.
+When $ h $ is small, the backward difference divided by $ h $ approximates the derivative. Assuming that $ f $ is differentiable, the error in this approximation can be derived from Taylor's theorem.
+\[ \frac{\nabla_{h}[f](x)}{h}-f'(x)=\mathcal{O}(h) \to 0 , \; as \; h \to 0 \]
+Because the evaluation of the objective function is computational expensive, in our implementation, we use $ h $ as the step size and then $ f(x-h) $ would be the objective function value from the last iteration. Thus no extra evaluation of the objective function is required.
+
+\subsubsection{Assuming Linearity}
+In the second method, we presume the relationship between the visibility-weighted saliency and the opacity of the feature is linear (even if this may not be true), and adopt the gradient of the objective function with respect to the visibility-weighted saliency as an estimation.
+
+The partial derivative of the objective function $ f $ with respect to $ x_{i} $ is
+\[ \frac{\partial f}{\partial f x_{i}} = \frac{\partial f}{\partial W_{i}} \frac{\partial W_{i}}{\partial x_{i}} \]
+where $ x_{i} $ is the opacity and $ W_{i} $ is the visibility-weighted saliency of feature $ i $.
+If $ W_{i} $ is a linear function of $ x_{i} $, the partial derivative $ \frac{\partial W_{i}}{\partial x_{i}} $ becomes constant and could be replaced by an empirical constant $ b_{i} $. Hence the gradient of the objective function with respect to the visibility saliency is used instead.
+\[ \frac{\partial f}{\partial f x_{i}} \approx \frac{\partial f}{\partial W_{i}} b_{i} \]
+
+\subsection{Gradient Descent}
 The gradient descent algorithm is employed in our optimizer.
-Gradient descent is a first-order optimization algorithm. It is based on the observation that if an objective function $ f(x) $ is defined and differentiable in a neighborhood of a point $ x_{1} $, then $ f(x) $ decreases fastest in the direction of the negative gradient of the objective function.
+Gradient descent is a first-order optimization algorithm. It is based on the observation that if an objective function $ f(x) $ is defined and differentiable in a neighborhood of a point $ x_{1} $, then $ f(x) $ decreases fastest in the direction of the negative gradient of the objective function \cite{chong_introduction_2013}.
 
 Given a continuously differentiable function $ f(x) $ with $ x \in \mathbb{R}^{n} $, let $ x_{k} $ be the current iteration point and $ g_{k}=g(x_{k})= \nabla f(x_{k}) $ be the gradient of $ f(x) $ at $ x_{k} $. The gradient descent method defines the next iteration point by
 \[ x_{k+1}=x_{k}- \alpha_{k} g_{k} , k \geq 0 \]
 for $ \alpha_{k} $ small enough, then $ f(x_{k+1}) \leq f(x_{k}) $. The gradient varies as the iteration proceeds, tending to zero as it approaches a local minimum. When the gradient decreases, the iteration step sizes also decrease. So hopefully the sequence $ {x_{k}} $ converges to the desired local minimum after performing the iteration.
 
-In gradient descent methods, we can either take very small step sizes and reevaluate the gradient at every steps, or take large steps each time. If the step size is too small, it may end up in a laborious situation that the objective function converges very slowly. If the step size is too large, it results in a more zigzag path and may have the risk of missing the local minimum and thus cannot converge \cite{chong_introduction_2013}.
-
-\subsection{Gradient Estimation}
-In terms of gradient estimations, we have experimented with two methods. First, we have tried to estimate the gradient with a backward difference divided by a small step.
-\[ \frac{\nabla_{h}[f](x)}{h}=\frac{f(x)-f(x-h)}{h} \]
-where $ h $ is nonzero number.
-
-When $ h $ is small, the backward difference divided by $ h $ approximates the derivative. The error in this approximation can be derived from Taylor's theorem. Assuming that $ f $ is differentiable, we have
-\[ \frac{\nabla_{h}[f](x)}{h}-f'(x)=\mathcal{O}(h) \to 0 , \; as \; h \to 0 \]
-Because the evaluation of the objective function is computational expensive, in our implementation, we use the $ h $ as the step size and $ f(x-h) $ would be the objective function value from the last iteration. Thus no extra evaluation of the objective function is required.
+In gradient descent methods, we can either take very small step sizes and reevaluate the gradient at every steps, or take large steps each time. If the step size is too small, it may end up in a laborious situation that the objective function converges very slowly. If the step size is too large, it results in a more zigzag path and may have the risk of missing the local minimum and thus cannot converge.
 
 \subsection{Adaptive Step Size with Line Search}
-Various approaches have been proposed regarding the choices of step sizes, which lead to various gradient algorithms \cite{yuan_step-sizes_2008}.
+Performing gradient descent with a small step size may result in converging too slowly and require a lot of evaluations of the objective function, which is rather expensive to compute in our application. Various approaches have been proposed regarding the choices of step sizes, which lead to various gradient algorithms \cite{yuan_step-sizes_2008}.
 
-The line search strategy adapts the step size in gradient descent in order to achieve a reduction in the objective function while still making sufficiently fast progress. Line search in employed in many multivariate optimization algorithms.
+The line search strategy is an iterative approach that adapts the step size in gradient descent in order to achieve a reduction in the objective function while still making sufficiently fast progress.
+\[ h( \gamma)=f(x_{k}+\gamma g_{k}) \]
+where $ g_{k} $ is the descent direction and $ x_{k} $ is the current point at the $ k$-$th $ iteration.
 
-\[ h(\alpha_{k})=f(x_{k}+\alpha_{k} g_{k}) \]
+There are two type of approaches of line search, exact line search and inexact line search \cite{vrahatis_class_2000}.
+Exact line search chooses the next iteration point by achieving the least objective function value. However, despite the optimal properties, exact line search often behave poorly and tend to zigzag in two orthogonal directions, which usually implies deteriorations in converge \cite{zhou_gradient_2006}.
+On the contrary, inexact line search only loosely find a sufficient decrease of the objective function along the descent direction.
 
-The exact line search algorithm chooses the next iteration point by achieving the least objective function value. However, despite the optimal properties, exact line search often behave poorly and tend to zigzag in two orthogonal directions, which usually implies deteriorations in converge \cite{zhou_gradient_2006}.
+The inexact line search we used in our implementation is as follows.
 
-\cite{vrahatis_class_2000}
-\cite{armijo_minimization_1966}
+\begin{enumerate}
+	\item Set initial iteration count $ n=0 $
+	\item Check if $ f(x_{k}+\gamma_{n+1} g_{k}) < f(x_{k}+\gamma_{n} g_{k}) $ where $ \gamma_{n}=2^{n} $
+	\item If so, $ n=n+1 $ and repeat Line 2, otherwise terminate the line search.
+\end{enumerate}
 
-The input to a line search is an objective function $ f $, an initial point $ x $, direction $ d $ and an initial step size $ s $.
-
-Choose a small step size and step iteratively step in the opposite direction of the gradient, evaluate the objective function at each step, and stop when the object function increases, then back up one step.
-This does not find the exact minimum along the line direction, in stead it yields reasonable results and runs very quickly.
-
-\[ f(x+ \gamma d)<f(x) \]
-\[ \gamma_{n}=\gamma_{1}2^{n} \]
-
-Figure~\ref{fig:nucleon_parameterspace_path}
+This inexact line search strategy does not find the exact minimum along the line direction, instead it yields reasonable results and descents much faster than using fixed step sizes.
 
 \subsection{Parallel Line Search}
+Gradient descent is an iterative procedure.
+The steps of gradient descent has to be iteratively determined. Next iteration takes the result from the previous iteration as input.
+However, the line search at each iteration can be computed parallel to accelerate the optimization.
+
+
+
 Parallel computation has overhead.
 It's worthy to perform line search in parallel when the evaluation of the objective function is computational expensive.
 Computing the visibility fields is require to perform a pass of slice-based volume rendering, which is computational expensive.
 
 %-------------------------------------------------------------------------
 \section{Results and Discussions}
+
+Figure~\ref{fig:nucleon_parameterspace_path}
 
 \begin{figure}
 	\centering
@@ -202,3 +224,6 @@ Computing the visibility fields is require to perform a pass of slice-based volu
 
 %-------------------------------------------------------------------------
 \section{Conclusions}
+This chapter proposes a novel transfer function optimization approach using the visibility-weighted saliency metric.
+With this approach, the design of transfer functions becomes more intuitive. This approach allows the user to directly set target visibility-weighted saliency for features of interest and then the transfer function is automatically refine to match the visibility-weighted saliency of the features with the user-defined targets.
+This approach has proven to be effective over several volume data sets.
