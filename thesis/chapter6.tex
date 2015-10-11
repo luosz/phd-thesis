@@ -92,15 +92,17 @@ In order to demonstrate the distribution of the objective function in the parame
 \end{figure}
 
 \subsection{Optimization Algorithm}
-Gradient descent is a first-order optimization algorithm. It is based on the observation that if an objective function $ f(x) $ is defined and differentiable in a neighborhood of a point $ x_{1} $, then $ f(x) $ decreases fastest in the direction of the negative gradient of the objective function \cite{chong_introduction_2013}.
+The gradient descent algorithm is employed in our optimizer.
+Gradient descent is a first-order optimization algorithm. It is based on the observation that if an objective function $ f(x) $ is defined and differentiable in a neighborhood of a point $ x_{1} $, then $ f(x) $ decreases fastest in the direction of the negative gradient of the objective function.
 
 Given a continuously differentiable function $ f(x) $ with $ x \in \mathbb{R}^{n} $, let $ x_{k} $ be the current iteration point and $ g_{k}=g(x_{k})= \nabla f(x_{k}) $ be the gradient of $ f(x) $ at $ x_{k} $. The gradient descent method defines the next iteration point by
 \[ x_{k+1}=x_{k}- \alpha_{k} g_{k} , k \geq 0 \]
 for $ \alpha_{k} $ small enough, then $ f(x_{k+1}) \leq f(x_{k}) $. The gradient varies as the iteration proceeds, tending to zero as it approaches a local minimum. When the gradient decreases, the iteration step sizes also decrease. So hopefully the sequence $ {x_{k}} $ converges to the desired local minimum after performing the iteration.
 
-In gradient descent methods, we can either take very small step sizes and reevaluate the gradient at every steps, or take large steps each time. If the step size is too small, it may end up in a laborious situation that the objective function converges very slowly. If the step size is too large, it results in a more zigzag path and may have the risk of missing the local minimum and thus cannot converge.
+In gradient descent methods, we can either take very small step sizes and reevaluate the gradient at every steps, or take large steps each time. If the step size is too small, it may end up in a laborious situation that the objective function converges very slowly. If the step size is too large, it results in a more zigzag path and may have the risk of missing the local minimum and thus cannot converge \cite{chong_introduction_2013}.
 
-Gradient descent is employed in our optimizer. In terms of gradient estimations, we have experimented with two methods. First, we have tried to estimate the gradient with a backward difference divided by a small step.
+\subsection{Gradient Estimation}
+In terms of gradient estimations, we have experimented with two methods. First, we have tried to estimate the gradient with a backward difference divided by a small step.
 \[ \frac{\nabla_{h}[f](x)}{h}=\frac{f(x)-f(x-h)}{h} \]
 where $ h $ is nonzero number.
 
