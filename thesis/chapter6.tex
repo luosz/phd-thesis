@@ -30,10 +30,14 @@ In our implementation, brightness and saturation are used respectively to comput
 The objective function is defined as the root mean square of the differences of the visibility-weighted saliency and target importance of each feature.
 \[ f=\sqrt{ \frac{\sum_{i=1}^{n} (W_{i}-t_{i})^{2}}{n} } 
 \addtag \]
-where $ W_{F}=u_{1}W_{F}(O_{b},i,\sigma)+u_{2}W_{F}(O_{s},i,\sigma) $ is the visibility-weighted saliency of feature $ i $, as previously described in Section~\ref{weighted_feature_saliency}. $ t_{i} $ is the user-defined importance of feature $ i $. These user-defined saliency values are normalized and they add up to 1, in other words, $ t_{i} \in [0.1] $ and $ \sum_{i=1}^{n} t_{i} = 1 $.
+where $ W_{F}=u_{1}W_{F}(O_{b},i,\sigma)+u_{2}W_{F}(O_{s},i,\sigma) $ is the visibility-weighted saliency of feature $ i $, and $ t_{i} $ is the user-defined importance of feature $ i $. These user-defined saliency values are normalized and they add up to 1, in other words, $ t_{i} \in [0.1] $ and $ \sum_{i=1}^{n} t_{i} = 1 $.
+
+As previously described in Section~\ref{weighted_feature_saliency}, multiple saliency fields computed from different appearance attributes can be combined together in order to represent different aspects of the visual saliency of voxels.
+In our implementation, $ W_{F}=u_{1}W_{F}(O_{b},i,\sigma)+u_{2}W_{F}(O_{s},i,\sigma) $ is a weighted sum of visibility-weighted saliency values computed using brightness and saturation of voxels respectively, and $ u_{1} $ and $ u_{2} $ are weights of the two appearance attributes
 
 \subsection{Parameter Space}
-However, the visibility-weighted saliency $ W_{i} $ is not a variable that can be directly modified. Instead, $ W_{i} $ is a complicated function dependent on the opacity values of features, the spatial distribution of voxels and the viewpoint of the visualization.
+However, the visibility-weighted saliency $ W_{i} $ is not a variable that can be directly modified. Instead, $ W_{i} $ is a complicated function of the color and opacity of voxels in feature $ i $ and is also influenced by the viewpoint of rendering. A visibility-weighted saliency field is a combination of a visibility field and a saliency field. The saliency field is a view-independent field based on the color of every voxels in the volume data set, while the visibility field is a view-dependent field computed from the opacity contribution of every voxels to the final image when rendered from a certain viewpoint.
+
 We use a nucleon data set to demonstrate how the visibility-weighted saliency of features change when the feature opacity values change. As displayed in Figure~\ref{fig:nucleon_naive}, three features are defined in the transfer function for the nucleon data set.
 In order to provide an intuitive overview of the relationship between the feature opacity values and the visibility-weighted saliency values, the 3 feature opacity values are mapped to $ x, y, z $ axes. Feature 1 (purple) in Figure~\ref{fig:nucleon_naive} is the exterior of the nucleon data set, the visibility-weighted saliency of this feature is shown in the 3D scalar fields in the same color at the left in Figure~\ref{fig:nucleon_densityplot}. The visibility-weighted saliency of feature 1 increases as the opacity increases, as shown in the figure that the brightness and opacity increase along $ x $ axis. Because feature 1 is the exterior, its visibility-weighted saliency is almost not affected by the opacity of other features. On the other hand, the visibility-weighted saliency of feature 2 (red) in Figure~\ref{fig:nucleon_naive} is affected by both the opacity of feature 1 and feature 2. In addition, the visibility-weighted saliency of feature 3 (green) in Figure~\ref{fig:nucleon_naive} is affected by the opacity of feature 1, feature 2 and feature 3.
 
@@ -107,7 +111,7 @@ This does not find the exact minimum along the line direction, in stead it yield
 
 Figure~\ref{fig:nucleon_parameterspace_path}
 
-\subsection{Adaptive Step Size with Parallel Search}
+\subsection{Parallel Line Search}
 Parallel computation has overhead.
 It's worthy to perform line search in parallel when the evaluation of the objective function is computational expensive.
 Computing the visibility fields is require to perform a pass of slice-based volume rendering, which is computational expensive.
