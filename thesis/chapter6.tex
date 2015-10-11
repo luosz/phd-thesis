@@ -33,13 +33,25 @@ The objective function is defined as the root mean square of the differences of 
 where $ W_{F}=u_{1}W_{F}(O_{b},i,\sigma)+u_{2}W_{F}(O_{s},i,\sigma) $ is the visibility-weighted saliency of feature $ i $, and $ t_{i} $ is the user-defined importance of feature $ i $. These user-defined saliency values are normalized and they add up to 1, in other words, $ t_{i} \in [0.1] $ and $ \sum_{i=1}^{n} t_{i} = 1 $.
 
 As previously described in Section~\ref{weighted_feature_saliency}, multiple saliency fields computed from different appearance attributes can be combined together in order to represent different aspects of the visual saliency of voxels.
-In our implementation, $ W_{F}=u_{1}W_{F}(O_{b},i,\sigma)+u_{2}W_{F}(O_{s},i,\sigma) $ is a weighted sum of visibility-weighted saliency values computed using brightness and saturation of voxels respectively, and $ u_{1} $ and $ u_{2} $ are weights of the two appearance attributes
+In our implementation, $ W_{F}=u_{1}W_{F}(O_{b},i,\sigma)+u_{2}W_{F}(O_{s},i,\sigma) $ is a weighted sum of visibility-weighted saliency values computed using brightness and saturation of voxels respectively, and $ u_{1} $ and $ u_{2} $ are weights of the two appearance attributes.
 
-\subsection{Parameter Space}
 However, the visibility-weighted saliency $ W_{i} $ is not a variable that can be directly modified. Instead, $ W_{i} $ is a complicated function of the color and opacity of voxels in feature $ i $ and is also influenced by the viewpoint of rendering. A visibility-weighted saliency field is a combination of a visibility field and a saliency field. The saliency field is a view-independent field based on the color of every voxels in the volume data set, while the visibility field is a view-dependent field computed from the opacity contribution of every voxels to the final image when rendered from a certain viewpoint.
 
+The computation of visibility fields is non-trivial. In order to compute a visibility field, a slice-based rendering is performed on a series of quads which are parallel to the viewing plane, one for each slice.
+Subsequently, the visibility values are computed by subtracting the accumulated opacity of the previous slice from that of the current slice. After collecting the visibility values of all voxels, the visibility field can be constructed. The details of visibility fields were previously described in Section~\ref{visibility_fields}.
+
+The evaluation of the objective function is computational expensive. However, in an iterative optimization, the visibility field and visibility-weighted saliency have to be recompute at each step after the feature opacity value are updated.
+
+\subsection{Parameter Space}
 We use a nucleon data set to demonstrate how the visibility-weighted saliency of features change when the feature opacity values change. As displayed in Figure~\ref{fig:nucleon_naive}, three features are defined in the transfer function for the nucleon data set.
-In order to provide an intuitive overview of the relationship between the feature opacity values and the visibility-weighted saliency values, the 3 feature opacity values are mapped to $ x, y, z $ axes. Feature 1 (purple) in Figure~\ref{fig:nucleon_naive} is the exterior of the nucleon data set, the visibility-weighted saliency of this feature is shown in the 3D scalar fields in the same color at the left in Figure~\ref{fig:nucleon_densityplot}. The visibility-weighted saliency of feature 1 increases as the opacity increases, as shown in the figure that the brightness and opacity increase along $ x $ axis. Because feature 1 is the exterior, its visibility-weighted saliency is almost not affected by the opacity of other features. On the other hand, the visibility-weighted saliency of feature 2 (red) in Figure~\ref{fig:nucleon_naive} is affected by both the opacity of feature 1 and feature 2. In addition, the visibility-weighted saliency of feature 3 (green) in Figure~\ref{fig:nucleon_naive} is affected by the opacity of feature 1, feature 2 and feature 3.
+
+The dimension of the parameter space is the same as the number of features defined by the user. In this case, three features are defined for the nucleon data set. The opacity of each feature is mapped to an axis in the parameter space. Therefore, the opacity values of the 3 features are mapped to $ x, y, z $ axes of a 3D scalar field. Figure~\ref{fig:nucleon_densityplot} displays three 3D scalar fields, one for each feature, to provide an intuitive overview of the relationship between the feature opacity values and the visibility-weighted saliency values.
+
+Feature 1 (the purple structure in Figure~\ref{fig:nucleon_naive}) is the exterior of the nucleon data set, the visibility-weighted saliency of this feature is shown in the 3D scalar fields in the same color at the left in Figure~\ref{fig:nucleon_densityplot}.
+The visibility-weighted saliency of feature 1 increases as its opacity increases, as shown in the 3D scalar fields that the brightness and opacity increase along $ x $ axis. Similar patterns also appear in the other 2 scalar fields, the visibility-weighted saliency of feature 2 (the red structure in Figure~\ref{fig:nucleon_naive}) and feature 3 (the green structure in Figure~\ref{fig:nucleon_naive}) also increase as their opacity increase.
+Thus it is reasonable to assume that the visibility-weighted saliency of a feature is a monotonic function of its opacity.
+
+Moreover, feature 1 is the exterior of the nucleon, its visibility-weighted saliency is almost not influenced by the opacity of other features. On the other hand, the visibility-weighted saliency of feature 2 is influenced by both the opacity of feature 1 and feature 2. In addition, the visibility-weighted saliency of feature 3 is drastically influenced by the opacity of feature 1, feature 2 and feature 3, as feature 3 is an interior structure and can be easily occluded by the other 2 features.
 
 In order to demonstrate the distribution of the objective function in the parameter space $ x \in [0,1] $, $ y \in [0,1] $ and $ z \in [0,1] $, we sample the parameter space with sampling interval $ 0.1 $, from 0 to 1 along each axis. There are 11 sampling points along each axis, which results in 1331 sampling points in the parameter space. In Figure~\ref{fig:nucleon_parameterspace}, the parameter space is rendered as a density plot with a temperate color map which gradually changes from orange to blue.
 
@@ -79,8 +91,7 @@ In order to demonstrate the distribution of the objective function in the parame
 	\label{fig:nucleon_parameterspace}
 \end{figure}
 
-
-\subsection{Gradient Descent}
+\subsection{Optimization Algorithm}
 Gradient descent is a first-order optimization algorithm. It is based on the observation that if an objective function $ f(x) $ is defined and differentiable in a neighborhood of a point $ x_{1} $, then $ f(x) $ decreases fastest in the direction of the negative gradient of the objective function \cite{chong_introduction_2013}.
 
 Given a continuously differentiable function $ f(x) $ with $ x \in \mathbb{R}^{n} $, let $ x_{k} $ be the current iteration point and $ g_{k}=g(x_{k})= \nabla f(x_{k}) $ be the gradient of $ f(x) $ at $ x_{k} $. The gradient descent method defines the next iteration point by
@@ -88,6 +99,14 @@ Given a continuously differentiable function $ f(x) $ with $ x \in \mathbb{R}^{n
 for $ \alpha_{k} $ small enough, then $ f(x_{k+1}) \leq f(x_{k}) $. The gradient varies as the iteration proceeds, tending to zero as it approaches a local minimum. When the gradient decreases, the iteration step sizes also decrease. So hopefully the sequence $ {x_{k}} $ converges to the desired local minimum after performing the iteration.
 
 In gradient descent methods, we can either take very small step sizes and reevaluate the gradient at every steps, or take large steps each time. If the step size is too small, it may end up in a laborious situation that the objective function converges very slowly. If the step size is too large, it results in a more zigzag path and may have the risk of missing the local minimum and thus cannot converge.
+
+Gradient descent is employed in our optimizer. In terms of gradient estimations, we have experimented with two methods. First, we have tried to estimate the gradient with a backward difference divided by a small step.
+\[ \frac{\nabla_{h}[f](x)}{h}=\frac{f(x)-f(x-h)}{h} \]
+where $ h $ is nonzero number.
+
+When $ h $ is small, the backward difference divided by $ h $ approximates the derivative. The error in this approximation can be derived from Taylor's theorem. Assuming that $ f $ is differentiable, we have
+\[ \frac{\nabla_{h}[f](x)}{h}-f'(x)=\mathcal{O}(h) \to 0 , \; as \; h \to 0 \]
+Because the evaluation of the objective function is computational expensive, in our implementation, we use the $ h $ as the step size and $ f(x-h) $ would be the objective function value from the last iteration. Thus no extra evaluation of the objective function is required.
 
 \subsection{Adaptive Step Size with Line Search}
 Various approaches have been proposed regarding the choices of step sizes, which lead to various gradient algorithms \cite{yuan_step-sizes_2008}.
