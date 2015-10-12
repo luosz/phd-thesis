@@ -161,13 +161,66 @@ The parallel line search is shown as follows.
 	\item Find the index $ i $ of the minimum $ f(x_{k}+\gamma_{i} g_{k}) $, then $ \gamma_{i} $ is the chosen step size.
 \end{enumerate}
 
-This parallel line search introduces extra overhead of starting and terminating threads. Moreover, the number of threads should not exceed the number of cores of the processor, otherwise multiple threads have to share the same core and this would cause performance impact. The parallel line search is beneficial only when the evaluation of the objective function is more expensive than the parallel overhead.
+The mechanism of the parallel line search is sightly different from the sequential line search. In the sequential line search, if the current candidate point does not meat the condition, the line search is terminated and the next candidate point would not be evaluated. By contrast, the parallel line search would always evaluate all the candidate points and pick the one with least value of the objective function. However, these two methods would have the same behavior if the objective function is a convex function.
+
+The parallel line search strategy would introduce extra overhead of starting and terminating threads. Moreover, the number of threads should not exceed the number of cores of the processor, otherwise multiple threads have to share the same core and this would cause performance impact. The parallel line search is beneficial only when the evaluation of the objective function is more expensive than the parallel overhead.
 In our case, the evaluation of the objective function is very computational expensive. It requires to compute the visibility fields, which in turn requires to perform a pass of slice-based volume rendering.
 
 %-------------------------------------------------------------------------
 \section{Results and Discussions}
 
+*** work in progress ***
+
+Before optimization
+Figure~\ref{fig:nucleon_strong_red}
+
+After optimization
+Figure~\ref{fig:nucleon_strong_red_optimized_fixed}
+
+Search paths in parameter space
 Figure~\ref{fig:nucleon_parameterspace_path}
+
+Objective function
+Figure~\ref{fig:nucleon_strong_red_rms}
+
+Visibility-weighted saliency of each feature
+Figure~\ref{fig:nucleon_strong_red_saliency}
+
+Opacity of each feature
+Figure~\ref{fig:nucleon_strong_red_opacity}
+
+\begin{table}[h]
+\begin{tabular}{ l | l c r }
+	& Fixed step size & Line search & Parallel line search \\
+	\hline
+	Time (seconds) & 1.91 & 0.83 & 0.55 \\
+	Iterations to converge (at 0.01) & 37 & 4 & 4 \\
+\end{tabular}
+\caption[Table caption text]{Performance of the 3 optimization approaches on the nulceon data set ($ 41 \times 41 \times 41 $)}
+\label{table:nucleon_table}
+\end{table}
+
+\begin{table}[h]
+	\begin{tabular}{ l | l c r }
+		& Fixed step size & Line search & Parallel line search \\
+		\hline
+		Time (seconds) & 18.05 & 6.59 & 3.31 \\
+		Iterations to converge (at 0.01) & 47 & 4 & 4 \\
+	\end{tabular}
+	\caption[Table caption text]{Performance of the 3 optimization approaches on the tooth data set ($ 140 \times 120 \times 161 $)}
+	\label{table:tooth_table}
+\end{table}
+
+\begin{table}[h]
+	\begin{tabular}{ l | l c r }
+		& Fixed step size & Line search & Parallel line search \\
+		\hline
+		Time (seconds) & 120.38 & 59.01 & 33.41 \\
+		Iterations to converge (at 0.01) & 47 & 6 & 6 \\
+	\end{tabular}
+	\caption[Table caption text]{Performance of the 3 optimization approaches on the CT-Knee data set ($ 379 \times 229 \times 305 $)}
+	\label{table:CT-Knee_table}
+\end{table}
 
 \begin{figure}
 	\centering
@@ -180,53 +233,77 @@ Figure~\ref{fig:nucleon_parameterspace_path}
 
 \begin{figure}
 	\centering
-	\begin{minipage}{.3\textwidth}
-		\includegraphics[width=1\linewidth]{images/saliency_fixed}
-		\caption{a}	
+	\begin{minipage}{.35\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_strong_red}
 	\end{minipage}~
-	\begin{minipage}{.3\textwidth}
-		\includegraphics[width=1\linewidth]{images/saliency_linesearch}
-		\caption{b}	
+	\begin{minipage}{.2\textwidth}
+		\includegraphics[width=1\linewidth]{images/tf_nucleon_strong_red}	
+	\end{minipage}~
+	\begin{minipage}{.4\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_visibility_saliency_weighted_chart}
 	\end{minipage}
-	\begin{minipage}{.3\textwidth}
-		\includegraphics[width=1\linewidth]{images/saliency_parallelsearch}
-		\caption{b}	
-	\end{minipage}
-	\label{fig:nucleon_saliency}
+	\caption{Before optimization. The rendered image of the nucleon data set, the transfer function and the visibility-weighted saliency histogram}
+	\label{fig:nucleon_strong_red}
 \end{figure}
 
 \begin{figure}
 	\centering
-	\begin{minipage}{.3\textwidth}
-		\includegraphics[width=1\linewidth]{images/opacity_fixed}
-		\caption{a}	
+	\begin{minipage}{.35\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_optimized_fixed}
 	\end{minipage}~
-	\begin{minipage}{.3\textwidth}
-		\includegraphics[width=1\linewidth]{images/opacity_linesearch}
-		\caption{b}	
+	\begin{minipage}{.2\textwidth}
+		\includegraphics[width=1\linewidth]{images/tf_nucleon_strong_red_optimized_fixed}
+	\end{minipage}~
+	\begin{minipage}{.4\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_optimized_fixed_visibility_saliency_weighted_chart}
 	\end{minipage}
-	\begin{minipage}{.3\textwidth}
-		\includegraphics[width=1\linewidth]{images/opacity_parallelsearch}
-		\caption{b}	
-	\end{minipage}
-	\label{fig:nucleon_opacity}
+	\caption{Optimization target \{0.1, 0.3, 0.6\}. The rendered image of the nucleon data set, the transfer function and the visibility-weighted saliency histogram}
+	\label{fig:nucleon_strong_red_optimized_fixed}
 \end{figure}
 
 \begin{figure}
 	\centering
-	\begin{minipage}{.3\textwidth}
-		\includegraphics[width=1\linewidth]{images/rms_fixed}
-		\caption{a}	
+	\begin{minipage}{.33\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_rms_fixed}
 	\end{minipage}~
-	\begin{minipage}{.3\textwidth}
-		\includegraphics[width=1\linewidth]{images/rms_linesearch}
-		\caption{b}	
+	\begin{minipage}{.33\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_rms_linesearch}
+	\end{minipage}~
+	\begin{minipage}{.33\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_rms_parallelsearch}
 	\end{minipage}
-	\begin{minipage}{.3\textwidth}
-		\includegraphics[width=1\linewidth]{images/rms_parallelsearch}
-		\caption{b}	
+	\caption{How the objective function change over iterations respectively in the 3 optimization approaches. (Left: fixed step size; middle: line search; right: parallel line search)}
+	\label{fig:nucleon_strong_red_rms}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{minipage}{.33\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_saliency_fixed}
+	\end{minipage}~
+	\begin{minipage}{.33\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_saliency_linesearch}
+	\end{minipage}~
+	\begin{minipage}{.33\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_saliency_parallelsearch}
 	\end{minipage}
-	\label{fig:nucleon_rms}
+	\caption{How the visibility-weighted saliency of each feature change over iterations respectively in the 3 optimization approaches. (Left: fixed step size; middle: line search; right: parallel line search)}
+	\label{fig:nucleon_strong_red_saliency}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{minipage}{.33\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_opacity_fixed}
+	\end{minipage}~
+	\begin{minipage}{.33\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_opacity_linesearch}
+	\end{minipage}~
+	\begin{minipage}{.33\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_opacity_parallelsearch}
+	\end{minipage}
+	\caption{How the opacity of each feature change over iterations respectively in the 3 optimization approaches. (Left: fixed step size; middle: line search; right: parallel line search)}
+	\label{fig:nucleon_strong_red_opacity}
 \end{figure}
 
 %-------------------------------------------------------------------------
