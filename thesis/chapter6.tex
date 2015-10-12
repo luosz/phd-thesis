@@ -126,7 +126,7 @@ for $ \alpha_{k} $ small enough, then $ f(x_{k+1}) \leq f(x_{k}) $. The gradient
 In gradient descent methods, we can either take very small step sizes and reevaluate the gradient at every steps, or take large steps each time. If the step size is too small, it may end up in a laborious situation that the objective function converges very slowly. If the step size is too large, it results in a more zigzag path and may have the risk of missing the local minimum and thus cannot converge.
 
 \subsection{Adaptive Step Size with Line Search}
-Performing gradient descent with a small step size may result in converging too slowly and require a lot of evaluations of the objective function, which is rather expensive to compute in our application. Various approaches have been proposed regarding the choices of step sizes, which lead to various gradient algorithms \cite{yuan_step-sizes_2008}.
+Performing gradient descent with a small step size may result in converging too slowly and require a lot of evaluations of the objective function, which is rather expensive to compute in our situation. Various approaches have been proposed regarding the choices of step sizes, which lead to various gradient algorithms \cite{yuan_step-sizes_2008}.
 
 The line search strategy is an iterative approach that adapts the step size in gradient descent in order to achieve a reduction in the objective function while still making sufficiently fast progress.
 \[ h( \gamma)=f(x_{k}+\gamma g_{k}) \]
@@ -139,23 +139,30 @@ On the contrary, inexact line search only loosely find a sufficient decrease of 
 The inexact line search we used in our implementation is as follows.
 
 \begin{enumerate}
-	\item Set initial iteration count $ n=0 $
-	\item Check if $ f(x_{k}+\gamma_{n+1} g_{k}) < f(x_{k}+\gamma_{n} g_{k}) $ where $ \gamma_{n}=2^{n} $
-	\item If so, $ n=n+1 $ and repeat Line 2, otherwise terminate the line search.
+	\item Set initial iteration count $ i=0 $ and set $ n $ to the maximum iteration count.
+	\item Check whether $ f(x_{k}+\gamma_{i+1} g_{k}) < f(x_{k}+\gamma_{i} g_{k}) $ where $ \gamma_{i}=2^{i} $
+	\item If so and $ i<n-1 $, $ i=i+1 $ and repeat Line 2, otherwise terminate the line search.
 \end{enumerate}
 
-This inexact line search strategy does not find the exact minimum along the line direction, instead it yields reasonable results and descents much faster than using fixed step sizes.
+The step size $ \gamma_{n} $ is chosen after the above line search procedure.
+This strategy does not find the exact minimum along the line direction, instead it yields reasonable results and descents much faster than using fixed step sizes.
 
 \subsection{Parallel Line Search}
-Gradient descent is an iterative procedure.
-The steps of gradient descent has to be iteratively determined. Next iteration takes the result from the previous iteration as input.
-However, the line search at each iteration can be computed parallel to accelerate the optimization.
+The classical gradient descent is a sequential algorithm. In its iterative procedure, the next iteration takes the result from the previous iteration as input.
+However, the line search at each iteration can be computed parallel to accelerate the optimization. This idea is particularly useful in our transfer function optimization, because the most expensive computation in our transfer function optimization is the evaluation of visibility-weighted saliency, which is required in the evaluation of the objective function at each iteration.
 
+In this section, we propose a parallel line search strategy, which evaluates the objective function at different candidate points in parallel along the line search direction. With this parallel approach, the computing power of modern multi-core processors can be better exploited to accelerate the transfer function optimization. Specifically, parallel line search launches multiple threads to perform the line search. Each thread computes the visibility-weighted saliency and the objective function at a candidate point. Subsequently, the results at all the candidate points are aggregated and the candidate point with the minimum objective function value is chosen as the next step.
 
+The parallel line search is shown as follows.
 
-Parallel computation has overhead.
-It's worthy to perform line search in parallel when the evaluation of the objective function is computational expensive.
-Computing the visibility fields is require to perform a pass of slice-based volume rendering, which is computational expensive.
+\begin{enumerate}
+	\item Generate a list of step sizes $ S= \{ \gamma_{0},\gamma_{1},...,\gamma_{n-1} \} $ where $ \gamma_{i}=2^{i} $
+	\item Evaluate $ f(x_{k}+\gamma_{i} g_{k}) $ in parallel for each $ \gamma_{i} $ in $ S $
+	\item Find the index $ i $ of the minimum $ f(x_{k}+\gamma_{i} g_{k}) $, then $ \gamma_{i} $ is the chosen step size.
+\end{enumerate}
+
+This parallel line search introduces extra overhead of starting and terminating threads. Moreover, the number of threads should not exceed the number of cores of the processor, otherwise multiple threads have to share the same core and this would cause performance impact. The parallel line search is beneficial only when the evaluation of the objective function is more expensive than the parallel overhead.
+In our case, the evaluation of the objective function is very computational expensive. It requires to compute the visibility fields, which in turn requires to perform a pass of slice-based volume rendering.
 
 %-------------------------------------------------------------------------
 \section{Results and Discussions}
