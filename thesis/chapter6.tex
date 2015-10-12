@@ -59,10 +59,10 @@ In order to demonstrate the distribution of the objective function in the parame
 
 \begin{figure}
 \centering
-	\begin{minipage}{.3\textwidth}
+	\begin{minipage}{.35\textwidth}
 	\includegraphics[width=1\linewidth]{images/nucleon_naive}
 	\end{minipage}~
-	\begin{minipage}{.3\textwidth}
+	\begin{minipage}{.2\textwidth}
 	\includegraphics[width=1\linewidth]{images/tf_nucleon_naive}
 	\end{minipage}
 	\caption{A nucleon data set \cite{website:Voreen_datasets_2013} (left) with a transfer function of equal opacity values to the 3 features (right)}
@@ -72,13 +72,13 @@ In order to demonstrate the distribution of the objective function in the parame
 \begin{figure}
 	\centering
 	\begin{minipage}{.3\textwidth}
-		\includegraphics[width=1\linewidth]{images/densityplot1}	
+		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_densityplot1}	
 	\end{minipage}~
 	\begin{minipage}{.3\textwidth}
-		\includegraphics[width=1\linewidth]{images/densityplot2}	
+		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_densityplot2}	
 	\end{minipage}
 	\begin{minipage}{.3\textwidth}
-		\includegraphics[width=1\linewidth]{images/densityplot3}	
+		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_densityplot3}	
 	\end{minipage}
 	\caption{Visibility-weighted saliency of the 3 features are mapped to brightness and opacity of the 3D fields at the left, middle and right respectively. The visibility-weighted saliency of feature 2 (red) is affected by both the opacity of feature 1 (purple) and feature 2. The visibility-weighted saliency of feature 3 (green) is affected by the opacity of feature 1, feature 2 and feature 3.}
 	\label{fig:nucleon_densityplot}
@@ -87,7 +87,7 @@ In order to demonstrate the distribution of the objective function in the parame
 \begin{figure}
 	\centering
 	\begin{minipage}{.6\textwidth}
-		\includegraphics[width=1\linewidth]{images/parameterspace}
+		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_parameterspace}
 	\end{minipage}
 	\caption{The values of the objective function $  f $ is displayed as the density in the parameter space (with sampling interval $ 0.1 $). Target saliency values are set to 0.1, 0.3 and 0.6 for the 3 features respectively. Only the high and low values are visible and the data range in the middle is set to transparent.}
 	\label{fig:nucleon_parameterspace}
@@ -178,7 +178,7 @@ Figure~\ref{fig:nucleon_strong_red_plot_fixed}
 	\begin{minipage}{.4\textwidth}
 		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_optimized_fixed_visibility_saliency_weighted_chart}
 	\end{minipage}
-	\caption{After optimization at target \{0.1, 0.3, 0.6\}, all the 3 features are visible and the green feature inside is particularly emphasized. (Left: the volume rendered image of the nucleon data set; Middle: the transfer function; Right: the visibility-weighted saliency histogram)}
+	\caption{After optimization to target \{0.1, 0.3, 0.6\}, all the 3 features are visible and the green feature inside is particularly emphasized. (Left: the volume rendered image of the nucleon data set; Middle: the transfer function; Right: the visibility-weighted saliency histogram)}
 	\label{fig:nucleon_strong_red_optimized_fixed}
 \end{figure}
 
@@ -193,7 +193,7 @@ Figure~\ref{fig:nucleon_strong_red_plot_fixed}
 	\begin{minipage}{.33\textwidth}
 		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_saliencyopacity_difference}
 	\end{minipage}
-	\caption{Before optimization. The rendered image of the nucleon data set, the transfer function and the visibility-weighted saliency histogram}
+	\caption{Gradient estimation 1}
 	\label{fig:nucleon_strong_red_plot_difference}
 \end{figure}
 
@@ -208,7 +208,7 @@ Figure~\ref{fig:nucleon_strong_red_plot_fixed}
 	\begin{minipage}{.33\textwidth}
 		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_saliencyopacity_fixed}
 	\end{minipage}
-	\caption{Before optimization. The rendered image of the nucleon data set, the transfer function and the visibility-weighted saliency histogram}
+	\caption{Gradient estimation 2}
 	\label{fig:nucleon_strong_red_plot_fixed}
 \end{figure}
 
@@ -308,9 +308,9 @@ Figure~\ref{fig:nucleon_strong_red_opacity}
 \begin{figure}
 	\centering
 	\begin{minipage}{.9\textwidth}
-		\includegraphics[width=1\linewidth]{images/parameterspace_path}
+		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_parameterspace_path}
 	\end{minipage}
-	\caption{The footprints of gradient descent methods with fixed step size and adaptive step size are shown in the parameter space in Figure~\ref{fig:nucleon_parameterspace}}
+	\caption{The footprints of gradient descent methods with fixed step size and adaptive step size are shown in the parameter space in Figure~\ref{fig:nucleon_parameterspace} (the step size is 0.1)}
 	\label{fig:nucleon_parameterspace_path}
 \end{figure}
 
