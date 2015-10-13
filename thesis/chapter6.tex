@@ -29,8 +29,8 @@ Users define target importance values for each feature defined in the transfer f
 Our transfer function optimizer adjusts the transfer function to match the visibility-weighted saliency with the user-defined target saliency values.
 Multiple saliency fields computed from different appearance attributes can be combined together in order to represent different aspects of the visual saliency of voxels.
 In our implementation, brightness and saturation are used respectively to compute visibility-weighted saliency fields and define the weighted sum of the two sets of feature saliency as visibility-weighted feature saliency.
-The objective function $ f $ is defined as the root mean square of the differences of the visibility-weighted saliency and target importance of each feature.
-\[ f=\sqrt{ \frac{\sum_{i=1}^{n} (W_{i}-t_{i})^{2}}{n} } 
+The objective function $ F $ is defined as the root mean square of the differences of the visibility-weighted saliency and target importance of each feature.
+\[ F=\sqrt{ \frac{\sum_{i=1}^{n} (W_{i}-t_{i})^{2}}{n} } 
 \addtag \]
 where $ W_{F}=u_{1}W_{F}(O_{b},i,\sigma)+u_{2}W_{F}(O_{s},i,\sigma) $ is the visibility-weighted saliency of feature $ i $, and $ t_{i} $ is the user-defined importance of feature $ i $. These user-defined saliency values are normalized and they add up to 1, in other words, $ t_{i} \in [0.1] $ and $ \sum_{i=1}^{n} t_{i} = 1 $.
 
@@ -89,7 +89,7 @@ In order to demonstrate the distribution of the objective function in the parame
 	\begin{minipage}{.6\textwidth}
 		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_parameterspace}
 	\end{minipage}
-	\caption{Each position (x, y, z) in the parameter space represents 3 features with opacity values (x, y, z). The value of the objective function $ f $ (with \{0.1, 0.3, 0.6\} as target) is mapped to the color in the parameter space (with sampling interval $ 0.1 $). Only the high and low values are visible and the data range in the middle is set to transparent.}
+	\caption{Each position (x, y, z) in the parameter space represents 3 features with opacity values (x, y, z). The value of the objective function (with \{0.1, 0.3, 0.6\} as target) is mapped to the color in the parameter space (with sampling interval $ 0.1 $). Only the high and low values are visible and the data range in the middle is set to transparent.}
 	\label{fig:nucleon_parameterspace}
 \end{figure}
 
@@ -109,46 +109,67 @@ As previously discussed, the visibility-weighted saliency of a feature increases
 %The visibility-weighted saliency of a feature is a monotonic function of the opacity of the feature. 
 However, the relationship between the visibility-weighted saliency and the opacity of a feature also depends the viewpoint of rendering and the spatial distribution of voxels of every features in the volume data set. An exact derivative of the visibility-weighted saliency with respect to the opacity of the feature cannot be determined in advance.
 
-In the following subsections, three different methods for estimating gradients or search directions are described.
+In the following subsections, two methods for estimating gradients or search directions are described.
 
-\subsubsection{Backward Difference}
-The first method is to estimate the gradient with a backward difference divided by a small step.
+\subsubsection{Gradients with Backward Difference}
+The partial derivative of the objective function $ F $ with respect to $ x_{i} $ is
+\[ \frac{\partial F}{\partial x_{i}} = \frac{\partial F}{\partial W_{i}} \frac{\partial W_{i}}{\partial x_{i}} \]
+where $ x_{i} $ is the opacity and $ W_{i} $ is the visibility-weighted saliency of feature $ i $.
+The partial derivative $ \frac{\partial f}{\partial W_{i}} $ can be solved from the objective function $ F $.
+However, $ \frac{\partial W_{i}}{\partial x_{i}} $ cannot be determined without knowledge the actual volume data set.
+
+For a function $ f(x) $, its first-order derivative can be estimated by a backward difference divided by a small step.
 \[ \frac{\nabla_{d}[f](x)}{d}=\frac{f(x)-f(x-d)}{d} \]
 where $ d $ is nonzero number.
 When $ d $ is small, the backward difference divided by $ d $ approximates the derivative. Assuming that $ f $ is differentiable, the error in this approximation can be derived from Taylor's theorem.
 \[ \frac{\nabla_{d}[f](x)}{d}-f'(x)=\mathcal{O}(d) \to 0 , \; as \; d \to 0 \]
-The evaluation of the objective function $ f $ is very computational expensive. In our implementation, a small step size $ d $ is adopted, therefore the backward difference can calculated from values of the objective function, visibility-weighted saliency and step positions of the last iteration. In this case, no extra evaluation of the visibility-weighted saliency and the objective function is required.
 
-\subsubsection{Derivatives with Backward Difference}
-The partial derivative of the objective function $ f $ with respect to $ x_{i} $ is
-\[ \frac{\partial f}{\partial x_{i}} = \frac{\partial f}{\partial W_{i}} \frac{\partial W_{i}}{\partial x_{i}} \]
-where $ x_{i} $ is the opacity and $ W_{i} $ is the visibility-weighted saliency of feature $ i $.
-
-The partial derivative $ \frac{\partial f}{\partial W_{i}} $ can be solved from the objective function $ f $. However, $ \frac{\partial W_{i}}{\partial x_{i}} $ cannot be determined without knowledge the actual volume data set. The backward difference is used here to approximate $ \frac{\partial W_{i}}{\partial x_{i}} $, hence we have
+The backward difference is used here to approximate $ \frac{\partial W_{i}}{\partial x_{i}} $, hence we have
 \[ \frac{\partial W_{i}}{\partial x_{i}} \approx \frac{\nabla_{d}[W_{i}](x_{i})}{d} \]
-Similarly, the backward difference can calculated from previous values of the visibility-weighted saliency and step positions.
+
+The evaluation of the objective function $ F $ is very computational expensive. In our implementation, a small step size $ d $ is adopted, therefore the backward difference can calculated from values of the objective function, visibility-weighted saliency and steps of the previous iteration. In this case, no extra evaluation of the visibility-weighted saliency and the objective function is required.
+%Similarly, the backward difference can calculated from previous values of the visibility-weighted saliency and step positions.
 
 Furthermore, if the function $ W_{i} $ of $ x_{i} $ is approximately a linear function, the partial derivative $ \frac{\partial W_{i}}{\partial x_{i}} $ becomes constant and could be replaced by an empirical constant $ b_{i} $. In this case, the gradient of the objective function with respect to the visibility saliency is used instead, which should be more computationally efficient.
-\[ \frac{\partial f}{\partial x_{i}} \approx \frac{\partial f}{\partial W_{i}} b_{i} \]
-In our implementation, $ b_{i}=1 $ is used and this yields desirable results.
+\[ \frac{\partial F}{\partial x_{i}} \approx \frac{\partial F}{\partial W_{i}} b_{i} \]
 
-\subsubsection{Newton's Method Using Backward Difference}
-Newton's method, which is an iterative method for finding the roots of a differentiable function, can be used to find a minimum or maximum of a function. Because the derivative is zero at a minimum or maximum, minima and maxima can be found by applying Newton's method to the derivative. Hence we have
+\subsubsection{Search Directions with Second-Order Derivatives}
+Newton's method, which is an iterative method for finding the roots of a differentiable function, can be used to find a minimum or maximum of a function. Because the derivative is zero at a minimum or maximum, minima and maxima can be found by applying Newton's method to the derivative.
 \[ x_{k+1}=x_{k}- \frac{f'(x_{k})}{f''(x_{k})} \]
-This iteration equation gives a similar form of gradient descent, thus we can use $ \frac{f'}{f''} $ in our optimization algorithm as the search direction.
+This iteration equation gives a similar form of gradient descent, thus $ \frac{\partial^2 F}{\partial x_{i}^2} $ can be adopted in our optimization algorithm as the search direction.
 
-The first-order derivative can be estimated by backward difference of the objective function $ f $, and the second-order derivative $ f'' $ can be estimated by backward difference of the first-order derivative $ f' $.
-\[ \frac{f'}{f''} 
-\approx \dfrac{ \frac{\nabla_{d}[f](x_{i})}{d} }{ \frac{\nabla_{d}[f'](x_{i})}{d} }
-= \frac{ \nabla_{d}[f](x_{i}) }{ \nabla_{d}[f'](x_{i}) } \]
+The first-order derivative can be estimated by backward difference of the objective function $ F $, and the second-order derivative $ F'' $ can be estimated by backward difference of the first-order derivative $ F' $.
+\[ \frac{\partial^2 F}{\partial x_{i}^2} 
+\approx \dfrac{ \frac{\nabla_{d}[F](x_{i})}{d} }{ \frac{\nabla_{d}[F'](x_{i})}{d} }
+= \frac{ \nabla_{d}[F](x_{i}) }{ \nabla_{d}[F'](x_{i}) } \]
 
-\subsubsection{Results of the Estimation Methods}
+\subsubsection{Comparison of the Gradient Estimation Methods}
 We have tested the gradient estimation methods discussed above with several volume data sets with various step sizes.
-In the preliminary results, we found these methods work with small step sizes. As the step size increase, using $ \frac{\nabla_{d}[f](x)}{d} $ and $ \frac{\partial f}{\partial W_{i}} \frac{\nabla_{d}[W_{i}](x_{i})}{d} $ as search directions would be unstable. While using $ \frac{\partial f}{\partial W_{i}} b_{i} $ and $ \frac{ \nabla_{d}[f](x_{i}) }{ \nabla_{d}[f'](x_{i}) } $ as search directions would be still stable even when the step sizes are large. In addition, with the same step size, using $ \frac{\partial f}{\partial W_{i}} b_{i} $ as the search direction would converge fastest among these methods.
+All the above described methods worked with small step sizes. As the step size increase, using $ \frac{\partial F}{\partial W_{i}} \frac{\nabla_{d}[W_{i}](x_{i})}{d} $ as search directions would be unstable. While using $ \frac{\partial F}{\partial W_{i}} b_{i} $ and $ \frac{ \nabla_{d}[F](x_{i}) }{ \nabla_{d}[F'](x_{i}) } $ as search directions would be still stable even when the step sizes are large. In our implementation, $ b_{i}=1 $ is used and this yields desirable results.
+
+Gradient descent were performed on several volume data sets with various transfer functions, using the two normalized search directions computed from $ [ \frac{\partial F}{\partial W_{1}} b_{1} ... \frac{\partial F}{\partial W_{n}} b_{n} ] $ (method 1)
+ and 
+$ [ \frac{ \nabla_{d}[F](x_{1}) }{ \nabla_{d}[F'](x_{1}) }  ... \frac{ \nabla_{d}[F](x_{n}) }{ \nabla_{d}[F'](x_{n}) } ] $ (method 2).
+In these preliminary results (Figure~\ref{fig:nucleon_naive_tooth_naive_rms}), the convergence speeds of the two methods were similar, with method 2 slightly faster in some cases.
+
+\begin{figure}
+	\centering
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_naive_rms_fixed_newton}
+	\end{minipage}~
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/tooth_naive_rms_fixed_newton}	
+	\end{minipage}
+	\caption{The two methods for estimating search directions are applied to transfer function optimization on the nuclon data set (left) and a tooth data set(right).
+		Method 1 converges (the objective function falls below 0.01) at the 10th step and method 2 converges at the 9th step on the nucleon data set with a naive transfer function of equal opacity for each feature.
+		The two methods both converge at the 47th step on the tooth data set, also with a native transfer function of equal opacity for each feature.}
+	\label{fig:nucleon_naive_tooth_naive_rms}
+\end{figure}
 
 \subsection{Adaptive Step Size with Line Search}
 Performing gradient descent with a small step size may result in converging too slowly and require a lot of evaluations of the objective function, which is rather expensive to compute in our situation. Various approaches have been proposed regarding the choices of step sizes, which lead to various gradient algorithms \cite{yuan_step-sizes_2008}.
 
+\subsubsection{Line Search}
 The line search strategy is an iterative approach that adapts the step size in gradient descent in order to achieve a reduction in the objective function while still making sufficiently fast progress.
 \[ h( \gamma)=f(x_{k}+\gamma g_{k}) \]
 where $ g_{k} $ is the descent direction and $ x_{k} $ is the current point at the $ k$-$th $ iteration.
@@ -168,11 +189,11 @@ The inexact line search we used in our implementation is as follows.
 The step size $ \gamma_{n} $ is chosen after the above line search procedure.
 This strategy does not find the exact minimum along the line direction, instead it yields reasonable results and descents much faster than using fixed step sizes.
 
-\subsection{Parallel Line Search}
+\subsubsection{Parallel Line Search}
 The classical gradient descent is a sequential algorithm. In its iterative procedure, the next iteration takes the result from the previous iteration as input.
 However, the line search at each iteration can be computed parallel to accelerate the optimization. This idea is particularly useful in our transfer function optimization, because the most expensive computation in our transfer function optimization is the evaluation of visibility-weighted saliency, which is required in the evaluation of the objective function at each iteration.
 
-In this section, we propose a parallel line search strategy, which evaluates the objective function at different candidate points in parallel along the line search direction. With this parallel approach, the computing power of modern multi-core processors can be better exploited to accelerate the transfer function optimization. Specifically, parallel line search launches multiple threads to perform the line search. Each thread computes the visibility-weighted saliency and the objective function at a candidate point. Subsequently, the results at all the candidate points are aggregated and the candidate point with the minimum objective function value is chosen as the next step.
+In this subsection, we propose a parallel line search strategy, which evaluates the objective function at different candidate points in parallel along the line search direction. With this parallel approach, the computing power of modern multi-core processors can be better exploited to accelerate the transfer function optimization. Specifically, parallel line search launches multiple threads to perform the line search. Each thread computes the visibility-weighted saliency and the objective function at a candidate point. Subsequently, the results at all the candidate points are aggregated and the candidate point with the minimum objective function value is chosen as the next step.
 
 The parallel line search is shown as follows.
 
@@ -186,6 +207,23 @@ The mechanism of the parallel line search is sightly different from the sequenti
 
 The parallel line search strategy would introduce extra overhead of starting and terminating threads. Moreover, the number of threads should not exceed the number of cores of the processor, otherwise multiple threads have to share the same core and this would cause performance impact. The parallel line search is beneficial only when the evaluation of the objective function is more expensive than the parallel overhead.
 In our case, the evaluation of the objective function is very computational expensive. It requires to compute the visibility fields, which in turn requires to perform a pass of slice-based volume rendering.
+
+\subsubsection{Comparion of Line Search and Parallel Line Search}
+
+Figure~\ref{fig:nucleon_naive_tooth_naive_rms_linesearch}
+
+\begin{figure}
+	\centering
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_naive_rms_fixed_linesearch_parallel}
+	\end{minipage}~
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/tooth_naive_rms_fixed_linesearch_parallel}	
+	\end{minipage}
+	\caption{The line search and parallel line search are applied to transfer function optimization on the nuclon data set (left) and the tooth data set(right). The two line search approaches are almost the same in terms of step size choices.}
+	\label{fig:nucleon_naive_tooth_naive_rms_linesearch}
+\end{figure}
+
 
 %-------------------------------------------------------------------------
 \section{Results and Discussions}
