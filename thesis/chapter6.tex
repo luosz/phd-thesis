@@ -26,7 +26,7 @@ These constraints are based on the assumption that the user has explored the vol
 
 \subsection{Objective Function}
 Users define target importance values for each feature defined in the transfer function domain.
-Our approach adjusts the transfer function to match the visibility-weighted saliency with the user-defined target saliency values.
+Our transfer function optimizer adjusts the transfer function to match the visibility-weighted saliency with the user-defined target saliency values.
 Multiple saliency fields computed from different appearance attributes can be combined together in order to represent different aspects of the visual saliency of voxels.
 In our implementation, brightness and saturation are used respectively to compute visibility-weighted saliency fields and define the weighted sum of the two sets of feature saliency as visibility-weighted feature saliency.
 The objective function $ f $ is defined as the root mean square of the differences of the visibility-weighted saliency and target importance of each feature.
@@ -89,13 +89,13 @@ In order to demonstrate the distribution of the objective function in the parame
 	\begin{minipage}{.6\textwidth}
 		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_parameterspace}
 	\end{minipage}
-	\caption{The values of the objective function $  f $ is displayed as the density in the parameter space (with sampling interval $ 0.1 $). Target saliency values are set to 0.1, 0.3 and 0.6 for the 3 features respectively. Only the high and low values are visible and the data range in the middle is set to transparent.}
+	\caption{Each position (x, y, z) in the parameter space represents 3 features with opacity values (x, y, z). The value of the objective function $ f $ (with \{0.1, 0.3, 0.6\} as target) is mapped to the color in the parameter space (with sampling interval $ 0.1 $). Only the high and low values are visible and the data range in the middle is set to transparent.}
 	\label{fig:nucleon_parameterspace}
 \end{figure}
 
 \subsection{Optimization Algorithm}
-The gradient descent algorithm is employed in our optimizer.
-Gradient descent is a first-order optimization algorithm. It is based on the observation that if an objective function $ f(x) $ is defined and differentiable in a neighborhood of a point $ x_{1} $, then $ f(x) $ decreases fastest in the direction of the negative gradient of the objective function \cite{chong_introduction_2013}.
+The gradient descent algorithm is employed in our transfer function optimizer.
+Gradient descent is a first-order optimization algorithm. It is based on the observation that if a function $ f(x) $ is defined and differentiable in a neighborhood of a point $ x_{1} $, then $ f(x) $ decreases fastest in the direction of the negative gradient of the function \cite{chong_introduction_2013}.
 
 Given a continuously differentiable function $ f(x) $ with $ x \in \mathbb{R}^{n} $, let $ x_{k} $ be the current iteration point and $ g_{k}=g(x_{k})= \nabla f(x_{k}) $ be the gradient of $ f(x) $ at $ x_{k} $. The gradient descent method defines the next iteration point by
 \[ x_{k+1}=x_{k}- \alpha_{k} g_{k} , k \geq 0 \]
@@ -103,10 +103,13 @@ for $ \alpha_{k} $ small enough, then $ f(x_{k+1}) \leq f(x_{k}) $. The gradient
 
 In gradient descent methods, we can either take very small step sizes and reevaluate the gradient at every steps, or take large steps each time. If the step size is too small, it may end up in a laborious situation that the objective function converges very slowly. If the step size is too large, it results in a more zigzag path and may have the risk of missing the local minimum and thus cannot converge.
 
-\subsection{Gradient Estimation}
-As discussed in the previous section, the visibility-weighted saliency of a feature increases as its feature opacity increases. The visibility-weighted saliency of a feature is a monotonic function of the opacity of the feature. However, the relationship between the visibility-weighted saliency and the opacity of a feature also depends the viewpoint of rendering and the spatial distribution of voxels of every features in the volume data set. An exact derivative of the visibility-weighted saliency with respect to the opacity of the feature cannot be determined in advance.
+\subsection{Estimating Search Directions}
+In each step of the optimization, the search direction $ g_{k} $ has to be updated. 
+As previously discussed, the visibility-weighted saliency of a feature increases as its feature opacity increases. 
+%The visibility-weighted saliency of a feature is a monotonic function of the opacity of the feature. 
+However, the relationship between the visibility-weighted saliency and the opacity of a feature also depends the viewpoint of rendering and the spatial distribution of voxels of every features in the volume data set. An exact derivative of the visibility-weighted saliency with respect to the opacity of the feature cannot be determined in advance.
 
-In terms of gradient estimation, the two methods we have studied are as follows.
+In the following subsections, three different methods for estimating gradients or search directions are described.
 
 \subsubsection{Backward Difference}
 The first method is to estimate the gradient with a backward difference divided by a small step.
@@ -116,103 +119,32 @@ When $ d $ is small, the backward difference divided by $ d $ approximates the d
 \[ \frac{\nabla_{d}[f](x)}{d}-f'(x)=\mathcal{O}(d) \to 0 , \; as \; d \to 0 \]
 The evaluation of the objective function $ f $ is very computational expensive. In our implementation, a small step size $ d $ is adopted, therefore the backward difference can calculated from values of the objective function, visibility-weighted saliency and step positions of the last iteration. In this case, no extra evaluation of the visibility-weighted saliency and the objective function is required.
 
-\subsubsection{Partial Derivative with Backward Difference}
+\subsubsection{Derivatives with Backward Difference}
 The partial derivative of the objective function $ f $ with respect to $ x_{i} $ is
 \[ \frac{\partial f}{\partial f x_{i}} = \frac{\partial f}{\partial W_{i}} \frac{\partial W_{i}}{\partial x_{i}} \]
 where $ x_{i} $ is the opacity and $ W_{i} $ is the visibility-weighted saliency of feature $ i $.
 
 The partial derivative $ \frac{\partial f}{\partial W_{i}} $ can be solved from the objective function $ f $. However, $ \frac{\partial W_{i}}{\partial x_{i}} $ cannot be determined without knowledge the actual volume data set. The backward difference is used here to approximate $ \frac{\partial W_{i}}{\partial x_{i}} $, hence we have
-\[ \frac{\partial W_{i}}{\partial x_{i}} = \frac{\nabla_{d}[W_{i}](x_{i})}{d} \]
+\[ \frac{\partial W_{i}}{\partial x_{i}} \approx \frac{\nabla_{d}[W_{i}](x_{i})}{d} \]
 Similarly, the backward difference can calculated from previous values of the visibility-weighted saliency and step positions.
 
 Furthermore, if the function $ W_{i} $ of $ x_{i} $ is approximately a linear function, the partial derivative $ \frac{\partial W_{i}}{\partial x_{i}} $ becomes constant and could be replaced by an empirical constant $ b_{i} $. In this case, the gradient of the objective function with respect to the visibility saliency is used instead, which should be more computationally efficient.
 \[ \frac{\partial f}{\partial f x_{i}} \approx \frac{\partial f}{\partial W_{i}} b_{i} \]
+In our implementation, $ b_{i}=1 $ is used and this yields desirable results.
 
-\subsubsection{Comparison of Gradient Estimation Methods}
-In this subsection, we describe preliminary results of applying the three methods in gradient descent.
-As mentioned previously, gradient descent uses this iterative equation to determine the next step position
-\[ x_{k+1}=x_{k}- \alpha_{k} g_{k} , k \geq 0 \]
-We replaced the gradient $ g_{k} $ at the $ k $-$ th $ iteration with the three estimations
-$ \frac{\nabla_{d}[f](x)}{d} $,
-$ \frac{\partial f}{\partial W_{i}} \frac{\nabla_{d}[W_{i}](x_{i})}{d} $ and
-$ \frac{\partial f}{\partial W_{i}} b_{i} $ respectively and performed gradient descent to optimization the transfer functions towards user-defined targets on several volume data sets.
+\subsubsection{Newton's Method Using Backward Difference}
+Newton's method, which is an iterative method for finding the roots of a differentiable function, can be used to find a minimum or maximum of a function. Because the derivative is zero at a minimum or maximum, minima and maxima can be found by applying Newton's method to the derivative. Hence we have
+\[ x_{k+1}=x_{k}- \frac{f'(x_{k})}{f''(x_{k})} \]
+This iteration equation gives a similar form of gradient descent, thus we can use $ \frac{f'}{f''} $ in our optimization algorithm as the search direction.
 
-In the results, it turns out that the backward difference $ \frac{\nabla_{d}[f](x)}{d} $ is not stable and sometimes cannot converge.
+The first-order derivative can be estimated by backward difference of the objective function $ f $, and the second-order derivative $ f'' $ can be estimated by backward difference of the first-order derivative $ f' $.
+\[ \frac{f'}{f''} 
+\approx \dfrac{ \frac{\nabla_{d}[f](x_{i})}{d} }{ \frac{\nabla_{d}[f'](x_{i})}{d} }
+= \frac{ \nabla_{d}[f](x_{i}) }{ \nabla_{d}[f'](x_{i}) } \]
 
-$ \frac{\partial f}{\partial W_{i}} b_{i} $ is the most stable and converges fastest.
-
-$ \frac{\partial f}{\partial W_{i}} \frac{\nabla_{d}[W_{i}](x_{i})}{d} $ is between the two, sometimes leads to diverging results.
-
-Before optimization
-Figure~\ref{fig:nucleon_strong_red}
-
-After optimization
-Figure~\ref{fig:nucleon_strong_red_optimized_fixed}
-
-Figure~\ref{fig:nucleon_strong_red_plot_difference}
-Figure~\ref{fig:nucleon_strong_red_plot_fixed}
-
-\begin{figure}
-	\centering
-	\begin{minipage}{.35\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_strong_red}
-	\end{minipage}~
-	\begin{minipage}{.2\textwidth}
-		\includegraphics[width=1\linewidth]{images/tf_nucleon_strong_red}	
-	\end{minipage}~
-	\begin{minipage}{.4\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_visibility_saliency_weighted_chart}
-	\end{minipage}
-	\caption{Before optimization, the transfer function strongly emphasizes the red feature, which occludes the green feature inside. (Left: the volume rendered image of the nucleon data set; Middle: the transfer function; Right: the visibility-weighted saliency histogram)}
-	\label{fig:nucleon_strong_red}
-\end{figure}
-
-\begin{figure}
-	\centering
-	\begin{minipage}{.35\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_optimized_fixed}
-	\end{minipage}~
-	\begin{minipage}{.2\textwidth}
-		\includegraphics[width=1\linewidth]{images/tf_nucleon_strong_red_optimized_fixed}
-	\end{minipage}~
-	\begin{minipage}{.4\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_optimized_fixed_visibility_saliency_weighted_chart}
-	\end{minipage}
-	\caption{After optimization to target \{0.1, 0.3, 0.6\}, all the 3 features are visible and the green feature inside is particularly emphasized. (Left: the volume rendered image of the nucleon data set; Middle: the transfer function; Right: the visibility-weighted saliency histogram)}
-	\label{fig:nucleon_strong_red_optimized_fixed}
-\end{figure}
-
-\begin{figure}
-	\centering
-	\begin{minipage}{.33\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_rms_difference}
-	\end{minipage}~
-	\begin{minipage}{.33\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_saliency_difference}	
-	\end{minipage}~
-	\begin{minipage}{.33\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_saliencyopacity_difference}
-	\end{minipage}
-	\caption{Gradient estimation 1}
-	\label{fig:nucleon_strong_red_plot_difference}
-\end{figure}
-
-\begin{figure}
-	\centering
-	\begin{minipage}{.33\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_rms_fixed}
-	\end{minipage}~
-	\begin{minipage}{.33\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_saliency_fixed}	
-	\end{minipage}~
-	\begin{minipage}{.33\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_saliencyopacity_fixed}
-	\end{minipage}
-	\caption{Gradient estimation 2}
-	\label{fig:nucleon_strong_red_plot_fixed}
-\end{figure}
-
-%In the second method, we presume the relationship between the visibility-weighted saliency and the opacity of the feature is linear (even if this may not be true), and adopt the gradient of the objective function with respect to the visibility-weighted saliency as an estimation.
+\subsubsection{Results of the Estimation Methods}
+We have tested the gradient estimation methods discussed above with several volume data sets with various step sizes.
+In the preliminary results, we found these methods work with small step sizes. As the step size increase, using $ \frac{\nabla_{d}[f](x)}{d} $ and $ \frac{\partial f}{\partial W_{i}} \frac{\nabla_{d}[W_{i}](x_{i})}{d} $ as search directions would be unstable. While using $ \frac{\partial f}{\partial W_{i}} b_{i} $ and $ \frac{ \nabla_{d}[f](x_{i}) }{ \nabla_{d}[f'](x_{i}) } $ as search directions would be still stable even when the step sizes are large. In addition, with the same step size, using $ \frac{\partial f}{\partial W_{i}} b_{i} $ as the search direction would converge fastest among these methods.
 
 \subsection{Adaptive Step Size with Line Search}
 Performing gradient descent with a small step size may result in converging too slowly and require a lot of evaluations of the objective function, which is rather expensive to compute in our situation. Various approaches have been proposed regarding the choices of step sizes, which lead to various gradient algorithms \cite{yuan_step-sizes_2008}.
@@ -272,6 +204,42 @@ Figure~\ref{fig:nucleon_strong_red_saliency}
 Opacity of each feature
 Figure~\ref{fig:nucleon_strong_red_opacity}
 
+Before optimization
+Figure~\ref{fig:nucleon_strong_red}
+
+After optimization
+Figure~\ref{fig:nucleon_strong_red_optimized_fixed}
+
+\begin{figure}
+	\centering
+	\begin{minipage}{.35\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_strong_red}
+	\end{minipage}~
+	\begin{minipage}{.2\textwidth}
+		\includegraphics[width=1\linewidth]{images/tf_nucleon_strong_red}	
+	\end{minipage}~
+	\begin{minipage}{.4\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_visibility_saliency_weighted_chart}
+	\end{minipage}
+	\caption{Before optimization, the transfer function strongly emphasizes the red feature, which occludes the green feature inside. (Left: the volume rendered image of the nucleon data set; Middle: the transfer function; Right: the visibility-weighted saliency histogram)}
+	\label{fig:nucleon_strong_red}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{minipage}{.35\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_optimized_fixed}
+	\end{minipage}~
+	\begin{minipage}{.2\textwidth}
+		\includegraphics[width=1\linewidth]{images/tf_nucleon_strong_red_optimized_fixed}
+	\end{minipage}~
+	\begin{minipage}{.4\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_optimized_fixed_visibility_saliency_weighted_chart}
+	\end{minipage}
+	\caption{After optimization to target \{0.1, 0.3, 0.6\}, all the 3 features are visible and the green feature inside is particularly emphasized. (Left: the volume rendered image of the nucleon data set; Middle: the transfer function; Right: the visibility-weighted saliency histogram)}
+	\label{fig:nucleon_strong_red_optimized_fixed}
+\end{figure}
+
 \begin{table}[h]
 \begin{tabular}{ l | l c r }
 	& Fixed step size & Line search & Parallel line search \\
@@ -310,7 +278,7 @@ Figure~\ref{fig:nucleon_strong_red_opacity}
 	\begin{minipage}{.9\textwidth}
 		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_parameterspace_path}
 	\end{minipage}
-	\caption{The footprints of gradient descent methods with fixed step size and adaptive step size are shown in the parameter space in Figure~\ref{fig:nucleon_parameterspace} (the step size is 0.1)}
+	\caption{The steps of gradient descent methods with fixed step size and adaptive step size are shown in the parameter space in Figure~\ref{fig:nucleon_parameterspace} (the step size is 0.1)}
 	\label{fig:nucleon_parameterspace_path}
 \end{figure}
 
