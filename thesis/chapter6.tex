@@ -121,7 +121,7 @@ The evaluation of the objective function $ f $ is very computational expensive. 
 
 \subsubsection{Derivatives with Backward Difference}
 The partial derivative of the objective function $ f $ with respect to $ x_{i} $ is
-\[ \frac{\partial f}{\partial f x_{i}} = \frac{\partial f}{\partial W_{i}} \frac{\partial W_{i}}{\partial x_{i}} \]
+\[ \frac{\partial f}{\partial x_{i}} = \frac{\partial f}{\partial W_{i}} \frac{\partial W_{i}}{\partial x_{i}} \]
 where $ x_{i} $ is the opacity and $ W_{i} $ is the visibility-weighted saliency of feature $ i $.
 
 The partial derivative $ \frac{\partial f}{\partial W_{i}} $ can be solved from the objective function $ f $. However, $ \frac{\partial W_{i}}{\partial x_{i}} $ cannot be determined without knowledge the actual volume data set. The backward difference is used here to approximate $ \frac{\partial W_{i}}{\partial x_{i}} $, hence we have
@@ -129,7 +129,7 @@ The partial derivative $ \frac{\partial f}{\partial W_{i}} $ can be solved from 
 Similarly, the backward difference can calculated from previous values of the visibility-weighted saliency and step positions.
 
 Furthermore, if the function $ W_{i} $ of $ x_{i} $ is approximately a linear function, the partial derivative $ \frac{\partial W_{i}}{\partial x_{i}} $ becomes constant and could be replaced by an empirical constant $ b_{i} $. In this case, the gradient of the objective function with respect to the visibility saliency is used instead, which should be more computationally efficient.
-\[ \frac{\partial f}{\partial f x_{i}} \approx \frac{\partial f}{\partial W_{i}} b_{i} \]
+\[ \frac{\partial f}{\partial x_{i}} \approx \frac{\partial f}{\partial W_{i}} b_{i} \]
 In our implementation, $ b_{i}=1 $ is used and this yields desirable results.
 
 \subsubsection{Newton's Method Using Backward Difference}
