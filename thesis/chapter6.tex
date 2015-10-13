@@ -161,8 +161,8 @@ In these preliminary results (Figure~\ref{fig:nucleon_naive_tooth_naive_rms}), t
 		\includegraphics[width=1\linewidth]{images/tooth_naive_rms_fixed_newton}	
 	\end{minipage}
 	\caption{The two methods for estimating search directions are applied to transfer function optimization on the nuclon data set (left) and a tooth data set(right).
-		Method 1 converges (the objective function falls below 0.01) at the 10th step and method 2 converges at the 9th step on the nucleon data set with a naive transfer function of equal opacity for each feature.
-		The two methods both converge at the 47th step on the tooth data set, also with a native transfer function of equal opacity for each feature.}
+		Method 1 converges (the objective function falls below 0.01) at the 10th step and method 2 converges at the 9th step on the nucleon data set with a naive transfer function (assgning equal opacity to each feature).
+		The two methods both converge at the 47th step on the tooth data set with a native transfer function.}
 	\label{fig:nucleon_naive_tooth_naive_rms}
 \end{figure}
 
@@ -223,7 +223,6 @@ Figure~\ref{fig:nucleon_naive_tooth_naive_rms_linesearch}
 	\caption{The line search and parallel line search are applied to transfer function optimization on the nuclon data set (left) and the tooth data set(right). The two line search approaches are almost the same in terms of step size choices.}
 	\label{fig:nucleon_naive_tooth_naive_rms_linesearch}
 \end{figure}
-
 
 %-------------------------------------------------------------------------
 \section{Results and Discussions}
