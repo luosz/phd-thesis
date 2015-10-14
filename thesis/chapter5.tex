@@ -1,200 +1,435 @@
-\chapter{Selective Saturation and Brightness for Visualizing Time-Varying Volume Data}
-Time-varying volume data is used in many areas of science and engineering. However visualizations of such data are not easy for users to visually process due to the amount of information that can be presented simultaneously. In this chapter, we propose a novel visualization approach which modulates focus, emphasizing important information, by adjusting saturation and brightness of voxels based on an importance measure derived from temporal and multivariate information. By conducting a voxel-wise analysis of a number of consecutive frames, we acquire a volatility measure of each voxel. We then use intensity, volatility and additional multivariate information to determine opacity, saturation and brightness of the voxels. The method was tested in visualizing a multivariate hurricane data set. The results suggest that our approach can give the user a more detailed understanding of the data by presenting multivariate information variables in one self-contained visualization.
+\chapter{Transfer Function Optimization Using Visibility-Weighted Saliency}
 
-%-------------------------------------------------------------------------
 \section{Introduction}
-With the development of more advanced techniques for scientific simulation, where various physical measurements at many time-steps can be simulated at extremely high detail, providing intuitive and effective tools for the analysis and visualization of such data becomes increasingly challenging.
+Volume visualization is an effective means of discovering meaningful features in volume data sets.
+Both exterior and interior of structures can be revealed simultaneously in a semi-transparent manner by specifying opacity values for the features in transfer functions \cite{wang_efficient_2011}.
+Features could include intensity intervals in 1D transfer functions, rectangular or other shapes in 2D or higher-dimensional transfer functions.
 
-Color mappings are often used in visualization to represent various types of information. Although traditional color transfer functions are often in RGB color space, transfer functions designed in HSB (hue, saturation and brightness) color space can be more intuitive and meaningful in terms of conveying quantitative information or for classifications of the data.
-%-------------------------------------------------------------------------
+In the specification of transfer functions for volume visualization, users often have a rough idea of how clear and opaque each feature should be and then adjust the opacity value of the features accordingly.
+However, the relationship between the opacity of features and the saliency of the features in the final image is not linear.
+The saliency of a feature in the final image depends on the opacity value assigned to the feature as well as the neighborhood of the feature and view-dependent occlusion of the feature.
+
+%Therefore, it is desirable to have an automated method to assist the user in the design of transfer functions. In this chapter, we propose an optimization approach to automatically refine a user-defined transfer function towards target saliency levels specified by the user.
+
+Therefore, it is desirable to have an automated method to assist the user in the design of transfer functions that match target saliency levels specified by the user. In this chapter, we propose an optimization approach that supports this requirement by automatically refining a user-defined transfer function towards any given saliency distribution. 
+
 \section{Related Work}
-The visualization of time-varying data is an important and active topic in the visualization community. Transfer function specification for static volume data has been widely studied over the years \cite{pfister_transfer_2001}. However, less work has been done for transfer function design of time-varying data.
-
-Jankun-Kelly and Ma first studied  transfer function specification for time-varying data \cite{jankun-kelly_study_2001}.
-Kniss and Hansen applied the techniques from multi-dimensional transfer function based volume rendering to the visualization of multivariate data from weather simulations \cite{kniss_volume_2002}.
-%Akiba et al. presented the use of time histogram for simultaneous classification of time-varying data in order to find transfer functions that classify all the time steps of the data set \cite{akiba_simultaneous_2006}.
-%Woodring and Shen presented a method for the comparison of different data fields through the expression of a volume shader that composes data fields together with set operations \cite{woodring_multi-variate_2006}.
-%Wang et al. introduced an importance measure based on conditional entropy and categorize temporal behaviors by clustering the importance curves over time \cite{wang_importance-driven_2008}.
-
-%Data analysis techniques for high dimensional spaces, such as parallel coordinates \cite{akiba_visualizing_2007} \cite{guo_scalable_2012} and principal component analysis \cite{liu_multivariate_2014}, were also investigated for exploring multivariate time-varying data sets.
-
-%\cite{luo_information-guided_2014}.
-
-Akiba et al. \cite{akiba_visualizing_2007} described three approaches for the data-fusion problem in multivariate data visualization.
-One approach, which is to use one variable for each color channel in RGB space, is popular because of its simplicity but is limiting due to the difficulty for viewers to interpret the resulting color.
-The second approach, is to use one of the values based on some criterion e.g. \cite{hastreiter_integrated_1998}
-use alternating sampling for rendering two volumes and this has been shown to work well for medical imaging but not for fluid flow visualization.
-The third approach is to compute a weighted sum of all the values. This approach is more flexible however this may not be guaranteed to lead to an effective visualization as blending different colors might lead to ambiguous mixing of different hues.
-
-%for the last point: SHOULD EXPLAIN WHY?
-
+% line search \cite{armijo_minimization_1966}
+% conjugate gradient descent \cite{shewchuk_introduction_1994}
 
 %-------------------------------------------------------------------------
 \section{Method}
-In this poster, we propose an intuitive approach of using color mappings in HSB space to effectively represent multivariate time-variant data. We use opacity to represent the main variable and saturation to represent the volatility of the main variable. In addition brightness can be used to represent other information such as an additional variable from a multivariate or multi-dimensional data set. 
+In Chapter~\ref{visibility-weighted_saliency}, visibility-weighted saliency was proposed as a measure of visual saliency of features in volume rendered images, in order to assist users in choosing suitable viewpoints and designing effective transfer functions to visualize the features of interest. In this chapter, we describe an automated transfer function optimization approach based on the visibility-weighted saliency metric, which indicates the perceptual importance of voxels and the visibility of features in volume rendered images.
 
-%Figure~\ref{fig:saturation_brightness} is a 2D map where saturation is mapped to the x axis and brightness to the y axis. It illustrates how the look of red color and cyan color change when their saturation and brightness vary.
+The approach described in Chapter~\ref{transfer_function_refinement} is an automated method of optimizing transfer functions, based on the intensity distribution of voxels in the volume data set. However, this approach does not take into account the spatial distribution of voxels and the viewpoint of the visualization. Visibility-weighted saliency, on the other hand, takes into account both of these two aspects. The visibility-weighted saliency consists of two component fields, i.e. saliency field and visiblity fields. Saliency fields are essentially difference of Gaussians, which include the information of local neighborhoods of voxels, and visibility fields are computed from opacity contribution of voxels to volume rendered images, which indicate viewpoint dependent occlusions of the voxels.
 
-For a multivariate data set with two variables X, Y, we use variable X of voxels for the alpha channel and modulate the saliency of voxels by adjusting saturation and brightness based on the volatility of variable X and the values of variable Y respectively.
-The volatility is measured by temporal standard deviation std(i), which is the standard deviation of the i-th voxel in the recent n consecutive frames, where n is a user specified number.
-%We use temporal standard deviation of voxels as a measure of volatility. The temporal standard deviation std(i) is acquired by calculating standard deviation of the i-th voxel in the recent n consecutive frames, where n is a user specified number.
-The hue, saturation, brightness and alpha of the i-th voxel (an element in a volume data set) in HSB color space are defined as follows:
-\begin{align*}
-Hue(i) = C(i) \\
-Saturation(i) = Clip(a \times std(i)) \\
-Brightness(i) = 1-Clip(b \times Y(i)) \\
-Alpha(i) = X(i) 
-\end{align*}
-where std(i) is the volatility and C(i) can be either a user-specified constant hue or mapped to a variable such as X(i). Clip is a function that clips the value to the range [0, 1]. $a$ and $b$ are scale factors for saturation and brightness respectively, which are determined by the user based on the distribution of variables X and Y in the data set. Variables X(i) and Y(i) are normalized to the range [0, 1].
+Constraints are introduced in the search of the parameter space. Only the opacity of features would be changed in the transfer function domain. The definition of features (e.g. the data intervals) and the colors of features remain the same.
+These constraints are based on the assumption that the user has explored the volume data and set up the transfer function according to his/her needs. Our algorithm aims to help the user reduce occlusion while preserving the user's knowledge or judgments of the data set.
 
-%\begin{figure}
-%\centering
-%\begin{minipage}{.15\textwidth}
-%\includegraphics[width=1\linewidth]{images/saturation_brightness_red.jpg}
-%\end{minipage}~
-%\begin{minipage}{.15\textwidth}
-%\includegraphics[width=1\linewidth]{images/saturation_brightness_cyan.jpg}
-%\end{minipage}~
-%\caption{Various saturation and brightness of red and cyan}
-%\label{fig:saturation_brightness}
-%\end{figure}
+\subsection{Objective Function}
+Users define target importance values for each feature defined in the transfer function domain.
+Our transfer function optimizer adjusts the transfer function to match the visibility-weighted saliency with the user-defined target saliency values.
+Multiple saliency fields computed from different appearance attributes can be combined together in order to represent different aspects of the visual saliency of voxels.
+In our implementation, brightness and saturation are used respectively to compute visibility-weighted saliency fields and define the weighted sum of the two sets of feature saliency as visibility-weighted feature saliency.
+The objective function $ F $ is defined as the root mean square of the differences of the visibility-weighted saliency and target importance of each feature.
+\[ F=\sqrt{ \frac{\sum_{i=1}^{n} (W_{i}-t_{i})^{2}}{n} } 
+\addtag \]
+where $ W_{F}=u_{1}W_{F}(O_{b},i,\sigma)+u_{2}W_{F}(O_{s},i,\sigma) $ is the visibility-weighted saliency of feature $ i $, and $ t_{i} $ is the user-defined importance of feature $ i $. These user-defined saliency values are normalized and they add up to 1, in other words, $ t_{i} \in [0.1] $ and $ \sum_{i=1}^{n} t_{i} = 1 $.
+
+As previously described in Section~\ref{weighted_feature_saliency}, multiple saliency fields computed from different appearance attributes can be combined together in order to represent different aspects of the visual saliency of voxels.
+In our implementation, $ W_{F}=u_{1}W_{F}(O_{b},i,\sigma)+u_{2}W_{F}(O_{s},i,\sigma) $ is a weighted sum of visibility-weighted saliency values computed using brightness and saturation of voxels respectively, and $ u_{1} $ and $ u_{2} $ are weights of the two appearance attributes.
+
+However, the visibility-weighted saliency $ W_{i} $ is not a variable that can be directly modified. Instead, $ W_{i} $ is a complicated function of the color and opacity of voxels in feature $ i $ and is also influenced by the viewpoint of rendering. A visibility-weighted saliency field is a combination of a visibility field and a saliency field. The saliency field is a view-independent field based on the color of every voxels in the volume data set, while the visibility field is a view-dependent field computed from the opacity contribution of every voxels to the final image when rendered from a certain viewpoint.
+
+The computation of visibility fields is non-trivial. In order to compute a visibility field, a slice-based rendering is performed on a series of quads which are parallel to the viewing plane, one for each slice.
+Subsequently, the visibility values are computed by subtracting the accumulated opacity of the previous slice from that of the current slice. After collecting the visibility values of all voxels, the visibility field can be constructed. The details of visibility fields were previously described in Section~\ref{visibility_fields}.
+
+The evaluation of the objective function is computational expensive. However, in an iterative optimization, the visibility field and visibility-weighted saliency have to be recompute at each step after the feature opacity value are updated.
+
+\subsection{Parameter Space}
+We use a nucleon data set to demonstrate how the visibility-weighted saliency of features change when the feature opacity values change. As displayed in Figure~\ref{fig:nucleon_naive}, three features are defined in the transfer function for the nucleon data set.
+
+The dimension of the parameter space is the same as the number of features defined by the user. In this case, three features are defined for the nucleon data set. The opacity of each feature is mapped to an axis in the parameter space. Therefore, the opacity values of the 3 features are mapped to $ x, y, z $ axes of a 3D scalar field. Figure~\ref{fig:nucleon_densityplot} displays three 3D scalar fields, one for each feature, to provide an intuitive overview of the relationship between the feature opacity values and the visibility-weighted saliency values.
+
+Feature 1 (the purple structure in Figure~\ref{fig:nucleon_naive}) is the exterior of the nucleon data set, the visibility-weighted saliency of this feature is shown in the 3D scalar fields in the same color at the left in Figure~\ref{fig:nucleon_densityplot}.
+The visibility-weighted saliency of feature 1 increases as its opacity increases, as shown in the 3D scalar fields that the brightness and opacity increase along $ x $ axis. Similar patterns also appear in the other 2 scalar fields, the visibility-weighted saliency of feature 2 (the red structure in Figure~\ref{fig:nucleon_naive}) and feature 3 (the green structure in Figure~\ref{fig:nucleon_naive}) also increase as their opacity increase.
+%Thus it is reasonable to assume that the visibility-weighted saliency of a feature is a monotonic function of its opacity.
+
+Moreover, feature 1 is the exterior of the nucleon, its visibility-weighted saliency is almost not influenced by the opacity of other features. On the other hand, the visibility-weighted saliency of feature 2 is influenced by both the opacity of feature 1 and feature 2. In addition, the visibility-weighted saliency of feature 3 is drastically influenced by the opacity of feature 1, feature 2 and feature 3, as feature 3 is an interior structure and can be easily occluded by the other 2 features.
+
+In order to demonstrate the distribution of the objective function in the parameter space $ x \in [0,1] $, $ y \in [0,1] $ and $ z \in [0,1] $, we sample the parameter space with sampling interval $ 0.1 $, from 0 to 1 along each axis. There are 11 sampling points along each axis, which results in 1331 sampling points in the parameter space. In Figure~\ref{fig:nucleon_parameterspace}, the parameter space is rendered as a density plot with a temperate color map which gradually changes from orange to blue.
 
 
-%\begin{figure}
-%\centering
-%\begin{minipage}{.15\textwidth}
-%\centering
-%\includegraphics[width=1\linewidth]{images/article-color-value-saturation-200x53}
-%\caption{Varying saturation from 1 to 0}
-%\label{fig:color-value-saturation}
-%\end{minipage}~
-%\begin{minipage}{.15\textwidth}
-%\centering
-%\includegraphics[width=1\linewidth]{images/article-color-value-brightness-200x52}
-%\caption{Varying brightness from 1 to 0}
-%\label{fig:color-value-brightness}
-%\end{minipage}~
-%\begin{minipage}{.15\textwidth}
-%\centering
-%\includegraphics[width=1\linewidth]{images/article-color-value-brightness-saturation-200x49}
-%\caption{Saturation and brightness from (1, 1) to (0, 0.5)}
-%\label{fig:color-value-brightness-saturation}
-%\end{minipage}
-%\end{figure}
+\begin{figure}
+\centering
+	\begin{minipage}{.35\textwidth}
+	\includegraphics[width=1\linewidth]{images/nucleon_naive}
+	\end{minipage}~
+	\begin{minipage}{.2\textwidth}
+	\includegraphics[width=1\linewidth]{images/tf_nucleon_naive}
+	\end{minipage}~
+	\begin{minipage}{.4\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_naive_visibility_saliency_weighted_chart}
+	\end{minipage}
+	\caption{Left: a nucleon data set \cite{website:Voreen_datasets_2013}; Middle: a naive transfer function with equal opacitity values for each feature; Right: the visibility-weighted saliency histogram}
+	\label{fig:nucleon_naive}
+\end{figure}
 
-% Task driven color coding \cite{tominski_task-driven_2008}
-% Color scheme \cite{harrower_colorbrewer.org:_2003}
+\begin{figure}
+	\centering
+	\begin{minipage}{.3\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_densityplot1}	
+	\end{minipage}~
+	\begin{minipage}{.3\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_densityplot2}	
+	\end{minipage}
+	\begin{minipage}{.3\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_densityplot3}	
+	\end{minipage}
+	\caption{Visibility-weighted saliency of the 3 features are mapped to brightness and opacity of the 3D fields at the left, middle and right respectively. The visibility-weighted saliency of feature 2 (red) is affected by both the opacity of feature 1 (purple) and feature 2. The visibility-weighted saliency of feature 3 (green) is affected by the opacity of feature 1, feature 2 and feature 3.}
+	\label{fig:nucleon_densityplot}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{minipage}{.6\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_parameterspace}
+	\end{minipage}
+	\caption{Each position (x, y, z) in the parameter space represents 3 features with opacity values (x, y, z). The value of the objective function (with \{0.1, 0.3, 0.6\} as target) is mapped to the color in the parameter space (with sampling interval $ 0.1 $). Only the high and low values are visible and the data range in the middle is set to transparent.}
+	\label{fig:nucleon_parameterspace}
+\end{figure}
+
+\subsection{Optimization Algorithm}
+The gradient descent algorithm is employed in our transfer function optimizer.
+Gradient descent is a first-order optimization algorithm. It is based on the observation that if a function $ f(x) $ is defined and differentiable in a neighborhood of a point $ x_{1} $, then $ f(x) $ decreases fastest in the direction of the negative gradient of the function \cite{chong_introduction_2013}.
+
+Given a continuously differentiable function $ f(x) $ with $ x \in \mathbb{R}^{n} $, let $ x_{k} $ be the current iteration point and $ g_{k}=g(x_{k})= \nabla f(x_{k}) $ be the gradient of $ f(x) $ at $ x_{k} $. The gradient descent method defines the next iteration point by
+\[ x_{k+1}=x_{k}- \alpha_{k} g_{k} , k \geq 0 \]
+for $ \alpha_{k} $ small enough, then $ f(x_{k+1}) \leq f(x_{k}) $. The gradient varies as the iteration proceeds, tending to zero as it approaches a local minimum. When the gradient decreases, the iteration step sizes also decrease. So hopefully the sequence $ {x_{k}} $ converges to the desired local minimum after performing the iteration.
+
+In gradient descent methods, we can either take very small step sizes and reevaluate the gradient at every steps, or take large steps each time. If the step size is too small, it may end up in a laborious situation that the objective function converges very slowly. If the step size is too large, it results in a more zigzag path and may have the risk of missing the local minimum and thus cannot converge.
+
+\subsection{Estimating Descent Directions}
+In each step of the optimization, the descent direction $ g_{k} $ has to be updated. 
+As previously discussed, the visibility-weighted saliency of a feature increases as its feature opacity increases. 
+%The visibility-weighted saliency of a feature is a monotonic function of the opacity of the feature. 
+However, the relationship between the visibility-weighted saliency and the opacity of a feature also depends the viewpoint of rendering and the spatial distribution of voxels of every features in the volume data set. An exact derivative of the visibility-weighted saliency with respect to the opacity of the feature cannot be determined in advance.
+
+In the following subsections, two methods for estimating descent directions are described.
+
+\subsubsection{Gradients with Backward Difference}
+The partial derivative of the objective function $ F $ with respect to $ x_{i} $ is
+\[ \frac{\partial F}{\partial x_{i}} = \frac{\partial F}{\partial W_{i}} \frac{\partial W_{i}}{\partial x_{i}} \]
+where $ x_{i} $ is the opacity and $ W_{i} $ is the visibility-weighted saliency of feature $ i $.
+The partial derivative $ \frac{\partial f}{\partial W_{i}} $ can be solved from the objective function $ F $.
+However, $ \frac{\partial W_{i}}{\partial x_{i}} $ cannot be determined without knowledge the actual volume data set.
+
+For a function $ f(x) $, its first-order derivative can be estimated by a backward difference divided by a small step.
+\[ \frac{\nabla_{d}[f](x)}{d}=\frac{f(x)-f(x-d)}{d} \]
+where $ d $ is nonzero number.
+When $ d $ is small, the backward difference divided by $ d $ approximates the derivative. Assuming that $ f $ is differentiable, the error in this approximation can be derived from Taylor's theorem.
+\[ \frac{\nabla_{d}[f](x)}{d}-f'(x)=\mathcal{O}(d) \to 0 , \; as \; d \to 0 \]
+
+The backward difference is used here to approximate $ \frac{\partial W_{i}}{\partial x_{i}} $, hence we have
+\[ \frac{\partial W_{i}}{\partial x_{i}} \approx \frac{\nabla_{d}[W_{i}](x_{i})}{d} \]
+
+The evaluation of the objective function $ F $ is very computational expensive. In our implementation, a small step size $ d $ is adopted, therefore the backward difference can calculated from values of the objective function, visibility-weighted saliency and steps of the previous iteration. In this case, no extra evaluation of the visibility-weighted saliency and the objective function is required.
+%Similarly, the backward difference can calculated from previous values of the visibility-weighted saliency and step positions.
+
+Furthermore, if the function $ W_{i} $ of $ x_{i} $ is approximately a linear function, the partial derivative $ \frac{\partial W_{i}}{\partial x_{i}} $ becomes constant and could be replaced by an empirical constant $ b_{i} $. In this case, the gradient of the objective function with respect to the visibility saliency is used instead, which should be more computationally efficient.
+\[ \frac{\partial F}{\partial x_{i}} \approx \frac{\partial F}{\partial W_{i}} b_{i} \]
+
+\subsubsection{Descent Directions with Second-Order Derivatives}
+Newton's method, which is an iterative method for finding the roots of a differentiable function, can be used to find a minimum or maximum of a function. Because the derivative is zero at a minimum or maximum, minima and maxima can be found by applying Newton's method to the derivative.
+\[ x_{k+1}=x_{k}- \frac{f'(x_{k})}{f''(x_{k})} \]
+This iteration equation gives a similar form of gradient descent, thus $ \frac{\partial^2 F}{\partial x_{i}^2} $ can be adopted in our optimization algorithm as the descent direction.
+
+The first-order derivative can be estimated by backward difference of the objective function $ F $, and the second-order derivative $ F'' $ can be estimated by backward difference of the first-order derivative $ F' $.
+\[ \frac{\partial^2 F}{\partial x_{i}^2} 
+\approx \dfrac{ \frac{\nabla_{d}[F](x_{i})}{d} }{ \frac{\nabla_{d}[F'](x_{i})}{d} }
+= \frac{ \nabla_{d}[F](x_{i}) }{ \nabla_{d}[F'](x_{i}) } \]
+
+\subsubsection{Comparison of Descent Directions}
+We have tested the descent directions discussed above with several volume data sets with various step sizes.
+All the above described methods worked with small step sizes. As the step size increase, using $ \frac{\partial F}{\partial W_{i}} \frac{\nabla_{d}[W_{i}](x_{i})}{d} $ as descent directions would be unstable. While using $ \frac{\partial F}{\partial W_{i}} b_{i} $ and $ \frac{ \nabla_{d}[F](x_{i}) }{ \nabla_{d}[F'](x_{i}) } $ as descent directions would be still stable even when the step sizes are large. In our implementation, $ b_{i}=1 $ is used and this yields desirable results.
+
+Gradient descent were performed on several volume data sets with various transfer functions, using the two normalized descent directions computed from $ [ \frac{\partial F}{\partial W_{1}} b_{1} ... \frac{\partial F}{\partial W_{n}} b_{n} ] $ (method 1)
+ and 
+$ [ \frac{ \nabla_{d}[F](x_{1}) }{ \nabla_{d}[F'](x_{1}) }  ... \frac{ \nabla_{d}[F](x_{n}) }{ \nabla_{d}[F'](x_{n}) } ] $ (method 2).
+In these preliminary results (Figure~\ref{fig:nucleon_naive_tooth_naive_rms}), the convergence speeds of the two methods were similar, with method 2 slightly faster in some cases.
+
+\begin{figure}
+	\centering
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_naive_rms_fixed_newton}
+	\end{minipage}~
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/tooth_naive_rms_fixed_newton}	
+	\end{minipage}
+	\caption{The two methods for estimating descent directions are applied to transfer function optimization on the nuclon data set (left) and a tooth data set(right).
+		Method 1 converges (the objective function falls below 0.01) at the 10th step and method 2 converges at the 9th step on the nucleon data set with a naive transfer function (assgning equal opacity to each feature).
+		The two methods both converge at the 47th step on the tooth data set with a native transfer function.}
+	\label{fig:nucleon_naive_tooth_naive_rms}
+\end{figure}
+
+\subsection{Adaptive Step Size with Line Search}
+Performing gradient descent with a small step size may result in converging too slowly and require a lot of evaluations of the objective function, which is rather expensive to compute in our situation. Various approaches have been proposed regarding the choices of step sizes, which lead to various gradient algorithms \cite{yuan_step-sizes_2008}.
+
+\subsubsection{Line Search}
+The line search strategy is an iterative approach that adapts the step size in gradient descent in order to achieve a reduction in the objective function while still making sufficiently fast progress.
+\[ h( \gamma)=f(x_{k}+\gamma g_{k}) \]
+where $ g_{k} $ is the descent direction and $ x_{k} $ is the current point at the $ k$-$th $ iteration.
+
+There are two type of approaches of line search, exact line search and inexact line search \cite{vrahatis_class_2000}.
+Exact line search chooses the next iteration point by achieving the least objective function value. However, despite the optimal properties, exact line search often behave poorly and tend to zigzag in two orthogonal directions, which usually implies deteriorations in converge \cite{zhou_gradient_2006}.
+On the contrary, inexact line search only loosely find a sufficient decrease of the objective function along the descent direction.
+
+The inexact line search we used in our implementation is as follows.
+
+\begin{enumerate}
+	\item Set initial iteration count $ i=0 $ and set $ n $ to the maximum iteration count.
+	\item Check whether $ f(x_{k}+\gamma_{i+1} g_{k}) < f(x_{k}+\gamma_{i} g_{k}) $ where $ \gamma_{i}=2^{i} $
+	\item If so and $ i<n-1 $, $ i=i+1 $ and repeat Line 2, otherwise terminate the line search.
+\end{enumerate}
+
+The step size $ \gamma_{n} $ is chosen after the above line search procedure.
+This strategy does not find the exact minimum along the line direction, instead it yields reasonable results and descents much faster than using fixed step sizes.
+
+With line search approaches, the optimization algorithm can converge much faster than using fixed step sizes. Figure~\ref{fig:nucleon_parameterspace_path} displays the paths of two gradient descent methods, one progresses regularly with fixed step sizes, the other progresses aggressively with line search. It takes fewer steps for the latter to reach a local minimum.
+
+\begin{figure}
+	\centering
+	\begin{minipage}{.9\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_parameterspace_path}
+	\end{minipage}
+	\caption{The steps of gradient descent methods with fixed step size and adaptive step size are shown in the parameter space in Figure~\ref{fig:nucleon_parameterspace} (the step size is 0.1)}
+	\label{fig:nucleon_parameterspace_path}
+\end{figure}
+
+\subsubsection{Parallel Line Search}
+The classical gradient descent is a sequential algorithm. In its iterative procedure, the next iteration takes the result from the previous iteration as input.
+However, the line search at each iteration can be computed parallel to accelerate the optimization. This idea is particularly useful in our transfer function optimization, because the most expensive computation in our transfer function optimization is the evaluation of visibility-weighted saliency, which is required in the evaluation of the objective function at each iteration.
+
+In this subsection, we propose a parallel line search strategy, which evaluates the objective function at different candidate points in parallel along the line search direction. With this parallel approach, the computing power of modern multi-core processors can be better exploited to accelerate the transfer function optimization. Specifically, parallel line search launches multiple threads to perform the line search. Each thread computes the visibility-weighted saliency and the objective function at a candidate point. Subsequently, the results at all the candidate points are aggregated and the candidate point with the minimum objective function value is chosen as the next step.
+
+The parallel line search is shown as follows.
+
+\begin{enumerate}
+	\item Generate a list of step sizes $ S= \{ \gamma_{0},\gamma_{1},...,\gamma_{n-1} \} $ where $ \gamma_{i}=2^{i} $
+	\item Evaluate $ f(x_{k}+\gamma_{i} g_{k}) $ in parallel for each $ \gamma_{i} $ in $ S $
+	\item Find the index $ i $ of the minimum $ f(x_{k}+\gamma_{i} g_{k}) $, then $ \gamma_{i} $ is the chosen step size.
+\end{enumerate}
+
+The mechanism of the parallel line search is sightly different from the sequential line search. In the sequential line search, if the current candidate point does not meat the condition, the line search is terminated and the next candidate point would not be evaluated. By contrast, the parallel line search would always evaluate all the candidate points and pick the one with least value of the objective function. However, these two methods would have the same behavior if the objective function is a convex function.
+
+The parallel line search strategy would introduce extra overhead of starting and terminating threads. Moreover, the number of threads should not exceed the number of cores of the processor, otherwise multiple threads have to share the same core and this would cause performance impact. The parallel line search is beneficial only when the evaluation of the objective function is more expensive than the parallel overhead.
+In our case, the evaluation of the objective function is very computational expensive. It requires to compute the visibility fields, which in turn requires to perform a pass of slice-based volume rendering.
+
+Figure~\ref{fig:nucleon_naive_tooth_naive_rms_linesearch} displays results of applying the two line search methods in optimizing transfer functions. The two curves of objective functions are mostly overlapping, which indicates the two methods acts almost the same in choosing step sizes.
+
+\begin{figure}
+	\centering
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_naive_rms_fixed_linesearch_parallel}
+	\end{minipage}~
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/tooth_naive_rms_fixed_linesearch_parallel}
+	\end{minipage}
+	\caption{The line search and parallel line search are applied to transfer function optimization on the nuclon data set (left) and the tooth data set(right). The two line search methods made almost the same choices in step sizes.}
+	\label{fig:nucleon_naive_tooth_naive_rms_linesearch}
+\end{figure}
 
 %-------------------------------------------------------------------------
-\section{Results}
-We tested our method on the hurricane data set from the National Center for Atmospheric Research provided for the IEEE Visualization 2004 Contest.
-The hurricane model is Hurricane Isabel, which was a very strong hurricane in the west Atlantic region in September of 2003.
-%The size of the data set is 500 (longitude) $ \times $ 500 (latitude) $ \times $ 100 (height) $ \times $ 48 (time). One time-step is one hour in the simulation.
-The variables we used in the tests are cloud moisture mixing ratio (kg water/kg dry air) and total precipitation mixing ratio (sum of mixing ratios of graupel, rain and snow). The ground in the hurricane data set, which is a height field of the surface topography, is rendered with relief mapping and presented as background in the visualization results.
+\section{Results and Discussions}
+In this section, we present some results to demonstrate the effectiveness of our approach on the nucleon data set ($ 41 \times 41 \times 41 $), a tooth data set ($ 140 \times 120 \times 161 $), a CT-knee (379 $ \times $ 229 $ \times $ 305) data set \cite{website:Roettger_volume_2013} and a time-step of a simulated turbulent vortex flow (128 $\times$ 128 $\times$ 128, 100 time-steps) \cite{ma_high_2000}.
+%and four volumes of a horse embryo data set, which are the horse embryo at 35, 37, 39 and 42 days.
+Results were obtained in our experimental programs written in Wolfram Mathematica on a computer equipped with an Intel Core i7-950 processor, 16GB of RAM and a NVIDIA GeForce GTX 750 Ti graphics card.
+%Tests were performed on a computer equipped with an Intel Core i5-2410M CPU, 8GB of RAM and a NVIDIA GeForce GT 540M graphics card.
 
-In Figure~\ref{fig:hurricane_gray}, the cloud, volatility of cloud and precipitation at frame 40 are displayed in grayscale for comparison.
-Figure~\ref{fig:hurricane_frames} shows images of 3 frames of the hurricane rendered with cloud, volatility of cloud and precipitation. Cloud is used as variable X and precipitation as variable Y. The temporal standard deviation is calculated using the recent 10 frames.
-The strong red color near the hurricane eye indicates where the hurricane was in previous several frames and the clouds with more precipitation are darker in the images.
-%Figure~\ref{fig:hurricane_40_cyan} displays a more realistic rendering of the same frame in Figure~\ref{fig:hurricane_40_defaultangle}, with a cyan hue and used precipitation to adjust both saturation and brightness.
 
-\begin{figure}
-\centering
-\begin{minipage}{.15\textwidth}
-\includegraphics[width=1\linewidth]{images/hurricane_cloud_gray_40}
-%\caption{Cloud at frame 40}
-%\label{fig:hurricane_cloud_gray}
-\end{minipage}~
-\begin{minipage}{.15\textwidth}
-\includegraphics[width=1\linewidth]{images/hurricane_std_gray_40}
-%\caption{Volatility of cloud at frame 40}
-%\label{fig:hurricane_std_gray}
-\end{minipage}~
-\begin{minipage}{.15\textwidth}
-\centering
-\includegraphics[width=1\linewidth]{images/hurricane_precip_gray_40}
-%\caption{Precipitation at frame 40}
-%\label{fig:hurricane_precip_gray}
-\end{minipage}
-\caption{Cloud (left), volatility of cloud (middle) and precipitation (right) at frame 40}
-\label{fig:hurricane_gray}
-\end{figure}
 
-\begin{figure}
-\centering
-\begin{minipage}{.15\textwidth}
-\centering
-\includegraphics[width=1\linewidth]{images/hsba_0_10std_1-10precip_cloud_35}
-\end{minipage}~
-\begin{minipage}{.15\textwidth}
-\centering
-\includegraphics[width=1\linewidth]{images/hsba_0_10std_1-10precip_cloud_40}
-\end{minipage}~
-\begin{minipage}{.15\textwidth}
-\centering
-\includegraphics[width=1\linewidth]{images/hsba_0_10std_1-10precip_cloud_45}
-\end{minipage}
-\caption{Adjusting saturation and brightness of frame 35 (left), frame 40 (middle) and frame 45 (right)}
-\label{fig:hurricane_frames}
-\end{figure}
 
-%We also tested our method on a time-varying smoke simulation based on an implementation of \cite{fedkiw_visual_2001}. Figure~\ref{fig:smoke} to Figure~\ref{fig:smoke_gradient} are smoke density, volatility of smoke density and gradient magnitude of smoke density rendered in grayscale for comparison.
-%The gradient magnitude is the Euclidean norm of the gradient at a voxel position,
-%% approximated using discrete derivatives of Gaussians in each dimension.
-%and the temporal standard deviation is calculated using the recent 10 frames.
-%In Figure~\ref{fig:smoke_hsba_red}, smoke density is used as variable X and gradient magnitude as variable Y. The image was rendered with a constant hue (red) and parameters $a=10$ and $b=5$ were used. 
+*** work in progress ***
+
+%Objective function
+%Figure~\ref{fig:nucleon_strong_red_rms}
+
+%Visibility-weighted saliency of each feature
+%Figure~\ref{fig:nucleon_strong_red_saliency}
 %
+%Opacity of each feature
+%Figure~\ref{fig:nucleon_strong_red_opacity}
+
+%Before optimization
+%Figure~\ref{fig:nucleon_strong_red}
+%
+%After optimization
+%Figure~\ref{fig:nucleon_strong_red_optimized}
+
 %\begin{figure}
-%\centering
-%%\begin{minipage}{.24\textwidth}
-%%\includegraphics[width=1\linewidth]{images/hsba_cyan_10precip_1-10precip_cloud_40_defaultangle}
-%%\caption{A more realistic rendering with both saturation and brightness representing precipitation at frame 40. Hue is cyan, a=10 and b=10}
-%%\label{fig:hurricane_40_cyan}
-%%\end{minipage}
-%
-%\begin{minipage}{.10\textwidth}
-%\includegraphics[width=1\linewidth]{images/smoke_160_.png}
-%\caption{Smoke density at frame 160}
-%\label{fig:smoke}
-%\end{minipage}~
-%\begin{minipage}{.10\textwidth}
-%\includegraphics[width=1\linewidth]{images/smoke_std_160_.png}
-%\caption{Smoke volatility at frame 160}
-%\label{fig:smoke_std}
-%\end{minipage}~
-%\begin{minipage}{.10\textwidth}
-%\centering
-%\includegraphics[width=1\linewidth]{images/smoke_gradient_160_.png}
-%\caption{Smoke gradient magnitude at frame 160}
-%\label{fig:smoke_gradient}
-%\end{minipage}~
-%%\begin{minipage}{.24\textwidth}
-%%	\centering
-%%	\includegraphics[width=1\linewidth]{images/smoke_hsba_intensity_10std_5gradient_intensity_160.png}
-%%	\caption{Smoke density as variable X and gradient magnitude as variable Y at frame 160. Hue is X(i), a=10 and b=5}
-%%	\label{fig:smoke_hsba_intensity}
-%%\end{minipage}~
-%\begin{minipage}{.15\textwidth}
 %	\centering
-%	\includegraphics[width=1\linewidth]{images/smoke_hsba_red_10std_5gradient_intensity_160.png}
-%	\caption{Part of the smoke is desaturated and darkened.}
-%	\label{fig:smoke_hsba_red}
-%\end{minipage}
+%	\begin{minipage}{.35\textwidth}
+%		\includegraphics[width=1\linewidth]{images/nucleon_strong_red}
+%	\end{minipage}~
+%	\begin{minipage}{.2\textwidth}
+%		\includegraphics[width=1\linewidth]{images/tf_nucleon_strong_red}	
+%	\end{minipage}~
+%	\begin{minipage}{.4\textwidth}
+%		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_visibility_saliency_weighted_chart}
+%	\end{minipage}
+%	\caption{Before optimization, the transfer function strongly emphasizes the red feature, which occludes the green feature inside. (Left: the volume rendered image of the nucleon data set; Middle: the transfer function; Right: the visibility-weighted saliency histogram)}
+%	\label{fig:nucleon_strong_red}
+%\end{figure}
+%
+\begin{figure}
+	\centering
+	\begin{minipage}{.35\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_naive_optimized_linesearch}
+	\end{minipage}~
+	\begin{minipage}{.2\textwidth}
+		\includegraphics[width=1\linewidth]{images/tf_nucleon_naive_optimized_linesearch}
+	\end{minipage}~
+	\begin{minipage}{.4\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_naive_optimized_linesearch_visibility_saliency_weighted_chart}
+	\end{minipage}
+	\caption{After optimization to target \{0.1, 0.3, 0.6\}, all the 3 features are visible and the green feature inside is particularly emphasized. (Left: optimized volume rendered image of the nucleon data set; Middle: optimized transfer function; Right: the visibility-weighted saliency histogram)}
+	\label{fig:nucleon_naive_optimized}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{minipage}{.4\textwidth}
+		\includegraphics[width=1\linewidth]{images/tooth_naive}
+	\end{minipage}~
+	\begin{minipage}{.4\textwidth}
+		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch}
+	\end{minipage}
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/tooth_naive_saliency_fixed}
+	\end{minipage}~
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/tooth_naive_saliency_parallelsearch}
+	\end{minipage}
+	\caption{After optimization to target \{0.1, 0.3, 0.6\}, all the 3 features are visible and the yellow feature inside is particularly emphasized.}
+	\label{fig:tooth_naive_optimized}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{minipage}{.4\textwidth}
+		\includegraphics[width=1\linewidth]{images/CT-Knee_naive}
+	\end{minipage}~
+	\begin{minipage}{.4\textwidth}
+		\includegraphics[width=1\linewidth]{images/CT-Knee_naive_optimized_linesearch}
+	\end{minipage}
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/CT-Knee_naive_saliency_fixed}
+	\end{minipage}~
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/CT-Knee_naive_saliency_parallelsearch}
+	\end{minipage}
+	\caption{After optimization to target \{0.1, 0.3, 0.6\}, all the 3 features are visible, and the green and the purple features inside become clearer.}
+	\label{fig:CT-Knee_naive_optimized}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{minipage}{.4\textwidth}
+		\includegraphics[width=1\linewidth]{images/vortex_naive}
+	\end{minipage}~
+	\begin{minipage}{.4\textwidth}
+		\includegraphics[width=1\linewidth]{images/vorts1_optimized_linesearch}
+	\end{minipage}
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/vorts1_saliency_fixed}
+	\end{minipage}
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/vorts1_saliency_parallelsearch}
+	\end{minipage}
+	\caption{After optimization to target \{0.4, 0.3, 0.3\}, all the 3 features are visible and the green feature inside is particularly emphasized.}
+	\label{fig:vortex_naive_optimized}
+\end{figure}
+
+\begin{table}[h]
+\begin{tabular}{ l | l c r }
+	& Fixed step size & Line search & Parallel line search \\
+	\hline
+	Time (seconds) & 1.91 & 0.83 & 0.55 \\
+	Iterations to converge (at 0.01) & 37 & 4 & 4 \\
+\end{tabular}
+\caption[Table caption text]{Performance of the 3 optimization approaches on the nulceon data set ($ 41 \times 41 \times 41 $)}
+\label{table:nucleon_table}
+\end{table}
+
+\begin{table}[h]
+	\begin{tabular}{ l | l c r }
+		& Fixed step size & Line search & Parallel line search \\
+		\hline
+		Time (seconds) & 18.05 & 6.59 & 3.31 \\
+		Iterations to converge (at 0.01) & 47 & 4 & 4 \\
+	\end{tabular}
+	\caption[Table caption text]{Performance of the 3 optimization approaches on the tooth data set ($ 140 \times 120 \times 161 $)}
+	\label{table:tooth_table}
+\end{table}
+
+\begin{table}[h]
+	\begin{tabular}{ l | l c r }
+		& Fixed step size & Line search & Parallel line search \\
+		\hline
+		Time (seconds) & 120.38 & 59.01 & 33.41 \\
+		Iterations to converge (at 0.01) & 47 & 6 & 6 \\
+	\end{tabular}
+	\caption[Table caption text]{Performance of the 3 optimization approaches on the CT-Knee data set ($ 379 \times 229 \times 305 $)}
+	\label{table:CT-Knee_table}
+\end{table}
+
+%\begin{figure}
+%	\centering
+%	\begin{minipage}{.33\textwidth}
+%		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_rms_fixed}
+%	\end{minipage}~
+%	\begin{minipage}{.33\textwidth}
+%		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_rms_linesearch}
+%	\end{minipage}~
+%	\begin{minipage}{.33\textwidth}
+%		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_rms_parallelsearch}
+%	\end{minipage}
+%	\caption{How the objective function change over iterations respectively in the 3 optimization approaches. (Left: fixed step size; middle: line search; right: parallel line search)}
+%	\label{fig:nucleon_strong_red_rms}
 %\end{figure}
 
-%-------------------------------------------------------------------------
-\section{Experiment}
-To judge the performance of the proposed approach, a human study was conducted to construct a subjective data set for assessing visual saliency of features in volume visualization as perceived by human users. The aim of this set of experiments is to gather human rating of visual saliency data and gather eye tracking data to evaluate and improve a proposed computational visual saliency metric for volume visualization.
+%\begin{figure}
+%	\centering
+%	\begin{minipage}{.33\textwidth}
+%		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_saliency_fixed}
+%	\end{minipage}~
+%	\begin{minipage}{.33\textwidth}
+%		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_saliency_linesearch}
+%	\end{minipage}~
+%	\begin{minipage}{.33\textwidth}
+%		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_saliency_parallelsearch}
+%	\end{minipage}
+%	\caption{How the visibility-weighted saliency of each feature change over iterations respectively in the 3 optimization approaches. (Left: fixed step size; middle: line search; right: parallel line search)}
+%	\label{fig:nucleon_strong_red_saliency}
+%\end{figure}
 
-\subsection{Source Images and Participants}
-This section describes the human study and experiments performed using it.
-The images used for the study were rendered by Voreen \cite{meyer-spradow_voreen:_2009} with a variety of transfer functions highlighting different features in various viewpoints.
-** females and ** males participated in the experiment all aged between ** and ** years.
-
-\subsection{Methods and Measurements}
-Participants would sit in front of a computer display viewing images generated from volume visualization. The first part of the experiment would investigate how participants perceive the visual saliency of different objects in the images. The participants’ task would be to score the images on the scale of 1 to 5 by keyboard input. In the next part of the experiment, the participants would be asked to score the quality (in terms of sharpness and contrast) of the images (also by keyboard input) and their eye movements would be tracked by a head mounted eye tracker (EyeLink II by SR Research). In both parts of the experiment, each image would be shown to the participant for approximately 10 seconds. The experiment would last approximately 30 minutes. There would be a break scheduled midway through the experiment to allow the participant to rest.
+%\begin{figure}
+%	\centering
+%	\begin{minipage}{.33\textwidth}
+%		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_opacity_fixed}
+%	\end{minipage}~
+%	\begin{minipage}{.33\textwidth}
+%		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_opacity_linesearch}
+%	\end{minipage}~
+%	\begin{minipage}{.33\textwidth}
+%		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_opacity_parallelsearch}
+%	\end{minipage}
+%	\caption{How the opacity of each feature change over iterations respectively in the 3 optimization approaches. (Left: fixed step size; middle: line search; right: parallel line search)}
+%	\label{fig:nucleon_strong_red_opacity}
+%\end{figure}
 
 %-------------------------------------------------------------------------
 \section{Conclusions}
-Our main contribution is a mechanism for exploiting saturation and brightness to modulate focus in time-variant volume visualization using an importance measure that is based on volatility. In addition we demonstrate how additional variables in a multivariate data set could be communicated simultaneously through the brightness channel. Preliminary results indicate that the results can provide more visual information for the test data set. In future work we plan to conduct perceptual experiments to quantitatively evaluate the mechanism and determine the optimal parameters for the approach.
-
-%-------------------------------------------------------------------------
+This chapter proposes a novel transfer function optimization approach using the visibility-weighted saliency metric.
+With this approach, the design of transfer functions becomes more intuitive. This approach allows the user to directly set target visibility-weighted saliency for features of interest and then the transfer function is automatically refine to match the visibility-weighted saliency of the features with the user-defined targets. In addition, a parallel line search strategy is presented for exploiting the computing power of multi-core processors in order to improve the perform of the transfer function optimization approach.
+This approach has proven to be effective over several volume data sets.
