@@ -137,7 +137,7 @@ The evaluation of the objective function $ F $ is very computational expensive. 
 Furthermore, if the function $ W_{i} $ of $ x_{i} $ is approximately a linear function, the partial derivative $ \frac{\partial W_{i}}{\partial x_{i}} $ becomes constant and could be replaced by an empirical constant $ b_{i} $. In this case, the gradient of the objective function with respect to the visibility saliency is used instead, which should be more computationally efficient.
 \[ \frac{\partial F}{\partial x_{i}} \approx \frac{\partial F}{\partial W_{i}} b_{i} \]
 
-\subsubsection{Search Directions with Second-Order Derivatives}
+\subsubsection{Descent Directions with Second-Order Derivatives}
 Newton's method, which is an iterative method for finding the roots of a differentiable function, can be used to find a minimum or maximum of a function. Because the derivative is zero at a minimum or maximum, minima and maxima can be found by applying Newton's method to the derivative.
 \[ x_{k+1}=x_{k}- \frac{f'(x_{k})}{f''(x_{k})} \]
 This iteration equation gives a similar form of gradient descent, thus $ \frac{\partial^2 F}{\partial x_{i}^2} $ can be adopted in our optimization algorithm as the descent direction.
@@ -147,8 +147,8 @@ The first-order derivative can be estimated by backward difference of the object
 \approx \dfrac{ \frac{\nabla_{d}[F](x_{i})}{d} }{ \frac{\nabla_{d}[F'](x_{i})}{d} }
 = \frac{ \nabla_{d}[F](x_{i}) }{ \nabla_{d}[F'](x_{i}) } \]
 
-\subsubsection{Comparison of the Gradient Estimation Methods}
-We have tested the gradient estimation methods discussed above with several volume data sets with various step sizes.
+\subsubsection{Comparison of Descent Directions}
+We have tested the descent directions discussed above with several volume data sets with various step sizes.
 All the above described methods worked with small step sizes. As the step size increase, using $ \frac{\partial F}{\partial W_{i}} \frac{\nabla_{d}[W_{i}](x_{i})}{d} $ as descent directions would be unstable. While using $ \frac{\partial F}{\partial W_{i}} b_{i} $ and $ \frac{ \nabla_{d}[F](x_{i}) }{ \nabla_{d}[F'](x_{i}) } $ as descent directions would be still stable even when the step sizes are large. In our implementation, $ b_{i}=1 $ is used and this yields desirable results.
 
 Gradient descent were performed on several volume data sets with various transfer functions, using the two normalized descent directions computed from $ [ \frac{\partial F}{\partial W_{1}} b_{1} ... \frac{\partial F}{\partial W_{n}} b_{n} ] $ (method 1)
