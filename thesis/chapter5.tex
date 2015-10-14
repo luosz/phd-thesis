@@ -24,7 +24,10 @@ In Chapter~\ref{visibility-weighted_saliency}, visibility-weighted saliency was 
 The approach described in Chapter~\ref{transfer_function_refinement} is an automated method of optimizing transfer functions, based on the intensity distribution of voxels in the volume data set. However, this approach does not take into account the spatial distribution of voxels and the viewpoint of the visualization. Visibility-weighted saliency, on the other hand, takes into account both of these two aspects. The visibility-weighted saliency consists of two component fields, i.e. saliency field and visiblity fields. Saliency fields are essentially difference of Gaussians, which include the information of local neighborhoods of voxels, and visibility fields are computed from opacity contribution of voxels to volume rendered images, which indicate viewpoint dependent occlusions of the voxels.
 
 Constraints are introduced in the search of the parameter space. Only the opacity of features would be changed in the transfer function domain. The definition of features (e.g. the data intervals) and the colors of features remain the same.
-These constraints are based on the assumption that the user has explored the volume data and set up the transfer function according to his/her needs. Our algorithm aims to help the user reduce occlusion while preserving the user's knowledge or judgments of the data set.
+done the classification of features.
+These constraints are based on the assumption that the user has explored the volume data and done the classification of features.
+% set up the transfer function according to his/her needs.
+Our algorithm aims to help the user adjust the saliency distribution and reduce occlusion while preserving the user's knowledge or judgments of the data set.
 
 \subsection{Objective Function}
 Users define target importance values for each feature defined in the transfer function domain.
@@ -44,12 +47,12 @@ However, the visibility-weighted saliency $ W_{i} $ is not a variable that can b
 The computation of visibility fields is non-trivial. In order to compute a visibility field, a slice-based rendering is performed on a series of quads which are parallel to the viewing plane, one for each slice.
 Subsequently, the visibility values are computed by subtracting the accumulated opacity of the previous slice from that of the current slice. After collecting the visibility values of all voxels, the visibility field can be constructed. The details of visibility fields were previously described in Section~\ref{visibility_fields}.
 
-The evaluation of the objective function is computational expensive. However, in an iterative optimization, the visibility field and visibility-weighted saliency have to be recompute at each step after the feature opacity value are updated.
+The evaluation of the objective function is computationally expensive. However, in an iterative optimization, the visibility field and visibility-weighted saliency have to be recompute at each step after the feature opacity value are updated.
 
 \subsection{Parameter Space}
-We use a nucleon data set to demonstrate how the visibility-weighted saliency of features change when the feature opacity values change. As displayed in Figure~\ref{fig:nucleon_naive}, three features are defined in the transfer function for the nucleon data set.
+We use a nucleon data set \cite{website:Voreen_datasets_2013} to demonstrate how the visibility-weighted saliency of features change when the feature opacity values change. As displayed in Figure~\ref{fig:nucleon_naive}, three features are defined in the transfer function for the nucleon data set.
 
-The dimension of the parameter space is the same as the number of features defined by the user. In this case, three features are defined for the nucleon data set. The opacity of each feature is mapped to an axis in the parameter space. Therefore, the opacity values of the 3 features are mapped to $ x, y, z $ axes of a 3D scalar field. Figure~\ref{fig:nucleon_densityplot} displays three 3D scalar fields, one for each feature, to provide an intuitive overview of the relationship between the feature opacity values and the visibility-weighted saliency values.
+The dimension of the parameter space is the same as the number of features defined by the user. In this case, three features are defined for the nucleon data set. The opacity of each feature is mapped to an axis in the parameter space. Therefore, the opacity values of the 3 features are mapped to $ x, y, z $ axes of a 3D scalar field respectively. Figure~\ref{fig:nucleon_densityplot} displays three 3D scalar fields, one for each feature, to provide an intuitive overview of the relationship between the feature opacity values and the visibility-weighted saliency values.
 
 Feature 1 (the purple structure in Figure~\ref{fig:nucleon_naive}) is the exterior of the nucleon data set, the visibility-weighted saliency of this feature is shown in the 3D scalar fields in the same color at the left in Figure~\ref{fig:nucleon_densityplot}.
 The visibility-weighted saliency of feature 1 increases as its opacity increases, as shown in the 3D scalar fields that the brightness and opacity increase along $ x $ axis. Similar patterns also appear in the other 2 scalar fields, the visibility-weighted saliency of feature 2 (the red structure in Figure~\ref{fig:nucleon_naive}) and feature 3 (the green structure in Figure~\ref{fig:nucleon_naive}) also increase as their opacity increase.
@@ -57,8 +60,7 @@ The visibility-weighted saliency of feature 1 increases as its opacity increases
 
 Moreover, feature 1 is the exterior of the nucleon, its visibility-weighted saliency is almost not influenced by the opacity of other features. On the other hand, the visibility-weighted saliency of feature 2 is influenced by both the opacity of feature 1 and feature 2. In addition, the visibility-weighted saliency of feature 3 is drastically influenced by the opacity of feature 1, feature 2 and feature 3, as feature 3 is an interior structure and can be easily occluded by the other 2 features.
 
-In order to demonstrate the distribution of the objective function in the parameter space $ x \in [0,1] $, $ y \in [0,1] $ and $ z \in [0,1] $, we sample the parameter space with sampling interval $ 0.1 $, from 0 to 1 along each axis. There are 11 sampling points along each axis, which results in 1331 sampling points in the parameter space. In Figure~\ref{fig:nucleon_parameterspace}, the parameter space is rendered as a density plot with a temperate color map which gradually changes from orange to blue.
-
+In order to demonstrate the distribution of the objective function in the parameter space $ x \in [0,1] $, $ y \in [0,1] $ and $ z \in [0,1] $, we sample the parameter space with sampling interval $ 0.1 $, from 0 to 1 along each axis. There are 11 sampling points along each axis, which results in 1331 sampling points in the parameter space. In Figure~\ref{fig:nucleon_parameterspace}, the parameter space is rendered as a density plot with a color function resembling a temperate map which gradually changes from orange to blue.
 
 \begin{figure}
 \centering
@@ -121,8 +123,8 @@ In the following subsections, two methods for estimating descent directions are 
 The partial derivative of the objective function $ F $ with respect to $ x_{i} $ is
 \[ \frac{\partial F}{\partial x_{i}} = \frac{\partial F}{\partial W_{i}} \frac{\partial W_{i}}{\partial x_{i}} \]
 where $ x_{i} $ is the opacity and $ W_{i} $ is the visibility-weighted saliency of feature $ i $.
-The partial derivative $ \frac{\partial f}{\partial W_{i}} $ can be solved from the objective function $ F $.
-However, $ \frac{\partial W_{i}}{\partial x_{i}} $ cannot be determined without knowledge the actual volume data set.
+The partial derivative $ \frac{\partial F}{\partial W_{i}} $ can be solved from the objective function $ F $.
+However, $ \frac{\partial W_{i}}{\partial x_{i}} $ cannot be determined without knowledge of the actual volume data set.
 
 For a function $ f(x) $, its first-order derivative can be estimated by a backward difference divided by a small step.
 \[ \frac{\nabla_{d}[f](x)}{d}=\frac{f(x)-f(x-d)}{d} \]
@@ -133,10 +135,10 @@ When $ d $ is small, the backward difference divided by $ d $ approximates the d
 The backward difference is used here to approximate $ \frac{\partial W_{i}}{\partial x_{i}} $, hence we have
 \[ \frac{\partial W_{i}}{\partial x_{i}} \approx \frac{\nabla_{d}[W_{i}](x_{i})}{d} \]
 
-The evaluation of the objective function $ F $ is very computational expensive. In our implementation, a small step size $ d $ is adopted, therefore the backward difference can calculated from values of the objective function, visibility-weighted saliency and steps of the previous iteration. In this case, no extra evaluation of the visibility-weighted saliency and the objective function is required.
+The evaluation of the objective function $ F $ is very computationally expensive. In our implementation, a small step size $ d $ is adopted, therefore the backward difference can calculated from values of the objective function, visibility-weighted saliency and steps of the previous iteration. In this case, no extra evaluation of the visibility-weighted saliency and the objective function is required.
 %Similarly, the backward difference can calculated from previous values of the visibility-weighted saliency and step positions.
 
-Furthermore, if the function $ W_{i} $ of $ x_{i} $ is approximately a linear function, the partial derivative $ \frac{\partial W_{i}}{\partial x_{i}} $ becomes constant and could be replaced by an empirical constant $ b_{i} $. In this case, the gradient of the objective function with respect to the visibility saliency is used instead, which should be more computationally efficient.
+Furthermore, if the function $ W_{i} $ of $ x_{i} $ is approximately a linear function, the partial derivative $ \frac{\partial W_{i}}{\partial x_{i}} $ becomes constant and could be replaced by an empirical constant $ b_{i} $. In this case, the gradient of the objective function with respect to the visibility-weighted saliency is used instead, which should be more computationally efficient.
 \[ \frac{\partial F}{\partial x_{i}} \approx \frac{\partial F}{\partial W_{i}} b_{i} \]
 
 \subsubsection{Descent Directions with Second-Order Derivatives}
@@ -151,9 +153,9 @@ The first-order derivative can be estimated by backward difference of the object
 
 \subsubsection{Comparison of Descent Directions}
 We have tested the descent directions discussed above with several volume data sets with various step sizes.
-All the above described methods worked with small step sizes. As the step size increase, using $ \frac{\partial F}{\partial W_{i}} \frac{\nabla_{d}[W_{i}](x_{i})}{d} $ as descent directions would be unstable. While using $ \frac{\partial F}{\partial W_{i}} b_{i} $ and $ \frac{ \nabla_{d}[F](x_{i}) }{ \nabla_{d}[F'](x_{i}) } $ as descent directions would be still stable even when the step sizes are large. In our implementation, $ b_{i}=1 $ is used and this yields desirable results.
+All the above described methods worked with small step sizes. As the step size increases, using $ \frac{\partial F}{\partial W_{i}} \frac{\nabla_{d}[W_{i}](x_{i})}{d} $ as descent directions would be unstable. While using $ \frac{\partial F}{\partial W_{i}} b_{i} $ and $ \frac{ \nabla_{d}[F](x_{i}) }{ \nabla_{d}[F'](x_{i}) } $ as descent directions would be still stable even when the step sizes are large. In our implementation, $ b_{i}=1 $ is used and this yields desirable results.
 
-Gradient descent were performed on several volume data sets with various transfer functions, using the two normalized descent directions computed from $ [ \frac{\partial F}{\partial W_{1}} b_{1} ... \frac{\partial F}{\partial W_{n}} b_{n} ] $ (method 1)
+Gradient descent was performed on several volume data sets with various transfer functions, using the two normalized descent directions computed from $ [ \frac{\partial F}{\partial W_{1}} b_{1} ... \frac{\partial F}{\partial W_{n}} b_{n} ] $ (method 1)
  and 
 $ [ \frac{ \nabla_{d}[F](x_{1}) }{ \nabla_{d}[F'](x_{1}) }  ... \frac{ \nabla_{d}[F](x_{n}) }{ \nabla_{d}[F'](x_{n}) } ] $ (method 2).
 In these preliminary results (Figure~\ref{fig:nucleon_naive_tooth_naive_rms}), the convergence speeds of the two methods were similar, with method 2 slightly faster in some cases.
@@ -166,8 +168,8 @@ In these preliminary results (Figure~\ref{fig:nucleon_naive_tooth_naive_rms}), t
 	\begin{minipage}{.49\textwidth}
 		\includegraphics[width=1\linewidth]{images/tooth_naive_rms_fixed_newton}	
 	\end{minipage}
-	\caption{The two methods for estimating descent directions are applied to transfer function optimization on the nuclon data set (left) and a tooth data set(right).
-		Method 1 converges (the objective function falls below 0.01) at the 10th step and method 2 converges at the 9th step on the nucleon data set with a naive transfer function (assgning equal opacity to each feature).
+	\caption{The two methods for estimating descent directions are applied to transfer function optimization on the nucleon data set (left) and a tooth data set(right).
+		Method 1 converges (the objective function falls below 0.01) at the 10th step and method 2 converges at the 9th step on the nucleon data set with a naive transfer function (assigning equal opacity to each feature).
 		The two methods both converge at the 47th step on the tooth data set with a native transfer function.}
 	\label{fig:nucleon_naive_tooth_naive_rms}
 \end{figure}
@@ -181,8 +183,8 @@ The line search strategy is an iterative approach that adapts the step size in g
 where $ g_{k} $ is the descent direction and $ x_{k} $ is the current point at the $ k$-$th $ iteration.
 
 There are two type of approaches of line search, exact line search and inexact line search \cite{vrahatis_class_2000}.
-Exact line search chooses the next iteration point by achieving the least objective function value. However, despite the optimal properties, exact line search often behave poorly and tend to zigzag in two orthogonal directions, which usually implies deteriorations in converge \cite{zhou_gradient_2006}.
-On the contrary, inexact line search only loosely find a sufficient decrease of the objective function along the descent direction.
+Exact line search chooses the next iteration point by achieving the least objective function value. However, despite the optimal properties, exact line search often behaves poorly and tends to zigzag in two orthogonal directions, which usually implies deteriorations in convergence \cite{zhou_gradient_2006}.
+In contrast, inexact line search only loosely finds a sufficient decrease of the objective function along the descent direction.
 
 The inexact line search we used in our implementation is as follows.
 
@@ -193,7 +195,7 @@ The inexact line search we used in our implementation is as follows.
 \end{enumerate}
 
 The step size $ \gamma_{n} $ is chosen after the above line search procedure.
-This strategy does not find the exact minimum along the line direction, instead it yields reasonable results and descents much faster than using fixed step sizes.
+This strategy does not find the exact minimum along the line direction, instead it yields reasonable results and descends much faster than using fixed step sizes.
 
 With line search approaches, the optimization algorithm can converge much faster than using fixed step sizes. Figure~\ref{fig:nucleon_parameterspace_path} displays the paths of two gradient descent methods, one progresses regularly with fixed step sizes, the other progresses aggressively with line search. It takes fewer steps for the latter to reach a local minimum.
 
@@ -208,7 +210,7 @@ With line search approaches, the optimization algorithm can converge much faster
 
 \subsubsection{Parallel Line Search}
 The classical gradient descent is a sequential algorithm. In its iterative procedure, the next iteration takes the result from the previous iteration as input.
-However, the line search at each iteration can be computed parallel to accelerate the optimization. This idea is particularly useful in our transfer function optimization, because the most expensive computation in our transfer function optimization is the evaluation of visibility-weighted saliency, which is required in the evaluation of the objective function at each iteration.
+However, the line search at each iteration can be computed in parallel to accelerate the optimization. This idea is particularly useful in our transfer function optimization, because the most expensive computation in our transfer function optimization is the evaluation of visibility-weighted saliency, which is required in the evaluation of the objective function at each iteration.
 
 In this subsection, we propose a parallel line search strategy, which evaluates the objective function at different candidate points in parallel along the line search direction. With this parallel approach, the computing power of modern multi-core processors can be better exploited to accelerate the transfer function optimization. Specifically, parallel line search launches multiple threads to perform the line search. Each thread computes the visibility-weighted saliency and the objective function at a candidate point. Subsequently, the results at all the candidate points are aggregated and the candidate point with the minimum objective function value is chosen as the next step.
 
@@ -220,10 +222,10 @@ The parallel line search is shown as follows.
 	\item Find the index $ i $ of the minimum $ f(x_{k}+\gamma_{i} g_{k}) $, then $ \gamma_{i} $ is the chosen step size.
 \end{enumerate}
 
-The mechanism of the parallel line search is sightly different from the sequential line search. In the sequential line search, if the current candidate point does not meat the condition, the line search is terminated and the next candidate point would not be evaluated. By contrast, the parallel line search would always evaluate all the candidate points and pick the one with least value of the objective function. However, these two methods would have the same behavior if the objective function is a convex function.
+The mechanism of the parallel line search is sightly different from the sequential line search. In the sequential line search, if the current candidate point does not meet the condition, the line search is terminated and the next candidate point would not be evaluated. By contrast, the parallel line search would always evaluate all the candidate points and pick the one with least value of the objective function. However, these two methods would have the same behavior if the objective function is a convex function.
 
 The parallel line search strategy would introduce extra overhead of starting and terminating threads. Moreover, the number of threads should not exceed the number of cores of the processor, otherwise multiple threads have to share the same core and this would cause performance impact. The parallel line search is beneficial only when the evaluation of the objective function is more expensive than the parallel overhead.
-In our case, the evaluation of the objective function is very computational expensive. It requires to compute the visibility fields, which in turn requires to perform a pass of slice-based volume rendering.
+In our case, the evaluation of the objective function is very computationally expensive. It requires to compute the visibility fields, which in turn requires to perform a pass of slice-based volume rendering.
 
 Figure~\ref{fig:nucleon_naive_tooth_naive_rms_linesearch} displays results of applying the two line search methods in optimizing transfer functions. The two curves of objective functions are mostly overlapping, which indicates the two methods acts almost the same in choosing step sizes.
 
@@ -346,7 +348,7 @@ Results were obtained in our experimental programs written in Wolfram Mathematic
 	\begin{minipage}{.49\textwidth}
 		\includegraphics[width=1\linewidth]{images/vorts1_saliency_parallelsearch}
 	\end{minipage}
-	\caption{After optimization to target \{0.4, 0.3, 0.3\}, all the 3 features are visible and the green feature inside is particularly emphasized.}
+	\caption{After optimization to target \{0.34, 0.33, 0.33\}, all the 3 features are visible and the green feature inside is particularly emphasized.}
 	\label{fig:vortex_naive_optimized}
 \end{figure}
 
@@ -357,7 +359,7 @@ Results were obtained in our experimental programs written in Wolfram Mathematic
 	Time (seconds) & 1.91 & 0.83 & 0.55 \\
 	Iterations to converge (at 0.01) & 37 & 4 & 4 \\
 \end{tabular}
-\caption[Table caption text]{Performance of the 3 optimization approaches on the nulceon data set ($ 41 \times 41 \times 41 $)}
+\caption[Table caption text]{Performance of the 3 optimization approaches on the nucleon data set ($ 41 \times 41 \times 41 $)}
 \label{table:nucleon_table}
 \end{table}
 
