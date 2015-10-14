@@ -57,6 +57,7 @@ Moreover, feature 1 is the exterior of the nucleon, its visibility-weighted sali
 
 In order to demonstrate the distribution of the objective function in the parameter space $ x \in [0,1] $, $ y \in [0,1] $ and $ z \in [0,1] $, we sample the parameter space with sampling interval $ 0.1 $, from 0 to 1 along each axis. There are 11 sampling points along each axis, which results in 1331 sampling points in the parameter space. In Figure~\ref{fig:nucleon_parameterspace}, the parameter space is rendered as a density plot with a temperate color map which gradually changes from orange to blue.
 
+
 \begin{figure}
 \centering
 	\begin{minipage}{.35\textwidth}
@@ -64,8 +65,11 @@ In order to demonstrate the distribution of the objective function in the parame
 	\end{minipage}~
 	\begin{minipage}{.2\textwidth}
 	\includegraphics[width=1\linewidth]{images/tf_nucleon_naive}
+	\end{minipage}~
+	\begin{minipage}{.4\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_naive_visibility_saliency_weighted_chart}
 	\end{minipage}
-	\caption{A nucleon data set \cite{website:Voreen_datasets_2013} (left) with a transfer function of equal opacity values to the 3 features (right)}
+	\caption{Left: a nucleon data set \cite{website:Voreen_datasets_2013}; Middle: a naive transfer function with equal opacitity values for each feature; Right: the visibility-weighted saliency histogram}
 	\label{fig:nucleon_naive}
 \end{figure}
 
@@ -103,13 +107,13 @@ for $ \alpha_{k} $ small enough, then $ f(x_{k+1}) \leq f(x_{k}) $. The gradient
 
 In gradient descent methods, we can either take very small step sizes and reevaluate the gradient at every steps, or take large steps each time. If the step size is too small, it may end up in a laborious situation that the objective function converges very slowly. If the step size is too large, it results in a more zigzag path and may have the risk of missing the local minimum and thus cannot converge.
 
-\subsection{Estimating Search Directions}
-In each step of the optimization, the search direction $ g_{k} $ has to be updated. 
+\subsection{Estimating Descent Directions}
+In each step of the optimization, the descent direction $ g_{k} $ has to be updated. 
 As previously discussed, the visibility-weighted saliency of a feature increases as its feature opacity increases. 
 %The visibility-weighted saliency of a feature is a monotonic function of the opacity of the feature. 
 However, the relationship between the visibility-weighted saliency and the opacity of a feature also depends the viewpoint of rendering and the spatial distribution of voxels of every features in the volume data set. An exact derivative of the visibility-weighted saliency with respect to the opacity of the feature cannot be determined in advance.
 
-In the following subsections, two methods for estimating gradients or search directions are described.
+In the following subsections, two methods for estimating descent directions are described.
 
 \subsubsection{Gradients with Backward Difference}
 The partial derivative of the objective function $ F $ with respect to $ x_{i} $ is
@@ -136,7 +140,7 @@ Furthermore, if the function $ W_{i} $ of $ x_{i} $ is approximately a linear fu
 \subsubsection{Search Directions with Second-Order Derivatives}
 Newton's method, which is an iterative method for finding the roots of a differentiable function, can be used to find a minimum or maximum of a function. Because the derivative is zero at a minimum or maximum, minima and maxima can be found by applying Newton's method to the derivative.
 \[ x_{k+1}=x_{k}- \frac{f'(x_{k})}{f''(x_{k})} \]
-This iteration equation gives a similar form of gradient descent, thus $ \frac{\partial^2 F}{\partial x_{i}^2} $ can be adopted in our optimization algorithm as the search direction.
+This iteration equation gives a similar form of gradient descent, thus $ \frac{\partial^2 F}{\partial x_{i}^2} $ can be adopted in our optimization algorithm as the descent direction.
 
 The first-order derivative can be estimated by backward difference of the objective function $ F $, and the second-order derivative $ F'' $ can be estimated by backward difference of the first-order derivative $ F' $.
 \[ \frac{\partial^2 F}{\partial x_{i}^2} 
@@ -145,9 +149,9 @@ The first-order derivative can be estimated by backward difference of the object
 
 \subsubsection{Comparison of the Gradient Estimation Methods}
 We have tested the gradient estimation methods discussed above with several volume data sets with various step sizes.
-All the above described methods worked with small step sizes. As the step size increase, using $ \frac{\partial F}{\partial W_{i}} \frac{\nabla_{d}[W_{i}](x_{i})}{d} $ as search directions would be unstable. While using $ \frac{\partial F}{\partial W_{i}} b_{i} $ and $ \frac{ \nabla_{d}[F](x_{i}) }{ \nabla_{d}[F'](x_{i}) } $ as search directions would be still stable even when the step sizes are large. In our implementation, $ b_{i}=1 $ is used and this yields desirable results.
+All the above described methods worked with small step sizes. As the step size increase, using $ \frac{\partial F}{\partial W_{i}} \frac{\nabla_{d}[W_{i}](x_{i})}{d} $ as descent directions would be unstable. While using $ \frac{\partial F}{\partial W_{i}} b_{i} $ and $ \frac{ \nabla_{d}[F](x_{i}) }{ \nabla_{d}[F'](x_{i}) } $ as descent directions would be still stable even when the step sizes are large. In our implementation, $ b_{i}=1 $ is used and this yields desirable results.
 
-Gradient descent were performed on several volume data sets with various transfer functions, using the two normalized search directions computed from $ [ \frac{\partial F}{\partial W_{1}} b_{1} ... \frac{\partial F}{\partial W_{n}} b_{n} ] $ (method 1)
+Gradient descent were performed on several volume data sets with various transfer functions, using the two normalized descent directions computed from $ [ \frac{\partial F}{\partial W_{1}} b_{1} ... \frac{\partial F}{\partial W_{n}} b_{n} ] $ (method 1)
  and 
 $ [ \frac{ \nabla_{d}[F](x_{1}) }{ \nabla_{d}[F'](x_{1}) }  ... \frac{ \nabla_{d}[F](x_{n}) }{ \nabla_{d}[F'](x_{n}) } ] $ (method 2).
 In these preliminary results (Figure~\ref{fig:nucleon_naive_tooth_naive_rms}), the convergence speeds of the two methods were similar, with method 2 slightly faster in some cases.
@@ -160,7 +164,7 @@ In these preliminary results (Figure~\ref{fig:nucleon_naive_tooth_naive_rms}), t
 	\begin{minipage}{.49\textwidth}
 		\includegraphics[width=1\linewidth]{images/tooth_naive_rms_fixed_newton}	
 	\end{minipage}
-	\caption{The two methods for estimating search directions are applied to transfer function optimization on the nuclon data set (left) and a tooth data set(right).
+	\caption{The two methods for estimating descent directions are applied to transfer function optimization on the nuclon data set (left) and a tooth data set(right).
 		Method 1 converges (the objective function falls below 0.01) at the 10th step and method 2 converges at the 9th step on the nucleon data set with a naive transfer function (assgning equal opacity to each feature).
 		The two methods both converge at the 47th step on the tooth data set with a native transfer function.}
 	\label{fig:nucleon_naive_tooth_naive_rms}
@@ -189,6 +193,17 @@ The inexact line search we used in our implementation is as follows.
 The step size $ \gamma_{n} $ is chosen after the above line search procedure.
 This strategy does not find the exact minimum along the line direction, instead it yields reasonable results and descents much faster than using fixed step sizes.
 
+With line search approaches, the optimization algorithm can converge much faster than using fixed step sizes. Figure~\ref{fig:nucleon_parameterspace_path} displays the paths of two gradient descent methods, one progresses regularly with fixed step sizes, the other progresses aggressively with line search. It takes fewer steps for the latter to reach a local minimum.
+
+\begin{figure}
+	\centering
+	\begin{minipage}{.9\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_parameterspace_path}
+	\end{minipage}
+	\caption{The steps of gradient descent methods with fixed step size and adaptive step size are shown in the parameter space in Figure~\ref{fig:nucleon_parameterspace} (the step size is 0.1)}
+	\label{fig:nucleon_parameterspace_path}
+\end{figure}
+
 \subsubsection{Parallel Line Search}
 The classical gradient descent is a sequential algorithm. In its iterative procedure, the next iteration takes the result from the previous iteration as input.
 However, the line search at each iteration can be computed parallel to accelerate the optimization. This idea is particularly useful in our transfer function optimization, because the most expensive computation in our transfer function optimization is the evaluation of visibility-weighted saliency, which is required in the evaluation of the objective function at each iteration.
@@ -208,9 +223,7 @@ The mechanism of the parallel line search is sightly different from the sequenti
 The parallel line search strategy would introduce extra overhead of starting and terminating threads. Moreover, the number of threads should not exceed the number of cores of the processor, otherwise multiple threads have to share the same core and this would cause performance impact. The parallel line search is beneficial only when the evaluation of the objective function is more expensive than the parallel overhead.
 In our case, the evaluation of the objective function is very computational expensive. It requires to compute the visibility fields, which in turn requires to perform a pass of slice-based volume rendering.
 
-\subsubsection{Comparion of Line Search and Parallel Line Search}
-
-Figure~\ref{fig:nucleon_naive_tooth_naive_rms_linesearch}
+Figure~\ref{fig:nucleon_naive_tooth_naive_rms_linesearch} displays results of applying the two line search methods in optimizing transfer functions. The two curves of objective functions are mostly overlapping, which indicates the two methods acts almost the same in choosing step sizes.
 
 \begin{figure}
 	\centering
@@ -218,63 +231,103 @@ Figure~\ref{fig:nucleon_naive_tooth_naive_rms_linesearch}
 		\includegraphics[width=1\linewidth]{images/nucleon_naive_rms_fixed_linesearch_parallel}
 	\end{minipage}~
 	\begin{minipage}{.49\textwidth}
-		\includegraphics[width=1\linewidth]{images/tooth_naive_rms_fixed_linesearch_parallel}	
+		\includegraphics[width=1\linewidth]{images/tooth_naive_rms_fixed_linesearch_parallel}
 	\end{minipage}
-	\caption{The line search and parallel line search are applied to transfer function optimization on the nuclon data set (left) and the tooth data set(right). The two line search approaches are almost the same in terms of step size choices.}
+	\caption{The line search and parallel line search are applied to transfer function optimization on the nuclon data set (left) and the tooth data set(right). The two line search methods made almost the same choices in step sizes.}
 	\label{fig:nucleon_naive_tooth_naive_rms_linesearch}
 \end{figure}
 
 %-------------------------------------------------------------------------
 \section{Results and Discussions}
+In this section, we present some results to demonstrate the effectiveness of our approach on the nucleon data set ($ 41 \times 41 \times 41 $), a tooth data set ($ 140 \times 120 \times 161 $), a CT-knee (379 $ \times $ 229 $ \times $ 305) data set \cite{website:Roettger_volume_2013} and a time-step of a simulated turbulent vortex flow (128 $\times$ 128 $\times$ 128, 100 time-steps) \cite{ma_high_2000}.
+%and four volumes of a horse embryo data set, which are the horse embryo at 35, 37, 39 and 42 days.
+Results were obtained in our experimental programs written in Wolfram Mathematica on a computer equipped with an Intel Core i7-950 processor, 16GB of RAM and a NVIDIA GeForce GTX 750 Ti graphics card.
+%Tests were performed on a computer equipped with an Intel Core i5-2410M CPU, 8GB of RAM and a NVIDIA GeForce GT 540M graphics card.
+
+
+
 
 *** work in progress ***
 
-Search paths in parameter space
-Figure~\ref{fig:nucleon_parameterspace_path}
+%Objective function
+%Figure~\ref{fig:nucleon_strong_red_rms}
 
-Objective function
-Figure~\ref{fig:nucleon_strong_red_rms}
+%Visibility-weighted saliency of each feature
+%Figure~\ref{fig:nucleon_strong_red_saliency}
+%
+%Opacity of each feature
+%Figure~\ref{fig:nucleon_strong_red_opacity}
 
-Visibility-weighted saliency of each feature
-Figure~\ref{fig:nucleon_strong_red_saliency}
+%Before optimization
+%Figure~\ref{fig:nucleon_strong_red}
+%
+%After optimization
+%Figure~\ref{fig:nucleon_strong_red_optimized}
 
-Opacity of each feature
-Figure~\ref{fig:nucleon_strong_red_opacity}
-
-Before optimization
-Figure~\ref{fig:nucleon_strong_red}
-
-After optimization
-Figure~\ref{fig:nucleon_strong_red_optimized_fixed}
-
+%\begin{figure}
+%	\centering
+%	\begin{minipage}{.35\textwidth}
+%		\includegraphics[width=1\linewidth]{images/nucleon_strong_red}
+%	\end{minipage}~
+%	\begin{minipage}{.2\textwidth}
+%		\includegraphics[width=1\linewidth]{images/tf_nucleon_strong_red}	
+%	\end{minipage}~
+%	\begin{minipage}{.4\textwidth}
+%		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_visibility_saliency_weighted_chart}
+%	\end{minipage}
+%	\caption{Before optimization, the transfer function strongly emphasizes the red feature, which occludes the green feature inside. (Left: the volume rendered image of the nucleon data set; Middle: the transfer function; Right: the visibility-weighted saliency histogram)}
+%	\label{fig:nucleon_strong_red}
+%\end{figure}
+%
 \begin{figure}
 	\centering
 	\begin{minipage}{.35\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_strong_red}
+		\includegraphics[width=1\linewidth]{images/nucleon_naive_optimized_linesearch}
 	\end{minipage}~
 	\begin{minipage}{.2\textwidth}
-		\includegraphics[width=1\linewidth]{images/tf_nucleon_strong_red}	
+		\includegraphics[width=1\linewidth]{images/tf_nucleon_naive_optimized_linesearch}
 	\end{minipage}~
 	\begin{minipage}{.4\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_visibility_saliency_weighted_chart}
+		\includegraphics[width=1\linewidth]{images/nucleon_naive_optimized_linesearch_visibility_saliency_weighted_chart}
 	\end{minipage}
-	\caption{Before optimization, the transfer function strongly emphasizes the red feature, which occludes the green feature inside. (Left: the volume rendered image of the nucleon data set; Middle: the transfer function; Right: the visibility-weighted saliency histogram)}
-	\label{fig:nucleon_strong_red}
+	\caption{After optimization to target \{0.1, 0.3, 0.6\}, all the 3 features are visible and the green feature inside is particularly emphasized. (Left: optimized volume rendered image of the nucleon data set; Middle: optimized transfer function; Right: the visibility-weighted saliency histogram)}
+	\label{fig:nucleon_naive_optimized}
 \end{figure}
 
 \begin{figure}
 	\centering
-	\begin{minipage}{.35\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_optimized_fixed}
-	\end{minipage}~
-	\begin{minipage}{.2\textwidth}
-		\includegraphics[width=1\linewidth]{images/tf_nucleon_strong_red_optimized_fixed}
+	\begin{minipage}{.4\textwidth}
+		\includegraphics[width=1\linewidth]{images/tooth_naive}
 	\end{minipage}~
 	\begin{minipage}{.4\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_optimized_fixed_visibility_saliency_weighted_chart}
+		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch}
 	\end{minipage}
-	\caption{After optimization to target \{0.1, 0.3, 0.6\}, all the 3 features are visible and the green feature inside is particularly emphasized. (Left: the volume rendered image of the nucleon data set; Middle: the transfer function; Right: the visibility-weighted saliency histogram)}
-	\label{fig:nucleon_strong_red_optimized_fixed}
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/tooth_naive_saliency_fixed}
+	\end{minipage}~
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/tooth_naive_saliency_parallelsearch}
+	\end{minipage}
+	\caption{After optimization to target \{0.1, 0.3, 0.6\}, all the 3 features are visible and the yellow feature inside is particularly emphasized.}
+	\label{fig:tooth_naive_optimized}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{minipage}{.4\textwidth}
+		\includegraphics[width=1\linewidth]{images/vortex_naive}
+	\end{minipage}~
+	\begin{minipage}{.4\textwidth}
+		\includegraphics[width=1\linewidth]{images/vorts1_optimized_linesearch}
+	\end{minipage}
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/vorts1_saliency_fixed}
+	\end{minipage}
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/vorts1_saliency_parallelsearch}
+	\end{minipage}
+	\caption{After optimization to target \{0.4, 0.3, 0.3\}, all the 3 features are visible and the green feature inside is particularly emphasized.}
+	\label{fig:vortex_naive_optimized}
 \end{figure}
 
 \begin{table}[h]
@@ -310,62 +363,53 @@ Figure~\ref{fig:nucleon_strong_red_optimized_fixed}
 	\label{table:CT-Knee_table}
 \end{table}
 
-\begin{figure}
-	\centering
-	\begin{minipage}{.9\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_parameterspace_path}
-	\end{minipage}
-	\caption{The steps of gradient descent methods with fixed step size and adaptive step size are shown in the parameter space in Figure~\ref{fig:nucleon_parameterspace} (the step size is 0.1)}
-	\label{fig:nucleon_parameterspace_path}
-\end{figure}
+%\begin{figure}
+%	\centering
+%	\begin{minipage}{.33\textwidth}
+%		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_rms_fixed}
+%	\end{minipage}~
+%	\begin{minipage}{.33\textwidth}
+%		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_rms_linesearch}
+%	\end{minipage}~
+%	\begin{minipage}{.33\textwidth}
+%		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_rms_parallelsearch}
+%	\end{minipage}
+%	\caption{How the objective function change over iterations respectively in the 3 optimization approaches. (Left: fixed step size; middle: line search; right: parallel line search)}
+%	\label{fig:nucleon_strong_red_rms}
+%\end{figure}
 
-\begin{figure}
-	\centering
-	\begin{minipage}{.33\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_rms_fixed}
-	\end{minipage}~
-	\begin{minipage}{.33\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_rms_linesearch}
-	\end{minipage}~
-	\begin{minipage}{.33\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_rms_parallelsearch}
-	\end{minipage}
-	\caption{How the objective function change over iterations respectively in the 3 optimization approaches. (Left: fixed step size; middle: line search; right: parallel line search)}
-	\label{fig:nucleon_strong_red_rms}
-\end{figure}
+%\begin{figure}
+%	\centering
+%	\begin{minipage}{.33\textwidth}
+%		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_saliency_fixed}
+%	\end{minipage}~
+%	\begin{minipage}{.33\textwidth}
+%		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_saliency_linesearch}
+%	\end{minipage}~
+%	\begin{minipage}{.33\textwidth}
+%		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_saliency_parallelsearch}
+%	\end{minipage}
+%	\caption{How the visibility-weighted saliency of each feature change over iterations respectively in the 3 optimization approaches. (Left: fixed step size; middle: line search; right: parallel line search)}
+%	\label{fig:nucleon_strong_red_saliency}
+%\end{figure}
 
-\begin{figure}
-	\centering
-	\begin{minipage}{.33\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_saliency_fixed}
-	\end{minipage}~
-	\begin{minipage}{.33\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_saliency_linesearch}
-	\end{minipage}~
-	\begin{minipage}{.33\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_saliency_parallelsearch}
-	\end{minipage}
-	\caption{How the visibility-weighted saliency of each feature change over iterations respectively in the 3 optimization approaches. (Left: fixed step size; middle: line search; right: parallel line search)}
-	\label{fig:nucleon_strong_red_saliency}
-\end{figure}
-
-\begin{figure}
-	\centering
-	\begin{minipage}{.33\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_opacity_fixed}
-	\end{minipage}~
-	\begin{minipage}{.33\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_opacity_linesearch}
-	\end{minipage}~
-	\begin{minipage}{.33\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_opacity_parallelsearch}
-	\end{minipage}
-	\caption{How the opacity of each feature change over iterations respectively in the 3 optimization approaches. (Left: fixed step size; middle: line search; right: parallel line search)}
-	\label{fig:nucleon_strong_red_opacity}
-\end{figure}
+%\begin{figure}
+%	\centering
+%	\begin{minipage}{.33\textwidth}
+%		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_opacity_fixed}
+%	\end{minipage}~
+%	\begin{minipage}{.33\textwidth}
+%		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_opacity_linesearch}
+%	\end{minipage}~
+%	\begin{minipage}{.33\textwidth}
+%		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_opacity_parallelsearch}
+%	\end{minipage}
+%	\caption{How the opacity of each feature change over iterations respectively in the 3 optimization approaches. (Left: fixed step size; middle: line search; right: parallel line search)}
+%	\label{fig:nucleon_strong_red_opacity}
+%\end{figure}
 
 %-------------------------------------------------------------------------
 \section{Conclusions}
 This chapter proposes a novel transfer function optimization approach using the visibility-weighted saliency metric.
-With this approach, the design of transfer functions becomes more intuitive. This approach allows the user to directly set target visibility-weighted saliency for features of interest and then the transfer function is automatically refine to match the visibility-weighted saliency of the features with the user-defined targets.
+With this approach, the design of transfer functions becomes more intuitive. This approach allows the user to directly set target visibility-weighted saliency for features of interest and then the transfer function is automatically refine to match the visibility-weighted saliency of the features with the user-defined targets. In addition, a parallel line search strategy is presented for exploiting the computing power of multi-core processors in order to improve the perform of the transfer function optimization approach.
 This approach has proven to be effective over several volume data sets.
