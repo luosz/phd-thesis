@@ -95,6 +95,25 @@ Furthermore, we investigate techniques which are applicable to consumer level de
 \section{Contributions}
 
 \section{Summary of Chapters}
+The rest of this thesis is structured as follows:
+
+Chapter~\ref{background_and_related_work}
+provides an overview of the background and related work in the field of volume visualization, with particular focus on the design and optimization of transfer functions.
+
+Chapter~\ref{transfer_function_refinement}
+presents a novel approach for transfer function refinement, which is an optimization of transfer functions based on the distribution (i.e. the histogram) of the volume data. This optimization also allows the user to prioritize specific regions by generating weightings for transfer function components based on user-selected regions
+
+Chapter~\ref{visibility-weighted_saliency}
+describes visibility-weighted saliency as a measure of visual saliency of features in volume rendered images, in order to assist users in choosing suitable viewpoints and designing effective transfer functions to visualize the features of interest. Visibility-weighted saliency is based on a computational measure of perceptual importance of voxels and the visibility of features in volume rendered images.
+
+Chapter~\ref{transfer_function_optimization}
+provides a detailed description of an automated transfer function optimization approach based on the visibility-weighted saliency metric, which indicates the perceptual importance of voxels and the visibility of features in volume rendered images.
+
+Chapter~\ref{selective_saturation_brightness}
+outlines a novel visualization approach which modulates focus, emphasizing important information, by adjusting saturation and brightness of voxels based on an importance measure derived from temporal and multivariate information.
+
+Chapter~\ref{conclusions}
+summarizes our contributions and provides a discussion of possible avenues of future work.
 
 %...
 %
