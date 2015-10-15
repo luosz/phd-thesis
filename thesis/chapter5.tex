@@ -64,31 +64,41 @@ In order to demonstrate the distribution of the objective function in the parame
 
 \begin{figure}
 \centering
-	\begin{minipage}{.35\textwidth}
+\begin{minipage}{.3\textwidth}
 	\includegraphics[width=1\linewidth]{images/nucleon_naive}
-	\end{minipage}~
-	\begin{minipage}{.2\textwidth}
+	\subcaption{}
+\end{minipage}~
+\begin{minipage}{.15\textwidth}
 	\includegraphics[width=1\linewidth]{images/tf_nucleon_naive}
-	\end{minipage}~
-	\begin{minipage}{.4\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_naive_visibility_saliency_weighted_chart}
-	\end{minipage}
-	\caption{Left: a nucleon data set \cite{website:Voreen_datasets_2013}; Middle: a naive transfer function with equal opacitity values for each feature; Right: the visibility-weighted saliency histogram}
-	\label{fig:nucleon_naive}
+	\subcaption{}
+\end{minipage}~
+\begin{minipage}{.25\textwidth}
+	\includegraphics[width=1\linewidth]{images/nucleon_naive_visibility_chart}
+	\subcaption{}
+\end{minipage}~
+\begin{minipage}{.25\textwidth}
+	\includegraphics[width=1\linewidth]{images/nucleon_naive_visibility_saliency_weighted_chart}
+	\subcaption{}
+\end{minipage}
+\caption{(a) A nucleon data set \cite{website:Voreen_datasets_2013}; (b) A naive transfer function with equal opacitity values for each feature; (c) The visibility histogram \cite{wang_efficient_2011}; (d) The visibility-weighted saliency histogram}
+\label{fig:nucleon_naive}
 \end{figure}
 
 \begin{figure}
 	\centering
 	\begin{minipage}{.3\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_densityplot1}	
+		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_densityplot1}
+		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.3\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_densityplot2}	
+		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_densityplot2}
+		\subcaption{}
 	\end{minipage}
 	\begin{minipage}{.3\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_densityplot3}	
+		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_densityplot3}
+		\subcaption{}
 	\end{minipage}
-	\caption{Visibility-weighted saliency of the 3 features are mapped to brightness and opacity of the 3D fields at the left, middle and right respectively. The visibility-weighted saliency of feature 2 (red) is affected by both the opacity of feature 1 (purple) and feature 2. The visibility-weighted saliency of feature 3 (green) is affected by the opacity of feature 1, feature 2 and feature 3.}
+	\caption{Visibility-weighted saliency of the 3 features are mapped to brightness and opacity of the 3D fields in (a), (b) and (c) respectively. The visibility-weighted saliency of feature 2 (red) is affected by both the opacity of feature 1 (purple) and feature 2. The visibility-weighted saliency of feature 3 (green) is affected by the opacity of feature 1, feature 2 and feature 3.}
 	\label{fig:nucleon_densityplot}
 \end{figure}
 
@@ -164,13 +174,23 @@ In these preliminary results (Figure~\ref{fig:nucleon_naive_tooth_naive_rms}), t
 	\centering
 	\begin{minipage}{.49\textwidth}
 		\includegraphics[width=1\linewidth]{images/nucleon_naive_rms_fixed_newton}
+		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.49\textwidth}
-		\includegraphics[width=1\linewidth]{images/tooth_naive_rms_fixed_newton}	
+		\includegraphics[width=1\linewidth]{images/tooth_naive_rms_fixed_newton}
+		\subcaption{}	
 	\end{minipage}
-	\caption{The two methods for estimating descent directions are applied to transfer function optimization on the nucleon data set (left) and a tooth data set(right).
-		Method 1 converges (the objective function falls below 0.01) at the 10th step and method 2 converges at the 9th step on the nucleon data set with a naive transfer function (assigning equal opacity to each feature).
-		The two methods both converge at the 47th step on the tooth data set with a native transfer function.}
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_naive_table_fixed}
+		\subcaption{}	
+	\end{minipage}~
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_naive_table_newton}
+		\subcaption{}	
+	\end{minipage}
+	\caption{The two methods for estimating descent directions are applied to transfer function optimization on the nucleon data set (a) and a tooth data set (b).
+		Method 1 converges ($F<0.01$) at step 10 (as in the iteration log (c)) and method 2 converges at step 9 (as in the iteration log (d)) on the nucleon data set with a naive transfer function (assigning equal opacity to each feature).
+		The two methods both converge at step 47 on the tooth data set with a native transfer function.}
 	\label{fig:nucleon_naive_tooth_naive_rms}
 \end{figure}
 
@@ -200,12 +220,12 @@ This strategy does not find the exact minimum along the line direction, instead 
 With line search approaches, the optimization algorithm can converge much faster than using fixed step sizes. Figure~\ref{fig:nucleon_parameterspace_path} displays the paths of two gradient descent methods, one progresses regularly with fixed step sizes, the other progresses aggressively with line search. It takes fewer steps for the latter to reach a local minimum.
 
 \begin{figure}
-	\centering
-	\begin{minipage}{.9\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_parameterspace_path}
-	\end{minipage}
-	\caption{The steps of gradient descent methods with fixed step size and adaptive step size are shown in the parameter space in Figure~\ref{fig:nucleon_parameterspace} (the step size is 0.1)}
-	\label{fig:nucleon_parameterspace_path}
+\centering
+\begin{minipage}{.9\textwidth}
+	\includegraphics[width=1\linewidth]{images/nucleon_strong_red_parameterspace_path}
+\end{minipage}
+\caption{The steps of gradient descent methods with fixed step size and adaptive step size are shown in the parameter space in Figure~\ref{fig:nucleon_parameterspace} (the step size is 0.1)}
+\label{fig:nucleon_parameterspace_path}
 \end{figure}
 
 \subsubsection{Parallel Line Search}
@@ -233,11 +253,13 @@ Figure~\ref{fig:nucleon_naive_tooth_naive_rms_linesearch} displays results of ap
 	\centering
 	\begin{minipage}{.49\textwidth}
 		\includegraphics[width=1\linewidth]{images/nucleon_naive_rms_fixed_linesearch_parallel}
+		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.49\textwidth}
 		\includegraphics[width=1\linewidth]{images/tooth_naive_rms_fixed_linesearch_parallel}
+		\subcaption{}
 	\end{minipage}
-	\caption{The line search and parallel line search are applied to transfer function optimization on the nuclon data set (left) and the tooth data set(right). The two line search methods made almost the same choices in step sizes.}
+	\caption{The line search and parallel line search are applied to transfer function optimization on the nuclon data set (a) and the tooth data set (b). The two methods both converge ($F<0.01$) at step 4 for the nucleon data set and both converge at step 5 for the tooth data set. The two line search methods made very similar choices in step sizes.}
 	\label{fig:nucleon_naive_tooth_naive_rms_linesearch}
 \end{figure}
 
@@ -285,16 +307,23 @@ Results were obtained in our experimental programs written in Wolfram Mathematic
 %
 \begin{figure}
 	\centering
-	\begin{minipage}{.35\textwidth}
+	\begin{minipage}{.3\textwidth}
 		\includegraphics[width=1\linewidth]{images/nucleon_naive_optimized_linesearch}
+		\subcaption{}
 	\end{minipage}~
-	\begin{minipage}{.2\textwidth}
+	\begin{minipage}{.15\textwidth}
 		\includegraphics[width=1\linewidth]{images/tf_nucleon_naive_optimized_linesearch}
+		\subcaption{}
 	\end{minipage}~
-	\begin{minipage}{.4\textwidth}
+	\begin{minipage}{.25\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_naive_optimized_linesearch_visibility_chart}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.25\textwidth}
 		\includegraphics[width=1\linewidth]{images/nucleon_naive_optimized_linesearch_visibility_saliency_weighted_chart}
+		\subcaption{}
 	\end{minipage}
-	\caption{After optimization to target \{0.1, 0.3, 0.6\}, all the 3 features are visible and the green feature inside is particularly emphasized. (Left: optimized volume rendered image of the nucleon data set; Middle: optimized transfer function; Right: the visibility-weighted saliency histogram)}
+	\caption{After optimization to target \{0.1, 0.3, 0.6\}, all the 3 features are visible and the green feature inside is particularly emphasized. (a) The optimized volume rendered image of the nucleon data set; (b) The optimized transfer function; (c) The visibility histogram \cite{wang_efficient_2011}; (d) The visibility-weighted saliency histogram)}
 	\label{fig:nucleon_naive_optimized}
 \end{figure}
 
@@ -302,15 +331,37 @@ Results were obtained in our experimental programs written in Wolfram Mathematic
 	\centering
 	\begin{minipage}{.4\textwidth}
 		\includegraphics[width=1\linewidth]{images/tooth_naive}
+		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.4\textwidth}
 		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch}
+		\subcaption{}
 	\end{minipage}
+	
+	\begin{minipage}{.24\textwidth}
+		\includegraphics[width=1\linewidth]{images/tooth_naive_visibility_chart}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.24\textwidth}
+		\includegraphics[width=1\linewidth]{images/tooth_naive_visibility_saliency_weighted_chart}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.24\textwidth}
+		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch_visibility_chart}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.24\textwidth}
+		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch_visibility_saliency_weighted_chart}
+		\subcaption{}
+	\end{minipage}
+	
 	\begin{minipage}{.49\textwidth}
 		\includegraphics[width=1\linewidth]{images/tooth_naive_saliency_fixed}
+		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.49\textwidth}
 		\includegraphics[width=1\linewidth]{images/tooth_naive_saliency_parallelsearch}
+		\subcaption{}
 	\end{minipage}
 	\caption{After optimization to target \{0.1, 0.3, 0.6\}, all the 3 features are visible and the yellow feature inside is particularly emphasized.}
 	\label{fig:tooth_naive_optimized}
@@ -320,15 +371,37 @@ Results were obtained in our experimental programs written in Wolfram Mathematic
 	\centering
 	\begin{minipage}{.4\textwidth}
 		\includegraphics[width=1\linewidth]{images/CT-Knee_naive}
+		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.4\textwidth}
 		\includegraphics[width=1\linewidth]{images/CT-Knee_naive_optimized_linesearch}
+		\subcaption{}
 	\end{minipage}
+	
+	\begin{minipage}{.24\textwidth}
+		\includegraphics[width=1\linewidth]{images/CT-Knee_naive_visibility_chart}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.24\textwidth}
+		\includegraphics[width=1\linewidth]{images/CT-Knee_naive_visibility_saliency_weighted_chart}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.24\textwidth}
+		\includegraphics[width=1\linewidth]{images/CT-Knee_naive_optimized_linesearch_visibility_chart}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.24\textwidth}
+		\includegraphics[width=1\linewidth]{images/CT-Knee_naive_optimized_linesearch_visibility_saliency_weighted_chart}
+		\subcaption{}
+	\end{minipage}	
+	
 	\begin{minipage}{.49\textwidth}
 		\includegraphics[width=1\linewidth]{images/CT-Knee_naive_saliency_fixed}
+		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.49\textwidth}
 		\includegraphics[width=1\linewidth]{images/CT-Knee_naive_saliency_parallelsearch}
+		\subcaption{}
 	\end{minipage}
 	\caption{After optimization to target \{0.1, 0.3, 0.6\}, all the 3 features are visible, and the green and the purple features inside become clearer.}
 	\label{fig:CT-Knee_naive_optimized}
@@ -338,15 +411,37 @@ Results were obtained in our experimental programs written in Wolfram Mathematic
 	\centering
 	\begin{minipage}{.4\textwidth}
 		\includegraphics[width=1\linewidth]{images/vortex_naive}
+		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.4\textwidth}
-		\includegraphics[width=1\linewidth]{images/vorts1_optimized_linesearch}
+		\includegraphics[width=1\linewidth]{images/vortex_naive_optimized_linesearch}
+		\subcaption{}
+	\end{minipage}
+
+	\begin{minipage}{.24\textwidth}
+		\includegraphics[width=1\linewidth]{images/vortex_naive_visibility_chart}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.24\textwidth}
+		\includegraphics[width=1\linewidth]{images/vortex_naive_visibility_saliency_weighted_chart}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.24\textwidth}
+		\includegraphics[width=1\linewidth]{images/vortex_naive_optimized_linesearch_visibility_chart}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.24\textwidth}
+		\includegraphics[width=1\linewidth]{images/vortex_naive_optimized_linesearch_visibility_saliency_weighted_chart}
+		\subcaption{}
+	\end{minipage}	
+	
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/vortex_naive_saliency_fixed}
+		\subcaption{}
 	\end{minipage}
 	\begin{minipage}{.49\textwidth}
-		\includegraphics[width=1\linewidth]{images/vorts1_saliency_fixed}
-	\end{minipage}
-	\begin{minipage}{.49\textwidth}
-		\includegraphics[width=1\linewidth]{images/vorts1_saliency_parallelsearch}
+		\includegraphics[width=1\linewidth]{images/vortex_naive_saliency_parallelsearch}
+		\subcaption{}
 	\end{minipage}
 	\caption{After optimization to target \{0.34, 0.33, 0.33\}, all the 3 features are visible and the green feature inside is particularly emphasized.}
 	\label{fig:vortex_naive_optimized}
