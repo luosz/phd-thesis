@@ -52,6 +52,16 @@
 \usepackage{braket}
 \newcommand\addtag{\refstepcounter{equation}\tag{\theequation}}
 
+% for quotes
+\usepackage{epigraph}
+\usepackage{etoolbox}
+% \epigraphsize{\small}% Default
+\setlength\epigraphwidth{8cm}
+\setlength\epigraphrule{0pt}
+\makeatletter
+\patchcmd{\epigraph}{\@epitext{#1}}{\itshape\@epitext{#1}}{}{}
+\makeatother
+
 % \mastersthesis                     %% Uncomment one of these; if you don't
 \phdthesis                         %% use either, the default is \phdthesis.
 
