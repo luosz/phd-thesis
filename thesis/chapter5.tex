@@ -496,18 +496,41 @@ The evolutions of the objective function are also shown in Figure~\ref{fig:nucle
 		\includegraphics[width=1\linewidth]{images/vortex_naive_saliencyopacity_parallelsearch}
 		\subcaption{}
 	\end{minipage}
-	\caption{After optimization to target \{0.34, 0.33, 0.33\}, all the 3 features are visible and the green feature inside is particularly emphasized.}
+	\caption{After optimization to target \{1/3, 1/3, 1/3\}, all the 3 features are visible and the green feature inside is particularly emphasized.}
 	\label{fig:vortex_naive_optimized}
 \end{figure}
 
+\begin{figure}
+	\centering
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/CT-Knee_naive_rms_fixed_linesearch_parallel}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/vortex_naive_rms_fixed_linesearch_parallel}
+		\subcaption{}
+	\end{minipage}
+	\caption{The line search and parallel line search are applied to transfer function optimization on the nuclon data set (a) and the tooth data set (b). The two methods both converge ($F<0.01$) at step 4 for the nucleon data set and both converge at step 5 for the tooth data set. The two line search methods made very similar choices in step sizes.}
+	\label{fig:CT-Knee_naive_vortex_naive_rms_linesearch}
+\end{figure}
+
 \begin{table}[h]
-\begin{tabular}{ l | l c r }
-	& Fixed step size & Line search & Parallel line search \\
-	\hline
-	Time (seconds) & 1.91 & 0.83 & 0.55 \\
-	Iterations to converge (at 0.01) & 37 & 4 & 4 \\
+\begin{tabular}{ c | l | l c r }
+& & Fixed step size & Line search & Parallel line search \\
+\hline
+nucleon & Steps to converge & 37 & 4 & 4 \\
+& Time (seconds) & 1.91 & 0.83 & 0.55 \\
+\hline
+tooth & Steps to converge & 47 & 4 & 4 \\
+& Time (seconds) & 18.05 & 6.59 & 3.31 \\
+\hline
+CT-Knee & Steps to converge & 47 & 6 & 6 \\
+& Time (seconds) & 120.38 & 59.01 & 33.41 \\
+\hline
+vortex & Steps to converge & 56 & 21 & 21 \\
+& Time (seconds) & 24.95 & 25.42 & 14.92 \\
 \end{tabular}
-\caption[Table caption text]{Performance of the 3 optimization approaches on the nucleon data set ($ 41 \times 41 \times 41 $)}
+\caption[Table caption text]{Performance of the 3 optimization approaches on 4 volume data sets. ($ F<0.01 $ is regarded as convergence.)}
 \label{table:nucleon_table}
 \end{table}
 
@@ -516,6 +539,7 @@ The evolutions of the objective function are also shown in Figure~\ref{fig:nucle
 		& Fixed step size & Line search & Parallel line search \\
 		\hline
 		Time (seconds) & 18.05 & 6.59 & 3.31 \\
+		\hline
 		Iterations to converge (at 0.01) & 47 & 4 & 4 \\
 	\end{tabular}
 	\caption[Table caption text]{Performance of the 3 optimization approaches on the tooth data set ($ 140 \times 120 \times 161 $)}
@@ -538,7 +562,7 @@ The evolutions of the objective function are also shown in Figure~\ref{fig:nucle
 		& Fixed step size & Line search & Parallel line search \\
 		\hline
 		Time (seconds) & 24.95 & 25.42 & 14.92 \\
-		Iterations to converge (at 0.01) & 21 & 6 & 21 \\
+		Iterations to converge (at 0.01) & 56 & 21 & 21 \\
 	\end{tabular}
 	\caption[Table caption text]{Performance of the 3 optimization approaches on the vortex data set ($ 128 \times 128 \times 128 $)}
 	\label{table:vortex_table}
