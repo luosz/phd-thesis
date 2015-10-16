@@ -121,7 +121,7 @@ for $ \alpha_{k} $ small enough, then $ f(x_{k+1}) \leq f(x_{k}) $. The gradient
 
 In gradient descent methods, we can either take very small step sizes and reevaluate the gradient at every steps, or take large steps each time. If the step size is too small, it may end up in a laborious situation that the objective function converges very slowly. If the step size is too large, it results in a more zigzag path and may have the risk of missing the local minimum and thus cannot converge.
 
-\subsection{Estimating Descent Directions}
+\subsection{Estimating Descent Directions \label{estimating_descent_directions}}
 In each step of the optimization, the descent direction $ g_{k} $ has to be updated. 
 As previously discussed, the visibility-weighted saliency of a feature increases as its feature opacity increases. 
 %The visibility-weighted saliency of a feature is a monotonic function of the opacity of the feature. 
@@ -220,12 +220,12 @@ This strategy does not find the exact minimum along the line direction, instead 
 With line search approaches, the optimization algorithm can converge much faster than using fixed step sizes. Figure~\ref{fig:nucleon_parameterspace_path} displays the paths of two gradient descent methods, one progresses regularly with fixed step sizes, the other progresses aggressively with line search. It takes fewer steps for the latter to reach a local minimum.
 
 \begin{figure}
-\centering
-\begin{minipage}{.9\textwidth}
-	\includegraphics[width=1\linewidth]{images/nucleon_strong_red_parameterspace_path}
-\end{minipage}
-\caption{The steps of gradient descent methods with fixed step size and adaptive step size are shown in the parameter space in Figure~\ref{fig:nucleon_parameterspace} (the step size is 0.1)}
-\label{fig:nucleon_parameterspace_path}
+	\centering
+	\begin{minipage}{.9\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_parameterspace_path}
+	\end{minipage}
+	\caption{The steps of gradient descent methods with fixed step size and adaptive step size are shown in the parameter space in Figure~\ref{fig:nucleon_parameterspace} (the step size is 0.1)}
+	\label{fig:nucleon_parameterspace_path}
 \end{figure}
 
 \subsubsection{Parallel Line Search}
@@ -265,15 +265,21 @@ Figure~\ref{fig:nucleon_naive_tooth_naive_rms_linesearch} displays results of ap
 
 %-------------------------------------------------------------------------
 \section{Results and Discussions}
-In this section, we present some results to demonstrate the effectiveness of our approach on the nucleon data set ($ 41 \times 41 \times 41 $), a tooth data set ($ 140 \times 120 \times 161 $), a CT-knee (379 $ \times $ 229 $ \times $ 305) data set \cite{website:Roettger_volume_2013} and a time-step of a simulated turbulent vortex flow (128 $\times$ 128 $\times$ 128, 100 time-steps) \cite{ma_high_2000}.
+In this section, we present some results to demonstrate the effectiveness of our approach on the nucleon data set ($ 41 \times 41 \times 41 $), a tooth data set ($ 140 \times 120 \times 161 $), a CT-knee (379 $ \times $ 229 $ \times $ 305) data set \cite{website:Roettger_volume_2013} and one time-step of a simulated turbulent vortex flow (128 $\times$ 128 $\times$ 128, 100 time-steps) \cite{ma_high_2000}.
 %and four volumes of a horse embryo data set, which are the horse embryo at 35, 37, 39 and 42 days.
 Results were obtained in our experimental programs written in Wolfram Mathematica on a computer equipped with an Intel Core i7-950 processor, 16GB of RAM and a NVIDIA GeForce GTX 750 Ti graphics card.
 %Tests were performed on a computer equipped with an Intel Core i5-2410M CPU, 8GB of RAM and a NVIDIA GeForce GT 540M graphics card.
 
+In the results, we display the transfer functions and volume rendered images before and after transfer function optimization, as well as the evolution of visibility-weighted saliency and opacity values of features during the iterations.
+The feature visibility histograms \cite{wang_efficient_2011} are displayed along with the visibility-weighted saliency histograms for comparison.
+0.05 is used as the step size and the objective function $ F $ falling below 0.01 is regarded as convergence.
+The two optimization methods shown in the results are gradient descent with fixed step size and gradient descent with parallel line search, both using the method 1 mentioned in Section~\ref{estimating_descent_directions} for estimating descent directions.
 
+Figure~\ref{fig:nucleon_naive_optimized} shows the optimization results of Figure~\ref{fig:nucleon_naive}. In Figure~\ref{fig:nucleon_naive_optimized} (a), the three features from outside to inside appear in different transparency levels, from weak to strong. This reveals a clear perspective of the three structures.
+Figure~\ref{fig:nucleon_naive_optimized} (b) to (d) are the optimized transfer function, the visibility histogram and the visibility-weighted saliency histogram respectively. Figure~\ref{fig:nucleon_naive_optimized} (e) and (f) are the evolution of visibility-weighted saliency of each feature over iterations. Figure~\ref{fig:nucleon_naive_optimized} (g) and (h) show scatter plots of visibility-weighted saliency and opacity in the iteration steps, with lines connecting adjacent steps.
 
-
-*** work in progress ***
+Figure~\ref{fig:tooth_naive_optimized} (a), (c) and (d) display volume rendered images of the tooth data set before transfer function optimization. Figure~\ref{fig:tooth_naive_optimized} (b), (e) and (f) shows those after transfer function optimization.
+Figure~\ref{fig:tooth_naive_optimized} (g) and (h) are the evolution of visibility-weighted saliency of each feature over iterations, in gradient descent with fixed step sizes and parallel line search respectively. Figure~\ref{fig:tooth_naive_optimized} (i) and (i) illustrate the relationship between the visibility-weighted saliency and opacity of features, in the iterations of the two gradient descent methods respectively.
 
 %Objective function
 %Figure~\ref{fig:nucleon_strong_red_rms}
@@ -323,6 +329,24 @@ Results were obtained in our experimental programs written in Wolfram Mathematic
 		\includegraphics[width=1\linewidth]{images/nucleon_naive_optimized_linesearch_visibility_saliency_weighted_chart}
 		\subcaption{}
 	\end{minipage}
+	
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_naive_saliency_fixed}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_naive_saliency_parallelsearch}
+		\subcaption{}
+	\end{minipage}
+	
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_naive_saliencyopacity_fixed}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_naive_saliencyopacity_parallelsearch}
+		\subcaption{}
+	\end{minipage}
 	\caption{After optimization to target \{0.1, 0.3, 0.6\}, all the 3 features are visible and the green feature inside is particularly emphasized. (a) The optimized volume rendered image of the nucleon data set; (b) The optimized transfer function; (c) The visibility histogram \cite{wang_efficient_2011}; (d) The visibility-weighted saliency histogram)}
 	\label{fig:nucleon_naive_optimized}
 \end{figure}
@@ -361,6 +385,15 @@ Results were obtained in our experimental programs written in Wolfram Mathematic
 	\end{minipage}~
 	\begin{minipage}{.49\textwidth}
 		\includegraphics[width=1\linewidth]{images/tooth_naive_saliency_parallelsearch}
+		\subcaption{}
+	\end{minipage}
+	
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/tooth_naive_saliencyopacity_fixed}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/tooth_naive_saliencyopacity_parallelsearch}
 		\subcaption{}
 	\end{minipage}
 	\caption{After optimization to target \{0.1, 0.3, 0.6\}, all the 3 features are visible and the yellow feature inside is particularly emphasized.}
@@ -403,6 +436,15 @@ Results were obtained in our experimental programs written in Wolfram Mathematic
 		\includegraphics[width=1\linewidth]{images/CT-Knee_naive_saliency_parallelsearch}
 		\subcaption{}
 	\end{minipage}
+	
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/CT-Knee_naive_saliencyopacity_fixed}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/CT-Knee_naive_saliencyopacity_parallelsearch}
+		\subcaption{}
+	\end{minipage}
 	\caption{After optimization to target \{0.1, 0.3, 0.6\}, all the 3 features are visible, and the green and the purple features inside become clearer.}
 	\label{fig:CT-Knee_naive_optimized}
 \end{figure}
@@ -441,6 +483,15 @@ Results were obtained in our experimental programs written in Wolfram Mathematic
 	\end{minipage}
 	\begin{minipage}{.49\textwidth}
 		\includegraphics[width=1\linewidth]{images/vortex_naive_saliency_parallelsearch}
+		\subcaption{}
+	\end{minipage}
+	
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/vortex_naive_saliencyopacity_fixed}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/vortex_naive_saliencyopacity_parallelsearch}
 		\subcaption{}
 	\end{minipage}
 	\caption{After optimization to target \{0.34, 0.33, 0.33\}, all the 3 features are visible and the green feature inside is particularly emphasized.}
