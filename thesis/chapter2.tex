@@ -1,4 +1,4 @@
-\chapter{Background and Related Work \label{background_related_work}}
+\chapter{Related Work \label{related_work_chapter}}
 In this chapter, we present a brief review of the literature related to the concepts that we discuss in this thesis.
 
 \section{Volume Rendering \label{volume_rendering}}
@@ -139,6 +139,10 @@ Kindlmann and Durkin extended Levoy's work by introducing a higher dimensional t
 Kindlmann et al. \cite{kindlmann_curvature-based_2003} proposed curvature-based transfer function to enhance the expressive and informative power of volume rendering. In their approach, volume data is rendered with contours to exhibit constant thickness in image space.
 Maciejewski et al. proposed a non-parametric method to generate transfer function \cite{maciejewski_structuring_2009}. Wang et al. introduced clustering of 2D density plots in their automating transfer function \cite{wang_automating_2012}.
 
+\cite{ip_hierarchical_2012}
+\cite{maciejewski_abstracting_2013}
+\cite{fang_visualization_2007}
+\cite{akiba_simultaneous_2006}
 %\paragraph{Isosurface Statistics}
 %Geometric properties of isosurfaces
 %\cite{bruckner_isosurface_2010}
@@ -146,16 +150,77 @@ Maciejewski et al. proposed a non-parametric method to generate transfer functio
 %\paragraph{Clustering}
 
 \subsection{Transfer Functions for Time-Varying Volume Visualization}
-Although researchers have developed a great number of visualization techniques for time-invariant volume data, how to effectively explore and understand time-varying volume data remains a challenging problem. Finding good transfer functions for time-invariant volume data itself has proven difficult \cite{pfister_transfer_2001}. Finding good transfer functions for time-varying volume data is even more difficult, as data value ranges and distributions change over time.
+Although researchers have developed a great number of visualization techniques for time-invariant volume data, how to effectively explore and understand time-varying volume data remains a challenging problem. Finding good transfer functions for time-invariant volume data itself has proven difficult \cite{pfister_transfer_2001}.
+%Finding good transfer functions for time-varying volume data is even more difficult, as data value ranges and distributions change over time.
+%Although researchers have developed a great number of visualization techniques for static volume data, how to effectively explore and understand time-varying volume data remains a challenging problem.
+Finding good transfer functions for time-varying volume data is more difficult than for static volume data, as data value ranges and distributions change over time.
 
-Coherence is an important issue of transfer function design for time-varying volume data. Ideally, a single transfer function should be used for the whole time-varying data set in order to obtain coherent visualization. More than one colour or opacity map can be misleading or physically meaningless, because the transition from one transfer function to another may cause sudden changes in the resulting images. However, this practice is not always applicable to general time-varying data sets.
+Coherence is an important issue of transfer function design for time-varying volume data. Ideally, a single transfer function should be used for the whole time-varying data set in order to obtain coherent visualization. More than one color or opacity map can be misleading or physically meaningless, because the transition from one transfer function to another may cause sudden changes in the resulting images. However, this practice is not always applicable to general time-varying data sets.
 
+%Jankun-Kelly and Ma \cite{jankun-kelly_study_2001} examined how to combine transfer functions for different time-steps to generate a coherent transfer function.
 Jankun-Kelly and Ma \cite{jankun-kelly_study_2001} examined how to combine transfer functions for different time-steps to generate a coherent transfer function.
 Woodring et al. \cite{woodring_high_2003} considered time-varying volume data as four-dimensional data field and provided a user interface to specify hyperplanes in 4D.
 Woodring and Shen \cite{woodring_chronovolumes_2003} introduced an alternative approach to render multiply time-steps in a sequence with different colours into a single image. This approach provides the context of surrounding time steps but coherence of colour among time-steps is hard to maintain.
+%Tikhonova et al. \cite{tikhonova_exploratory_2010} presented an exploratory approach based on a compact representation of each time step of the dataset in the form of ray attenuation functions. Ray attenuation functions are subsequently used for transfer function generation.
+Tikhonova et al. \cite{tikhonova_exploratory_2010} presented an exploratory approach based on a compact representation of each time step of the dataset in the form of ray attenuation functions. Ray attenuation functions are subsequently used for transfer function generation.
 
-Tikhonova et al. \cite{tikhonova_exploratory_2010} presented an explorative approach based on a compact
-representation of each time step of the dataset in the form of ray attenuation functions. Ray attenuation functions are subsequently used for transfer function generation.
+\section{Automated Transfer Function Optimization}
+Various strategies have been proposed to simplify transfer function specification \cite{pfister_transfer_2001}.
+%Data-centric strategies examine the properties of volume data sets.
+Overlapping intensity intervals corresponding to different materials make boundary detection difficult. Classical approaches try to detect boundary information between tissues by introducing derived attributes such as first and second derivatives to isolate materials \cite{kindlmann_semi-automatic_1998} \cite{kniss_multidimensional_2002} \cite{kindlmann_transfer_2002}.
+In this case, the transfer functions are extended to multidimensional feature spaces. As a result, the interaction of transfer functions becomes more complex and unintuitive as the dimensionality becomes higher.
+%Even two-dimensional transfer functions require a considerable amount of user interaction to find a meaningful shape \cite{arens_survey_2010}.
+Even in the case of two-dimensional transfer functions, a considerable amount of user interaction is
+required in order to come up with meaningful results \cite{arens_survey_2010}.
+%There are other multi-dimensional transfer functions approaches, such as spatialized gradient-based transfer functions \cite{roettger_spatialized_2005}, distance-based transfer functions \cite{tappenbeck_distance-based_2006}, size-based transfer function \cite{correa_size-based_2008}, texture-based transfer functions \cite{caban_texture-based_2008} and curvature based transfer functions \cite{kindlmann_curvature-based_2003}.
+
+Rezk-Salama et al. \cite{rezk-salama_automatic_2000} presented high-level semantics to abstract parametric models of transfer functions in order to automatically assign transfer function templates.
+Bruckner and Gr{\"o}ller introduced the concept of style transfer functions \cite{bruckner_style_2007}, which aim to produce more comprehensible images by using transfer functions that map input values to different non-photorealistic rendering styles.
+%Another strategy is based on the selection of rendered images. This strategy lets the user select one or more favorite images to guide the further search of transfer functions
+%\cite{marks_design_1997}.
+Wu and Qu \cite{wu_interactive_2007} developed a method that uses editing operations and stochastic search of the transfer function parameters to maximize the similarity between volume-rendered images given by the user.
+
+
+\section{chapter 4}
+Transfer functions have played a crucial role in volume visualization and the design of transfer functions to generate informative visualizations has been a significant challenge addressed by a number of researchers \cite{pfister_transfer_2001}.
+Various strategies have been proposed to simplify transfer function specification \cite{hadwiger_real-time_2006}.
+In volume data, boundaries are regions between areas of relatively homogeneous material. It is difficult to detect boundaries because different materials often consist of overlapping intensity intervals. To address this problem, multidimensional transfer functions used derived attributes such as gradient magnitudes and second derivatives along with scalar values, in order to detect transitions between relatively homogeneous areas \cite{kindlmann_semi-automatic_1998} \cite{kniss_multidimensional_2002} \cite{kindlmann_transfer_2002}.
+%Classical approaches try to detect boundary information between tissues by introducing derived attributes such as first and second derivatives to isolate materials \cite{kindlmann_semi-automatic_1998} \cite{kniss_multidimensional_2002} \cite{kindlmann_transfer_2002}.
+In this case, the transfer functions are extended to multidimensional feature spaces. As a result, the interaction of transfer functions becomes more complex and unintuitive as the dimensionality becomes higher.
+Even in the case of two-dimensional transfer functions, a considerable amount of user interaction is
+required in order to come up with meaningful results \cite{arens_survey_2010}.
+
+\section{Visibility Histograms}
+\cite{emsenhuber_visibility_2008}
+
+\cite{correa_visibility_2011}
+
+\cite{wang_efficient_2011}
+
+\section{Information Theory in Visualization}
+Information theory \cite{shannon_mathematical_1948} was originally introduced to study the fundamental limit of reliable transmission of messages through a noisy communication channel. Traditional applications of information theory, such as data compression and data communication, focus on the efficient throughput of a communication channel, whilst visualization focuses on the effectiveness in aiding the perceptual and cognitive process for data understanding and knowledge discovery.
+
+In recent years, there is an emerging direction towards using the principles of information theory to solve challenging problems in scientific visualization. \cite{wang_information_2011}. Chen and J�enicke \cite{chen_information-theoretic_2010} presented an information-theoretic framework for visualization. They examined the theoretical aspect of information and its relation to data communication and interpret different stages of the visualization pipeline using the taxonomy of information.
+
+Haidacher et at. \cite{haidacher_information-based_2008} proposed an approach of transfer function specification for multi-modal data visualization. They considered the joint occurrence of multiple features from one or multiple variables so as to separate statistical features that only occur in a single variable from those that are present in both.
+Ruiz et al. \cite{ruiz_automatic_2011} presented an approach to generate transfer functions from a target distribution provided by the user. Their approach is based on a communication channel between a set of viewpoints and a set of bins of a volume data set, and supports both 1D and 2D transfer functions including the gradient information.
+Bramon et al. \cite{bramon_information_2013} proposed an automatic method to visualize multi-modal data by combining several information-theoretic strategies to define colours and opacities of the multi-modal transfer function.
+They set an information channel between two registered input datasets to define the fused colour and minimize the informational divergence between the visibility distribution captured by a set of viewpoints and a target distribution proposed by the user to obtain the opacity.
+
+\section{Saliency}
+\cite{itti_model_1998}
+
+\cite{harel_graph-based_2006}
+
+\cite{cui_measuring_2006}
+
+\cite{lee_mesh_2005}
+
+\cite{duan_visual_2011}
+
+\cite{kim_saliency-guided_2006}
+
+\cite{shen_spatiotemporal_2015}
 
 \section{Non-Photorealistic Rendering (NPR)}
 In contrast to traditional computer graphics, which has focused largely on creating photorealistic images of synthetic objects, non-photorealistic rendering (NPR) is an area of computer graphics that focuses on creating abstract images with a wide variety of expressive styles \cite{haeberli_paint_1990}. NPR has been an active research area for a long time. A number of approaches have been proposed to produce convincing artistic styles for both off-line and on-line rendering. For example, there are various types of commonly used styles including painterly rendering, edge stylisation, sketch-shading, cel-shading, hatching.
@@ -233,16 +298,6 @@ Feature extraction methods are often based on an analytical description of the f
 The visualization of vector fields plays a crucial role in visual interpretation and understand of the underlying flow features and patterns \cite{kuhn_clustering-based_2011} \cite{ma_coherent_2013}. Since flow patterns also exist in time-varying volume data, certain techniques for visualizing vector field could be incorporated into time-varying volume visualization, in order to depict the dynamic aspects of time-varying data.
 
 Line drawings are effective ways to depict complex information with simple means \cite{benard_state_art_2011}. Among vector field visualization techniques, streamline visualization is a simple but common way to convey the structure of 3D vector fields \cite{chen_illustrative_2011}. Streamlines have proven to give expressive visual representation if they are combined with appropriate seeding strategies \cite{annen_vector_2008}. Streamlines reveal flow patterns in an intuitive fashion by integrating the flow path.
-
-\section{Information Theory in Visualization}
-Information theory \cite{shannon_mathematical_1948} was originally introduced to study the fundamental limit of reliable transmission of messages through a noisy communication channel. Traditional applications of information theory, such as data compression and data communication, focus on the efficient throughput of a communication channel, whilst visualization focuses on the effectiveness in aiding the perceptual and cognitive process for data understanding and knowledge discovery.
-
-In recent years, there is an emerging direction towards using the principles of information theory to solve challenging problems in scientific visualization. \cite{wang_information_2011}. Chen and J�enicke \cite{chen_information-theoretic_2010} presented an information-theoretic framework for visualization. They examined the theoretical aspect of information and its relation to data communication and interpret different stages of the visualization pipeline using the taxonomy of information.
-
-Haidacher et at. \cite{haidacher_information-based_2008} proposed an approach of transfer function specification for multi-modal data visualization. They considered the joint occurrence of multiple features from one or multiple variables so as to separate statistical features that only occur in a single variable from those that are present in both.
-Ruiz et al. \cite{ruiz_automatic_2011} presented an approach to generate transfer functions from a target distribution provided by the user. Their approach is based on a communication channel between a set of viewpoints and a set of bins of a volume data set, and supports both 1D and 2D transfer functions including the gradient information.
-Bramon et al. \cite{bramon_information_2013} proposed an automatic method to visualize multi-modal data by combining several information-theoretic strategies to define colours and opacities of the multi-modal transfer function.
-They set an information channel between two registered input datasets to define the fused colour and minimize the informational divergence between the visibility distribution captured by a set of viewpoints and a target distribution proposed by the user to obtain the opacity.
 
 \section{Perceptual Evaluation}
 %The term visualization may have various meanings.

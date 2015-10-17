@@ -29,14 +29,6 @@ This technique is also useful for understanding how much different parts of the 
 
 %-------------------------------------------------------------------------
 \section{Related Work}
-Transfer functions have played a crucial role in volume visualization and the design of transfer functions to generate informative visualizations has been a significant challenge addressed by a number of researchers \cite{pfister_transfer_2001}.
-Various strategies have been proposed to simplify transfer function specification \cite{hadwiger_real-time_2006}.
-In volume data, boundaries are regions between areas of relatively homogeneous material. It is difficult to detect boundaries because different materials often consist of overlapping intensity intervals. To address this problem, multidimensional transfer functions used derived attributes such as gradient magnitudes and second derivatives along with scalar values, in order to detect transitions between relatively homogeneous areas \cite{kindlmann_semi-automatic_1998} \cite{kniss_multidimensional_2002} \cite{kindlmann_transfer_2002}.
-%Classical approaches try to detect boundary information between tissues by introducing derived attributes such as first and second derivatives to isolate materials \cite{kindlmann_semi-automatic_1998} \cite{kniss_multidimensional_2002} \cite{kindlmann_transfer_2002}.
-In this case, the transfer functions are extended to multidimensional feature spaces. As a result, the interaction of transfer functions becomes more complex and unintuitive as the dimensionality becomes higher.
-Even in the case of two-dimensional transfer functions, a considerable amount of user interaction is
-required in order to come up with meaningful results \cite{arens_survey_2010}.
-
 Several computational models of visual saliency for modeling human attention have been developed.
 Itti et al. \cite{itti_model_1998} developed a computational model of visual attention based on the center-surround operators in an image. This center-surround mechanism has the intuitive appeal of being able to identify regions that are different from their surrounding context.
 Lee et al. \cite{lee_mesh_2005} proposed saliency for meshes based on a multi-scale center-surround mechanism that operates on local curvature. Kim and Varshney \cite{kim_saliency-guided_2006} presented the use of a center-surround operator using the Laplacian of Gaussian-weighted averages of appearance attributes to enhance selected regions of a volume and validated their work using an eye-tracking user study. Shen et al. \cite{shen_spatiotemporal_2015} extended this technique to spatiotemporal volume saliency to detect both spatial and temporal changes.
