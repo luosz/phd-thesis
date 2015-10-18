@@ -189,29 +189,52 @@ Visualization and exploration of time-varying medical image data sets
 Simultaneous classification of time-varying volume data based on the time histogram
 \cite{akiba_simultaneous_2006}
 
-\section{Transfer Function Optimization and Visibility Histograms}
+\section{Automatd Transfer Function Generation}
+Researches have proposed various approaches to automate the design of transfer functions and provide acceptable suggestions which can be further edited by users. However, the usefulness of a transfer function mostly depends on the underlying question the user wants to answer. Moreover, the users' tasks vary drastically from one domain to another. Therefore, most techniques work semi-automatically and very few techniques consider domain knowledge in the design process \cite{zudilova-seinstra_trends_2008}.
+
+He et al. \cite{he_generation_1996} addressed transfer function exploration as a parameter optimization problem and presented an approach to assist the user in exploring appropriate transfer functions using stochastic search techniques starting from an initial population.
+Another strategy is based on the selection of rendered images. This strategy lets the user select one or more favorite images to guide the further search of transfer functions \cite{marks_design_1997}.
 Rezk-Salama et al. \cite{rezk-salama_automatic_2000} presented high-level semantics to abstract parametric models of transfer functions in order to automatically assign transfer function templates.
-%Another strategy is based on the selection of rendered images. This strategy lets the user select one or more favorite images to guide the further search of transfer functions
-%\cite{marks_design_1997}.
+
+
+\cite{tzeng_novel_2003}
+\cite{tzeng_cluster-space_2004}
+\cite{tzeng_intelligent_2005}
+
+\cite{jani_opacity_2005}
+
 Wu and Qu \cite{wu_interactive_2007} developed a method that uses editing operations and stochastic search of the transfer function parameters to maximize the similarity between volume-rendered images given by the user.
+
+\cite{peng_optimal_2011}
+\cite{lathen_automatic_2012}
+
+
+\section{Visibility-Driven Transfer Functions}
+The visibility of structures revealed in volume rendering is more of a consequence of adjusting transfer functions than a design parameter \cite{preim_visual_2013}. In contrast, Correa and Ma \cite{correa_visibility-driven_2009} suggested to use visibility to guide transfer function design for both manual and automatic searches.
+
+\begin{figure}
+\centering
+\includegraphics[width=1\linewidth]{images/correa_visibility-driven_2009}
+\caption{Visibility histograms for two data sets \cite{correa_visibility-driven_2009}}
+\label{fig:correa_visibility-driven_2009}
+\end{figure}
+
+With conventional transfer function design, the visibility of certain anatomical structures is a consequence of adjusting transfer function parameters. 
+Correa and Ma suggest to control visibility directly by computing visibility histograms as a basis for visibility-driven transfer functions. Visibility-based transfer functions are actually an instance of a data-driven transfer function specification.
 
 \cite{bordoloi_view_2005}
 \cite{takahashi_feature-driven_2005}
 
-\cite{lathen_automatic_2012}
 \cite{emsenhuber_visibility_2008}
 \cite{correa_visibility_2011}
 \cite{wang_efficient_2011}
+
+\cite{bronstad_visibility_2012}
+
 \cite{jung_visibility-driven_2013}
 \cite{zheng_visibility_2013}
-\cite{peng_optimal_2011}
 \cite{ruiz_automatic_2011}
 \cite{bramon_information_2013}
-\cite{jani_opacity_2005}
-\cite{tzeng_novel_2003}
-\cite{tzeng_intelligent_2005}
-\cite{tzeng_cluster-space_2004}
-\cite{he_generation_1996}
 
 \section{Information Theory in Visualization}
 Information theory \cite{shannon_mathematical_1948} was originally introduced to study the fundamental limit of reliable transmission of messages through a noisy communication channel. Traditional applications of information theory, such as data compression and data communication, focus on the efficient throughput of a communication channel, whilst visualization focuses on the effectiveness in aiding the perceptual and cognitive process for data understanding and knowledge discovery.
