@@ -181,15 +181,13 @@ Woodring et al. \cite{woodring_high_2003} considered time-varying volume data as
 Woodring and Shen \cite{woodring_chronovolumes_2003} introduced an alternative approach to render multiply time-steps in a sequence with different colours into a single image. This approach provides the context of surrounding time steps but coherence of colour among time-steps is hard to maintain.
 %Tikhonova et al. \cite{tikhonova_exploratory_2010} presented an exploratory approach based on a compact representation of each time step of the dataset in the form of ray attenuation functions. Ray attenuation functions are subsequently used for transfer function generation.
 Tikhonova et al. \cite{tikhonova_exploratory_2010} presented an exploratory approach based on a compact representation of each time step of the dataset in the form of ray attenuation functions. Ray attenuation functions are subsequently used for transfer function generation.
+Akiba et al. \cite{akiba_simultaneous_2006} introduced the time histogram which allows simultaneous classification and specification of temporal transfer functions for the entire time series.
 
+The time activity curve (TAC) \cite{fang_visualization_2007} uses a vector representation of the values each voxel ordered by time, representing the values of the voxel over time. It is a common method to represent the change of time-varying data over time.
 
+Woodring et al. \cite{woodring_semi-automatic_2009} utilized a method called temporal clustering and sequencing to find dynamic features in value space and create a corresponding transfer function.
 
-Visualization and exploration of time-varying medical image data sets
-\cite{fang_visualization_2007}
-Simultaneous classification of time-varying volume data based on the time histogram
-\cite{akiba_simultaneous_2006}
-
-\section{Automatd Transfer Function Generation}
+\section{Automatd Transfer Function Design}
 Researches have proposed various approaches to automate the design of transfer functions and provide acceptable suggestions which can be further edited by users. However, the usefulness of a transfer function mostly depends on the underlying question the user wants to answer. Moreover, the users' tasks vary drastically from one domain to another. Therefore, most techniques work semi-automatically and very few techniques consider domain knowledge in the design process \cite{zudilova-seinstra_trends_2008}.
 
 He et al. \cite{he_generation_1996} addressed transfer function exploration as a parameter optimization problem and presented an approach to assist the user in exploring appropriate transfer functions using stochastic search techniques starting from an initial population.
