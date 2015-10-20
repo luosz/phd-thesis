@@ -5,12 +5,12 @@ In this chapter, we present a brief review of the literature related to the conc
 Volume rendering is used to display a 2D image of a three-dimensional (3D) dataset. It can be seen as a projection of a 3D volumetric dataset into a two-dimensional (2D) image
 % without extracting intermediate polygonal representations 
 \cite{garcia_parallel_2006}.
-The majority of datasets are discretely sampled along a three
+The majority of data sets are discretely sampled along a three
 dimensional grid and contain scalar values usually acquired from medical
 imaging devices such as CT or MRI machines. The data then takes the form
 a 3D array of voxels (a three dimensional extension of pixels).
 %There are various kinds of volumetric data sets. Typical volumetric data sets in medical visualization are groups of two-dimensional (2D) slice images acquired by a CT, MRI, or MicroCT scanner.
-In flow visualization, the datasets are often generated from simulations.
+In flow visualization, the data sets are often generated from simulations.
 
 Volume rendering can be performed using two main techniques, either by extracting a
 number of surfaces from the data and rendering these surfaces to the screen,
@@ -18,7 +18,7 @@ called isosurface rendering or by rendering the volume itself as a complete
 block of data with no intermediary structures, usually called direct volume
 rendering (DVR).
 
-%Volume rendering is called direct volume rendering, where no polygonal representations are generated in the process, whereas rendering from polygonal representations extracted from volumetric datasets is called indirect volume rendering.
+%Volume rendering is called direct volume rendering, where no polygonal representations are generated in the process, whereas rendering from polygonal representations extracted from volumetric data sets is called indirect volume rendering.
 
 An example of volume rendering is provided in Figure~\ref{fig:multiple_VisMale}, which shows a sliced image and a volume rendered image of a head data set.
 
@@ -56,7 +56,7 @@ An example of volume rendering is provided in Figure~\ref{fig:multiple_VisMale},
 \label{fig:multiple_VisMale}
 \end{figure}
 
-%Whereas rendering from polygonal representations extracted from volumetric datasets is also called indirect volume rendering.
+%Whereas rendering from polygonal representations extracted from volumetric data sets is also called indirect volume rendering.
 
 %There are four typical volume rendering techniques: ray casting, splatting, shear warp and texture mapping. In recent years, many variants and combinations of these techniques have been proposed, especially approaches which utilise GPU hardware to improve performance or even achieve real-time interactivity.
 
@@ -74,7 +74,7 @@ Transfer function specification is an essential part in volume visualization.
 %In terms of dimensionality, transfer functions are divided into two categories, one-dimensional (1D) and multidimensional.
 A simple one-dimensional transfer function is a mapping from scalar values to RGB and alpha values.
 The resulting visualization largely depends on how well the transfer function captures features of interest \cite{kniss_multidimensional_2002}.
-%Due to the complex nature of volumetric datasets, abstraction techniques is often used in order to provide better understanding of the datasets.
+%Due to the complex nature of volumetric data sets, abstraction techniques is often used in order to provide better understanding of the data sets.
 However, it is non-trivial to obtain an effective transfer function. The specification is often a trial-and-error process, which involves a significant amount of tweaking of color and opacity. Figure~\ref{fig:multiple_glk_transfunction} shows how slight changes in the transfer function lead to significant changes in the resulting images. The adjustment of transfer functions is unintuitive and often difficult.
 
 \begin{figure}
@@ -104,7 +104,7 @@ However, it is non-trivial to obtain an effective transfer function. The specifi
 \end{figure}
 
 In practice, major factors that have a great influence on transfer function setting are: partial volume effect \footnote{During the acquisition of data, the finite resolution causes contributions of different materials combined into the value of a single voxel. This is generally referred to as the partial volume effect, which results in blurred boundaries and hampers the detection of small or thin structures. \cite{serlie_classifying_2007}}, non-uniform distribution of materials and noise \cite{serlie_computed_2003}.
-Among these, two challenging problems that need to be tackled could be elaborated as follows: firstly, for volume datasets, e.g. those obtained by MRI and CT, different tissues are represented in similar or even overlapping ranges of scalar values; secondly, interesting interior structures are often partly or completely occluded by surrounding tissue.
+Among these, two challenging problems that need to be tackled could be elaborated as follows: firstly, for volume data sets, e.g. those obtained by MRI and CT, different tissues are represented in similar or even overlapping ranges of scalar values; secondly, interesting interior structures are often partly or completely occluded by surrounding tissue.
 %This is common in visualizing interior structures. 
 Consequently, feature detection and understanding volume data become a big challenge.
 
@@ -278,7 +278,7 @@ In recent years, there is an emerging direction towards using the principles of 
 Haidacher et at. \cite{haidacher_information-based_2008} proposed an approach of transfer function specification for multi-modal data visualization. They considered the joint occurrence of multiple features from one or multiple variables so as to separate statistical features that only occur in a single variable from those that are present in both.
 Ruiz et al. \cite{ruiz_automatic_2011} presented an approach to generate transfer functions from a target distribution provided by the user. Their approach is based on a communication channel between a set of viewpoints and a set of bins of a volume data set, and supports both 1D and 2D transfer functions including the gradient information.
 Bramon et al. \cite{bramon_information_2013} proposed an automatic method to visualize multi-modal data by combining several information-theoretic strategies to define colors and opacities of the multi-modal transfer function.
-They set an information channel between two registered input datasets to define the fused color and minimize the informational divergence between the visibility distribution captured by a set of viewpoints and a target distribution proposed by the user to obtain the opacity.
+They set an information channel between two registered input data sets to define the fused color and minimize the informational divergence between the visibility distribution captured by a set of viewpoints and a target distribution proposed by the user to obtain the opacity.
 
 \section{Non-Photorealistic Rendering (NPR)}
 In contrast to traditional computer graphics, which has focused largely on creating photorealistic images of synthetic objects, non-photorealistic rendering (NPR) is an area of computer graphics that focuses on creating abstract images with a wide variety of expressive styles \cite{haeberli_paint_1990}. NPR has been an active research area for a long time. A number of approaches have been proposed to produce convincing artistic styles for both off-line and on-line rendering. For example, there are various types of commonly used styles including painterly rendering, edge stylization, sketch-shading, cel-shading, hatching.
@@ -296,7 +296,7 @@ Illustration-based styles are believed to be effective in conveying information.
 Bruckner and Gr{\"o}ller introduced the concept of style transfer functions \cite{bruckner_style_2007}, which aim to produce more comprehensible images by using transfer functions that map input values to different NPR rendering styles.
 
 \subsection{Visualising Time-Varying Volume Data with NPR}
-An essential problem in time-varying volume visualization is to visualize temporal variation and analysis of features. Traditionally, time-varying data has been visualized as snapshots of individual time steps or animation of snapshots of a sequence of time steps. These techniques are effective in making time-varying data understandable. However, they struggle when the complexity of datasets increased dramatically in recent years \cite{brambilla_illustrative_2012}.
+An essential problem in time-varying volume visualization is to visualize temporal variation and analysis of features. Traditionally, time-varying data has been visualized as snapshots of individual time steps or animation of snapshots of a sequence of time steps. These techniques are effective in making time-varying data understandable. However, they struggle when the complexity of data sets increased dramatically in recent years \cite{brambilla_illustrative_2012}.
 
 Compared to flow visualization, which is a well established branch of scientific visualization \cite{brambilla_illustrative_2012}, general time-varying volume visualization is still a relative young field.
 Illustrations for time-varying rendering could be divided into two categories, one is to enhance time-invariant features and the other is to enhance temporal features of time-varying volume data. The techniques in the first category focus on enhancing structural perception of volume models through the amplification of features and the addition of illumination effects \cite{rheingans_volume_2001} \cite{joshi_illustration-inspired_2005}. Examples of these techniques include boundary enhancement, oriented feature enhancement (silhouettes, fading, and sketch lines). The techniques in the second category focus on illustrating dynamic aspects such as movement of features. A few kinds of techniques have been proposed for this purpose. For example, there are speedlines, flow ribbons and strobe silhouettes, which are inspired by traditional animation \cite{joshi_illustration-inspired_2005} \cite{joshi_evaluation_2008} \cite{joshi_case_2009}; and there are extended silhouette and boundary enhancement domains, which are inspired by the techniques used by illustrators and other artists \cite{svakhine_illustration_2005}. Nevertheless, illustrations of temporal features of time-varying data requires more attention from researchers in the visualization community. The usefulness of illustrative approaches in time-varying volume visualization has not been studied as thoroughly as in other areas.
