@@ -183,18 +183,21 @@ Woodring and Shen \cite{woodring_chronovolumes_2003} introduced an alternative a
 Tikhonova et al. \cite{tikhonova_exploratory_2010} presented an exploratory approach based on a compact representation of each time step of the dataset in the form of ray attenuation functions. Ray attenuation functions are subsequently used for transfer function generation.
 Akiba et al. \cite{akiba_simultaneous_2006} introduced the time histogram which allows simultaneous classification and specification of temporal transfer functions for the entire time series.
 
-Data value activity has been used in the classiﬁcation of
-time-varying data
-
-\cite{jankun-kelly_study_2001}
-
-\cite{tzeng_intelligent_2005}
-
-The time activity curve (TAC) \cite{fang_visualization_2007} uses a vector representation of the values each voxel ordered by time, representing the values of the voxel over time. It is a common method to represent the change of time-varying data over time.
-
-\cite{woodring_multiscale_2009}
+A time-varying volume data set can be considered as a 3D array where each voxel contains a time-activity curve (TAC). Fang et al. \cite{fang_visualization_2007} described an approach for classifying time-varying volume data based on the temporal behavior of voxels and three different similarity measures that can be used in their approach.
+Woording and Shen \cite{woodring_multiscale_2009} presented a method that filters time-varying volume data into several time scales using wavelet transform and classifies the voxels by clustering the entire time series by time scale.
+Lee and Shen \cite{lee_visualizing_2009} proposed a method for classifying time-varying features using time activity curves with the dynamic time warping distance metric.
 
 Woodring et al. \cite{woodring_semi-automatic_2009} utilized a method called temporal clustering and sequencing to find dynamic features in value space and create a corresponding transfer function.
+
+\begin{figure}
+\centering
+\includegraphics[width=1\linewidth]{images/woodring_semi-automatic_2009}
+\caption{\cite{woodring_semi-automatic_2009}}
+\label{fig:woodring_semi-automatic_2009}
+\end{figure}
+
+
+\cite{wang_importance-driven_2008}
 
 \cite{ward_visual_2011}
 
