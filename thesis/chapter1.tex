@@ -7,8 +7,8 @@ Volume visualization is a powerful technique which aims to visualize the 3D stru
 %Visualization of large-scale time-varying volumetric datasets has become one of the most challenging problems in scientific visualization.
 With the advance of various data acquisition hardware,
 %such as CT, MRI, fMRI, 
-time-varying volumetric datasets are increasing dramatically both in size and complexity. However, the visualization of time-varying volume data remains a challenging problem due to the large size and the dynamic nature of the underlying information.
-Previously established techniques, such as in flow visualization, struggle to deal with the increasing complexity of the most recent datasets.
+time-varying volumetric data sets are increasing dramatically both in size and complexity. However, the visualization of time-varying volume data remains a challenging problem due to the large size and the dynamic nature of the underlying information.
+Previously established techniques, such as in flow visualization, struggle to deal with the increasing complexity of the most recent data sets.
 %Researchers have proposed various techniques to analyse and visualize volume data.
 
 The rendering of volume data requires every sample value (also called voxel, which is a volume element (or volumetric pixel)) to be mapped to visual properties (e.g. opacity and colour). This mapping is done with a transfer function, which can be a simple ramp, a piecewise linear function or an arbitrary table.
@@ -31,12 +31,12 @@ Illustrative visualization has proven its usefulness in revealing 3D structures 
 %Illustrative visualization has proven its usefulness in revealing 3D structures due to its ability to hide less relevant details while emphasizing important features. The goal of illustrative visualization is to gain clarity compared to photo-realistic rendering by emphasizing important features and improving data exploration. In order to gain more comprehensive images, it is necessary to highlight important aspects and omit less relevant details.
 
 \section{Motivation \label{motivation}}
-Understanding and analysing complex volumetrically varying data is a challenging problem.
+Understanding and analyzing complex volumetrically varying data is a challenging problem.
 Many visualization techniques have had only limited success in succinctly portraying the structure of 3D time-varying volume data.
 %There are only limited success have been reported about various visualization techniques which succinctly portray the structure of 3D time-varying volume data.
 The main goal of our research is to investigate the optimization of visualization parameters (in particular transfer functions) and the use of NPR techniques, and develop a methodology which incorporates these two types of techniques to facilitate the user's exploration of the data sets. NPR techniques are effective forms of abstraction and they have proven their usefulness in expressing features that cannot be shown using realistic depiction of scenes and objects. The combination of standard volume visualization and NPR techniques will bring the opportunity to provide expressive visualization and assist the user in accomplishing his/her task efficiently.
 
-We hypothesise that the importance of voxels (sample values in volume data) are associated with their information content. Therefore, the transfer functions of volume visualization can be optimized based on the information within the data sets and user input which indicates the user's interest.
+We hypothesize that the importance of voxels (sample values in volume data) are associated with their information content. Therefore, the transfer functions of volume visualization can be optimized based on the information within the data sets and user input which indicates the user's interest.
 In addition, we investigate the feasibility of propagating the optimization approach from static volume data to time-varying data.
 
 %A small number of approaches have been proposed for using information theory in volume visualization. However, most available approaches are not designed for the visualization of time-varying data and thus they have not taken the coherence issues into account.
@@ -44,7 +44,7 @@ In addition, we investigate the feasibility of propagating the optimization appr
 \section{Scope}
 This thesis focuses on methods for enhancing user understanding of volume data by optimizing visualization parameters and incorporating NPR techniques.
 We investigate the optimization of transfer functions by exploiting the information inherent within the volume data and input from user interaction.
-In addition, we investigate NPR techniques which we believe are well suited for highlighting important details as well as simplifying less important details. Hence we combine the optimization of visualization parameters and NPR techniques in order to provide meaningful exploration of complex data.
+In addition, we investigate NPR techniques which we believe are well suited for highlighting important details as well as simplifying less important details. Hence, we combine the optimization of visualization parameters and NPR techniques in order to provide meaningful exploration of complex data.
 
 In this research, we focus on the visualization of both static and time-varying volume data, particularly those scalar data acquired from CT, MRI and 4D MRI. Flow data which are often in the form of vector fields are not under the focus of our research.
 Furthermore, we investigate techniques which are applicable to consumer level devices rather than expensive dedicated visualization hardware. As such, this constrains the amount of memory and processing power available, and therefore fast techniques with low memory requirement are necessary.
