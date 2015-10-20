@@ -215,7 +215,7 @@ $ p(x)=\frac{n_{x}}{n} $, where $ n_{x} $ is the number of voxels with intensity
 %In Bordoloi and Shen's work \cite{bordoloi_view_2005}, 
 
 Bordoloi and Shen \cite{bordoloi_view_2005} described a noteworthiness factor to denote the significance of the voxel to the visualization.
-The noteworthiness should be high for the voxels which are desired to be seen, and vice versa. The noteworthiness of voxel $ j $ is defined as
+The noteworthiness should be high for the voxels which are desired to be seen, and vice versa . The noteworthiness of voxel $ j $ is defined as
 $ W_{j}=\alpha_{j}I_{j}=-\alpha_{j}logf_{j} $
 , where $ \alpha_{j} $ is the opacity of voxel $ j $ looked up from the transfer function, $ I_{j} $ is the information carried by voxel $ j $, which can be derived from the frequency of its histogram bin $ f_{j} $. -log $ f_{j} $ represents the amount of information associated with voxel $ j $.
 
@@ -361,7 +361,7 @@ e_{R}(i)=\int_{x \in [x_{i}, x_{i+1}]} w_{R}(x)s(x) dx
 \]
 where $ s(x)=-\alpha(x)p(x) \log p(x), x \in [0,1], i \in [0,n]$.
 
-Hence the energy function with distance factors for the region $ R $ of the transfer function can be defined as the variance of edge weights with the distance factors
+Hence, the energy function with distance factors for the region $ R $ of the transfer function can be defined as the variance of edge weights with the distance factors
 \[
 E_{R}=\sum_{i=0}^{n}(e_{R}(i)-\overline{e_{R}(i)})^{2}
 \]
@@ -379,18 +379,18 @@ Similarly, in order to use the energy function $ E_{R} $, we need to replace the
 %\[ V_{R}(i)=W_{R}(i)V(i), i \in [1,n] \]
 %To use this significance factor with the optimization algorithm described above, we simply need to replace $ V(i) $ with $ V_{R}(i) $ and compute the mean of significance factors accordingly in the energy function.
 
-The distance factors described in this section measure the dissimilarity between a selected region and a control point. Therefore the distance factor would be small if the region has an overall color similar to the color of the control point.
+The distance factors described in this section measure the dissimilarity between a selected region and a control point. Therefore, the distance factor would be small if the region has an overall color similar to the color of the control point.
 Since we are minimizing the energy function, which is the variance of the edge weights, reducing the distance factors of those control points, which are related to the selected region, will result in their opacity values being increased. As a result, the features (in this case, the intensity intervals) in the selected regions will be enhanced and other features will be de-emphasized in the rendered image.
 %The distances in $ D_{s}(R,i) $ are squared, therefore, it results in a weighting which is more biased towards the selected region, compared to the weighting based on non-squared distances.
 %It thus leads to further enhanced features with further weaken context in the rendered images.
-Since the distance is measured in the color space, the choice of colors for the control points affects the distance measured and thus affects the weighting function.
+Since the distance is measured in the color space, the choice of colors for the control points affects the measured distance and thus affects the weighting function.
 %For the purpose of generating satisfactory weighting, control points are better to be assigned colors which are dispersed in the color space.
 
 %In addition, other color spaces could be adopted in this approach. The CIE L*u*v* (abbreviated CIELUV) color space, which is a perceptually uniform representation of the color volume, is a potential alternative in terms of measuring difference. Because the CIE L*u*v* color space is perceptually uniform, it has the characteristic that equally distances in the color space correspond to equal perceptual differences, at least for reasonable small distances \cite{ebert_designing_2002}.
 
 \subsection{Adaptive Transfer Functions for Time-Varying Data Sets}
 In time-varying data sets, the data value ranges and distributions change among time-steps. A single global transfer function may not be able to adequately catch the details of the data set.
-Therefore we exploit the transfer function optimizer (as discussed in Section~\ref{sec:optimizer}) to locally refine the transfer function for each time-step in the data set.
+Therefore, we exploit the transfer function optimizer (as discussed in Section~\ref{sec:optimizer}) to locally refine the transfer function for each time-step in the data set.
 In this case, the user specifies a transfer function for a single time-step of the time-varying data set and using either of the two interaction methods (as discussed in Section~\ref{interaction_methods}) to specify priority intensity ranges.
 The transfer function designed for this time-step is taken as an input transfer function and optimised again based on the histogram of the next time-step. Subsequently, the output of next time-step is taken as input of the time-step after it and so forth.
 
@@ -438,7 +438,7 @@ In Figure~\ref{fig:tf_CT-Knee_spectrum_16_ramp}, only parts of the skeleton are 
 %The knee joint is completely occluded by the surrounding tissues.
 After optimization (Figure~\ref{fig:tf_CT-Knee_spectrum_16_ramp_balance}), the surrounding tissues become translucent, hence the skeleton is exposed and the knee joint is visible, while the overall context is preserved. We argue that in the absence of any previous assumptions on what the user is looking for, the global optimization provides a more balanced initial view before deeper exploration of the data.
 
-Although the continuous transfer function is useful in automatic transfer function generation, in typical volume visualization programs, users often prefer much more simplified transfer functions, e.g. a small number of control points such as in transfer functions with tent-like shapes. Figure~\ref{fig:tf_CT-Knee_spectrum_6} is the CT-Knee data set rendered with the transfer function. We show in Figure~\ref{fig:tf_CT-Knee_spectrum_6_balance_1000} that our optimization can also benefit such simpler transfer functions.
+Although the continuous transfer function is useful in automatic transfer function generation, in typical volume visualization programs, users often prefer much more simplified transfer functions, e.g. a few control points such as in transfer functions with tent-like shapes. Figure~\ref{fig:tf_CT-Knee_spectrum_6} is the CT-Knee data set rendered with the transfer function. We show in Figure~\ref{fig:tf_CT-Knee_spectrum_6_balance_1000} that our optimization can also benefit such simpler transfer functions.
 
 In practice we observed that the energy function usually converges to a small but non-zero value. As the number of control points increases, it takes more iterations for the optimization to achieve a stable state - a number of tent-like shapes ranging from 4 to 16 was found to be the most effective.
 Our approach is relatively lightweight, e.g. we observed that the optimization finished within one second on the CT-Knee and VisMale data sets with transfer functions consisting of 24 control points and maximum iteration count of 1000.
@@ -510,7 +510,7 @@ of tent-like shapes (a) Preliminary view of data set (b) A transfer function wit
 \subsection{Transfer Function Refinement with User-Selected Intensity Values}
 %optimising the transfer function to *improve* the exploration of volume data
 %In this paragraph, we discuss the results of optimisation with distance factors for user-selected intensity values.
-Figure~\ref{fig:CT-Knee_series} shows three images of a CT-Knee data set while different colors are selected for optimization. Since the colors of the transfer function are generated in HSV color space by varying the hue component. The difference of intensity values are mapped to the difference of hue in HSV color space. By clicking on the color palette (Figure~\ref{fig:CT-Knee_hue_selection}), the transfer function is instantly optimized for the corresponding intensity values.
+Figure~\ref{fig:CT-Knee_series} shows three images of a CT-Knee data set while different colors are selected for optimization. Since the colors of the transfer function are generated in HSV color space by varying the hue component, the difference of intensity values are mapped to the difference of hue in HSV color space. By clicking on the color palette (Figure~\ref{fig:CT-Knee_hue_selection}), the transfer function is instantly optimized for the corresponding intensity values.
 
 \begin{figure}
     \centering	
@@ -628,8 +628,8 @@ As shown in Figure~\ref{fig:VisMale_spectrum_4_clipplane_region_1000}, the skull
 %\end{figure}
 
 \subsection{Adaptive Transfer Functions for Time-Varying Data Sets}
-We demonstrate our approach on a turbulent vortex data set \cite{website:Ma_repository_2013}, which consists of 100 time-steps. Our optimizer propagates transfer functions for the time-varying data set in an adaptive way. Specifically, the transfer function of the previous time-step is taken as input to generate the transfer function for the next time-step.
-Therefore, the transfer functions are locally optimized for each time-step of the time-varying data set, but as the input transfer function comes from the immediate preceding timestep, the resulting transfer functions also exhibit reasonable temporal coherency assuming the dataset is also coherent.
+We demonstrate our approach on a turbulent vortex data set \cite{website:Ma_repository_2013}, which consists of 100 time-steps. Our optimizer adaptively propagates transfer functions for the time-varying data set. Specifically, the transfer function of the previous time-step is taken as input to generate the transfer function for the next time-step.
+Therefore, the transfer functions are locally optimized for each time-step of the time-varying data set, but as the input transfer function comes from the immediate preceding time-step, the resulting transfer functions also exhibit reasonable temporal coherency assuming the data set is also coherent.
 As the difference of intensity histograms among consecutive time-steps is hard to notice, only the images of the first time-step and a time-step in the middle of the data set are displayed here.
 Figure~\ref{fig:vortex_series_time_00} shows three images of the vortex data set at time-step 0 while optimized for the three colors chosen in the color palette in Figure~\ref{fig:vortex_hue_selection}.
 Figure~\ref{fig:vortex_series_time_50} displays the vortex data set at time-step 50 with the transfer functions optimized for the three chosen colors.
@@ -745,10 +745,10 @@ In this paper, the global optimization aims to alleviate excessive occlusion pro
 %We have implemented an optimization method for improving the exploration of volume data sets.
 In addition, we propose two interactive methods that extend on the optimization technique in order to enhance specific intensity ranges within the data as identified by the user.
 %The process is fast and intuitive and allows the user to provide customised views of the data to aid in exploration of the volume data set.
-This mechanism provides the ability for users to specify priority intensity ranges in an intuitive way, thus facilitating the exploration of both static and time-varying volume data sets.
+This mechanism provides the ability for users to intuitively specify priority intensity ranges, thus facilitating the exploration of both static and time-varying volume data sets.
 
 The main limitation of the approach is that variations to the transfer function are limited to opacity values, which limits, to some degree, the resulting variations in output. The initial choice of intensity ranges, number of control points and color mapping across the histograms can affect the quality of the final output and some prior knowledge of the data sets may be of benefit for optimal results. On the other hand the simple and straightforward techniques presented in this paper should be fully compatible with independent mechanisms for choosing optimal combinations of other visual parameters or indeed if the user wishes to combine these with more manual choices of parameters such as the color map.
 %We plan to investigate these areas in our future work.
-In addition, the transfer functions in our proposed system are always editable through the user interface. Users may benefit from the flexibility of further tweaking the intensity or opacity of the control points after the application of the automatic optimizations discussed in this paper.
+In addition, the transfer functions in our proposed system are always editable through the user interface. Users may benefit from the flexibility of further tweaking the intensity or opacity of the control points after the application of the automatic optimization discussed in this paper.
 
 %-------------------------------------------------------------------------
