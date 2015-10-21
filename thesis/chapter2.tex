@@ -190,7 +190,13 @@ Multidimensional transfer functions are very effective means to extract material
 There are other multi-dimensional transfer functions approaches, such as spatialized gradient-based transfer functions \cite{roettger_spatialized_2005}, distance-based transfer functions \cite{tappenbeck_distance-based_2006}, size-based transfer function \cite{correa_size-based_2008}, texture-based transfer functions \cite{caban_texture-based_2008} \cite{alper_selver_exploring_2015} and curvature based transfer functions \cite{kindlmann_curvature-based_2003}.
 Bruckner and Gr{\"o}ller introduced the concept of style transfer functions \cite{bruckner_style_2007}, which aim to produce more comprehensible images by using transfer functions that map input values to different NPR rendering styles.
 
-Another strategy is based on the selection of rendered images. This strategy lets the user select one or more favorite images to guide the further search of transfer functions \cite{marks_design_1997} \cite{wu_interactive_2007}. More recent approaches introduced visibility \cite{correa_visibility_2011} or measures derived from information theory \cite{haidacher_information-based_2008} \cite{bruckner_isosurface_2010} \cite{ruiz_automatic_2011} \cite{bramon_information_2013}. Despite the advances of these methods, transfer function design for volume rendering is still an open research problem.
+Another strategy is based on the selection of rendered images. This strategy lets the user select one or more favorite images to guide the further search of transfer functions \cite{marks_design_1997} \cite{wu_interactive_2007}. More recent approaches introduced visibility \cite{correa_visibility_2011} or measures derived from information theory \cite{haidacher_information-based_2008} \cite{bruckner_isosurface_2010} \cite{ruiz_automatic_2011} \cite{bramon_information_2013}. 
+
+Combine transfer functions
+\cite{zhou_transfer_2012}
+
+
+Despite the advances of these methods, transfer function design for volume rendering is still an open research problem.
 
 Moreover, transfer function specification in general is an unintuitive or even monotonous task for average users, because it is usually an iterative process of trial and error.
 For instance, there are skin and fat tissues around the brain, and their intensities lie in the same range as the brain. If we want to visualize the brain by setting the scalar value range of the brain to opaque, the surrounding skin and fat tissue will also become opaque. Then the brain will be occluded by the surrounding soft tissues which make it difficult to explore the brain structure.
@@ -232,6 +238,9 @@ Ip et al. \cite{ip_hierarchical_2012} described a multilevel segmentation techni
 %Geometric properties of isosurfaces
 %\cite{bruckner_isosurface_2010}
 %\paragraph{Clustering}
+
+Dimension reduction
+\cite{zhao_multi-dimensional_2010}
 
 \subsection{Transfer Functions for Time-Varying Volume Visualization}
 Although researchers have developed a great number of visualization techniques for time-invariant volume data, how to effectively explore and understand time-varying volume data remains a challenging problem. Finding good transfer functions for time-invariant volume data itself has proven difficult \cite{pfister_transfer_2001}.
@@ -332,12 +341,16 @@ Correa and Ma suggest to control visibility directly by computing visibility his
 \cite{correa_visibility_2011}
 \cite{wang_efficient_2011}
 
+\cite{wan_fast_2010}
+
 \begin{figure}
 	\centering
 	\includegraphics[width=1\linewidth]{images/wang_efficient_2011}
 	\caption{Visibility based opacity specification \cite{wang_efficient_2011}}
 	\label{fig:wang_efficient_2011}
 \end{figure}
+
+\cite{mak_visibility-aware_2011}
 
 \cite{bronstad_visibility_2012}
 
