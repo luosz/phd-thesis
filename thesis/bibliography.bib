@@ -3204,3 +3204,182 @@ The last contribution is a new manipulation tool designed for adding contextual 
 	keywords = {Computer Graphics, Computers Graphics Design, Visualization},
 	year={1994}
 }
+
+@thesis{kim_saliency-guided_2008,
+	title = {Saliency-guided Graphics and Visualization},
+	url = {http://drum.lib.umd.edu/handle/1903/8744},
+	abstract = {In this dissertation, we show how we can use principles of saliency to enhance depiction, manage visual attention, and increase interactivity for 3D graphics and visualization. Current mesh saliency approaches are inspired by low-level human visual cues, but have not yet been validated. Our eye-tracking-based user study shows that the current computational model of mesh saliency can well approximate human eye movements. Artists, illustrators, photographers, and cinematographers have long used the principles of contrast and composition to guide visual attention. We present a visual-saliency-based operator to draw visual attention to selected regions of interest. We have observed that it is more successful at eliciting viewer attention than the traditional Gaussian enhancement operator for visualizing both volume datasets and 3D meshes.
+
+Mesh saliency can be measured in various ways. The previous model of saliency computes saliency by identifying the uniqueness of curvature. Another way to identify uniqueness is to look for non-repeating structure in the middle of repeating structure. We have developed a system to detect repeating patterns in 3D point datasets. We introduce the idea of creating vertex and transformation streams that represent large point datasets via their interaction. This dramatically improves arithmetic intensity and addresses the input geometry bandwidth bottleneck for interactive 3D graphics applications.
+
+Fast-previewing of time-varing datasets is important for the purpose of summarization and abstraction. We compute the salient frames in molecular dynamics simulations through the subspace analysis of the protein's residue orientations. We first compute an affinity matrix for each frame i of the simulation based on the similarity of the orientation of the protein's backbone residues. Eigenanalysis of the affinity matrix gives us the subspace that best represents the conformation of the current frame i. We use this subspace to represent the frames ahead and behind frame i. The more accurately we can use the subspace of frame i to represent its neighbors, the less salient it is.
+
+Taken together, the tools and techniques developed in this dissertation are likely to provide the building blocks for the next generation visual analysis, reasoning, and discovery environments.},
+	institution = {University of Maryland, College Park},
+	type = {phdthesis},
+	author = {Kim, Youngmin},
+	urldate = {2015-10-21},
+	date = {2008-08-28},
+	langid = {american},
+	file = {Full Text PDF:C\:\\Users\\dell\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\727v3yux.default\\zotero\\storage\\VNTGM46Z\\Kim - 2008 - Saliency-guided Graphics and Visualization.pdf:application/pdf;Snapshot:C\:\\Users\\dell\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\727v3yux.default\\zotero\\storage\\MRDBZV6I\\8744.html:text/html}
+}
+
+@article{alper_selver_exploring_2015,
+	title = {Exploring Brushlet Based 3D Textures in Transfer Function Specification for Direct Volume Rendering of Abdominal Organs},
+	volume = {21},
+	issn = {1077-2626},
+	doi = {10.1109/TVCG.2014.2359462},
+	abstract = {Intuitive and differentiating domains for transfer function ({TF}) specification for direct volume rendering is an important research area for producing informative and useful 3D images. One of the emerging branches of this research is the texture based transfer functions. Although several studies in two, three, and four dimensional image processing show the importance of using texture information, these studies generally focus on segmentation. However, {TFs} can also be built effectively using appropriate texture information. To accomplish this, methods should be developed to collect wide variety of shape, orientation, and texture of biological tissues and organs. In this study, volumetric data (i.e., domain of a {TF}) is enhanced using brushlet expansion, which represents both low and high frequency textured structures at different quadrants in transform domain. Three methods (i.e., expert based manual, atlas and machine learning based automatic) are proposed for selection of the quadrants. Non-linear manipulation of the complex brushlet coefficients is also used prior to the tiling of selected quadrants and reconstruction of the volume. Applications to abdominal data sets acquired with {CT}, {MR}, and {PET} show that the proposed volume enhancement effectively improves the quality of 3D rendering using well-known {TF} specification techniques.},
+	pages = {174--187},
+	number = {2},
+	journaltitle = {{IEEE} Transactions on Visualization and Computer Graphics},
+	author = {Alper Selver, M.},
+	date = {2015-02},
+	keywords = {3D rendering quality, Abdominal Imaging, abdominal organs, atlas, biological organs, biomedical {MRI}, brushlet based 3D textures, brushlet expansion, Brushlets, complex brushlet coefficients, computerised tomography, {CT}, direct volume rendering, expert based manual, frequency-domain analysis, high frequency textured structures, Histograms, Image reconstruction, image texture, learning (artificial intelligence), low frequency textured structures, machine learning based automatic, medical image processing, {MR}, Noise, {PET}, Positron emission tomography, rendering (computer graphics), Texture Analysis, {TF} specification techniques, Transfer functions, transfer function specification, transform domain, Transforms, Volume rendering},
+	file = {IEEE Xplore Abstract Record:C\:\\Users\\dell\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\727v3yux.default\\zotero\\storage\\FDT7ZFRD\\articleDetails.html:text/html;IEEE Xplore Full Text PDF:C\:\\Users\\dell\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\727v3yux.default\\zotero\\storage\\D4F6PH8Q\\Alper Selver - 2015 - Exploring Brushlet Based 3D Textures in Transfer F.pdf:application/pdf}
+}
+
+@article{kroes_exposure_2012,
+	title = {Exposure Render: An Interactive Photo-Realistic Volume Rendering Framework},
+	volume = {7},
+	url = {http://dx.doi.org/10.1371/journal.pone.0038586},
+	doi = {10.1371/journal.pone.0038586},
+	shorttitle = {Exposure Render},
+	abstract = {The field of volume visualization has undergone rapid development during the past years, both due to advances in suitable computing hardware and due to the increasing availability of large volume datasets. Recent work has focused on increasing the visual realism in Direct Volume Rendering ({DVR}) by integrating a number of visually plausible but often effect-specific rendering techniques, for instance modeling of light occlusion and depth of field. Besides yielding more attractive renderings, especially the more realistic lighting has a positive effect on perceptual tasks. Although these new rendering techniques yield impressive results, they exhibit limitations in terms of their exibility and their performance. Monte Carlo ray tracing ({MCRT}), coupled with physically based light transport, is the de-facto standard for synthesizing highly realistic images in the graphics domain, although usually not from volumetric data. Due to the stochastic sampling of {MCRT} algorithms, numerous effects can be achieved in a relatively straight-forward fashion. For this reason, we have developed a practical framework that applies {MCRT} techniques also to direct volume rendering ({DVR}). With this work, we demonstrate that a host of realistic effects, including physically based lighting, can be simulated in a generic and flexible fashion, leading to interactive {DVR} with improved realism. In the hope that this improved approach to {DVR} will see more use in practice, we have made available our framework under a permissive open source license.},
+	pages = {e38586},
+	number = {7},
+	journaltitle = {{PLoS} {ONE}},
+	shortjournal = {{PLoS} {ONE}},
+	author = {Kroes, Thomas and Post, Frits H. and Botha, Charl P.},
+	urldate = {2015-10-21},
+	date = {2012-07-02},
+	file = {PLoS Full Text PDF:C\:\\Users\\dell\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\727v3yux.default\\zotero\\storage\\S4Q3U7FB\\Kroes et al. - 2012 - Exposure Render An Interactive Photo-Realistic Vo.pdf:application/pdf}
+}
+
+@inproceedings{jung_opacity-driven_2014,
+	title = {Opacity-driven volume clipping for slice of interest ({SOI}) visualisation of multi-modality {PET}-{CT} volumes},
+	doi = {10.1109/EMBC.2014.6945169},
+	abstract = {Multi-modality positron emission tomography and computed tomography ({PET}-{CT}) imaging depicts biological and physiological functions (from {PET}) within a higher resolution anatomical reference frame (from {CT}). The need to efficiently assimilate the information from these co-aligned volumes simultaneously has resulted in 3D visualisation methods that depict e.g., slice of interest ({SOI}) from {PET} combined with direct volume rendering ({DVR}) of {CT}. However because {DVR} renders the whole volume, regions of interests ({ROIs}) such as tumours that are embedded within the volume may be occluded from view. Volume clipping is typically used to remove occluding structures by `cutting away' parts of the volume; this involves tedious trail-and-error tweaking of the clipping attempts until a satisfied visualisation is made, thus restricting its application. Hence, we propose a new automated opacity-driven volume clipping method for {PET}-{CT} using {DVR}-{SOI} visualisation. Our method dynamically calculates the volume clipping depth by considering the opacity information of the {CT} voxels in front of the {PET} {SOI}, thereby ensuring that only the relevant anatomical information from the {CT} is visualised while not impairing the visibility of the {PET} {SOI}. We outline the improvements of our method when compared to conventional 2D and traditional {DVR}-{SOI} visualisations.},
+	eventtitle = {2014 36th Annual International Conference of the {IEEE} Engineering in Medicine and Biology Society ({EMBC})},
+	pages = {6714--6717},
+	booktitle = {2014 36th Annual International Conference of the {IEEE} Engineering in Medicine and Biology Society ({EMBC})},
+	author = {Jung, Younhyun and Kim, Jinman and Fulham, M. and Feng, D.D.},
+	date = {2014-08},
+	keywords = {automated opacity-driven volume clipping method, biological functions, Biomedical imaging, Computed tomography, computerised tomography, data visualization, direct volume rendering, {DVR}-slice-of-interest visualisation, higher resolution anatomical reference frame, Image resolution, medical image processing, multimodality {PET}-{CT} volumes, physiological functions, Positron emission tomography, region-of-interest visualisation, rendering (computer graphics), three-dimensional displays, tumours, Visualization},
+	file = {IEEE Xplore Abstract Record:C\:\\Users\\dell\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\727v3yux.default\\zotero\\storage\\VBHKTTWF\\articleDetails.html:text/html;IEEE Xplore Full Text PDF:C\:\\Users\\dell\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\727v3yux.default\\zotero\\storage\\75UIJE7M\\Jung et al. - 2014 - Opacity-driven volume clipping for slice of intere.pdf:application/pdf}
+}
+
+@inproceedings{jung_dual-modal_2012,
+	title = {Dual-modal visibility metrics for interactive {PET}-{CT} visualization},
+	doi = {10.1109/EMBC.2012.6346520},
+	abstract = {Dual-modal positron emission tomography and computed tomography ({PET}-{CT}) imaging enables the visualization of functional structures ({PET}) within human bodies in the spatial context of their anatomical ({CT}) counterparts, and is providing unprecedented capabilities in understanding diseases. However, the need to access and assimilate the two volumes simultaneously has raised new visualization challenges. In typical dual-modal visualization, the transfer functions for the two volumes are designed in isolation with the resulting volumes being fused. Unfortunately, such transfer function design fails to exploit the correlation that exists between the two volumes. In this study, we propose a dual-modal visualization method where we employ `visibility' metrics to provide interactive visual feedback regarding the occlusion caused by the first volume on the second volume and vice versa. We further introduce a region of interest ({ROI}) function that allows visibility analyses to be restricted to subsection of the volume. We demonstrate the new visualization enabled by our proposed dual-modal visibility metrics using clinical whole-body {PET}-{CT} studies of various diseases.},
+	eventtitle = {2012 Annual International Conference of the {IEEE} Engineering in Medicine and Biology Society ({EMBC})},
+	pages = {2696--2699},
+	booktitle = {2012 Annual International Conference of the {IEEE} Engineering in Medicine and Biology Society ({EMBC})},
+	author = {Jung, Younhyun and Kim, Jinman and Feng, D.D.},
+	date = {2012-08},
+	keywords = {Algorithms, clinical whole-body {PET}-{CT} property, Computed tomography, Computer Graphics, disease, diseases, dual-modal positron emission tomography, dual-modal visibility metrics, dual-modal visualization method, hidden feature removal, Histograms, Humans, interactive visual feedback, Lungs, medical image processing, Multimodal Imaging, occlusion, {PET}-{CT} visualization, Positron emission tomography, Positron-Emission Tomography, region of interest function, rendering (computer graphics), Tomography, X-Ray Computed, Transfer functions, visibility metrics, Visualization},
+	file = {IEEE Xplore Abstract Record:C\:\\Users\\dell\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\727v3yux.default\\zotero\\storage\\9IGKHNN7\\articleDetails.html:text/html;IEEE Xplore Full Text PDF:C\:\\Users\\dell\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\727v3yux.default\\zotero\\storage\\HGVTQ5WB\\Jung et al. - 2012 - Dual-modal visibility metrics for interactive PET-.pdf:application/pdf}
+}
+
+@inproceedings{wang_saliency-aware_2013,
+	title = {Saliency-Aware Volume Data Resizing by Surface Carving},
+	doi = {10.1109/CADGraphics.2013.90},
+	abstract = {We present a saliency-aware volume resizing operation called surface carving, which intelligently removes contextual voxels while preserving important features. By iteratively applying surface carving in all directions, we can create a volume of the desired size. For large volume data sets, a multilevel banded method is introduced to gracefully overcome the memory limit and speed up volume resizing. We compare our technique with traditionally cropping and scaling approaches and demonstrate the effectiveness and efficiency of our method with several volume data sets.},
+	eventtitle = {2013 International Conference on Computer-Aided Design and Computer Graphics ({CAD}/Graphics)},
+	pages = {447--448},
+	booktitle = {2013 International Conference on Computer-Aided Design and Computer Graphics ({CAD}/Graphics)},
+	author = {Wang, Qichao and Tao, Yubo and Lin, Hai},
+	date = {2013-11},
+	keywords = {Context, contextual voxels, data reduction, data visualisation, Educational institutions, Energy measurement, Manifolds, Memory management, multilevel banded method, Saliency Aware, saliency-aware volume data resizing, saliency-aware volume resizing operation, surface carving, Transfer functions, Volume Resizing, Weight measurement},
+	file = {IEEE Xplore Abstract Record:C\:\\Users\\dell\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\727v3yux.default\\zotero\\storage\\R8T8HECE\\articleDetails.html:text/html;IEEE Xplore Full Text PDF:C\:\\Users\\dell\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\727v3yux.default\\zotero\\storage\\WGG57C67\\Wang et al. - 2013 - Saliency-Aware Volume Data Resizing by Surface Car.pdf:application/pdf}
+}
+
+@article{shen_save:_2014,
+	title = {{SAVE}: saliency-assisted volume exploration},
+	issn = {1343-8875, 1875-8975},
+	url = {http://link.springer.com/article/10.1007/s12650-014-0237-y},
+	doi = {10.1007/s12650-014-0237-y},
+	shorttitle = {{SAVE}},
+	abstract = {Abstract Interactive visualization has become a valuable tool in visual exploration of scientific data. One prerequisite and fundamental issue is how to infer three-dimensional information through users’ two-dimensional input. Existing approaches commonly build on the hypothesis that user input is precise, which is sometimes invalid because of multiple causes like data noise, limited resolution of display devices and users’ casual input. In this paper, we reconsider some design choices of previous methods and propose an alternative effective algorithm for inferring interaction position in scientific data, especially volume data exploration. Our method automatically assists user interaction with the defined saliency. The presented saliency integrates data value, corresponding transfer function and user input. The result saliency implies remarkable regions of raw data as existing methods. Moreover, it reflects the areas of users’ concern. Thirdly, it eliminates the errors from data and device, helping users get the region they focus on. Various experiments have verified that our method can reasonably refine user interaction and effectively help users access interested features. Graphical Abstract},
+	pages = {1--11},
+	journaltitle = {Journal of Visualization},
+	shortjournal = {J Vis},
+	author = {Shen, Enya and Li, Sikun and Cai, Xun and Zeng, Liang and Wang, Wenke},
+	urldate = {2014-10-08},
+	date = {2014-10-04},
+	langid = {english},
+	keywords = {Classical Continuum Physics, Computer Imaging, Vision, Pattern Recognition and Graphics, Engineering Fluid Dynamics, Engineering Thermodynamics, Heat and Mass Transfer, Human perception, Interactive visualization, {WYSIWYG}},
+	file = {Full Text PDF:C\:\\Users\\dell\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\727v3yux.default\\zotero\\storage\\9B3SJZQC\\Shen et al. - 2014 - SAVE saliency-assisted volume exploration.pdf:application/pdf;Snapshot:C\:\\Users\\dell\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\727v3yux.default\\zotero\\storage\\MWH9K9DG\\10.html:text/html}
+}
+
+@inproceedings{liu_multivariate_2014,
+	title = {Multivariate volume visualization through dynamic projections},
+	doi = {10.1109/LDAV.2014.7013202},
+	abstract = {We propose a multivariate volume visualization framework that tightly couples dynamic projections with a high-dimensional transfer function design for interactive volume visualization. We assume that the complex, high-dimensional data in the attribute space can be well-represented through a collection of low-dimensional linear subspaces, and embed the data points in a variety of 2D views created as projections onto these subspaces. Through dynamic projections, we present animated transitions between different views to help the user navigate and explore the attribute space for effective transfer function design. Our framework not only provides a more intuitive understanding of the attribute space but also allows the design of the transfer function under multiple dynamic views, which is more flexible than being restricted to a single static view of the data. For large volumetric datasets, we maintain interactivity during the transfer function design via intelligent sampling and scalable clustering. Using examples in combustion and climate simulations, we demonstrate how our framework can be used to visualize interesting structures in the volumetric space.},
+	eventtitle = {2014 {IEEE} 4th Symposium on Large Data Analysis and Visualization ({LDAV})},
+	pages = {35--42},
+	booktitle = {2014 {IEEE} 4th Symposium on Large Data Analysis and Visualization ({LDAV})},
+	author = {Liu, Shusen and Wang, Bei and Thiagarajan, J.J. and Bremer, P.-T. and Pascucci, V.},
+	date = {2014-11},
+	keywords = {2D view, animated transitions, attribute space, computer animation, data visualisation, data visualization, dynamic projections, high-dimensional data, high-dimensional transfer function design, Hurricanes, hurricanes, Image color analysis, intelligent sampling, interactive systems, interactive volume visualization, low-dimensional linear subspaces, multiple dynamic view, multivariate volume visualization, Navigation, pattern clustering, principal component analysis, scalable clustering, Space exploration, Transfer functions},
+	file = {IEEE Xplore Abstract Record:C\:\\Users\\dell\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\727v3yux.default\\zotero\\storage\\4AHC5CTZ\\articleDetails.html:text/html;IEEE Xplore Full Text PDF:C\:\\Users\\dell\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\727v3yux.default\\zotero\\storage\\BKU67HJ9\\Liu et al. - 2014 - Multivariate volume visualization through dynamic .pdf:application/pdf}
+}
+
+@article{van_pelt_illustrative_2010,
+	title = {Illustrative Volume Visualization Using {GPU}-Based Particle Systems},
+	volume = {16},
+	issn = {1077-2626},
+	doi = {10.1109/TVCG.2010.32},
+	abstract = {Illustrative techniques are generally applied to produce stylized renderings. Various illustrative styles have been applied to volumetric data sets, producing clearer images and effectively conveying visual information. We adopt particle systems to produce user-configurable stylized renderings from the volume data, imitating traditional pen-and-ink drawings. In the following, we present an interactive {GPU}-based illustrative volume rendering framework, called {VolFliesGPU}. In this framework, isosurfaces are sampled by evenly distributed particle sets, delineating surface shape by illustrative styles. The appearance of these styles is based on locally-measured surface properties. For instance, hatches convey surface shape by orientation and shape characteristics are enhanced by color, mapped using a curvature-based transfer function. Hidden-surfaces are generally removed to avoid visual clutter, after that a combination of styles is applied per isosurface. Multiple surfaces and styles can be explored interactively, exploiting parallelism in both graphics hardware and particle systems. We achieve real-time interaction and prompt parametrization of the illustrative styles, using an intuitive {GPGPU} paradigm that delivers the computational power to drive our particle system and visualization algorithms.},
+	pages = {571 --582},
+	number = {4},
+	journaltitle = {{IEEE} Transactions on Visualization and Computer Graphics},
+	author = {van Pelt, R. and Vilanova, A. and van de Wetering, H.},
+	date = {2010-08},
+	keywords = {Algorithms, Biomedical imaging, Computed tomography, computer graphic equipment, Computer Graphics, Computer Simulation, consumer graphics hardware, coprocessors, curvature-based transfer function, data visualisation, data visualization, distributed particle sets, {GPU}-based illustrative volume rendering framework, {GPU}-based particle systems, Graphics, graphics hardware, Hardware, illustrative rendering, Image Interpretation, Computer-Assisted, Imaging, Three-Dimensional, Isosurfaces, Models, Theoretical, parallel processing, parallel processing., Particle Size, Particle systems, real time interaction, Real time systems, rendering (computer graphics), Rendering (computer graphics), Shape, traditional pen-and-ink drawings, User-Computer Interface, user-configurable stylized renderings, Visual information, {VolFliesGPU}, volumetric data sets, Volume visualization, volume visualization},
+	file = {IEEE Xplore Abstract Record:C\:\\Users\\dell\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\727v3yux.default\\zotero\\storage\\WE5C52UA\\articleDetails.html:text/html;IEEE Xplore Full Text PDF:C\:\\Users\\dell\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\727v3yux.default\\zotero\\storage\\3HNRUZBZ\\van Pelt et al. - 2010 - Illustrative Volume Visualization Using GPU-Based .pdf:application/pdf}
+}
+
+@inproceedings{de_moura_pinto_importance-aware_2010,
+	title = {Importance-Aware Composition for Illustrative Volume Rendering},
+	doi = {10.1109/SIBGRAPI.2010.26},
+	abstract = {Non-photorealistic volume rendering, often referred as volume illustration, augments typical visualization methods to selectively emphasize or de-emphasize structures within a volumetric dataset. Illustrative visualization techniques may affect not only the rendering style of specific portions of the dataset but also their visibility, ensuring that less important regions do not occlude more important ones. Cutaway views completely remove occluding, unimportant structures - possibly also removing valuable context information - while current solutions for smooth reduction of occlusion based on importance lack precise visibility control, simplicity and generality. We introduce a new front-to-back sample composition equation for direct volume rendering that directly takes into account a measure of sample importance. The proposed method allows smooth and precise importance-based visibility control in single-pass volume rendering, assuring visibility of important structures. We provide a mathematical justification of our composition equation and demonstrate its generality by presenting several illustrative effects, which were obtained by using our composition method and a set of importance measures calculated on the fly.},
+	eventtitle = {2010 23rd {SIBGRAPI} Conference on Graphics, Patterns and Images ({SIBGRAPI})},
+	pages = {134--141},
+	booktitle = {2010 23rd {SIBGRAPI} Conference on Graphics, Patterns and Images ({SIBGRAPI})},
+	author = {de Moura Pinto, F. and Freitas, C.M.D.S.},
+	date = {2010-08},
+	keywords = {color, composition, data visualisation, direct volume rendering, Equations, front-to-back sample composition equation, illustrative visualization techniques, illustrative volume rendering, importance, importance-aware composition, importance-based visibility control, Mathematical model, Modulation, rendering (computer graphics), Transfer functions, Visualization},
+	file = {IEEE Xplore Abstract Record:C\:\\Users\\dell\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\727v3yux.default\\zotero\\storage\\ME7Z6XJS\\abs_all.html:text/html;IEEE Xplore Full Text PDF:C\:\\Users\\dell\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\727v3yux.default\\zotero\\storage\\PCBFWZ5V\\de Moura Pinto and Freitas - 2010 - Importance-Aware Composition for Illustrative Volu.pdf:application/pdf}
+}
+
+@inproceedings{xia_visualization_2014,
+	title = {Visualization of heart from cryosection image based on a hybrid transfer function},
+	doi = {10.1109/ICALIP.2014.7009766},
+	abstract = {Visualizing segmented heart and integral chest clearly and precisely would be beneficial for pathology research, presurgical planning and clinical approach. In this paper we investigated the visualization of the segmented heart obtained by cryosection images from Visible Human Project. In addition, the result also visualizes the integral chest to represent the spatial characteristics of the heart in the chest. To provide a satisfactory visualization quality on the shape and boundary of heart, we first extract cardiac data from cryosection data. In volume rendering process, we design a new transfer function combining occlusion spectrum with gradient information to highlight heart without lost of chest data. By implementation of some popular transfer functions, comparison with these results shows that this hybrid transfer function we proposed visualizes cardiac outline and internal structures clearly. Through the display of chest, users can also observe heart's location characteristics.},
+	eventtitle = {2014 International Conference on Audio, Language and Image Processing ({ICALIP})},
+	pages = {106--109},
+	booktitle = {2014 International Conference on Audio, Language and Image Processing ({ICALIP})},
+	author = {Xia, Yong and Liu, Yixuan and Wang, Kuanquan},
+	date = {2014-07},
+	keywords = {bio-optics, cardiology, clinical approach, cryogenics, cryosection image, data visualization, gradient information, Heart, heart boundary, heart shape, heart visualization, hybrid transfer function, Image color analysis, image segmentation, integral chest visualization, occlusion spectrum, pathology research, presurgical planning, rendering (computer graphics), segmented heart, transfer function, Transfer functions, vectors, Visible Human project, Visualization, volume rendering process},
+	file = {IEEE Xplore Abstract Record:C\:\\Users\\dell\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\727v3yux.default\\zotero\\storage\\ZS3CG6BK\\articleDetails.html:text/html;IEEE Xplore Full Text PDF:C\:\\Users\\dell\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\727v3yux.default\\zotero\\storage\\D6NXRQUD\\Xia et al. - 2014 - Visualization of heart from cryosection image base.pdf:application/pdf}
+}
+
+@article{alper_selver_semiautomatic_2009,
+	title = {Semiautomatic Transfer Function Initialization for Abdominal Visualization Using Self-Generating Hierarchical Radial Basis Function Networks},
+	volume = {15},
+	issn = {1077-2626},
+	doi = {10.1109/TVCG.2008.198},
+	abstract = {Being a tool that assigns optical parameters used in interactive visualization, transfer functions ({TF}) have important effects on the quality of volume rendered medical images. Unfortunately, finding accurate {TFs} is a tedious and time consuming task because of the trade off between using extensive search spaces and fulfilling the physician's expectations with interactive data exploration tools and interfaces. By addressing this problem, we introduce a semi-automatic method for initial generation of {TFs}. The proposed method uses a self generating hierarchical radial basis function network to determine the lobes of a volume histogram stack ({VHS}) which is introduced as a new domain by aligning the histograms of slices of a image series. The new self generating hierarchical design strategy allows the recognition of suppressed lobes corresponding to suppressed tissues and representation of the overlapping regions which are parts of the lobes but can not be represented by the Gaussian bases in {VHS}. Moreover, approximation with a minimum set of basis functions provides the possibility of selecting and adjusting suitable units to optimize the {TF}. Applications on different {CT}/{MR} data sets show enhanced rendering quality and reduced optimization time in abdominal studies.},
+	pages = {395--409},
+	number = {3},
+	journaltitle = {{IEEE} Transactions on Visualization and Computer Graphics},
+	author = {Alper Selver, M. and Guzelis, C.},
+	date = {2009-05},
+	keywords = {Abdomen, Algorithms, Biomedical imaging, biomedical optical imaging, Computed tomography, Computer Graphics, Computer Simulation, data visualisation, data visualization, Gaussian base, Gaussian processes, Hierarchical radial basis function networks, Histograms, Humans, image recognition, Imaging, Three-Dimensional, interactive abdominal visualization, interactive systems, medical image, medical image processing, Models, Biological, multiscale analysis, Optical network units, Pattern Recognition, Automated, radial basis function networks, Radiographic Image Enhancement, Radiographic Image Interpretation, Computer-Assisted, Radiography, Abdominal, rendering (computer graphics), Reproducibility of Results, self-generating hierarchical radial basis function network, semiautomatic transfer function initialization, Sensitivity and Specificity, statistical analysis, suppressed lobe recognition, suppressed tissue recognition, Transfer function design, Transfer functions, User-Computer Interface, volume histogram stack, volume rendered medical image, Volume visualization},
+	file = {IEEE Xplore Abstract Record:C\:\\Users\\dell\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\727v3yux.default\\zotero\\storage\\JGM29SZ6\\articleDetails.html:text/html}
+}
+
+
