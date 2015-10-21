@@ -80,7 +80,6 @@ Illustration-based styles are believed to be effective in conveying information.
 
 \cite{svakhine_illustration-inspired_2009}
 \cite{van_pelt_illustrative_2010}
-\cite{de_moura_pinto_importance-aware_2010}
 
 \subsubsection{Painterly Stylization and Texture-Based Techniques \label{painterly_rendering}}
 Streamlines and textures are often used to represent flow directions \cite{urnessy_techniques_2004}. Interrante and Grosch \cite{interrante_strategies_1997} introduced volume LIC (Line Integral Convolution) to visualize 3D flow via volume textures. Figure~\ref{fig:interrante_strategies_1997} shows a volume texture generated with LIC. In this figure, vorticity magnitude is mapped to streamline color and the striations along the axial direction reveal the presence of periodic waves propagated down the jet axis. Since volume LIC is limited to steady flows, Liu and Moorhead \cite{liu_texture-based_2005} introduced a accelerated unsteady flow LIC algorithm to generate volume flow textures (Figure~\ref{fig:liu_texture-based_2005}). In their approach, magnitude-based transfer functions and cutting planes in volume rendering are employed to show the flow structure and the flow evolution.
@@ -277,6 +276,8 @@ Compared to flow visualization, which is a well established branch of scientific
 Illustrations for time-varying rendering could be divided into two categories, one is to enhance time-invariant features and the other is to enhance temporal features of time-varying volume data. The techniques in the first category focus on enhancing structural perception of volume models through the amplification of features and the addition of illumination effects \cite{rheingans_volume_2001} \cite{joshi_illustration-inspired_2005}. Examples of these techniques include boundary enhancement, oriented feature enhancement (silhouettes, fading, and sketch lines). The techniques in the second category focus on illustrating dynamic aspects such as movement of features. A few kinds of techniques have been proposed for this purpose. For example, there are speed lines, flow ribbons and strobe silhouettes, which are inspired by traditional animation \cite{joshi_illustration-inspired_2005} \cite{joshi_evaluation_2008} \cite{joshi_case_2009}; and there are extended silhouette and boundary enhancement domains, which are inspired by the techniques used by illustrators and other artists \cite{svakhine_illustration_2005}. Nevertheless, illustrations of temporal features of time-varying data requires more attention from researchers in the visualization community. The usefulness of illustrative approaches in time-varying volume visualization has not been studied as thoroughly as in other areas.
 
 \section{Automatd Transfer Function Design}
+\cite{kindlmann_semi-automatic_1998}
+
 Researches have proposed various approaches to automate the design of transfer functions and provide acceptable suggestions which can be further edited by users. However, the usefulness of a transfer function mostly depends on the underlying question the user wants to answer. Moreover, the users' tasks vary drastically from one domain to another. Therefore, most techniques work semi-automatically and very few techniques consider domain knowledge in the design process \cite{zudilova-seinstra_trends_2008}.
 
 He et al. \cite{he_generation_1996} addressed transfer function exploration as a parameter optimization problem and presented an approach to assist the user in exploring appropriate transfer functions using stochastic search techniques starting from an initial population.
@@ -292,6 +293,12 @@ Rezk-Salama et al. \cite{rezk-salama_automatic_2000} presented high-level semant
 
 Wu and Qu \cite{wu_interactive_2007} developed a method that uses editing operations and stochastic search of the transfer function parameters to maximize the similarity between volume-rendered images given by the user.
 
+\cite{wang_efficient_volume_2011}
+
+\cite{zhou_automatic_2009}
+
+\cite{marchesin_per-pixel_2010}
+
 \cite{peng_optimal_2011}
 \cite{lathen_automatic_2012}
 
@@ -304,6 +311,7 @@ Wu and Qu \cite{wu_interactive_2007} developed a method that uses editing operat
 
 \section{Visibility Histograms and Visibility-Driven Transfer Functions}
 \cite{jung_dual-modal_2012}
+\cite{schlegel_visibility-difference_2013}
 
 The visibility of structures revealed in volume rendering is more of a consequence of adjusting transfer functions than a design parameter \cite{preim_visual_2013}. In contrast, Correa and Ma \cite{correa_visibility-driven_2009} suggested to use visibility to guide transfer function design for both manual and automatic searches.
 
@@ -338,6 +346,7 @@ Correa and Ma suggest to control visibility directly by computing visibility his
 \cite{ruiz_automatic_2011}
 \cite{bramon_information_2013}
 
+\cite{tang_depth-based_2011}
 \cite{zhou_opacity_2014}
 
 \section{Multivariate Volume Visualization}
