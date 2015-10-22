@@ -190,12 +190,7 @@ Multidimensional transfer functions are very effective means to extract material
 There are other multi-dimensional transfer functions approaches, such as spatialized gradient-based transfer functions \cite{roettger_spatialized_2005}, distance-based transfer functions \cite{tappenbeck_distance-based_2006}, size-based transfer function \cite{correa_size-based_2008}, texture-based transfer functions \cite{caban_texture-based_2008} \cite{alper_selver_exploring_2015} and curvature based transfer functions \cite{kindlmann_curvature-based_2003}.
 Bruckner and Gr{\"o}ller introduced the concept of style transfer functions \cite{bruckner_style_2007}, which aim to produce more comprehensible images by using transfer functions that map input values to different NPR rendering styles.
 
-Another strategy is based on the selection of rendered images. This strategy lets the user select one or more favorite images to guide the further search of transfer functions \cite{marks_design_1997} \cite{wu_interactive_2007}. More recent approaches introduced visibility \cite{correa_visibility_2011} or measures derived from information theory \cite{haidacher_information-based_2008} \cite{bruckner_isosurface_2010} \cite{ruiz_automatic_2011} \cite{bramon_information_2013}. 
-
-Combine transfer functions
-\cite{zhou_transfer_2012}
-
-
+Another strategy is based on the selection of rendered images. This strategy lets the user select one or more favorite images to guide the further search of transfer functions \cite{marks_design_1997} \cite{wu_interactive_2007}. More recent approaches introduced visibility \cite{correa_visibility_2011} or measures derived from information theory \cite{haidacher_information-based_2008} \cite{bruckner_isosurface_2010} \cite{ruiz_automatic_2011} \cite{bramon_information_2013}. Zhou et al. \cite{zhou_transfer_2012} studied the combination of 2D transfer functions with occlusion and size-based transfer functions.
 Despite the advances of these methods, transfer function design for volume rendering is still an open research problem.
 
 Moreover, transfer function specification in general is an unintuitive or even monotonous task for average users, because it is usually an iterative process of trial and error.
@@ -232,15 +227,7 @@ Kindlmann et al. \cite{kindlmann_curvature-based_2003} proposed curvature-based 
 Maciejewski et al. proposed a non-parametric method to generate transfer function \cite{maciejewski_structuring_2009}.
 In their later work \cite{maciejewski_abstracting_2013}, instead of using the attributes, metrics representing relationships and correlations in the underlying data were used in the method.
 Wang et al. introduced clustering of 2D density plots in their automating transfer function \cite{wang_automating_2012}.
-Ip et al. \cite{ip_hierarchical_2012} described a multilevel segmentation technique that mimics user exploration behaviors by recursively segmenting intensity-gradient histograms.
-
-%\paragraph{Isosurface Statistics}
-%Geometric properties of isosurfaces
-%\cite{bruckner_isosurface_2010}
-%\paragraph{Clustering}
-
-Dimension reduction
-\cite{zhao_multi-dimensional_2010}
+Ip et al. \cite{ip_hierarchical_2012} described a multilevel segmentation technique that mimics user exploration behaviors by recursively segmenting intensity-gradient histograms. The use of parallel coordinates is introduced to assist the design of transfer functions in multidimensional parameter spaces \cite{zhao_multi-dimensional_2010} \cite{guo_multi-dimensional_2011}.
 
 \subsection{Transfer Functions for Time-Varying Volume Visualization}
 Although researchers have developed a great number of visualization techniques for time-invariant volume data, how to effectively explore and understand time-varying volume data remains a challenging problem. Finding good transfer functions for time-invariant volume data itself has proven difficult \cite{pfister_transfer_2001}.
@@ -261,22 +248,16 @@ Akiba et al. \cite{akiba_simultaneous_2006} introduced the time histogram which 
 A time-varying volume data set can be considered as a 3D array where each voxel contains a time-activity curve (TAC). Fang et al. \cite{fang_visualization_2007} described an approach for classifying time-varying volume data based on the temporal behavior of voxels and three different similarity measures that can be used in their approach.
 Woording and Shen \cite{woodring_multiscale_2009} presented a method that filters time-varying volume data into several time scales using wavelet transform and classifies the voxels by clustering the entire time series by time scale.
 Lee and Shen \cite{lee_visualizing_2009} proposed a method for classifying time-varying features using time activity curves with the dynamic time warping distance metric.
-
-Woodring et al. \cite{woodring_semi-automatic_2009} utilized a method called temporal clustering and sequencing to find dynamic features in value space and create a corresponding transfer function.
+Woodring et al. \cite{woodring_semi-automatic_2009} utilized a method called temporal clustering and sequencing to find dynamic features in value space and create dynamic transfer functions through time-series analysis.
+Ward and Guo \cite{ward_visual_2011} presented a method for visualizing time-series data that reveals a wide variety of features in the data, by mapping short sub-sequences of the time-varying volume data into a high-dimensional shape space, and then performing a dimension reduction process to allow projection into screen space.
+Gu and Wang \cite{gu_transgraph:_2011} proposed an approach to organize a time-varying data set into a hierarchical graph, which captures the transition relationships in the data set. This approach assists the user in comprehending the correspondence between volume regions over time and allows interaction of the graph through brushing and liking.
 
 \begin{figure}
 \centering
 \includegraphics[width=1\linewidth]{images/woodring_semi-automatic_2009}
-\caption{\cite{woodring_semi-automatic_2009}}
+\caption{A single static transfer function cannot capture dynamic features. In the two images at the top, the features appear to vanish over time. On the other hand, the features are visible over time if a dynamic transfer function is used (in the two images at the bottom) \cite{woodring_semi-automatic_2009}.}
 \label{fig:woodring_semi-automatic_2009}
 \end{figure}
-
-
-\cite{wang_importance-driven_2008}
-
-\cite{ward_visual_2011}
-
-\cite{jang_time-varying_2012}
 
 \subsubsection{Visualising Time-Varying Volume Data with NPR}
 An essential problem in time-varying volume visualization is to visualize temporal variation and analysis of features. Traditionally, time-varying data has been visualized as snapshots of individual time steps or animation of snapshots of a sequence of time steps. These techniques are effective in making time-varying data understandable. However, they struggle when the complexity of data sets increased dramatically in recent years \cite{brambilla_illustrative_2012}.
@@ -377,7 +358,11 @@ Information theory \cite{shannon_mathematical_1948} was originally introduced to
 In recent years, there is an emerging direction towards using the principles of information theory to solve challenging problems in scientific visualization. \cite{wang_information_2011}. Chen and J{\"a}nicke \cite{chen_information-theoretic_2010} presented an information-theoretic framework for visualization. They examined the theoretical aspect of information and its relation to data communication and interpret different stages of the visualization pipeline using the taxonomy of information.
 
 Haidacher et at. \cite{haidacher_information-based_2008} proposed an approach of transfer function specification for multi-modal data visualization. They considered the joint occurrence of multiple features from one or multiple variables in order to separate statistical features that only occur in a single variable from those that are present in both.
+
+Want et al. \cite{wang_importance-driven_2008} introduced an approach to characterized the dynamic temporal behaviors of spatial blocks using importance curves, which are based on conditional entropy. Clustering is performed on the importance curves of all the spatial blocks to classify the underlying volume data set.
+
 Ruiz et al. \cite{ruiz_automatic_2011} presented an approach to generate transfer functions from a target distribution provided by the user. Their approach is based on a communication channel between a set of viewpoints and a set of bins of a volume data set, and supports both 1D and 2D transfer functions including the gradient information.
+
 Bramon et al. \cite{bramon_information_2013} proposed an automatic method to visualize multi-modal data by combining several information-theoretic strategies to define colors and opacity values of the multi-modal transfer function.
 They set an information channel between two registered input data sets to define the fused color and minimize the informational divergence between the visibility distribution captured by a set of viewpoints and a target distribution proposed by the user to obtain the opacity.
 
