@@ -191,7 +191,15 @@ There are other multi-dimensional transfer functions approaches, such as spatial
 Bruckner and Gr{\"o}ller introduced the concept of style transfer functions \cite{bruckner_style_2007}, which aim to produce more comprehensible images by using transfer functions that map input values to different NPR rendering styles.
 
 Another strategy is based on the selection of rendered images. This strategy lets the user select one or more favorite images to guide the further search of transfer functions \cite{marks_design_1997} \cite{wu_interactive_2007}. More recent approaches introduced visibility \cite{correa_visibility_2011} or measures derived from information theory \cite{haidacher_information-based_2008} \cite{bruckner_isosurface_2010} \cite{ruiz_automatic_2011} \cite{bramon_information_2013}. Zhou et al. \cite{zhou_transfer_2012} studied the combination of 2D transfer functions with occlusion and size-based transfer functions.
+
 Despite the advances of these methods, transfer function design for volume rendering is still an open research problem.
+The creation of transfer functions needs to be simplified and the functionality of transfer functions needs to be extended in order to realize the full potential of volume rendering. For instance, more sophisticated transfer functions are required in medical imaging, in order to address various domain specific visualization problems \cite{lindholm_spatial_2010}.
+
+The transfer function concept and design process is still an active research topic as it is generally considered that transfer function creation needs to be simplified and at the same time extended with more functionality in order to realize the full potential of volume rendering. The medical field in particular requires more sophisticated transfer function solutions to express a variety of domain specific knowledge in proper terms.
+
+Transfer function creation needs to be simplified and the functionality needs to be extended i order to realize the full potential of volume rendering.
+Transfer function design is still an active research topic.
+
 
 Moreover, transfer function specification in general is an unintuitive or even monotonous task for average users, because it is usually an iterative process of trial and error.
 For instance, there are skin and fat tissues around the brain, and their intensities lie in the same range as the brain. If we want to visualize the brain by setting the scalar value range of the brain to opaque, the surrounding skin and fat tissue will also become opaque. Then the brain will be occluded by the surrounding soft tissues which make it difficult to explore the brain structure.
@@ -402,6 +410,7 @@ There are a number of different evaluation strategies, such as measuring user pe
 Joshi and Rheingans \cite{joshi_evaluation_2008} evaluated the effective of their illustrative techniques by measuring user accuracy, time required to perform a task and user confidence.
 
 \cite{lu_volume_2010}
+\cite{kersten-oertel_evaluation_2014}
 
 \section{Feature Tracking}
 Feature extraction and tracking is an established technique for the analysis of time-varying data in various research fields, such as video analysis, computer vision and flow visualization \cite{muelder_interactive_2009}.
