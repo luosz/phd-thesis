@@ -63,7 +63,7 @@ Volume visualization was initially used in medical imaging, and later became an 
 
 %A volume renderer maps every voxel (an element in volume data) to an opacity and a color with a transfer function, which is a piecewise linear function or an arbitrary table. Once converted to an RGBA value, the composed RGBA result is projected on corresponding pixel of the frame buffer with certain volume rendering techniques.
 
-\subsection{Non-Photorealistic Rendering (NPR)}
+\subsubsection{Non-Photorealistic Rendering (NPR)}
 In contrast to traditional computer graphics, which has focused largely on creating photorealistic images of synthetic objects, non-photorealistic rendering (NPR) is an area of computer graphics that focuses on creating abstract images with a wide variety of expressive styles \cite{haeberli_paint_1990}. NPR has been an active research area for a long time. A number of approaches have been proposed to produce convincing artistic styles for both off-line and on-line rendering. For example, there are various types of commonly used styles including painterly rendering, edge stylization, sketch-shading, cel-shading, hatching.
 % Although there are plenty of works on non-photorealistic rendering, most of them focus on how to imitate artistic styles with emphasis on aesthetic aspects.
 %Researchers in modelling and rendering in computer graphics have focused for many years on producing photorealistic images, which are indistinguishable from photographs captured from real-world scene. Nevertheless, there are other compelling methods of visual discourse such as paintings, sketches and cel animation.
@@ -71,54 +71,62 @@ In certain situations, non-photorealistic renderings are considered more effecti
 
 %As a basic part of most approaches to non-photorealistic volume rendering, contours delineate object shape and clarify sites of occlusion by emphasizing the transition between front-face and back-facing surface locations.
 %Kindlmann et al. \cite{kindlmann_curvature-based_2003} proposed curvature-based transfer function to enhance the expressive and informative power of volume rendering. In their approach, volume data is rendered with contours to exhibit constant thickness in image space.
-\cite{kroes_exposure_2012}
 
 \subsubsection{Illustrative Volume Visualization}
 NPR models were adopted in visualization and hence formed the field illustrative visualization.
-Illustrative visualization, as a novel category of visualization, aims at visualizing data in a clear and understandable way using techniques from traditional hand-crafted illustrations. Illustrative visualization has been successful employed in medical visualization \cite{svakhine_illustration_2005} \cite{viola_importance-driven_2005}.
+Illustrative visualization, as a novel category of visualization, aims at visualizing data in a clear and understandable way using techniques from traditional hand-crafted illustrations.
+Illustrative visualization has been successful employed in medical visualization \cite{svakhine_illustration_2005} \cite{viola_importance-driven_2005} \cite{svakhine_illustration-inspired_2009}.
+
 Illustration-based styles are believed to be effective in conveying information. Researchers in the field of computer graphics and visualization have applied illustration-based styles in order to produce effective and expressive visualization. Stompel et al. \cite{stompel_visualization_2002} introduced feature enhancement techniques, such as strokes based, temporal domain enhancement, to enhance time-varying data obtained from the field of computational fluid dynamics (CFD).
 
-\cite{svakhine_illustration-inspired_2009}
-\cite{van_pelt_illustrative_2010}
+Inspired by techniques from illustration, various approaches are proposed to reveal different level of details in volume data sets.
+Two level rendering \cite{hauser_two-level_2001} \cite{hadwiger_high-quality_2003} \cite{corcoran_perceptual_2010} is a method of merging several volume rendering techniques into a single rendering. This method is useful when inner structures needs to be rendered along with semitransparent outer parts.
+Focus and context \cite{wang_magic_2005} \cite{bruckner_illustrative_2006} \cite{chen_intelligent_2008} provides a means of revealing the interior of a volume data set in a feature-driven way and also retaining context information.
+Another alternative is the cutaway technique \cite{burns_feature_2007} \cite{sigg_intelligent_2012}, which makes inner structures clearly visible along with its spatial relation to the surrounding material.
 
-\subsubsection{Painterly Stylization and Texture-Based Techniques \label{painterly_rendering}}
-Streamlines and textures are often used to represent flow directions \cite{urnessy_techniques_2004}. Interrante and Grosch \cite{interrante_strategies_1997} introduced volume LIC (Line Integral Convolution) to visualize 3D flow via volume textures. Figure~\ref{fig:interrante_strategies_1997} shows a volume texture generated with LIC. In this figure, vorticity magnitude is mapped to streamline color and the striations along the axial direction reveal the presence of periodic waves propagated down the jet axis. Since volume LIC is limited to steady flows, Liu and Moorhead \cite{liu_texture-based_2005} introduced a accelerated unsteady flow LIC algorithm to generate volume flow textures (Figure~\ref{fig:liu_texture-based_2005}). In their approach, magnitude-based transfer functions and cutting planes in volume rendering are employed to show the flow structure and the flow evolution.
+\subsubsection{Other NPR Techniques in Volume Visuailzation \label{painterly_rendering}}
+Streamlines and textures are often used to represent flow directions \cite{urnessy_techniques_2004}. Interrante and Grosch \cite{interrante_strategies_1997} introduced volume LIC (Line Integral Convolution) to visualize 3D flow via volume textures.
+%Figure~\ref{fig:interrante_strategies_1997} shows a volume texture generated with LIC. In this figure, vorticity magnitude is mapped to streamline color and the striations along the axial direction reveal the presence of periodic waves propagated down the jet axis.
+Since volume LIC is limited to steady flows, Liu and Moorhead \cite{liu_texture-based_2005} introduced an accelerated unsteady flow LIC algorithm to generate volume flow textures.
+% (Figure~\ref{fig:liu_texture-based_2005}).
+In their approach, magnitude-based transfer functions and cutting planes in volume rendering are employed to show the flow structure and the flow evolution.
 
-Artists recognize patterns and flows in a target scene and express them through brush strokes. They use stroke orientation corresponding to the actual movement \cite{lee_motion_2009}. This type of techniques from master painting and human perception are used to visualize multidimensional data sets \cite{healey_perceptually_2004}. Tateosian et al. \cite{tateosian_engaging_2007} use the color, orientation and size of strokes to represent the magnitude, flow orientation and pressure of a 2D slice of a simulated supernova collapse (Figure~\ref{fig:tateosian_engaging_2007}). Lee et at. \cite{lee_motion_2009} presented a painterly rendering technique based on the motion information (magnitude, direction, standard deviation) extracted from a image sequences of the same view.
+Artists recognize patterns and flows in a target scene and express them through brush strokes. They use stroke orientation corresponding to the actual movement \cite{lee_motion_2009}. This type of techniques from master painting and human perception are used to visualize multidimensional data sets \cite{healey_perceptually_2004}. Tateosian et al. \cite{tateosian_engaging_2007} use the color, orientation and size of strokes to represent the magnitude, flow orientation and pressure of a 2D slice of a simulated supernova collapse.
+% (Figure~\ref{fig:tateosian_engaging_2007}).
+Lee et at. \cite{lee_motion_2009} presented a painterly rendering technique based on the motion information (magnitude, direction, standard deviation) extracted from an image sequences of the same view.
+Besides stroke-based techniques and texture-based techniques, particle-based techniques \cite{busking_particle-based_2007} \cite{van_pelt_illustrative_2010} were also proposed to produce user-configurable stylized renderings from volume data sets, imitating traditional pen and ink drawings.
 
-\begin{figure}
-	\centering
-	\begin{minipage}{.49\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{images/interrante_strategies_1997.png}
-		\caption{Streamlines are represented as a volume texture, which provides an intuitive impression of the 3D flow. \cite{interrante_strategies_1997}}
-		\label{fig:interrante_strategies_1997}
-	\end{minipage}~
-	\begin{minipage}{.49\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{images/liu_texture-based_2005.png}
-		\caption{Streamlines are represented as a volume texture, which provides an intuitive impression of the 3D flow. \cite{liu_texture-based_2005}}
-		\label{fig:liu_texture-based_2005}
-	\end{minipage}
-\end{figure}
-
-\begin{figure}
-	\centering
-	\begin{minipage}{.49\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{images/tateosian_engaging_2007.png}
-		\caption{A visual complexity style visualization of flow patterns in a 2D slice though a simulated supernova collapse, using the mappings: flow orientation $ \rightarrow $ stroke orientation, magnitude $ \rightarrow $ order and pressure $ \rightarrow $ stroke size \cite{tateosian_engaging_2007}.}
-		\label{fig:tateosian_engaging_2007}
-	\end{minipage}~
-	\begin{minipage}{.49\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{images/lee_motion_2009.png}
-		\caption{The motion directions determine stroke orientations in the regions with significant motions, and image gradients determine stroke orientations where little motion is observed \cite{lee_motion_2009}.}
-		\label{fig:lee_motion_2009}
-	\end{minipage}
-\end{figure}
-
-
+%\begin{figure}
+%	\centering
+%	\begin{minipage}{.49\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{images/interrante_strategies_1997.png}
+%		\caption{Streamlines are represented as a volume texture, which provides an intuitive impression of the 3D flow. \cite{interrante_strategies_1997}}
+%		\label{fig:interrante_strategies_1997}
+%	\end{minipage}~
+%	\begin{minipage}{.49\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{images/liu_texture-based_2005.png}
+%		\caption{Streamlines are represented as a volume texture, which provides an intuitive impression of the 3D flow. \cite{liu_texture-based_2005}}
+%		\label{fig:liu_texture-based_2005}
+%	\end{minipage}
+%\end{figure}
+%
+%\begin{figure}
+%	\centering
+%	\begin{minipage}{.49\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{images/tateosian_engaging_2007.png}
+%		\caption{A visual complexity style visualization of flow patterns in a 2D slice though a simulated supernova collapse, using the mappings: flow orientation $ \rightarrow $ stroke orientation, magnitude $ \rightarrow $ order and pressure $ \rightarrow $ stroke size \cite{tateosian_engaging_2007}.}
+%		\label{fig:tateosian_engaging_2007}
+%	\end{minipage}~
+%	\begin{minipage}{.49\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{images/lee_motion_2009.png}
+%		\caption{The motion directions determine stroke orientations in the regions with significant motions, and image gradients determine stroke orientations where little motion is observed \cite{lee_motion_2009}.}
+%		\label{fig:lee_motion_2009}
+%	\end{minipage}
+%\end{figure}
 
 \section{Transfer Functions \label{literature_of_transfer_function}}
 Volume data are 3D entities with information inside them, but the data might not consist of surfaces and edges.
@@ -195,12 +203,6 @@ Another strategy is based on the selection of rendered images. This strategy let
 Despite the advances of these methods, transfer function design for volume rendering is still an open research problem.
 The creation of transfer functions needs to be simplified and the functionality of transfer functions needs to be extended in order to realize the full potential of volume rendering. For instance, more sophisticated transfer functions are required in medical imaging, in order to address various domain specific visualization problems \cite{lindholm_spatial_2010}.
 
-The transfer function concept and design process is still an active research topic as it is generally considered that transfer function creation needs to be simplified and at the same time extended with more functionality in order to realize the full potential of volume rendering. The medical field in particular requires more sophisticated transfer function solutions to express a variety of domain specific knowledge in proper terms.
-
-Transfer function creation needs to be simplified and the functionality needs to be extended i order to realize the full potential of volume rendering.
-Transfer function design is still an active research topic.
-
-
 Moreover, transfer function specification in general is an unintuitive or even monotonous task for average users, because it is usually an iterative process of trial and error.
 For instance, there are skin and fat tissues around the brain, and their intensities lie in the same range as the brain. If we want to visualize the brain by setting the scalar value range of the brain to opaque, the surrounding skin and fat tissue will also become opaque. Then the brain will be occluded by the surrounding soft tissues which make it difficult to explore the brain structure.
 Common approaches to this problem are to introduce explicit segmentation of structures of interest before the volume rendering process \cite{rezk-salama_opacity_2006}. In fact, the process of applying the transfer function could be interpreted as a segmentation problem.
@@ -245,6 +247,8 @@ Finding good transfer functions for time-varying volume data is more difficult t
 
 Coherence is an important issue of transfer function design for time-varying volume data. Ideally, a single transfer function should be used for the whole time-varying data set in order to obtain coherent visualization. More than one color or opacity map can be misleading or physically meaningless, because the transition from one transfer function to another may cause sudden changes in the resulting images. However, this practice is not always applicable to general time-varying data sets.
 
+Volume data sets are inherently 3D representations. Automated analysis methods, such as temporal trends or statistical aggregates e.g. mean values and standard deviations, are often applied in order to abstract dynamic characteristics of the data sets \cite{kehrer_visualization_2013}.
+
 %Jankun-Kelly and Ma \cite{jankun-kelly_study_2001} examined how to combine transfer functions for different time-steps to generate a coherent transfer function.
 Jankun-Kelly and Ma \cite{jankun-kelly_study_2001} examined how to combine transfer functions for different time-steps to generate a coherent transfer function.
 Woodring et al. \cite{woodring_high_2003} considered time-varying volume data as four-dimensional data field and provided a user interface to specify hyperplanes in 4D.
@@ -274,14 +278,11 @@ Compared to flow visualization, which is a well established branch of scientific
 Illustrations for time-varying rendering could be divided into two categories, one is to enhance time-invariant features and the other is to enhance temporal features of time-varying volume data. The techniques in the first category focus on enhancing structural perception of volume models through the amplification of features and the addition of illumination effects \cite{rheingans_volume_2001} \cite{joshi_illustration-inspired_2005}. Examples of these techniques include boundary enhancement, oriented feature enhancement (silhouettes, fading, and sketch lines). The techniques in the second category focus on illustrating dynamic aspects such as movement of features. A few kinds of techniques have been proposed for this purpose. For example, there are speed lines, flow ribbons and strobe silhouettes, which are inspired by traditional animation \cite{joshi_illustration-inspired_2005} \cite{joshi_evaluation_2008} \cite{joshi_case_2009}; and there are extended silhouette and boundary enhancement domains, which are inspired by the techniques used by illustrators and other artists \cite{svakhine_illustration_2005}. Nevertheless, illustrations of temporal features of time-varying data requires more attention from researchers in the visualization community. The usefulness of illustrative approaches in time-varying volume visualization has not been studied as thoroughly as in other areas.
 
 \section{Automatd Transfer Function Design}
-\cite{kindlmann_semi-automatic_1998}
-
 Researches have proposed various approaches to automate the design of transfer functions and provide acceptable suggestions which can be further edited by users. However, the usefulness of a transfer function mostly depends on the underlying question the user wants to answer. Moreover, the users' tasks vary drastically from one domain to another. Therefore, most techniques work semi-automatically and very few techniques consider domain knowledge in the design process \cite{zudilova-seinstra_trends_2008}.
 
 He et al. \cite{he_generation_1996} addressed transfer function exploration as a parameter optimization problem and presented an approach to assist the user in exploring appropriate transfer functions using stochastic search techniques starting from an initial population.
 Another strategy is based on the selection of rendered images. This strategy lets the user select one or more favorite images to guide the further search of transfer functions \cite{marks_design_1997}.
 Rezk-Salama et al. \cite{rezk-salama_automatic_2000} presented high-level semantics to abstract parametric models of transfer functions in order to automatically assign transfer function templates.
-
 
 \cite{tzeng_novel_2003}
 \cite{tzeng_cluster-space_2004}
