@@ -254,7 +254,7 @@ Volume data sets are inherently 3D representations. Automated analysis methods, 
 Jankun-Kelly and Ma \cite{jankun-kelly_study_2001} examined how to combine transfer functions for different time-steps to generate a coherent transfer function.
 Woodring et al. \cite{woodring_high_2003} considered time-varying volume data as four-dimensional data field and provided a user interface to specify hyperplanes in 4D.
 Woodring and Shen \cite{woodring_chronovolumes_2003} introduced an alternative approach to render multiple time-steps in a sequence with different colors into a single image. This approach provides the context of surrounding time steps but coherence of color among time-steps is hard to maintain.
-%Tikhonova et al. \cite{tikhonova_exploratory_2010} presented an exploratory approach based on a compact representation of each time step of the dataset in the form of ray attenuation functions. Ray attenuation functions are subsequently used for transfer function generation.
+
 Tikhonova et al. \cite{tikhonova_exploratory_2010} presented an exploratory approach based on a compact representation of each time step of the dataset in the form of ray attenuation functions. Ray attenuation functions are subsequently used for transfer function generation.
 Akiba et al. \cite{akiba_simultaneous_2006} introduced the time histogram which allows simultaneous classification and specification of temporal transfer functions for the entire time series.
 
@@ -292,16 +292,13 @@ Rezk-Salama et al. \cite{rezk-salama_automatic_2000} presented high-level semant
 \cite{jani_opacity_2005}
 
 Wu and Qu \cite{wu_interactive_2007} developed a method that uses editing operations and stochastic search of the transfer function parameters to maximize the similarity between volume-rendered images given by the user.
-
 Maciejewski et al. \cite{maciejewski_structuring_2009} described a method to structure attribute space in order to guide users to regions of interest within the transfer function histogram.
-
 Chan et al. \cite{chan_perception-based_2009} developed a system to optimize transparency automatically in volume rendering based on Metelli's episcotister model to improve the perceptual quality of transparent structures.
-
 Correa and Ma \cite{correa_visibility-driven_2009} proposed the visibility histogram to guide the transfer function design.
 
-\cite{wang_efficient_volume_2011}
+Zhou and Takatsuka \cite{zhou_automatic_2009} presented an automated approach for generating transfer functions, which can depict inclusion relationship between structures in the volume, and maximize opacity and color differences among the structures. This approach uses a residue flow model based on Darcy’s Law to differentiate the distribution of opacity between branches of a contour tree.
 
-\cite{zhou_automatic_2009}
+Want et al. \cite{wang_efficient_volume_2011} extended visibility histograms to feature visibility, in order to measure the influence of each feature to the volume rendered image. Their approach allows the user to directly specify the desired visibility for the features of interest, and the appropriate opacity values are automatically obtained. This mechanism is similar to the perception-based transparency equalization \cite{chan_perception-based_2009}, which automatically optimize the rendering parameters based on psychological principles, in order to deliver results complying with viewer's perception.
 
 \cite{marchesin_per-pixel_2010}
 
@@ -355,8 +352,6 @@ Schlegel and Pajarola \cite{schlegel_visibility-difference_2013} proposed a visi
 
 \cite{tang_depth-based_2011}
 \cite{zhou_opacity_2014}
-
-
 
 \begin{figure}
 \centering
