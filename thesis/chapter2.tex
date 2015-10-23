@@ -79,7 +79,8 @@ Illustrative visualization has been successful employed in medical visualization
 
 Illustration-based styles are believed to be effective in conveying information. Researchers in the field of computer graphics and visualization have applied illustration-based styles in order to produce effective and expressive visualization. Stompel et al. \cite{stompel_visualization_2002} introduced feature enhancement techniques, such as strokes based, temporal domain enhancement, to enhance time-varying data obtained from the field of computational fluid dynamics (CFD).
 
-Inspired by techniques from illustration, various approaches are proposed to reveal different level of details in volume data sets.
+In scientific visualization, features of interest are often inner structures of the data sets, e.g. visualizing certain structures in anatomical data sets \cite{diaz_iriberri_enhanced_2013}.
+Inspired by techniques from illustration, various approaches are proposed to reveal different level of structures simultaneously in volume data sets.
 Two level rendering \cite{hauser_two-level_2001} \cite{hadwiger_high-quality_2003} \cite{corcoran_perceptual_2010} is a method of merging several volume rendering techniques into a single rendering. This method is useful when inner structures needs to be rendered along with semitransparent outer parts.
 Focus and context \cite{wang_magic_2005} \cite{bruckner_illustrative_2006} \cite{chen_intelligent_2008} provides a means of revealing the interior of a volume data set in a feature-driven way and also retaining context information.
 Another alternative is the cutaway technique \cite{burns_feature_2007} \cite{sigg_intelligent_2012}, which makes inner structures clearly visible along with its spatial relation to the surrounding material.
@@ -364,7 +365,9 @@ Correa and Ma suggest to control visibility directly by computing visibility his
 \section{Information Theory in Visualization}
 Information theory \cite{shannon_mathematical_1948} was originally introduced to study the fundamental limit of reliable transmission of messages through a noisy communication channel. Traditional applications of information theory, such as data compression and data communication, focus on the efficient throughput of a communication channel, whilst visualization focuses on the effectiveness in aiding the perceptual and cognitive process for data understanding and knowledge discovery.
 
-In recent years, there is an emerging direction towards using the principles of information theory to solve challenging problems in scientific visualization. \cite{wang_information_2011}. Chen and J{\"a}nicke \cite{chen_information-theoretic_2010} presented an information-theoretic framework for visualization. They examined the theoretical aspect of information and its relation to data communication and interpret different stages of the visualization pipeline using the taxonomy of information.
+In recent years, there is an emerging direction towards using the principles of information theory to solve challenging problems in scientific visualization \cite{wang_information_2011}. These problems include view selection \cite{bordoloi_view_2005} \cite{takahashi_feature-driven_2005} \cite{feixas_unified_2009}, streamline seeding and selection \cite{xu_information-theoretic_2010} \cite{lee_view_2011}, transfer function for multimodal data \cite{bramon_multimodal_2012}, representative isosurface selection \cite{wang_lod_2006}, time-varying and multivariate data analysis \cite{wang_importance-driven_2008} and information channel between objects and viewpoints \cite{ruiz_viewpoint_2010}.
+
+Chen and J{\"a}nicke \cite{chen_information-theoretic_2010} presented an information-theoretic framework for visualization. They examined the theoretical aspect of information and its relation to data communication and interpret different stages of the visualization pipeline using the taxonomy of information.
 
 Haidacher et at. \cite{haidacher_information-based_2008} proposed an approach of transfer function specification for multi-modal data visualization. They considered the joint occurrence of multiple features from one or multiple variables in order to separate statistical features that only occur in a single variable from those that are present in both.
 
@@ -375,29 +378,25 @@ Ruiz et al. \cite{ruiz_automatic_2011} presented an approach to generate transfe
 Bramon et al. \cite{bramon_information_2013} proposed an automatic method to visualize multi-modal data by combining several information-theoretic strategies to define colors and opacity values of the multi-modal transfer function.
 They set an information channel between two registered input data sets to define the fused color and minimize the informational divergence between the visibility distribution captured by a set of viewpoints and a target distribution proposed by the user to obtain the opacity.
 
-\cite{feixas_unified_2009}
-
 \section{Computational Saliency Models}
 Predicting salient locations has many real world applications, such as navigational assistance, robot control, surveillance systems, object detection and scene understanding \cite{zhao_learning_2013}.
-Inspired by the mechanisms of human visual system, various computational models of visual saliency have been proposed to predict gaze allocation \cite{itti_model_1998} \cite{parkhurst_modeling_2002} \cite{harel_graph-based_2006} \cite{chikkerur_what_2010} \cite{mahadevan_spatiotemporal_2010} \cite{duan_visual_2011}.
-Lee et al. \cite{lee_mesh_2005} introduced mesh saliency, which is defined in a scale-dependent manner using a center-surround operator on Gaussian-weighted mean curvatures. They observed that their approach was able to capture the most visually interesting regions on a mesh.
+Inspired by mechanisms of the human visual system, various computational models of visual saliency have been proposed to predict gaze allocation \cite{itti_model_1998} \cite{parkhurst_modeling_2002} \cite{harel_graph-based_2006} \cite{chikkerur_what_2010} \cite{mahadevan_spatiotemporal_2010} \cite{duan_visual_2011}.
 
-\cite{kim_mesh_2010}
-\cite{song_mesh_2014}
+Lee et al. \cite{lee_mesh_2005} presented mesh saliency, which is defined in a scale-dependent manner using a center-surround operator on Gaussian-weighted mean curvatures. They observed that their approach was able to capture the most visually interesting regions on a mesh.
+Kim and Varshney \cite{kim_saliency-guided_2006} introduced the user of center-surround operators to compute saliency fields of volume data. In their user study, they found that their approach was better at eliciting viewer attention than the traditional Gaussian regional enhancement approaches.
+Shen et al. \cite{shen_save:_2014} proposed the use of saliency to assist volume exploration. They described a method for inferring interaction position in volume visualization, in order to help users pick focused features conveniently.
+Shen et al. \cite{shen_spatiotemporal_2015} described spatiotemporal volume saliency, which extended the saliency field \cite{kim_saliency-guided_2006} to time-varying volume data.
 
-A saliency-based enhancement of volume visualization inspired by the center-surround mechanisms of the human
-visual system
-For volume \cite{kim_saliency-guided_2006}
-\cite{kim_saliency-guided_2008}
+%\cite{kim_mesh_2010}
+%\cite{song_mesh_2014}
 
-saliency assisted
-\cite{shen_save:_2014}
-\cite{wang_saliency-aware_2013}
+%A saliency-based enhancement of volume visualization inspired by the center-surround mechanisms of the human
+%visual system
+%For volume \cite{kim_saliency-guided_2006}
+%\cite{kim_saliency-guided_2008}
 
-
-
-spatiotemporal
-\cite{shen_spatiotemporal_2015}
+%saliency assisted
+%\cite{wang_saliency-aware_2013}
 
 %\cite{treue_visual_2003}
 %\cite{healey_combining_2001}
@@ -417,14 +416,11 @@ The evaluation of visualization methods that focus on human factors often employ
 There are a number of different evaluation strategies, such as measuring user performance, accuracy and experience \cite{redmond_influencing_2010}. Laidlaw et al. \cite{laidlaw_quantitative_2001} compared six methods for visualizing 2D vector fields and measured user performance on three flow-related tasks for each of the six methods. They used the evaluation results to identify what makes a 2D vector fields visualization effective.
 Joshi and Rheingans \cite{joshi_evaluation_2008} evaluated the effective of their illustrative techniques by measuring user accuracy, time required to perform a task and user confidence.
 
-\cite{carmi_causal_2006}
+Lu \cite{lu_volume_2010} described a method for automatically selecting rendering parameters to simplify user interaction and improve usability. Subsequently, a user study was conducted to evaluate the effectiveness of this method. Two data sets were rendered in three styles with three predefined portions of the data sets were highlighted respectively. The users' eye gaze patterns were analyzed to determine if they were able to accurately identify the highlighted areas in the images.
 
-\cite{lu_volume_2010}
-\cite{kersten-oertel_evaluation_2014}
+Kersten-Oertel et al. \cite{kersten-oertel_evaluation_2014} presented empirical studies on the effect of six different perceptual cues for enhancing depth. In the user study, the subjects were asked to determine which one of two indicated vessels was closer to them, and were asked to respond as accurately and quickly as possible. Both the percentage of correct answers and response times were analyzed.
 
-Barcelona
-\cite{diaz_perceptual_2015}
-\cite{diaz_iriberri_enhanced_2013}
+Also for depth perception, D{\'i}az et al. \cite{diaz_perceptual_2015} conducted a user study to investigate the impact of well-known volumetric shading models in stereoscopic desktop-based environments. In the results, the average time spent and average correctness of answers were analyzed.
 
 \section{Feature Tracking}
 Feature extraction and tracking is an established technique for the analysis of time-varying data in various research fields, such as video analysis, computer vision and flow visualization \cite{muelder_interactive_2009}.
