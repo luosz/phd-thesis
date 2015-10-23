@@ -268,7 +268,7 @@ Gu and Wang \cite{gu_transgraph:_2011} proposed an approach to organize a time-v
 \begin{figure}
 \centering
 \includegraphics[width=1\linewidth]{images/woodring_semi-automatic_2009}
-\caption{A single static transfer function cannot capture dynamic features. In the two images at the top, the features appear to vanish over time. On the other hand, the features are visible over time if a dynamic transfer function is used (in the two images at the bottom) \cite{woodring_semi-automatic_2009}.}
+\caption{A single static transfer function cannot capture dynamic features. In the two images at the top, the features appear to vanish over time. On the other hand, the features are visible over time if a dynamic transfer function is used (the two images at the bottom) \cite{woodring_semi-automatic_2009}.}
 \label{fig:woodring_semi-automatic_2009}
 \end{figure}
 
@@ -293,6 +293,12 @@ Rezk-Salama et al. \cite{rezk-salama_automatic_2000} presented high-level semant
 
 Wu and Qu \cite{wu_interactive_2007} developed a method that uses editing operations and stochastic search of the transfer function parameters to maximize the similarity between volume-rendered images given by the user.
 
+Maciejewski et al. \cite{maciejewski_structuring_2009} described a method to structure attribute space in order to guide users to regions of interest within the transfer function histogram.
+
+Chan et al. \cite{chan_perception-based_2009} developed a system to optimize transparency automatically in volume rendering based on Metelli's episcotister model to improve the perceptual quality of transparent structures.
+
+Correa and Ma \cite{correa_visibility-driven_2009} proposed the visibility histogram to guide the transfer function design.
+
 \cite{wang_efficient_volume_2011}
 
 \cite{zhou_automatic_2009}
@@ -308,12 +314,26 @@ Wu and Qu \cite{wu_interactive_2007} developed a method that uses editing operat
 
 \cite{alper_selver_semiautomatic_2009}
 
+%A number of approaches have been proposed to automate the design of transfer functions.
+%Wu and Qu \cite{wu_interactive_2007} developed a method that uses editing operations and stochastic search of the transfer function parameters to maximize the similarity between volume-rendered images given by the user.
+%Maciejewski et al. \cite{maciejewski_structuring_2009} described a method to structure attribute space in order to guide users to regions of interest within the transfer function histogram.
+%Chan et al. \cite{chan_perception-based_2009} developed a system to optimize transparency automatically in volume rendering based on Metelli's episcotister model to improve the perceptual quality of transparent structures.
+%Correa and Ma \cite{correa_visibility-driven_2009} proposed the visibility histogram to guide the transfer function design.
+
 
 \section{Visibility Histograms and Visibility-Driven Transfer Functions}
-\cite{jung_dual-modal_2012}
-\cite{schlegel_visibility-difference_2013}
 
 The visibility of structures revealed in volume rendering is more of a consequence of adjusting transfer functions than a design parameter \cite{preim_visual_2013}. In contrast, Correa and Ma \cite{correa_visibility-driven_2009} suggested to use visibility to guide transfer function design for both manual and automatic searches.
+
+Visibility histograms \cite{emsenhuber_visibility_2008} \cite{correa_visibility-driven_2009}, which summarize the distribution of visibility of voxels from a given viewpoint, is a powerful feedback mechanism of volume visualization.
+Visibility histograms encode the information required to measure the efficacy of transfer functions and are advantageous in guiding and automating the manipulation of transfer functions.
+
+Jung et al. \cite{jung_visibility-driven_2013} extended the visibility calculations into multimodal volume data sets to provide a mechanism for visual feedback of the occlusion, from CT to its counterpart PET and vice versa.
+
+Instead of calculating the visibility of all voxels in the volume, Zheng et al. \cite{zheng_visibility_2013} employed local visibility histograms to ensure that features of interest are sufficiently visible in the final image.
+
+\cite{jung_dual-modal_2012}
+\cite{schlegel_visibility-difference_2013}
 
 \begin{figure}
 \centering
@@ -328,7 +348,7 @@ Correa and Ma suggest to control visibility directly by computing visibility his
 %\cite{bordoloi_view_2005}
 %\cite{takahashi_feature-driven_2005}
 
-\cite{emsenhuber_visibility_2008}
+
 \cite{correa_visibility_2011}
 \cite{wang_efficient_2011}
 
@@ -345,8 +365,8 @@ Correa and Ma suggest to control visibility directly by computing visibility his
 
 \cite{bronstad_visibility_2012}
 
-\cite{jung_visibility-driven_2013}
-\cite{zheng_visibility_2013}
+
+
 \cite{ruiz_automatic_2011}
 \cite{bramon_information_2013}
 
@@ -392,7 +412,7 @@ Ruiz et al. \cite{ruiz_automatic_2011} presented an approach to generate transfe
 Bramon et al. \cite{bramon_information_2013} proposed an automatic method to visualize multi-modal data by combining several information-theoretic strategies to define colors and opacity values of the multi-modal transfer function.
 They set an information channel between two registered input data sets to define the fused color and minimize the informational divergence between the visibility distribution captured by a set of viewpoints and a target distribution proposed by the user to obtain the opacity.
 
-\section{Computational Saliency Models}
+\section{Computational Saliency}
 Predicting salient locations has many real world applications, such as navigational assistance, robot control, surveillance systems, object detection and scene understanding \cite{zhao_learning_2013}.
 Inspired by mechanisms of the human visual system, various computational models of visual saliency have been proposed to predict gaze allocation \cite{itti_model_1998} \cite{parkhurst_modeling_2002} \cite{harel_graph-based_2006} \cite{chikkerur_what_2010} \cite{mahadevan_spatiotemporal_2010} \cite{duan_visual_2011}.
 
@@ -419,9 +439,6 @@ Shen et al. \cite{shen_spatiotemporal_2015} described spatiotemporal volume sali
 %\cite{cui_measuring_2006}
 
 \section{Perceptual Evaluation}
-%The term visualization may have various meanings.
-%Chen et al. \cite{chen_what_2013} presented a definition, which is "visualization is a study of transformation from data to visual representations in order to facilitate effective and efficient cognitive processes in performing tasks involving data". Therefore, based on this definition, the fundamental measure for effectiveness is correctness and that for efficiency is the time required for accomplishing a task.
-
 Due to the complex nature of the data being studied, simply displaying all available information does not adequately meet the demands of domain scientists \cite{anderson_evaluating_2012}.
 %Determining the best use of visualization techniques is one of the goals of visualization evaluations.
 User studies can be used to evaluate the strengths and weaknesses of visualization methods \cite{christopher_thoughts_2003}.
