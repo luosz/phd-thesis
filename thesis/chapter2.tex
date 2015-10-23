@@ -354,13 +354,27 @@ Correa and Ma suggest to control visibility directly by computing visibility his
 \cite{zhou_opacity_2014}
 
 \section{Multivariate Volume Visualization}
-\cite{kniss_volume_2002}
-\cite{woodring_multi-variate_2006}
-\cite{akiba_visualizing_2007}
-\cite{lee_visualization_2009}
-\cite{guo_scalable_2012}
-\cite{khlebnikov_noise-based_2013}
-\cite{liu_multivariate_2014}
+Analyzing multivariate data is an importance and challenging topic in many scientific disciplines. For instance, applications in medicine, engineering and meteorology often require analyzing multivariate data.
+However, multivariate volume data sets are usually mapped to a scalar dimension and visualized separately with standard volume rendering techniques.
+
+Kniss and Hansen \cite{kniss_volume_2002} applied volume rendering with multidimensional transfer function to visualize multivariate weather simulations. In their approach, they combined the temperature and humidity as a multivariate field in order to assist the meteorologists in identifying the frontal zones. 
+
+Akiba et al. presented the use of time histogram for simultaneous classification of time-varying data in order to find transfer functions that classify all the time steps of the data set \cite{akiba_simultaneous_2006}.
+
+Woodring and Shen presented a method for the comparison of different data fields through the expression of a volume shader that composes data fields together with set operations \cite{woodring_multi-variate_2006}.
+
+Wang et al. introduced an importance measure based on conditional entropy and categorize temporal behaviors by clustering the importance curves over time \cite{wang_importance-driven_2008}.
+
+Lee and Shen \cite{lee_visualization_2009} extended the Dynamic Time Warping (DTW) approach \cite{lee_visualizing_2009} to SUBDTW, in order to estimate when a trend appears and vanishes in a given time series. They modeled the temporal relationships as a state machine based on the beginning and ending times of the trends.
+
+Khlebnikov et al. \cite{khlebnikov_noise-based_2013} described a novel method that allows simultaneous rendering of multivariate data by redistributing the opacity within a voxel. This method uses procedural texture synthesis \cite{khlebnikov_procedural_2012} for opacity redistribution pattern and is similar in spirit to color weaving.
+
+Data analysis techniques for high dimensional spaces, such as parallel coordinates \cite{akiba_visualizing_2007} \cite{guo_scalable_2012} and principal component analysis \cite{liu_multivariate_2014}, were also investigated for exploring multivariate time-varying data sets.
+
+%\cite{woodring_multi-variate_2006}
+%\cite{akiba_visualizing_2007}
+%\cite{guo_scalable_2012}
+%\cite{liu_multivariate_2014}
 
 \section{Information Theory in Visualization}
 Information theory \cite{shannon_mathematical_1948} was originally introduced to study the fundamental limit of reliable transmission of messages through a noisy communication channel. Traditional applications of information theory, such as data compression and data communication, focus on the efficient throughput of a communication channel, whilst visualization focuses on the effectiveness in aiding the perceptual and cognitive process for data understanding and knowledge discovery.
