@@ -12,8 +12,8 @@ In this chapter, we present a brief review of the literature related to the conc
 %Volume rendering can be performed using two main techniques, either by extracting a number of surfaces from the data and rendering these surfaces to the screen, called isosurface rendering or by rendering the volume itself as a complete block of data with no intermediary structures, usually called direct volume rendering (DVR).
 
 Volume rendering is used to display a two-dimensional (2D) image of three-dimensional (3D) data set. It can be considered as a projection of a 3D volumetric data set to a 2D image \cite{garcia_parallel_2006}.
-The majority of data sets are discretely sampled along 3D grids and contain scalar values usually acquired from medical imaging devices such as CT or MRI machines or computed from scientific simulations such as fluid simulation.
-The data sets have the form of 3D arrays and the elements in the data sets are called voxels, which correspond to pixels in 2D images.
+The majority of volume data sets are discretely sampled along 3D grids and contain scalar values usually acquired from medical imaging devices such as CT or MRI machines or computed from scientific simulations such as fluid simulation.
+Volume data sets have the form of 3D arrays and elements in the data sets are called voxels, which correspond to pixels in 2D images.
 An example of volume rendering is provided in Figure~\ref{fig:multiple_VisMale}, which shows a sliced image and a volume rendered image of a head data set.
 
 %\begin{figure}
@@ -217,78 +217,28 @@ Multidimensional transfer functions \cite{kniss_interactive_2001}, which are map
 
 In volume data, boundaries are regions between areas of relatively homogeneous material. It is difficult to detect boundaries because different materials often consist of overlapping intensity intervals. To address this problem, multidimensional transfer functions used derived attributes such as gradient magnitudes and second derivatives along with scalar values, in order to detect transitions between relatively homogeneous areas \cite{kindlmann_semi-automatic_1998} \cite{kindlmann_transfer_2002}.
 %Classical approaches try to detect boundary information between tissues by introducing derived attributes such as first and second derivatives to isolate materials \cite{kindlmann_semi-automatic_1998} \cite{kniss_multidimensional_2002} \cite{kindlmann_transfer_2002}.
-In this case, the transfer functions are extended to multidimensional feature spaces.
-For higher-dimensional transfer functions, the generation of transfer functions could be memory intensive and costly to compute,
 %and exploration of the transfer function domain might not be intuitive.
-and the interaction of transfer functions becomes more complex and unintuitive as the dimensionality becomes higher. 
 %As a result, the interaction of transfer functions becomes more complex and unintuitive as the dimensionality becomes higher.
+In this case, the transfer functions are extended to multidimensional feature spaces.
+For higher-dimensional transfer functions, the generation of transfer functions could be memory intensive and costly to compute, and the interaction of transfer functions are more complex and unintuitive as the dimensionality becomes higher. 
 
 Therefore, two-dimensional (2D) histograms are often used in multidimensional transfer functions \cite{maciejewski_structuring_2009}. An example is a 2D histogram with axes representing a subset of the feature space (e.g. scalar value vs gradient magnitude), with each entry in the 2D histogram being the number of voxels for a given feature space pair.
-%A great number of transfer function approaches have also been merged and one-dimensional transfer function is extended to multi-dimensional transfer function.
 Even in the case of two-dimensional transfer functions, a considerable amount of user interaction is required in order to come up with meaningful results \cite{arens_survey_2010}.
+%A great number of transfer function approaches have also been merged and one-dimensional transfer function is extended to multi-dimensional transfer function.
 %Even in the case of two-dimensional transfer functions, a considerable amount of user interaction is required in order to come up with meaningful results \cite{arens_survey_2010}.
 %There are other multi-dimensional transfer functions approaches, such as spatialized gradient-based transfer functions \cite{roettger_spatialized_2005}, distance-based transfer functions \cite{tappenbeck_distance-based_2006}, size-based transfer function \cite{correa_size-based_2008}, texture-based transfer functions \cite{caban_texture-based_2008} and curvature based transfer functions \cite{kindlmann_curvature-based_2003}.
 
-As one of the most common representations of voxel distributions, histograms are used in transfer function design to assign visual properties to voxels \cite{pfister_transfer_2001}. Bajaj et al. \cite{bajaj_contour_1997} introduced the contour spectrum to determine voxels corresponding to important isosurfaces in the volume. To overcome the difficulty of using one-dimensional transfer functions (solely based on scalar values stored in the voxels) to extract inner structures of interest from the volume data, Levoy proposed the use of gradient magnitude to emphasize strong boundaries between different tissues \cite{levoy_display_1988}.
+As one of the most common representations of voxel distributions, histograms are used in transfer function design to assign visual properties to voxels \cite{pfister_transfer_2001}. Bajaj et al. \cite{bajaj_contour_1997} introduced the contour spectrum to determine voxels corresponding to important isosurfaces in the volume. To overcome the difficulty of using one-dimensional transfer functions (solely based on scalar values stored in the voxels) to extract inner structures of interest from the volume data, Levoy \cite{levoy_display_1988} proposed the use of gradient magnitude to emphasize strong boundaries between different tissues.
 
 The introduction of gradient magnitude as a data metric aims to detect voxels that are of large deviation compared with other voxels by approximating gradient magnitude at each sample point in the volume, because the exact distribution of data is unknown due to information lost in the discrete sampling process.
-
-Kindlmann and Durkin extended Levoy's work by introducing a higher dimensional transfer function domain based on gradient magnitudes and second derivatives \cite{kindlmann_semi-automatic_1998}. To emphasize different structures, Kniss et al. \cite{kniss_interactive_2001} presented a technique for interactively manipulating 2D histograms of gradient magnitudes and data values. In their work, material boundaries appear as arcs in the 2D histogram and can be selected with interactive widgets \cite{kniss_multidimensional_2002}.
+Kindlmann and Durkin \cite{kindlmann_semi-automatic_1998} extended Levoy's work \cite{levoy_display_1988} by introducing a higher dimensional transfer function domain based on gradient magnitudes and second derivatives. To emphasize different structures, Kniss et al. \cite{kniss_interactive_2001} presented a technique for interactively manipulating 2D histograms of gradient magnitudes and data values. In their work, material boundaries appear as arcs in the 2D histogram and can be selected with interactive widgets \cite{kniss_multidimensional_2002}.
 Kindlmann et al. \cite{kindlmann_curvature-based_2003} proposed curvature-based transfer function to enhance the expressive and informative power of volume rendering. In their approach, volume data is rendered with contours to exhibit constant thickness in image space.
+{\v S}ereda et al. \cite{sereda_visualization_2006} proposed LH histograms for improving the identification and selection of boundaries in 2D intensity-gradient transfer functions.
+Haidacher et al. \cite{haidacher_volume_2010} described the statistical transfer function space, which is based on statistical properties such as mean and standard deviation of the data values (e.g. intensity and gradient magnitude for 2D transfer functions) in the neighborhood of each voxel. This approach can reduce the influence of noise and enhance visual appearance in volume rendering.
 
-Various plots and histograms were introduced to assist the design of multidimensional transfer functions.
-Kniss et al. \cite{kniss_multidimensional_2002} introduced the intensity-gradient scatter plots for 2D transfer functions, which has now become a popular approach for 2D transfer functions.
-
-{\v S}ereda et al. \cite{sereda_visualization_2006} proposed LH histograms for easier identification and selection of boundaries than the arches that users often encounter in 2D intensity-gradient transfer functions.
-
-%In this paper, we label the higher intensity of the two
-%materials that form the boundary FH and the lower
-%intensity FL (see Fig. 5). The LH Histogram is a
-%2D histogram whose axes correspond to FL and FH . The
-%domain of the LH Histogram is the same as that of the Span
-%Space [22]. However, in the Span Space, each point is
-%indexed by the minimum and maximum values within a
-
-%LH Histogram allows easier identifica-
-%tion and selection of boundaries than we could obtain from
-%the arches in the domain of scalar value and gradient
-%magnitude. We have shown cases where, because of a large
-%overlap (due to disturbing phenomena such as noise and
-%partial volume effect), one is not able to select a boundary in
-%the arches, while this is possible in the LH Histogram. The
-%compactness of the boundaries in the LH Histogram may
-%become even more relevant if we are to select the
-%boundaries automatically. However, the LH Histogram
-%requires more complex computations.
-% present a method to identify the materials that
-% form the boundaries. These materials are then used in a new domain that facilitates interactive and semiautomatic design of
-% appropriate transfer functions. We also show how the obtained boundary information can be used in region-growing-based
-% segmentation.
-
-
-
-%transfer function exploration
-\cite{pinto_volume_2008}
-
-%local histogram
-\cite{glaser_automatic_2010}
-
-Wang et al. \cite{wang_automating_2012} described a clustering approach on 2D density plots for automatic transfer function design.
-
-
-present an approach
-in this paper to automate the transfer function design based on 2D density plots. By exploiting their smoothness,
-we adopted the Morse theory to automatically decompose the feature space into a set of valley cells. We design
-a simpliﬁcation process based on cell separability to eliminate cells which are mainly caused by noise in the
-original volume data. Boundary persistence is ﬁrst introduced to measure the separability between adjacent cells
-and to suitably merge them. 
-
+Wang et al. \cite{wang_automating_2012} described a clustering approach on 2D density plots for automatic transfer function design. Their approach allows the user to interactively explore the pre-computed clusters in the feature space and merge or remove uninterested features to improve visualization quality.
 Ip et al. \cite{ip_hierarchical_2012} described a multilevel segmentation technique that mimics user exploration behaviors by recursively segmenting intensity-gradient histograms.
-
-The use of parallel coordinates was introduced to assist the design of transfer functions in multidimensional parameter spaces \cite{zhao_multi-dimensional_2010} \cite{guo_multi-dimensional_2011}.
-
-%dimension reduction
-\cite{kim_dimensionality_2010}
+Parallel coordinates and dimensionality reduction algorithms were introduced to support the design of transfer functions in multidimensional parameter spaces \cite{zhao_multi-dimensional_2010} \cite{guo_multi-dimensional_2011} \cite{kim_dimensionality_2010}.
 
 \subsection{Transfer Functions for Time-Varying Volume Visualization}
 Although researchers have developed a great number of visualization techniques for time-invariant volume data, how to effectively explore and understand time-varying volume data remains a challenging problem. Finding good transfer functions for time-invariant volume data itself has proven difficult \cite{pfister_transfer_2001}.
@@ -328,12 +278,21 @@ An essential problem in time-varying volume visualization is to visualize tempor
 Compared to flow visualization, which is a well established branch of scientific visualization \cite{brambilla_illustrative_2012}, general time-varying volume visualization is still a relative young field.
 Illustrations for time-varying rendering could be divided into two categories, one is to enhance time-invariant features and the other is to enhance temporal features of time-varying volume data. The techniques in the first category focus on enhancing structural perception of volume models through the amplification of features and the addition of illumination effects \cite{rheingans_volume_2001} \cite{joshi_illustration-inspired_2005}. Examples of these techniques include boundary enhancement, oriented feature enhancement (silhouettes, fading, and sketch lines). The techniques in the second category focus on illustrating dynamic aspects such as movement of features. A few kinds of techniques have been proposed for this purpose. For example, there are speed lines, flow ribbons and strobe silhouettes, which are inspired by traditional animation \cite{joshi_illustration-inspired_2005} \cite{joshi_evaluation_2008} \cite{joshi_case_2009}; and there are extended silhouette and boundary enhancement domains, which are inspired by the techniques used by illustrators and other artists \cite{svakhine_illustration_2005}. Nevertheless, illustrations of temporal features of time-varying data requires more attention from researchers in the visualization community. The usefulness of illustrative approaches in time-varying volume visualization has not been studied as thoroughly as in other areas.
 
-\section{Automatd Transfer Function Design}
+\section{Automated Transfer Function Design}
 Researches have proposed various approaches to automate the design of transfer functions and provide acceptable suggestions which can be further edited by users. However, the usefulness of a transfer function mostly depends on the underlying question the user wants to answer. Moreover, the users' tasks vary drastically from one domain to another. Therefore, most techniques work semi-automatically and very few techniques consider domain knowledge in the design process \cite{zudilova-seinstra_trends_2008}.
 
 He et al. \cite{he_generation_1996} addressed transfer function exploration as a parameter optimization problem and presented an approach to assist the user in exploring appropriate transfer functions using stochastic search techniques starting from an initial population.
-Another strategy is based on the selection of rendered images. This strategy lets the user select one or more favorite images to guide the further search of transfer functions \cite{marks_design_1997}.
+Another strategy is further tuning transfer functions based on user selection of favorable rendered images as feedback, in order to achieve desired results.
+Marks et al. \cite{marks_design_1997} presented Design Gallery, which lets the user select one or more favorite images to guide the further search of transfer functions.
 Rezk-Salama et al. \cite{rezk-salama_automatic_2000} presented high-level semantics to abstract parametric models of transfer functions in order to automatically assign transfer function templates.
+
+
+
+{\v S}ereda et al. \cite{sereda_automating_2006}
+
+\cite{cai_automatic_2013}
+
+
 
 \cite{tzeng_novel_2003}
 \cite{tzeng_cluster-space_2004}
