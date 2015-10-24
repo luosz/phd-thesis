@@ -350,20 +350,15 @@ Want et al. \cite{wang_efficient_2011} extended visibility histograms to feature
 	\label{fig:wang_efficient_2011}
 \end{figure}
 
-\cite{mak_visibility-aware_2011}
-%Visibility-Aware Direct Volume Rendering
+Ruiz et al. \cite{ruiz_automatic_2011} proposed an information-theoretic framework which obtains opacity transfer functions by minimizing the Kullback–Leibler divergence between the observed visibility distribution and a target distribution provided by the user. Later, Bramon et al. \cite{bramon_information_2013} extended this approach to visualize multimodal volume data.
 
-\cite{bronstad_visibility_2012}
-%Visibility driven visualization of 3D cardiac ultrasound data on the GPU
-
-\cite{ruiz_automatic_2011}
-%Automatic Transfer Functions Based on Informational Divergence
-
-\cite{bramon_information_2013}
-%Information Theory-Based Automatic Multimodal Transfer Function Design
+Cai et al. \cite{cai_automatic_2013} described a method to derive opacity transfer functions by minimizing the Jensen-Shannon divergence between the observed visibility distribution and a user-defined target distribution. The target distribution can be defined using Gaussian function weighting.
 
 %\cite{wan_fast_2010}
 %%Fast volumetric data exploration with importance-based accumulated transparency modulation
+
+%\cite{mak_visibility-aware_2011}
+%%Visibility-Aware Direct Volume Rendering
 
 %\cite{tang_depth-based_2011}
 %%Depth-Based Feature Enhancement for Volume Visualization
@@ -371,15 +366,19 @@ Want et al. \cite{wang_efficient_2011} extended visibility histograms to feature
 %\cite{zhou_opacity_2014}
 %%Opacity modulation based peeling for direct volume rendering
 
+In addition, various methods were proposed regarding the use of visibility for enhancing different aspects of volume visualization.
+
 Marchesin et al. \cite{marchesin_per-pixel_2010} introduced a volume rendering technique that manipulates the voxel opacity values in a view-dependent way, in order to enhance visibility of internal structures in the volume data set.
+
+Bronstad et al. \cite{bronstad_visibility_2012} described local opacity transfer functions with feature detection along the ray profile implemented on the GPU. In their approach, visibility histograms are employed to access the performance of the feature detection algorithm.
 
 Jung et al. \cite{jung_dual-modal_2012} presented a dual-modal visualization method, which uses visibility metrics to provide visual feedback regarding the occlusion caused by the volume data in one modal on the other modal.
 Jung et al. \cite{jung_visibility-driven_2013} extended visibility histograms to multimodal volume visualization.
 They demonstrated the use of visibility histograms together with region of interest segmentation was effective in visualizing PET-CT volume data sets.
+
 Instead of computing the visibility of all voxels, Zheng et al. \cite{zheng_visibility_2013} employed local visibility histograms to ensure both the features of interest and contextual information are visible in multimodal volume visualization.
 
 Schlegel and Pajarola \cite{schlegel_visibility-difference_2013} proposed a visibility-difference entropy metric. They presented an automated approach using this metric for generating a set of transfer function candidates with high ratings and are strongly distinct in what they reveal.
-Cai et al. \cite{cai_automatic_2013} described a method to derive opacity transfer functions by minimizing the Jensen-Shannon divergence between the observed visibility distribution and a user-defined target distribution. The target distribution can be defined using Gaussian function weighting.
 
 Qin et al. \cite{qin_voxel_2015} presented the voxel visibility model as a quality metric for transfer function design.
 The voxel visibility model is a mapping function from data attributes of voxels to their visibility attributes. Instead of specifying transfer functions, this approach allows users to directly adjust the visibility of each voxel, and then the corresponding opacity transfer functions can be obtained by minimizing the distance between the desired voxel visibility distriubtion and the actual voxel visibility distribution.
