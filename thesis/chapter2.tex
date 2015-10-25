@@ -183,7 +183,6 @@ Good transfer functions reveal important structures in the data without obscurin
 The design of transfer functions to generate informative visualizations has been a significant challenge addressed by a number of researchers \cite{pfister_transfer_2001}.
 Various strategies have been proposed for transfer function design \cite{hadwiger_real-time_2006}.
 %Data-centric strategies examine the properties of volume data sets.
-Data-centric strategies examine the properties of volume data sets.
 However, certain features are difficult to be extracted and visualized with 1D transfer functions, e.g. CT and MRI data sets which contain complex boundaries between multiple materials.
 Overlapping intensity intervals corresponding to different materials make boundary separation difficult.
 When one intensity value or interval is associated with multiple boundaries, a 1D transfer function is unable to render them in isolation \cite{kniss_multidimensional_2002}.
@@ -234,9 +233,11 @@ As one of the most common representations of voxel distributions, histograms are
 
 The introduction of gradient magnitude as a data metric aims to detect voxels that are of large deviation compared with other voxels by approximating gradient magnitude at each sample point in the volume, because the exact distribution of data is unknown due to information lost in the discrete sampling process.
 Kindlmann and Durkin \cite{kindlmann_semi-automatic_1998} extended Levoy's work \cite{levoy_display_1988} by introducing a higher dimensional transfer function domain based on gradient magnitudes and second derivatives. To emphasize different structures, Kniss et al. \cite{kniss_interactive_2001} presented a technique for interactively manipulating 2D histograms of gradient magnitudes and data values. In their work, material boundaries appear as arcs in the 2D histogram and can be selected with interactive widgets \cite{kniss_multidimensional_2002}.
+Kniss et al. \cite{kniss_gaussian_2003} presented Gaussian transfer functions, which are suitable for the classification of narrow features in multidimensional domains.
 Kindlmann et al. \cite{kindlmann_curvature-based_2003} proposed curvature-based transfer function to enhance the expressive and informative power of volume rendering. In their approach, volume data is rendered with contours to exhibit constant thickness in image space.
 
-{\v S}ereda et al. \cite{sereda_visualization_2006} proposed LH histograms for improving the identification and selection of boundaries in 2D intensity-gradient transfer functions. Subsequently, they \cite{sereda_automating_2006} presented a clustering method based on the LH histograms for semi-automatic transfer function design.
+{\v S}ereda et al. \cite{sereda_visualization_2006} proposed LH histograms for improving the identification and selection of boundaries in 2D intensity-gradient transfer functions. Subsequently, {\v S}ereda et al. \cite{sereda_automating_2006} presented a clustering method based on the LH histograms for semi-automatic transfer function design.
+
 Haidacher et al. \cite{haidacher_volume_2010} described the statistical transfer function space, which is based on statistical properties such as mean and standard deviation of the data values (e.g. intensity and gradient magnitude for 2D transfer functions) in the neighborhood of each voxel. This approach can reduce the influence of noise and enhance visual appearance in volume rendering.
 
 Wang et al. \cite{wang_automating_2012} described a clustering approach on 2D density plots for automatic transfer function design. Their approach allows the user to interactively explore the pre-computed clusters in the feature space and merge or remove uninterested features to improve visualization quality.
@@ -305,8 +306,6 @@ Correa and Ma \cite{correa_visibility-driven_2009} proposed the visibility histo
 Zhou and Takatsuka \cite{zhou_automatic_2009} presented an automated approach for generating transfer functions, which can depict inclusion relationship between structures in the volume, and maximize opacity and color differences among the structures. This approach uses a residue flow model based on Darcy\rq s Law to differentiate the distribution of opacity between branches of a contour tree.
 Selver and G{\"u}zeli{\c s} \cite{alper_selver_semiautomatic_2009} introduced a semi-automatic method for transfer function initialization and optimization using volume histogram stacks and radial basis function networks.
 
-Want et al. \cite{wang_efficient_volume_2011} extended visibility histograms to feature visibility, in order to measure the influence of each feature to the volume rendered image. Their approach allows the user to directly specify the desired visibility for the features of interest, and the appropriate opacity values are automatically obtained. This mechanism is similar to the perception-based transparency equalization \cite{chan_perception-based_2009}, which automatically optimize the rendering parameters based on psychological principles, in order to deliver results complying with viewer's perception.
-
 Inspired by how physicians interact with volume data to extract clinically relevant information, L{\"a}th{\'e}n et al. \cite{lathen_automatic_2012} proposed an optimization method for shifting transfer function presets, in order to better visualize contrast enhanced blood vessels.
 %Automatic Tuning of Spatially Varying Transfer Functions for Blood Vessel Visualization
 
@@ -341,7 +340,7 @@ Visibility histograms encode the information required to measure the efficacy of
 	\label{fig:correa_visibility-driven_2009}
 \end{figure}
 
-Want et al. \cite{wang_efficient_2011} extended visibility histograms to feature visibility, in order to measures the influence of each feature to the resulting images. As shown in Figure~\ref{fig:wang_efficient_2011}, they described a scheme that allows user to specify desired visibility for features of interest and subsequently the opacity transfer function is optimized using an active set algorithm \cite{polyak_conjugate_1969}.
+Want et al. \cite{wang_efficient_2011} extended visibility histograms to feature visibility, in order to measure the influence of each feature to the volume rendered image. As shown in Figure~\ref{fig:wang_efficient_2011}, their approach allows the user to directly specify the desired visibility for the features of interest, and subsequently the opacity transfer function is optimized using an active set algorithm \cite{polyak_conjugate_1969}.
 
 \begin{figure}
 	\centering
@@ -427,9 +426,40 @@ Predicting salient locations has many real world applications, such as navigatio
 Inspired by mechanisms of the human visual system, various computational models of visual saliency have been proposed to predict gaze allocation \cite{itti_model_1998} \cite{parkhurst_modeling_2002} \cite{harel_graph-based_2006} \cite{chikkerur_what_2010} \cite{mahadevan_spatiotemporal_2010} \cite{duan_visual_2011}.
 
 Lee et al. \cite{lee_mesh_2005} presented mesh saliency, which is defined in a scale-dependent manner using a center-surround operator on Gaussian-weighted mean curvatures. They observed that their approach was able to capture the most visually interesting regions on a mesh.
+
 Kim and Varshney \cite{kim_saliency-guided_2006} introduced the user of center-surround operators to compute saliency fields of volume data. In their user study, they found that their approach was better at eliciting viewer attention than the traditional Gaussian regional enhancement approaches.
+
+J{\"a}nicke and Chen \cite{janicke_salience-based_2010} described a quality metric for analyzing the saliency of visualization images and demonstrated its usefulness with examples from information visualization, volume visualization and flow visualization.
+%A salience-based quality metric for visualization
+
+%We describe a method for computing such
+%a metric for a visualization image in the context of a given dataset. We show how this technique can be used to
+%analyze a visualization’s salience, improve an existing visualization, and choose the best representation from a set
+%of alternatives. The usefulness of this proposed metric is illustrated using examples from information visualization,
+%volume visualization and flow visualization
+
+%In this paper, we presented a novel quality metric for visu-
+%alization based on visual salience. This metric favors visu-
+%alizations that guide the observers visual attention to rele-
+%vant parts of the image and is generically applicable to all
+%areas of visualization. Using different analysis tools, i.e.,
+%salience overlays, contribution maps and quality charts, we
+%could show how our quality metric can be used to choose the
+%best visualization from a set of alternatives, and to establish
+%an effective default setting for a visualization process.
+
+Kim et al. \cite{kim_spatiotemporal_2011} extended their previous work on detecting salient regions in images \cite{kim_saliency_2010} to detect salient regions in both images and videos. Both approaches use the self-ordinal resemblance measure to compute the spatial saliency. Then the spatiotemporal saliency map is generated by combining the spatial saliency with the temporal saliency, which is the sum of absolute differences of temporal gradients of the center and the surrounding regions.
+
+% For the spatiotemporal saliency, we combined the
+% spatial saliency with the temporal saliency by simply com-
+% puting SAD between temporal gradients of the center and the
+% surrounding regions
+
 Shen et al. \cite{shen_save:_2014} proposed the use of saliency to assist volume exploration. They described a method for inferring interaction position in volume visualization, in order to help users pick focused features conveniently.
 Shen et al. \cite{shen_spatiotemporal_2015} described spatiotemporal volume saliency, which extended the saliency field \cite{kim_saliency-guided_2006} to time-varying volume data.
+
+%\cite{yu_hierarchical_2012}
+%%Hierarchical Streamline Bundles
 
 %\cite{kim_mesh_2010}
 %\cite{song_mesh_2014}
@@ -441,12 +471,6 @@ Shen et al. \cite{shen_spatiotemporal_2015} described spatiotemporal volume sali
 
 %saliency assisted
 %\cite{wang_saliency-aware_2013}
-
-%\cite{treue_visual_2003}
-%\cite{healey_combining_2001}
-%\cite{hall_trainable_2004}
-%\cite{kadir_saliency_2001}
-%\cite{cui_measuring_2006}
 
 \section{Perceptual Evaluation}
 Traditional, visualization research has an emphasis on solving problems with modeling and optimization using engineering and mathematics tools.
@@ -469,29 +493,40 @@ Also for depth perception, D{\'i}az et al. \cite{diaz_perceptual_2015} conducted
 Feature extraction and tracking is an established technique for the analysis of time-varying data in various research fields, such as video analysis, computer vision and flow visualization \cite{muelder_interactive_2009}.
 In time-varying data, features are objects that evolve over time. Feature tracking aims to determine the correspondence between features in successive time steps and describe the evolution of features through time \cite{post_state_2003}.
 
-In practice, feature extraction and tracking are often employed in the exploration and analysis of time-varying volume visualization in order to better understand the dynamic nature of the underlying phenomena \cite{tzeng_intelligent_2005} \cite{woodring_multiscale_2009} \cite{lee_visualizing_2009} \cite{gu_transgraph_2011}.
+In practice, feature extraction and tracking are often employed in the exploration and analysis of time-varying volume visualization in order to better understand the dynamic nature of the underlying phenomena \cite{wang_information_2008} \cite{woodring_multiscale_2009} \cite{lee_visualizing_2009}.
 Feature extraction methods are often based on an analytic description of the feature of interest. Consequently, feature extraction and tracking could become a manual-driven and trial-and-error process in the case that properties cannot be easily defined and are sometimes unknown \cite{ma_machine_2007}.
 
-%%survey
-\cite{ma_machine_2007} \cite{wang_information_2008}
-%
-\cite{caban_texture-based_2007}
-%
-%%tracking related works
-\cite{widanagamaachchi_interactive_2012} \cite{ozer_group_2012}
-\cite{hsieh_feature_2013}
+Tzeng and Ma \cite{tzeng_intelligent_2005} proposed an intelligent feature extraction and tracking algorithm, which applies machine learning to extract and track time-varying fluid flow features in volume data.
+They investigated the use of both neural networks and support vector machines in their approach and obtained promising results.
+
+Based on the observation that regions in time-varying volume data present specific pattern and textural features, Caben et al. \cite{caban_texture-based_2007} introduced a texture-based feature tracking technique which analyzes local textural properties and finds correspondent features in the time series.
+%In their technique, a combination of first-order, second-order and run-length matrices are used to analyze local textural features, and then similarity measurements are used to locate the best match of features in following time steps.
+Caban and Rheingans \cite{caban_texture-based_2008} extended this technique for transfer function design, in which the voxels' resulting opacity and color are based on local textural properties instead of intensity values.
+
+Gu and Wang \cite{gu_transgraph_2011} described the TransGraph, which is a graph-based representation for visualizing hierarchical state transition relationships. This approach provides an occlusion-free over map and allows controllable interaction to help users to track data transition over space and time.
+%The TransGraph assists the user in understanding time-varying volume data with an occlusion-free over map.
+%It also provides controllable interaction, which helps the user to track data transition over space and time.
+
+Hsieh et al. \cite{hsieh_feature_2013} introduced an particle swarm method for transfer function design. This method maps the frequency of particle occurrences to the color and opacity values and extract features after the particles finish searching for features in the volume data.
 
 \section{Vector Field Visualization}
 The visualization of vector fields plays a crucial role in visual interpretation and understand of the underlying flow features and patterns \cite{kuhn_clustering-based_2011} \cite{ma_coherent_2013}. Since flow patterns also exist in time-varying volume data, certain techniques for visualizing vector field could be incorporated into time-varying volume visualization, in order to depict the dynamic aspects of time-varying data.
 
-Line drawings are effective ways to depict complex information with simple means \cite{benard_state_art_2011}. Among vector field visualization techniques, streamline visualization is a simple but common way to convey the structure of 3D vector fields \cite{chen_illustrative_2011}. Streamlines have proven to give expressive visual representation if they are combined with appropriate seeding strategies \cite{annen_vector_2008}. Streamlines intuitively reveal flow patterns by integrating the flow path.
+Line drawings are effective ways to depict complex information with simple means \cite{benard_state---art_2011}.
+Among vector field visualization techniques, streamline visualization is a simple but common way to convey the structure of 3D vector fields \cite{chen_illustrative_2011}. Streamlines have proven to give expressive visual representation if they are combined with appropriate seeding strategies \cite{annen_vector_2008}. Streamlines intuitively reveal flow patterns by integrating the flow path.
 
 \section{Summary}
 We have presented a review of literature in the field of volume visualization.
-The review suggests that it is feasible to optimize the parameters of volume visualization based on the information within volume data. Existing research on multidimensional transfer functions, classification of volume data and information theory provides us the foundation to explore and understand how this optimization may be achieved.
+Specific areas which were reviewed in detail include transfer functions, automated transfer function generation, visibility histograms, information theory and computational saliency.
+Transfer functions are relevant to all of the following chapters as transfer function optimization is a central theme of this thesis.
+Information theory is relevant to Chapter~\ref{transfer_function_refinement}.
+Visibility and computational saliency are relevant to Chapter~\ref{visibility-weighted_saliency} and Chapter~\ref{transfer_function_optimization}.
+Transfer functions for time-varying volume visualization relates to Chapter~\ref{selective_saturation_brightness}
+
+The review suggests that it is feasible to optimize the parameters of volume visualization based on the information within volume data. Existing research on automated transfer function generation, information theory, visibility histograms and computational saliency of volume data provides us the foundation to explore and understand how this optimization may be achieved.
 %Existing research on the analysis and visualization of time-varying data and flow data gives us valuable information on the study of the dynamic aspect of time-varying volume data.
-In particular, the analysis and visualization of time-varying data is a compelling problem due to increasing availability of such data in recent years. Although some work has been published in this area, it is clear that there is compelling work left to be done in optimizing the rendering of such data sets.
-The use of NPR techniques can improve the expressiveness of the visualization and thus facilitate better user understanding of data.
-Further studies are required in order to better integrate NPR techniques into the visualization pipeline and enhance the expressiveness by exploiting the information within volume data sets.
+%In particular, the analysis and visualization of time-varying data is a compelling problem due to increasing availability of such data in recent years. Although some work has been published in this area, it is clear that there is compelling work left to be done in optimizing the rendering of such data sets.
+%The use of NPR techniques can improve the expressiveness of the visualization and thus facilitate better user understanding of data.
+Further studies are required in order to better integrate visibility and computational saliency of volume data into the visualization pipeline and enhance the expressiveness by exploiting the information within volume data sets.
 
 %-------------------------------------------------------------------------
