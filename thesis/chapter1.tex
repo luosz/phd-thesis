@@ -4,17 +4,17 @@
 \cite{moreland_survey_2013}
 \cite{beyer_state---art_2015}
 
-Volume visualization is an active branch of scientific visualization. It is a method of extracting meaningful information from volumetric data (3D discretely sampled data sets) using interactive graphics and imaging (see Section~\ref{volume_rendering}). The study of volume visualization involves volume data representation, modelling, manipulation and rendering \cite{kaufman_volume_1997}.
-First introduced by Levoy \cite{levoy_display_1988} for visualization of volume data, volume visualization has been widely used in various sciences to create insightful visualizations from both simulated and measured data.
-Volume visualization is a powerful technique which aims to visualize the 3D structures in volume data sets and thus facilitates the user's exploration into the data. It has become an important technique for various applications such as medical imaging and scientific visualization and is especially useful in diagnostics for physicians in medicine.
+Volume visualization is an active branch of scientific visualization. It is a method of extracting meaningful information from volumetric data (3D discretely sampled data sets) using interactive graphics and imaging (see Section~\ref{volume_rendering}). The study of volume visualization involves volume data representation, modeling, manipulation and rendering \cite{kaufman_volume_1997}.
+First introduced by Levoy \cite{levoy_display_1988}, volume visualization has been widely used in various sciences to create insightful visualizations from both simulated and measured data.
+Volume visualization is a powerful technique which aims to visualize the 3D structures in volume data sets and thus facilitates the user's exploration into the data. It has become an important technique for various applications such as medical imaging and scientific visualization. Furthermore, it is especially useful in diagnostics for physicians in medicine.
 %Visualization of large-scale time-varying volumetric datasets has become one of the most challenging problems in scientific visualization.
 With the advance of various data acquisition hardware,
 %such as CT, MRI, fMRI, 
-time-varying volumetric data sets are increasing dramatically both in size and complexity. However, the visualization of time-varying volume data remains a challenging problem due to the large size and the dynamic nature of the underlying information.
+time-varying volume data sets are increasing dramatically both in size and complexity. However, the visualization of time-varying volume data remains a challenging problem due to the large size and the dynamic nature of the underlying information.
 Previously established techniques, such as in flow visualization, struggle to deal with the increasing complexity of the most recent data sets.
 %Researchers have proposed various techniques to analyse and visualize volume data.
 
-The rendering of volume data requires every sample value (also called voxel, which is a volume element (or volumetric pixel)) to be mapped to visual properties (e.g. opacity and color). This mapping is done with a transfer function, which can be a simple ramp, a piecewise linear function or an arbitrary table.
+The rendering of volume data requires every sample value (also called voxel, which is a volume element or volumetric pixel) to be mapped to visual properties (e.g. opacity and color). This mapping is done with a transfer function, which can be a simple ramp, a piecewise linear function or an arbitrary table.
 The design of an effective transfer function (see Section~\ref{literature_of_transfer_function} for details) is essential for visualizing volume data. A wealth of techniques have been developed for transfer function design for static volume data \cite{kindlmann_semi-automatic_1998} \cite{pfister_transfer_2001} \cite{kniss_multidimensional_2002} \cite{bernardon_transfer-function_2008} \cite{arens_survey_2010}. However, transfer function design for time-varying volume data has not been studied thoroughly. % as in static volume data.
 A fundamental challenge in the analysis and classification of time-varying volume data is the lack of capability to %observe and 
 track data change or evolution over time \cite{gu_transgraph_2011}.
