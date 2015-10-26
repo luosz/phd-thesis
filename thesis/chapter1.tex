@@ -2,36 +2,27 @@
 %\epigraph{``What is above form is called Tao; what is within form is called tool."}{--- \textup{I Ching (the Classic of Changes)}}
 
 \cite{moreland_survey_2013}
-\cite{beyer_state---art_2015}
 
-Volume visualization is an active branch of scientific visualization. It is a method of extracting meaningful information from volumetric data (3D discretely sampled data sets) using interactive graphics and imaging (see Section~\ref{volume_rendering}). The study of volume visualization involves volume data representation, modeling, manipulation and rendering \cite{kaufman_volume_1997}.
+Volume visualization is an active branch of scientific visualization. It is a method of extracting meaningful information from volume data (3D discretely sampled data sets) using interactive graphics and imaging (see Section~\ref{volume_rendering}). The study of volume visualization involves volume data representation, modeling, manipulation and rendering \cite{kaufman_volume_1997}.
 First introduced by Levoy \cite{levoy_display_1988}, volume visualization has been widely used in various sciences to create insightful visualizations from both simulated and measured data.
 Volume visualization is a powerful technique which aims to visualize the 3D structures in volume data sets and thus facilitates the user's exploration into the data. It has become an important technique for various applications such as medical imaging and scientific visualization. Furthermore, it is especially useful in diagnostics for physicians in medicine.
-%Visualization of large-scale time-varying volumetric datasets has become one of the most challenging problems in scientific visualization.
-With the advance of various data acquisition hardware,
-%such as CT, MRI, fMRI, 
-time-varying volume data sets are increasing dramatically both in size and complexity. However, the visualization of time-varying volume data remains a challenging problem due to the large size and the dynamic nature of the underlying information.
-Previously established techniques, such as in flow visualization, struggle to deal with the increasing complexity of the most recent data sets.
-%Researchers have proposed various techniques to analyse and visualize volume data.
+Recent advance in volume data acquisition and scientific simulations have led dramatically increasing volume data sets, both in size and complexity, that must be visualized and analyzed \cite{beyer_state---art_2015}.
+
+%Time-varying volume data sets are increasing dramatically both in size and complexity as various data acquisition devices rapidly evolve in recent years.
+%However, the visualization of time-varying volume data remains a challenging problem due to the large size and the dynamic nature of the underlying information.
+%Previously established techniques, such as in flow visualization, struggle to deal with the increasing complexity of the most recent data sets.
 
 The rendering of volume data requires every sample value (also called voxel, which is a volume element or volumetric pixel) to be mapped to visual properties (e.g. opacity and color). This mapping is done with a transfer function, which can be a simple ramp, a piecewise linear function or an arbitrary table.
-The design of an effective transfer function (see Section~\ref{literature_of_transfer_function} for details) is essential for visualizing volume data. A wealth of techniques have been developed for transfer function design for static volume data \cite{kindlmann_semi-automatic_1998} \cite{pfister_transfer_2001} \cite{kniss_multidimensional_2002} \cite{bernardon_transfer-function_2008} \cite{arens_survey_2010}. However, transfer function design for time-varying volume data has not been studied thoroughly. % as in static volume data.
-A fundamental challenge in the analysis and classification of time-varying volume data is the lack of capability to %observe and 
-track data change or evolution over time \cite{gu_transgraph_2011}.
+The design of an effective transfer function (see Section~\ref{literature_of_transfer_function} for details) is essential for visualizing volume data. A wealth of techniques have been developed for transfer function design for static volume data \cite{kindlmann_semi-automatic_1998} \cite{pfister_transfer_2001} \cite{kniss_multidimensional_2002} \cite{bernardon_transfer-function_2008} \cite{arens_survey_2010}.
 
-%Historically, most volume rendering techniques are designed to produce photorealistic images (e.g. volume ray-casting technique, which is an approximation of casting rays through the volume data).
-Much of the work in the field of volume visualization has been focused on the synthesis of photorealistic images to assist in the visualization of structures contained in volume data sets.
-However, traditional depictions of the same types of data, such as those found in medical textbooks, deliberately use non-realistic techniques to draw the viewer's attention to important aspects \cite{bruckner_style_2007}. Using abstraction, visual overload is prevented and thus result in a more effective visualization.
-
-NPR techniques are effective forms of abstraction. They are commonly inspired by artistic styles and techniques that do not focus on a realistic depiction of scenes and objects, therefore, they can express features that cannot be shown using physically correct light transport. Non-photorealistic images are used in preference to photorealistic images in specific circumstances. For instance, an empirical study \cite{schumann_assessing_1996} reported that, when asked to compare a computer-produced sketch against a photorealistically rendered CAD image, architects showed a great preference for the sketch.
-NPR models were adopted in visualization and hence formed the field of illustrative visualization.
-Although illustrative visualization is a relatively novel category of visualization approaches, it has been successfully employed in medical and other visualization sub-fields \cite{svakhine_illustration_2005} \cite{svakhine_illustration-inspired_2009}.
-Illustrative visualization has proven its usefulness in revealing 3D structures due to its ability to hide less relevant details while emphasizing important details. The goal of illustrative visualization is to gain clarity compared to photo-realistic rendering by emphasizing important features and improving data exploration. In order to obtain more comprehensive images, it is necessary to highlight important aspects and omit less relevant details.
-
-%In recent years, illustrative styles have been adopted in scientific visualization to enhance expressiveness of renderings. Approaches for illustrative volume visualization frequently employ non-photorealistic rendering techniques to mimic the style of traditional illustrations.
+%However, transfer function design for time-varying volume data has not been studied thoroughly.
+%A fundamental challenge in the analysis and classification of time-varying volume data is the lack of capability to track data change or evolution over time \cite{gu_transgraph_2011}.
+%Much of the work in the field of volume visualization has been focused on the synthesis of photorealistic images to assist in the visualization of structures contained in volume data sets.
+%However, traditional depictions of the same types of data, such as those found in medical textbooks, deliberately use non-realistic techniques to draw the viewer's attention to important aspects \cite{bruckner_style_2007}. Using abstraction, visual overload is prevented and thus result in a more effective visualization.
+%NPR techniques are effective forms of abstraction. They are commonly inspired by artistic styles and techniques that do not focus on a realistic depiction of scenes and objects, therefore, they can express features that cannot be shown using physically correct light transport. Non-photorealistic images are used in preference to photorealistic images in specific circumstances. For instance, an empirical study \cite{schumann_assessing_1996} reported that, when asked to compare a computer-produced sketch against a photorealistically rendered CAD image, architects showed a great preference for the sketch.
+%NPR models were adopted in visualization and hence formed the field of illustrative visualization.
 %Although illustrative visualization is a relatively novel category of visualization approaches, it has been successfully employed in medical and other visualization sub-fields \cite{svakhine_illustration_2005} \cite{svakhine_illustration-inspired_2009}.
-%
-%Illustrative visualization has proven its usefulness in revealing 3D structures due to its ability to hide less relevant details while emphasizing important features. The goal of illustrative visualization is to gain clarity compared to photo-realistic rendering by emphasizing important features and improving data exploration. In order to gain more comprehensive images, it is necessary to highlight important aspects and omit less relevant details.
+%Illustrative visualization has proven its usefulness in revealing 3D structures due to its ability to hide less relevant details while emphasizing important details. The goal of illustrative visualization is to gain clarity compared to photo-realistic rendering by emphasizing important features and improving data exploration. In order to obtain more comprehensive images, it is necessary to highlight important aspects and omit less relevant details.
 
 \section{Motivation \label{motivation}}
 Understanding and analyzing complex volumetrically varying data is a challenging problem.
