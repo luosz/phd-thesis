@@ -24,22 +24,32 @@ The design of an effective transfer function (see Section~\ref{literature_of_tra
 
 \section{Motivation \label{motivation}}
 Understanding and analyzing complex volumetrically varying data is a challenging problem.
-Many visualization techniques have had only limited success in succinctly portraying the structure of 3D time-varying volume data.
+Many visualization techniques have had only limited success in succinctly portraying the structure of volume data sets.
 %There are only limited success have been reported about various visualization techniques which succinctly portray the structure of 3D time-varying volume data.
-The main goal of our research is to investigate the optimization of visualization parameters (in particular transfer functions) and the use of NPR techniques, and develop a methodology which incorporates these two types of techniques to facilitate the user's exploration of the data sets. NPR techniques are effective forms of abstraction and they have proven their usefulness in expressing features that cannot be shown using realistic depiction of scenes and objects. The combination of standard volume visualization and NPR techniques will bring the opportunity to provide expressive visualization and assist the user in accomplishing his/her task efficiently.
+
+%The main goal of our research is to investigate the optimization of visualization parameters (in particular transfer functions) and the use of NPR techniques, and develop a methodology which incorporates these two types of techniques to facilitate the user's exploration of the data sets. NPR techniques are effective forms of abstraction and they have proven their usefulness in expressing features that cannot be shown using realistic depiction of scenes and objects. The combination of standard volume visualization and NPR techniques will bring the opportunity to provide expressive visualization and assist the user in accomplishing his/her task efficiently.
+
+The main goal of our research is to investigate the optimization of visualization parameters (in particular transfer functions) with information derived from volume data and feedback from the volume rendering process.
 
 We hypothesize that the importance of voxels (sample values in volume data) are associated with their information content. Therefore, the transfer functions of volume visualization can be optimized based on the information within the data sets and user input which indicates the user's interest.
-In addition, we investigate the feasibility of propagating the optimization approach from static volume data to time-varying data.
+%In addition, we investigate the feasibility of propagating the optimization approach from static volume data to time-varying data.
 
 %A small number of approaches have been proposed for using information theory in volume visualization. However, most available approaches are not designed for the visualization of time-varying data and thus they have not taken the coherence issues into account.
 
 \section{Scope}
-This thesis focuses on methods for enhancing user understanding of volume data by optimizing visualization parameters and incorporating NPR techniques.
-We investigate the optimization of transfer functions by exploiting the information inherent within the volume data and input from user interaction.
-In addition, we investigate NPR techniques which we believe are well suited for highlighting important details as well as simplifying less important details. Hence, we combine the optimization of visualization parameters and NPR techniques in order to provide meaningful exploration of complex data.
+%This thesis focuses on methods for enhancing user understanding of volume data by optimizing visualization parameters and incorporating NPR techniques.
+%I investigate the optimization of transfer functions by exploiting the information inherent within the volume data and input from user interaction.
+%In addition, we investigate NPR techniques which we believe are well suited for highlighting important details as well as simplifying less important details. Hence, we combine the optimization of visualization parameters and NPR techniques in order to provide meaningful exploration of complex data.
 
-In this research, we focus on the visualization of both static and time-varying volume data, particularly those scalar data acquired from CT, MRI and 4D MRI. Flow data which are often in the form of vector fields are not under the focus of our research.
-Furthermore, we investigate techniques which are applicable to consumer level devices rather than expensive dedicated visualization hardware. As such, this constrains the amount of memory and processing power available, and therefore fast techniques with low memory requirement are necessary.
+The focus of this thesis is on methods for enhancing user understanding of features of interest in volume visualization by optimizing transfer functions based on information derived from volume data (e.g. entropy and saliency of voxels). In addition to the information inherent in the volume data, view-dependent information (e.g. visibility of voxels) obtained in the volume rendering process is also exploited in the optimization of transfer functions.
+
+In this research, I focus on the visualization of volume data sets, particularly the scalar field data acquired from medical imaging (e.g. CT and MRI scans) and generated from flow simulations (e.g. computational fluid dynamics).
+
+The features of interest in a volume data set are specified by user-defined transfer functions.
+Therefore, manual segmentation by domain experts or computational expensive automatic segmentation techniques are not in the scope of this thesis.
+
+%Flow data which are often in the form of vector fields are not under the focus of our research.
+%Furthermore, we investigate techniques which are applicable to consumer level devices rather than expensive dedicated visualization hardware. As such, this constrains the amount of memory and processing power available, and therefore fast techniques with low memory requirement are necessary.
 
 %\section{Research Question and Design \label{section_research_question}}
 %\paragraph{Research Question}
@@ -87,6 +97,14 @@ Furthermore, we investigate techniques which are applicable to consumer level de
 %\section{Scope}
 
 \section{Contributions}
+I have presented a transfer function refinement approach, which exploits the entropy of voxels derived from volume to equalize the opacity transfer function, in order to reduce general occlusion and improve the clarity of layers of structures in the resulting images. Moreover, the user can explore a volume by interactively specifying different priority intensity ranges and observe which layers of structures are revealed.
+
+In addition to view-independent information (i.e. entropy of voxels), I propose visibility-weighted saliency for measuring the view-dependent saliency of features of interest for volume visualization.
+This metric aims to assist users in choosing suitable viewpoints and designing effective transfer functions to visualize the features of interest.
+
+Subsequently, I describe an automated transfer function optimization method based on the visibility-weighted saliency metric. This method takes into account the perceptual importance of voxels and the visibility of features, and automatically adjust the transfer function to match the target saliency levels specified by the user. In addition, a parallel line search strategy is presented to improve the performance of the optimization algorithm.
+
+Finally, I develop a novel visualization approach which modulates focus, emphasizing important information, by adjusting saturation and brightness of voxels based on an importance measure derived from temporal and multivariate information.
 
 \section{Summary of Chapters}
 The rest of this thesis is structured as follows:
@@ -95,7 +113,7 @@ Chapter~\ref{related_work_chapter}
 provides an overview of the background and related work in the field of volume visualization, with particular focus on the design and optimization of transfer functions.
 
 Chapter~\ref{transfer_function_refinement}
-presents a novel approach for transfer function refinement, which is an optimization of transfer functions based on the distribution (i.e. the histogram) of the volume data. This optimization also allows the user to prioritize specific regions by generating weightings for transfer function components based on user-selected regions
+presents a novel approach for transfer function refinement, which is an optimization of transfer functions based on the distribution (i.e. the histogram) of the volume data. This optimization also allows the user to prioritize specific regions by generating weightings for transfer function components based on user-selected regions.
 
 Chapter~\ref{visibility-weighted_saliency}
 describes visibility-weighted saliency as a measure of visual saliency of features in volume rendered images, in order to assist users in choosing suitable viewpoints and designing effective transfer functions to visualize the features of interest. Visibility-weighted saliency is based on a computational measure of perceptual importance of voxels and the visibility of features in volume rendered images.
