@@ -18,17 +18,23 @@ Therefore, it is desirable to have an automated method to assist the user in the
 % conjugate gradient descent \cite{shewchuk_introduction_1994}
 Transfer function specification is a non-trivial and unintuitive task in volume visualization. Compared to typical transfer function approaches, which are often subjective, it is desirable to have objective feedback regarding the clarity of features in volume visualization.
 
-Chen et al. \cite{chan_perception-based_2009}
-Based on the perception principles, introduce several image quality measures, 
-to enhance the perceived quality of semi-transparent structures.
+Based on the perception principles, Chen et al. \cite{chan_perception-based_2009} introduced several image quality measures to enhance the perceived quality of semitransparent features.
+J{\"a}nicke and Chen \cite{janicke_salience-based_2010} described a quality metric for analyzing the saliency of visualization images and demonstrated its usefulness with examples from information visualization, volume visualization and flow visualization.
+
+Correa and Ma \cite{correa_visibility-driven_2009} introduced visibility histograms to guide transfer function design for both manual and automatic adjustment.
+Visibility histograms (Figure~\ref{fig:correa_visibility-driven_2009}), which summarize the distribution of visibility of voxels from a given viewpoint, is a powerful feedback mechanism of volume visualization \cite{emsenhuber_visibility_2008}.
+Want et al. \cite{wang_efficient_2011} extended visibility histograms to feature visibility, in order to measures the influence of each feature to the resulting images. They described a scheme that allows user to specify desired visibility for features of interest and subsequently the opacity transfer function is optimized using an active set algorithm \cite{polyak_conjugate_1969}.
 
 \noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
 *** to be edited ***
 
-Correa and Ma \cite{correa_visibility-driven_2009} introduced visibility histograms to guide transfer function design for both manual and automatic adjustment.
-Visibility histograms (Figure~\ref{fig:correa_visibility-driven_2009}), which summarize the distribution of visibility of voxels from a given viewpoint, is a powerful feedback mechanism of volume visualization \cite{emsenhuber_visibility_2008}.
+Researchers have developed a variety of parallel strategies to accelerate sequential optimization algorithms \cite{spedicato_algorithms_2012}.
 
-Want et al. \cite{wang_efficient_2011} extended visibility histograms to feature visibility, in order to measures the influence of each feature to the resulting images. They described a scheme that allows user to specify desired visibility for features of interest and subsequently the opacity transfer function is optimized using an active set algorithm \cite{polyak_conjugate_1969}.
+\cite{koko_parallel_1998}
+Phua et al. \cite{phua_parallel_1998} proposed a parallel extension to quasi-Newton methods \cite{yang_optimization_2001}. Their approach generates several search directions at each iteration and then apply different line search and scaling strategies in parallel along each search direction.
+Peachey et al. \cite{peachey_parallel_2009} presented heuristics for speeding convergence by continuing to the next iteration before all evaluations are complete. 
+where in their applications the evaluations of the objective function typically require minutes or hours.
+
 
 %ASA is a general optimization algorithm especially
 %suited for solving box constrained optimization problems.
