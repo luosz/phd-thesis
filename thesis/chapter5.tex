@@ -25,32 +25,12 @@ Correa and Ma \cite{correa_visibility-driven_2009} introduced visibility histogr
 Visibility histograms (Figure~\ref{fig:correa_visibility-driven_2009}), which summarize the distribution of visibility of voxels from a given viewpoint, is a powerful feedback mechanism of volume visualization \cite{emsenhuber_visibility_2008}.
 Want et al. \cite{wang_efficient_2011} extended visibility histograms to feature visibility, in order to measures the influence of each feature to the resulting images. They described a scheme that allows user to specify desired visibility for features of interest and subsequently the opacity transfer function is optimized using an active set algorithm \cite{polyak_conjugate_1969}.
 
-\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
-*** to be edited ***
+%\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
 
 Researchers have developed a variety of parallel strategies to accelerate sequential optimization algorithms \cite{spedicato_algorithms_2012}.
-
-\cite{koko_parallel_1998}
+%\cite{koko_parallel_1998}
 Phua et al. \cite{phua_parallel_1998} proposed a parallel extension to quasi-Newton methods \cite{yang_optimization_2001}. Their approach generates several search directions at each iteration and then apply different line search and scaling strategies in parallel along each search direction.
-Peachey et al. \cite{peachey_parallel_2009} presented heuristics for speeding convergence by continuing to the next iteration before all evaluations are complete. 
-where in their applications the evaluations of the objective function typically require minutes or hours.
-
-
-%ASA is a general optimization algorithm especially
-%suited for solving box constrained optimization problems.
-%Moreover, it can achieve global convergence with some
-%loose assumptions. In other words, the iteration is guaran-
-%teed to converge to a local minimum no matter what the ini-
-%tial guess is. This property is very useful in the opacity op-
-%timization procedure where the user usually does not have a
-%clear idea about what initial opacities are close enough to
-%ensure convergence. The traditional conjugate gradient or
-%steepest descent methods do not have this property. Real-
-%ization of this algorithm requires the calculation of partial
-%derivatives and an initial solution. Because it is not easy to
-%ﬁnd an analytical expression for the gradient in Equation 9,
-%we calculate partial derivatives of the objective function us-
-%ing a second-order central difference scheme.
+Peachey et al. \cite{peachey_parallel_2009} presented another approach to parallelize the quasi-Newton methods. Their approach evaluates the objective function in parallel over a cluster of computers and continue to the next iteration before all evaluations finish in order to accelerate convergence, in a scenario that the objective function evaluation typically require minutes or hours in their applications.
 
 %-------------------------------------------------------------------------
 \section{Method}

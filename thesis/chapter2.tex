@@ -83,37 +83,10 @@ Since the advent of programmable graphics processing units (GPU) and 3D textures
 
 \subsection{Splatting}
 Splatting is a volume rendering technique that trades quality for speed by combining volume projection with a sparse data representation \cite{westover_splatting:_1991}. In splatting, only voxels within certain intensity ranges need to be projected and the projection is done with efficient rasterization schemes \cite{mueller_splatting_1999}.
-Typical splatting approaches classifies and shades voxels before the projection. Hence, each voxel's footprint is weighted by its color and opacity specified by the transfer function. Projecting these fuzzy color balls leads to a blurry appearance of edges and boundaries of the objects.
 
-Splatting traditionally classifies and shades the voxels prior to projection, and thus each voxel foot-
-% print is weighted by the assigned voxel color and opacity. Project-
-% ing these fuzzy color balls provides a uniform screen image for
-% homogeneous object regions, but leads to a blurry appearance of
-% object edges.
-
-%Each projected voxel is represented as a radially symmetric interpolation kernel
-%
-%We would like to investigate better gradient kernels than the
-%Gaussian. However, we are limited by the fact that we have to use
-%radially symmetric kernels. Thus we cannot efficiently use the ker-
-%nels presented in [2] and [20], but work is underway to expand the
-%theory presented in [20] to rotationally symmetric kernels. Another
-%promising avenue of research in this respect are the Bessel-Kaiser
-%kernels derived by Lewitt [16].
-
-% In splatting, each projected voxel is represented as a
-% radially symmetric interpolation kernel, equivalent to a fuzzy ball.
-% Projecting such a basis function leaves a fuzzy impression, called a
-% footprint or splat, on the screen. Splatting traditionally classifies
-% and shades the voxels prior to projection, and thus each voxel foot-
-% print is weighted by the assigned voxel color and opacity. Project-
-% ing these fuzzy color balls provides a uniform screen image for
-% homogeneous object regions, but leads to a blurry appearance of
-% object edges. The latter is clearly undesirable, especially when the
-% view is zoomed on the object. In this work, we manipulate the ren-
-% dering pipeline of splatting by performing the classification and
-% shading process after the voxels have been projected onto the
-% screen.
+Typical splatting approaches classifies and shades voxels before the projection. Subsequently, each shaded voxel is projected to the screen using a 3D interpolation kernel. A 2D projection of the kernel is called a splat or footprint.
+Each voxel's splat is weighted by its color and opacity specified by the transfer function.
+Because of the pre-shaded scheme, projecting these fuzzy splats leads to a blurry appearance of object boundaries in the resulting image.
 
 \subsection{Shear Warp}
 \cite{lacroute_fast_1994}
