@@ -393,15 +393,58 @@ The feature visibility and weighted feature saliency in Figure~\ref{fig:tooth_sa
 
 %-------------------------------------------------------------------------
 \section{Experiment}
-To judge the performance of the proposed approach, a human study was conducted to construct a subjective data set for assessing visual saliency of features in volume visualization as perceived by human users. The aim of this set of experiments is to gather human rating of visual saliency data and gather eye tracking data to evaluate and improve a proposed computational visual saliency metric for volume visualization.
+To judge the performance of the proposed approach, a human study was conducted to construct a subjective data set for assessing visual saliency of features in volume visualization as perceived by human users. The aim of this set of experiments is to gather human rating of visual saliency data to evaluate the proposed computational visual saliency metric for volume visualization.
 
 \subsection{Source Images and Participants}
 This section describes the human study and experiments performed using it.
-The images used for the study were rendered by Voreen \cite{meyer-spradow_voreen:_2009} with a variety of transfer functions highlighting different features in various viewpoints.
-** females and ** males participated in the experiment all aged between ** and ** years.
+The volume rendering images used for the study were rendered by Voreen \cite{meyer-spradow_voreen:_2009} with a variety of transfer functions highlighting different features from various viewpoints.
+20 males and 10 females participated in the experiment all aged between 22 and 39 years old.
 
 \subsection{Methods and Measurements}
-Participants would sit in front of a computer display viewing images generated from volume visualization. The first part of the experiment would investigate how participants perceive the visual saliency of different objects in the images. The participants’ task would be to score the images on the scale of 1 to 5 by keyboard input. In the next part of the experiment, the participants would be asked to score the quality (in terms of sharpness and contrast) of the images (also by keyboard input) and their eye movements would be tracked by a head mounted eye tracker (EyeLink II by SR Research). In both parts of the experiment, each image would be shown to the participant for approximately 10 seconds. The experiment would last approximately 30 minutes. There would be a break scheduled midway through the experiment to allow the participant to rest.
+Participants would sit in front of a computer display viewing images generated from volume visualization. The first part of the experiment would investigate how participants perceive the visual saliency of different objects in the images. The participants’ task would be to score the images on the scale of 1 to 5 by keyboard input. 
+In each trial, a screen indicating the feature of interest would be shown to the participant for approximately 3 seconds, followed by a screen displaying a volume rendered image for approximately 17 seconds.
+The experiment would last approximately 20 minutes.
+%There would be a break scheduled midway through the experiment to allow the participant to rest.
+
+
+\begin{figure}
+	\centering
+	\begin{minipage}{.24\textwidth}
+		\includegraphics[width=1\linewidth]{images/mos_vs_metric_engine_feature_2}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.24\textwidth}
+		\includegraphics[width=1\linewidth]{images/mos_vs_metric_foot_feature_2}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.24\textwidth}
+		\includegraphics[width=1\linewidth]{images/mos_vs_metric_MRbrain_feature_2}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.24\textwidth}
+		\includegraphics[width=1\linewidth]{images/mos_vs_metric_nucleon_feature_2}
+		\subcaption{}
+	\end{minipage}
+
+	\begin{minipage}{.24\textwidth}
+		\includegraphics[width=1\linewidth]{images/mos_vs_metric_nucleon_feature_3}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.24\textwidth}
+		\includegraphics[width=1\linewidth]{images/mos_vs_metric_tooth_feature_3}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.24\textwidth}
+		\includegraphics[width=1\linewidth]{images/mos_vs_metric_vismale_feature_1}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.24\textwidth}
+		\includegraphics[width=1\linewidth]{images/mos_vs_metric_vismale_feature_2}
+		\subcaption{}
+	\end{minipage}
+	\caption{Experiment results of 6 volume data sets \cite{website:Roettger_volume_2013} \cite{website:Voreen_datasets_2013}}
+	\label{fig:mos_vs_metric}
+\end{figure}
 
 %-------------------------------------------------------------------------
 \section{Conclusions}
