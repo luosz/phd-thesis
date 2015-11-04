@@ -426,9 +426,29 @@ The experiment would last approximately 20 minutes.
 %There would be a break scheduled midway through the experiment to allow the participant to rest.
 
 \subsection{Data Analysis}
-Because the rating scales may not be linear, normally distributed or consistently applied across participants and data sets \cite{cunningham_experimental_2011}, this structure of the results may violate many assumptions of standard statistical tests.
+Since the opinion scores obtained from participants in the experiment may not be normally distributed or consistently applied across participants and data sets, this structure of data may violate the assumptions of some standard statistical tests \cite{cunningham_experimental_2011}.
+Spearman's rank correlation, which evaluates the strength of the monotonic association between two variables, does not assume normality of the variables.
+We applied the Spearman's rank correlation to analyze the monotonic association between the opinion scores and several computational metrics.
 
-As shown in Figure~\ref{fig:mos_vs_metric}, we analyze the mean opinion scores versus the visual saliency metric for each feature of the data sets separately.
+In addition, as shown in Figure~\ref{fig:mos_vs_metric}, we analyze the mean opinion scores versus the visual saliency metric for each feature of the data sets separately.
+
+\begin{figure}
+	\centering
+	\begin{minipage}{.33\textwidth}
+		\includegraphics[width=1\linewidth]{images/mos_vs_vws.png}
+		\subcaption{ Spearman's $\rho=0.66985 $, P-value$=3.03794 \times 10^{-8} $ }
+	\end{minipage}~
+	\begin{minipage}{.33\textwidth}
+		\includegraphics[width=1\linewidth]{images/mos_vs_visibility}
+		\subcaption{ Spearman's $\rho=0.677018 $, P-value$=1.90023 \times 10^{-8} $ }
+	\end{minipage}~
+	\begin{minipage}{.33\textwidth}
+		\includegraphics[width=1\linewidth]{images/mos_vs_fsm}
+		\subcaption{ Spearman's $\rho=0.525612 $, P-value$=4.47878 \times 10^{-5} $ }
+	\end{minipage}
+	\caption{Spearman's rank correlation of 54 opinion scores against the corresponding visibility-weighted saliency, visibility and feature saliency map respectively.}
+	\label{fig:mos_vs_vws}
+\end{figure}
 
 \begin{figure}
 	\centering
