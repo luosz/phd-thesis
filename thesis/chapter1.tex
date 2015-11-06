@@ -1,9 +1,10 @@
 \chapter{Introduction \label{section_introduction}}
 %\epigraph{``What is above form is called Tao; what is within form is called tool."}{--- \textup{I Ching (the Classic of Changes)}}
 
-Volume visualization is an active branch of scientific visualization. It is a method of extracting meaningful information from volume data (3D discretely sampled data sets) using interactive graphics and imaging (see Section~\ref{volume_rendering}). The study of volume visualization involves volume data representation, modeling, manipulation and rendering \cite{kaufman_volume_1997}.
+Volume visualization is an active branch of scientific visualization. It is a method of extracting meaningful information from volume data (3D discretely sampled data sets) using interactive graphics and imaging. The study of volume visualization involves volume data representation, modeling, manipulation and rendering \cite{kaufman_volume_1997}.
 First introduced by Levoy \cite{levoy_display_1988}, volume visualization has been widely used in various sciences to create insightful visualizations from both simulated and measured data.
-Volume visualization is a powerful technique which aims to visualize the 3D structures in volume data sets and thus facilitates the user's exploration into the data. It has become an important technique for various applications such as medical imaging and scientific visualization. Furthermore, it is especially useful in diagnostics for physicians in medicine.
+Volume visualization is a powerful technique which aims to visualize the 3D structures in volume data sets and thus facilitates the user's exploration into the data. It has become an important technique for various applications such as medical imaging and scientific visualization.
+%Furthermore, it is especially useful in diagnostics for physicians in medicine.
 Recent advance in volume data acquisition and scientific simulations have led dramatically increasing volume data sets, both in size and complexity, that must be visualized and analyzed \cite{beyer_state---art_2015}.
 
 %Time-varying volume data sets are increasing dramatically both in size and complexity as various data acquisition devices rapidly evolve in recent years.
@@ -11,7 +12,7 @@ Recent advance in volume data acquisition and scientific simulations have led dr
 %Previously established techniques, such as in flow visualization, struggle to deal with the increasing complexity of the most recent data sets.
 
 The rendering of volume data requires every sample value (also called voxel, which is a volume element or volumetric pixel) to be mapped to visual properties (e.g. opacity and color). This mapping is done with a transfer function, which can be a simple ramp, a piecewise linear function or an arbitrary table.
-The design of an effective transfer function (see Section~\ref{literature_of_transfer_function} for details) is essential for visualizing volume data. A wealth of techniques have been developed for transfer function design for static volume data \cite{kindlmann_semi-automatic_1998} \cite{pfister_transfer_2001} \cite{kniss_multidimensional_2002} \cite{bernardon_transfer-function_2008} \cite{arens_survey_2010}.
+The design of an effective transfer function (see Section~\ref{literature_of_transfer_function} for details) is essential for visualizing volume data. A wealth of techniques have been developed for transfer function design for static volume data \cite{pfister_transfer_2001} \cite{bernardon_transfer-function_2008} \cite{arens_survey_2010}.
 
 %However, transfer function design for time-varying volume data has not been studied thoroughly.
 %A fundamental challenge in the analysis and classification of time-varying volume data is the lack of capability to track data change or evolution over time \cite{gu_transgraph_2011}.
@@ -29,7 +30,7 @@ Many visualization techniques have had only limited success in succinctly portra
 
 %The main goal of our research is to investigate the optimization of visualization parameters (in particular transfer functions) and the use of NPR techniques, and develop a methodology which incorporates these two types of techniques to facilitate the user's exploration of the data sets. NPR techniques are effective forms of abstraction and they have proven their usefulness in expressing features that cannot be shown using realistic depiction of scenes and objects. The combination of standard volume visualization and NPR techniques will bring the opportunity to provide expressive visualization and assist the user in accomplishing his/her task efficiently.
 
-The main goal of our research is to investigate the optimization of visualization parameters (in particular transfer functions) with information derived from volume data and feedback from the volume rendering process.
+The main goal of our research is to investigate the optimization of visualization parameters (in particular transfer functions) with information derived from volume data and feedback mechanisms (e.g. visibility and visual saliency in resulting images) from the volume rendering process.
 
 We hypothesize that the importance of voxels (sample values in volume data) are associated with their information content. Therefore, the transfer functions of volume visualization can be optimized based on the information within the data sets and user input which indicates the user's interest.
 %In addition, we investigate the feasibility of propagating the optimization approach from static volume data to time-varying data.
@@ -43,7 +44,7 @@ We hypothesize that the importance of voxels (sample values in volume data) are 
 
 The focus of this thesis is on methods for enhancing user understanding of features of interest in volume visualization by optimizing transfer functions based on information derived from volume data (e.g. entropy and saliency of voxels). In addition to the information inherent in the volume data, view-dependent information (e.g. visibility of voxels) obtained in the volume rendering process is also exploited in the optimization of transfer functions.
 
-In this research, I focus on the visualization of volume data sets, particularly the scalar field data acquired from medical imaging (e.g. CT and MRI scans) and generated from flow simulations (e.g. computational fluid dynamics).
+In this research, we focus on the visualization of volume data sets, particularly the scalar field data acquired from medical imaging (e.g. CT and MRI scans) and generated from flow simulations (e.g. computational fluid dynamics).
 
 The features of interest in a volume data set are specified by user-defined transfer functions.
 Therefore, manual segmentation by domain experts or computational expensive automatic segmentation techniques are not in the scope of this thesis.
@@ -97,14 +98,14 @@ Therefore, manual segmentation by domain experts or computational expensive auto
 %\section{Scope}
 
 \section{Contributions}
-I have presented a transfer function refinement approach, which exploits the entropy of voxels derived from volume to equalize the opacity transfer function, in order to reduce general occlusion and improve the clarity of layers of structures in the resulting images. Moreover, the user can explore a volume by interactively specifying different priority intensity ranges and observe which layers of structures are revealed.
+We have presented a transfer function refinement approach, which exploits the entropy of voxels derived from volume to equalize the opacity transfer function, in order to reduce general occlusion and improve the clarity of layers of structures in the resulting images. Moreover, the user can explore a volume by interactively specifying different priority intensity ranges and observe which layers of structures are revealed.
 
-In addition to view-independent information (i.e. entropy of voxels), I propose visibility-weighted saliency for measuring the view-dependent saliency of features of interest for volume visualization.
+In addition to view-independent information (i.e. entropy of voxels), we propose visibility-weighted saliency for measuring the view-dependent saliency of features of interest for volume visualization.
 This metric aims to assist users in choosing suitable viewpoints and designing effective transfer functions to visualize the features of interest.
 
-Subsequently, I describe an automated transfer function optimization method based on the visibility-weighted saliency metric. This method takes into account the perceptual importance of voxels and the visibility of features, and automatically adjust the transfer function to match the target saliency levels specified by the user. In addition, a parallel line search strategy is presented to improve the performance of the optimization algorithm.
+Subsequently, we describe an automated transfer function optimization method based on the visibility-weighted saliency metric. This method takes into account the perceptual importance of voxels and the visibility of features, and automatically adjust the transfer function to match the target saliency levels specified by the user. In addition, a parallel line search strategy is presented to improve the performance of the optimization algorithm.
 
-Finally, I develop a novel visualization approach which modulates focus, emphasizing important information, by adjusting saturation and brightness of voxels based on an importance measure derived from temporal and multivariate information.
+Finally, we develop a novel visualization approach which modulates focus, emphasizing important information, by adjusting saturation and brightness of voxels based on an importance measure derived from temporal and multivariate information.
 
 \section{Summary of Chapters}
 The rest of this thesis is structured as follows:
