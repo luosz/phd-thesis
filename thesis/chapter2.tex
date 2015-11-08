@@ -239,7 +239,7 @@ Moreover, transfer function specification in general is an unintuitive or even m
 For instance, there are skin and fat tissues around the brain, and their intensities lie in the same range as the brain. If we want to visualize the brain by setting the scalar value range of the brain to opaque, the surrounding skin and fat tissue will also become opaque. Then the brain will be occluded by the surrounding soft tissues which make it difficult to explore the brain structure.
 Common approaches to this problem are to introduce explicit segmentation of structures of interest before the volume rendering process \cite{rezk-salama_opacity_2006}. In fact, the process of applying the transfer function could be interpreted as a segmentation problem.
 
-\subsection{Multidimensional Transfer Functions}
+\subsubsection{Multidimensional Transfer Functions}
 Multidimensional transfer functions \cite{kniss_interactive_2001}, which are mappings from intensity and other variables, such as first and second derivatives to color and opacity, have demonstrated their effectiveness in distinguishing boundaries between materials in volume data.
 
 %Overlapping intensity intervals corresponding to different materials make boundary detection difficult. Classical approaches try to detect boundary information between tissues by introducing derived attributes such as first and second derivatives to isolate materials \cite{kindlmann_semi-automatic_1998} \cite{kniss_multidimensional_2002} \cite{kindlmann_transfer_2002}.
@@ -274,50 +274,6 @@ Wang et al. \cite{wang_automating_2012} described a clustering approach on 2D de
 Ip et al. \cite{ip_hierarchical_2012} described a multilevel segmentation technique that mimics user exploration behaviors by recursively segmenting intensity-gradient histograms.
 
 In addition, parallel coordinates and dimensionality reduction algorithms (e.g. principal component analysis) were employed to support the design of transfer functions in multidimensional parameter spaces \cite{zhao_multi-dimensional_2010} \cite{guo_multi-dimensional_2011} \cite{kim_dimensionality_2010}.
-
-\subsection{Transfer Functions for Time-Varying Volume Visualization}
-Although researchers have developed a great number of visualization techniques for time-invariant volume data, how to effectively explore and understand time-varying volume data remains a challenging problem. Finding good transfer functions for time-invariant volume data itself has proven difficult \cite{pfister_transfer_2001}.
-%Finding good transfer functions for time-varying volume data is even more difficult, as data value ranges and distributions change over time.
-%Although researchers have developed a great number of visualization techniques for static volume data, how to effectively explore and understand time-varying volume data remains a challenging problem.
-Finding good transfer functions for time-varying volume data is more difficult than for static volume data, as data value ranges and distributions change over time.
-
-Coherence is an important issue of transfer function design for time-varying volume data. Ideally, a single transfer function should be used for the whole time-varying data set in order to obtain coherent visualization. More than one color or opacity map can be misleading or physically meaningless, because the transition from one transfer function to another may cause sudden changes in the resulting images. However, this practice is not always applicable to general time-varying data sets.
-
-Volume data sets are inherently 3D representations. Automated analysis methods, such as temporal trends or statistical aggregates e.g. mean values and standard deviations, are often applied in order to abstract dynamic characteristics of the data sets \cite{kehrer_visualization_2013}.
-
-%Jankun-Kelly and Ma \cite{jankun-kelly_study_2001} examined how to combine transfer functions for different time-steps to generate a coherent transfer function.
-Jankun-Kelly and Ma \cite{jankun-kelly_study_2001} examined how to combine transfer functions for different time-steps to generate a coherent transfer function.
-Woodring et al. \cite{woodring_high_2003} considered time-varying volume data as four-dimensional data field and provided a user interface to specify hyperplanes in 4D.
-Woodring and Shen \cite{woodring_chronovolumes_2003} introduced an alternative approach to render multiple time-steps in a sequence with different colors into a single image. This approach provides the context of surrounding time steps but coherence of color among time-steps is hard to maintain.
-
-Tikhonova et al. \cite{tikhonova_exploratory_2010} presented an exploratory approach based on a compact representation of each time step of the dataset in the form of ray attenuation functions. Ray attenuation functions are subsequently used for transfer function generation.
-Akiba et al. \cite{akiba_simultaneous_2006} introduced the time histogram which allows simultaneous classification and specification of temporal transfer functions for the entire time series.
-
-A time-varying volume data set can be considered as a 3D array where each voxel contains a time-activity curve (TAC). Fang et al. \cite{fang_visualization_2007} described an approach for classifying time-varying volume data based on the temporal behavior of voxels and three different similarity measures that can be used in their approach.
-Woording and Shen \cite{woodring_multiscale_2009} presented a method that filters time-varying volume data into several time scales using wavelet transform and classifies the voxels by clustering the entire time series by time scale.
-Lee and Shen \cite{lee_visualizing_2009} proposed a method for classifying time-varying features using time activity curves with the dynamic time warping distance metric.
-
-A single static transfer function maybe be able to capture dynamic features whose their intensity change over time.
-To address this problem, Woodring et al. \cite{woodring_semi-automatic_2009} utilized a method called temporal clustering and sequencing to find dynamic features in value space and create dynamic transfer functions through time-series analysis (Figure~\ref{fig:woodring_semi-automatic_2009}).
-
-\begin{figure}
-	\centering
-	\includegraphics[width=1\linewidth]{images/woodring_semi-automatic_2009}
-	\caption{A single static transfer function cannot capture dynamic features. In the two images at the top, the features appear to vanish over time. On the other hand, the features are visible over time if a dynamic transfer function is used (the two images at the bottom) \cite{woodring_semi-automatic_2009}.}
-	\label{fig:woodring_semi-automatic_2009}
-\end{figure}
-
-Ward and Guo \cite{ward_visual_2011} presented a method for visualizing time-series data that reveals a wide variety of features in the data, by mapping short sub-sequences of the time-varying volume data into a high-dimensional shape space, and then performing a dimension reduction process to allow projection into screen space.
-
-Gu and Wang \cite{gu_transgraph:_2011} proposed an approach to organize a time-varying data set into a hierarchical graph, which captures the transition relationships in the data set. This approach assists the user in comprehending the correspondence between volume regions over time and allows interaction of the graph through brushing and liking.
-
-In order to create coherent and feature-prominent animations of time-varying volume data, Peng et al. \cite{peng_optimal_2011} described an optimal color mapping strategy, which uses a two-phase optimization method with bilateral filtering and energy minimization.
-
-\subsubsection{Visualising Time-Varying Volume Data with NPR}
-An essential problem in time-varying volume visualization is to visualize temporal variation and analysis of features. Traditionally, time-varying data has been visualized as snapshots of individual time steps or animation of snapshots of a sequence of time steps. These techniques are effective in making time-varying data understandable. However, they struggle when the complexity of data sets increased dramatically in recent years \cite{brambilla_illustrative_2012}.
-
-Compared to flow visualization, which is a well established branch of scientific visualization \cite{brambilla_illustrative_2012}, general time-varying volume visualization is still a relative young field.
-Illustrations for time-varying rendering could be divided into two categories, one is to enhance time-invariant features and the other is to enhance temporal features of time-varying volume data. The techniques in the first category focus on enhancing structural perception of volume models through the amplification of features and the addition of illumination effects \cite{rheingans_volume_2001} \cite{joshi_illustration-inspired_2005}. Examples of these techniques include boundary enhancement, oriented feature enhancement (silhouettes, fading, and sketch lines). The techniques in the second category focus on illustrating dynamic aspects such as movement of features. A few kinds of techniques have been proposed for this purpose. For example, there are speed lines, flow ribbons and strobe silhouettes, which are inspired by traditional animation \cite{joshi_illustration-inspired_2005} \cite{joshi_evaluation_2008} \cite{joshi_case_2009}; and there are extended silhouette and boundary enhancement domains, which are inspired by the techniques used by illustrators and other artists \cite{svakhine_illustration_2005}. Nevertheless, illustrations of temporal features of time-varying data requires more attention from researchers in the visualization community. The usefulness of illustrative approaches in time-varying volume visualization has not been studied as thoroughly as in other areas.
 
 \section{Automated Transfer Function Generation}
 Researches have proposed various approaches to automate the design of transfer functions and provide acceptable suggestions which can be further edited by users. However, the usefulness of a transfer function mostly depends on the underlying question the user wants to answer. Moreover, users' tasks vary drastically from one domain to another. Therefore, most techniques work semi-automatically and very few techniques consider domain knowledge in the design process \cite{zudilova-seinstra_trends_2008}.
@@ -435,6 +391,61 @@ Data analysis techniques for high dimensional spaces, such as parallel coordinat
 %\cite{guo_scalable_2012}
 %\cite{liu_multivariate_2014}
 
+\section{Time-Varying Volume Visualization}
+Although researchers have developed a great number of visualization techniques for time-invariant volume data, how to effectively explore and understand time-varying volume data remains a challenging problem. Finding good transfer functions for time-invariant volume data itself has proven difficult \cite{pfister_transfer_2001}.
+%Finding good transfer functions for time-varying volume data is even more difficult, as data value ranges and distributions change over time.
+%Although researchers have developed a great number of visualization techniques for static volume data, how to effectively explore and understand time-varying volume data remains a challenging problem.
+Finding good transfer functions for time-varying volume data is more difficult than for static volume data, as data value ranges and distributions change over time.
+
+\subsection{Transfer Functions for Time-Varying Volume Visualization}
+Coherence is an important issue of transfer function design for time-varying volume data. Ideally, a single transfer function should be used for the whole time-varying data set in order to obtain coherent visualization. More than one color or opacity map can be misleading or physically meaningless, because the transition from one transfer function to another may cause sudden changes in the resulting images. However, this practice is not always applicable to general time-varying data sets. In some cases, the intensity distributions change significantly over time, thus applying a single transfer function to all frames becomes inappropriate.
+
+Volume data sets are inherently 3D representations. Automated analysis methods, such as temporal trends or statistical aggregates e.g. mean values and standard deviations, are often applied in order to abstract dynamic characteristics of the data sets \cite{kehrer_visualization_2013}.
+
+%Jankun-Kelly and Ma \cite{jankun-kelly_study_2001} examined how to combine transfer functions for different time-steps to generate a coherent transfer function.
+Jankun-Kelly and Ma \cite{jankun-kelly_study_2001} examined how to combine transfer functions for different time-steps to generate a coherent transfer function.
+Woodring et al. \cite{woodring_high_2003} considered time-varying volume data as four-dimensional data field and provided a user interface to specify hyperplanes in 4D.
+Woodring and Shen \cite{woodring_chronovolumes_2003} introduced an alternative approach to render multiple time-steps in a sequence with different colors into a single image. This approach provides the context of surrounding time steps but coherence of color among time-steps is hard to maintain.
+
+Tikhonova et al. \cite{tikhonova_exploratory_2010} presented an exploratory approach based on a compact representation of each time step of the dataset in the form of ray attenuation functions. Ray attenuation functions are subsequently used for transfer function generation.
+Akiba et al. \cite{akiba_simultaneous_2006} introduced the time histogram which allows simultaneous classification and specification of temporal transfer functions for the entire time series.
+
+A time-varying volume data set can be considered as a 3D array where each voxel contains a time-activity curve (TAC). Fang et al. \cite{fang_visualization_2007} described an approach for classifying time-varying volume data based on the temporal behavior of voxels and three different similarity measures that can be used in their approach.
+Woording and Shen \cite{woodring_multiscale_2009} presented a method that filters time-varying volume data into several time scales using wavelet transform and classifies the voxels by clustering the entire time series by time scale.
+Lee and Shen \cite{lee_visualizing_2009} proposed a method for classifying time-varying features using time activity curves with the dynamic time warping distance metric.
+
+A single static transfer function maybe be able to capture dynamic features whose their intensity change over time.
+To address this problem, Woodring et al. \cite{woodring_semi-automatic_2009} utilized a method called temporal clustering and sequencing to find dynamic features in value space and create dynamic transfer functions through time-series analysis (Figure~\ref{fig:woodring_semi-automatic_2009}).
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\linewidth]{images/woodring_semi-automatic_2009}
+	\caption{A single static transfer function cannot capture dynamic features. In the two images at the top, the features appear to vanish over time. On the other hand, the features are visible over time if a dynamic transfer function is used (the two images at the bottom) \cite{woodring_semi-automatic_2009}.}
+	\label{fig:woodring_semi-automatic_2009}
+\end{figure}
+
+Ward and Guo \cite{ward_visual_2011} presented a method for visualizing time-series data that reveals a wide variety of features in the data, by mapping short sub-sequences of the time-varying volume data into a high-dimensional shape space, and then performing a dimension reduction process to allow projection into screen space.
+
+Gu and Wang \cite{gu_transgraph:_2011} proposed an approach to organize a time-varying data set into a hierarchical graph, which captures the transition relationships in the data set. This approach assists the user in comprehending the correspondence between volume regions over time and allows interaction of the graph through brushing and liking.
+
+In order to create coherent and feature-prominent animations of time-varying volume data, Peng et al. \cite{peng_optimal_2011} described an optimal color mapping strategy, which uses a two-phase optimization method with bilateral filtering and energy minimization.
+
+\subsection{Visualizing Time-Varying Volume Data with Non-Photorealistic Rendering}
+In contrast to traditional computer graphics, which has focused largely on creating photorealistic images of synthetic objects, non-photorealistic rendering (NPR) is an area of computer graphics that focuses on creating abstract images with a wide variety of expressive styles \cite{haeberli_paint_1990}.
+In certain situations, non-photorealistic renderings are considered more effective and expressive than an equivalent photograph \cite{healey_perceptually_2004}.
+
+An essential problem in time-varying volume visualization is to visualize temporal variation and analysis of features. Traditionally, time-varying data has been visualized as snapshots of individual time steps or animation of snapshots of a sequence of time steps. These techniques are effective in making time-varying data understandable. However, they struggle when the complexity of data sets increased dramatically in recent years \cite{brambilla_illustrative_2012}.
+
+Compared to flow visualization, which is a well established branch of scientific visualization \cite{brambilla_illustrative_2012}, general time-varying volume visualization is still a relative young field.
+Illustrations for time-varying rendering could be divided into two categories, one is to enhance time-invariant features and the other is to enhance temporal features of time-varying volume data. The techniques in the first category focus on enhancing structural perception of volume models through the amplification of features and the addition of illumination effects \cite{rheingans_volume_2001} \cite{joshi_illustration-inspired_2005}. Examples of these techniques include boundary enhancement, oriented feature enhancement (silhouettes, fading, and sketch lines). The techniques in the second category focus on illustrating dynamic aspects such as movement of features. A few kinds of techniques have been proposed for this purpose. For example, there are speed lines, flow ribbons and strobe silhouettes, which are inspired by traditional animation \cite{joshi_illustration-inspired_2005} \cite{joshi_evaluation_2008} \cite{joshi_case_2009}; and there are extended silhouette and boundary enhancement domains, which are inspired by the techniques used by illustrators and other artists \cite{svakhine_illustration_2005}. Nevertheless, illustrations of temporal features of time-varying data requires more attention from researchers in the visualization community. The usefulness of illustrative approaches in time-varying volume visualization has not been studied as thoroughly as in other areas.
+
+\subsection{Vector Field Visualization}
+The visualization of vector fields plays a crucial role in visual interpretation and understand of the underlying flow features and patterns \cite{kuhn_clustering-based_2011} \cite{ma_coherent_2013}. Since flow patterns also exist in time-varying volume data, certain techniques for visualizing vector field could be incorporated into time-varying volume visualization, in order to depict the dynamic aspects of time-varying data.
+
+Line drawings are effective ways to depict complex information with simple means \cite{benard_state---art_2011}.
+Among vector field visualization techniques, streamline visualization is a simple but common way to convey the structure of 3D vector fields \cite{chen_illustrative_2011}. Streamlines have proven to give expressive visual representation if they are combined with appropriate seeding strategies \cite{annen_vector_2008}. Streamlines intuitively reveal flow patterns by integrating the flow path.
+
+
 \section{Information Theory in Visualization}
 Information theory \cite{shannon_mathematical_1948} was originally introduced to study the fundamental limit of reliable transmission of messages through a noisy communication channel. Traditional applications of information theory, such as data compression and data communication, focus on the efficient throughput of a communication channel, whilst visualization focuses on the effectiveness in aiding the perceptual and cognitive process for data understanding and knowledge discovery.
 
@@ -538,12 +549,6 @@ Gu and Wang \cite{gu_transgraph_2011} described the TransGraph, which is a graph
 %It also provides controllable interaction, which helps the user to track data transition over space and time.
 
 Hsieh et al. \cite{hsieh_feature_2013} introduced an particle swarm method for transfer function design. This method maps the frequency of particle occurrences to the color and opacity values and extract features after the particles finish searching for features in the volume data.
-
-\section{Vector Field Visualization}
-The visualization of vector fields plays a crucial role in visual interpretation and understand of the underlying flow features and patterns \cite{kuhn_clustering-based_2011} \cite{ma_coherent_2013}. Since flow patterns also exist in time-varying volume data, certain techniques for visualizing vector field could be incorporated into time-varying volume visualization, in order to depict the dynamic aspects of time-varying data.
-
-Line drawings are effective ways to depict complex information with simple means \cite{benard_state---art_2011}.
-Among vector field visualization techniques, streamline visualization is a simple but common way to convey the structure of 3D vector fields \cite{chen_illustrative_2011}. Streamlines have proven to give expressive visual representation if they are combined with appropriate seeding strategies \cite{annen_vector_2008}. Streamlines intuitively reveal flow patterns by integrating the flow path.
 
 \section{Summary}
 We have presented a review of literature in the field of volume visualization.
