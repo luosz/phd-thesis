@@ -168,14 +168,10 @@ Finally, I would like to especially thank my parents, my sister and Lu Han, to w
 
 \begin{thesisabstract}
 Volume data is widely used in scientific and medical research, and volume visualization has been proven to be an effective and flexible method for visualizing complex structures.
-%Volume visualization is a powerful technique for depicting layered structures in 3D volume data sets.
-%Volume visualization has been widely used to depict complicated 3D structures in volume data sets.
-%However, it is a major challenge to obtain clear visualizations of a volume with important structures clearly revealed.
 However, obtaining clear visualization of features of interest in volume data is still a major challenge.
 Due to the 3D occlusion between structures, it is a time-consuming and unintuitive task to specify appropriate transfer functions to clearly reveal the features of interest.
 In practice, transfer functions are often specified in a trial and error manner with careful observation of changes in the resulting images.
 
-%This thesis examines the methods for exploring of volume data by optimization of visualization parameters and through the use of focus and context visualization techniques by selectively enhancing important parts of the data sets.
 This thesis proposes and investigates novel automated optimization techniques for emphasizing features of interest in volume visualization using information content associated with volume data and objective measures such as visual saliency and visibility of voxels.
 
 We describe a global optimization and two user-driven refinement methods for modulating transfer functions in order to assist the exploration of volume data.
@@ -189,12 +185,17 @@ we propose visibility-weighted saliency as a measure of visual saliency of featu
 Visibility-weighted saliency is based on a computational measure of perceptual importance of voxels and the visibility of features in volume rendered images.
 The effectiveness of this scheme is demonstrated by test results on various volume data sets.
 
-Subsequently, we describe an automated transfer function optimization method based on the visibility-weighted saliency metric. This method takes into account the perceptual importance of voxels and the visibility of features, and automatically adjusts the transfer function to match the target saliency levels specified by the user. In addition, a parallel line search strategy is presented to improve the performance of the optimization algorithm.
+Subsequently, we present an automated transfer function optimization method based on the visibility-weighted saliency metric. This method takes into account the perceptual importance of voxels and the visibility of features, and automatically adjusts the transfer function to match the target saliency levels specified by the user. In addition, a parallel line search strategy is presented to improve the performance of the optimization algorithm.
 
-%Time-varying volume data is used in many areas of science and engineering. However, visualizations of such data are not easy for users to visually process due to the amount of information that can be presented simultaneously.
-Finally, we propose a novel visualization approach which modulates focus, emphasizing important information, by adjusting saturation and brightness of voxels based on an importance measure derived from temporal and multivariate information.
-%By conducting a voxel-wise analysis of a number of consecutive frames, we acquire a volatility measure of each voxel. We then use intensity, volatility and additional multivariate information to determine opacity, saturation and brightness of the voxels.
+Finally, we describe a multivariate visualization approach which modulates focus, emphasizing important information, by adjusting saturation and brightness of voxels based on an importance measure derived from temporal and multivariate information.
 The method was tested in visualizing a multivariate hurricane data set. The results suggest that our approach can give the user an intuitive understanding of the data by presenting multivariate information variables in one self-contained visualization.
+
+%Volume visualization is a powerful technique for depicting layered structures in 3D volume data sets.
+%Volume visualization has been widely used to depict complicated 3D structures in volume data sets.
+%However, it is a major challenge to obtain clear visualizations of a volume with important structures clearly revealed.
+%This thesis examines the methods for exploring of volume data by optimization of visualization parameters and through the use of focus and context visualization techniques by selectively enhancing important parts of the data sets.
+%Time-varying volume data is used in many areas of science and engineering. However, visualizations of such data are not easy for users to visually process due to the amount of information that can be presented simultaneously.
+%By conducting a voxel-wise analysis of a number of consecutive frames, we acquire a volatility measure of each voxel. We then use intensity, volatility and additional multivariate information to determine opacity, saturation and brightness of the voxels.
 
 %Volume data is widely used in scientific and medical research, and volume visualization has been proven to be an effective and flexible method for visualizing complex structures within volume data.
 %In recent years, volume visualization has received increasing attention in the analysis of dynamics and evolution of phenomena in a variety of application domains, including medicine, meteorology, astrophysics and engineering.
