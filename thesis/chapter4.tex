@@ -304,7 +304,7 @@ The feature visibility and weighted feature saliency in Figure~\ref{fig:tooth_sa
 \begin{figure}
 	\centering
 	\begin{minipage}{.6\textwidth}
-		\includegraphics[width=1\linewidth]{images/tooth.png}
+		\includegraphics[width=1\linewidth]{images/tooth_naive.png}
 	\end{minipage}~
 	\begin{minipage}{.3\textwidth}
 		\includegraphics[width=1\linewidth]{images/tooth_tf.png}
@@ -349,7 +349,7 @@ The feature visibility and weighted feature saliency in Figure~\ref{fig:tooth_sa
 \begin{figure}
 	\centering
 	\begin{minipage}{.6\textwidth}
-		\includegraphics[width=1\linewidth]{images/tooth_balance.png}
+		\includegraphics[width=1\linewidth]{images/tooth_balance_gpu.png}
 	\end{minipage}~
 	\begin{minipage}{.3\textwidth}
 		\includegraphics[width=1\linewidth]{images/tooth_balance_tf.png}
@@ -390,6 +390,12 @@ The feature visibility and weighted feature saliency in Figure~\ref{fig:tooth_sa
 	\caption{Feature visibility (darker histogram on the left) and weighted feature saliency (brighter histogram on the right) of the three features, computed with the transfer function in Figure~\ref{fig:tooth_2}.}
 	\label{fig:tooth_saliency_chart_2}
 \end{figure}
+
+\section{Feature Saliency with 2D Saliency Maps}
+A widely used saliency model is the saliency map by Itti et al. \cite{itti_model_1998}.
+The architecture and components of this model mimic the properties of primate early vision.
+Three visual properties, i.e. intensity contrast, color opponency and orientation are considered in the model in order to determine whether an image pixel stands out from its surroundings.
+The saliency map is a 2D image indicating the visual saliency of pixels in the input image. Although 2D saliency maps can not be directly used to estimate the visual saliency of 3D features, an inverse distance weighting \cite{shepard_two-dimensional_1968} can be applied to divided a 2D saliency map into several feature saliency maps, one for each feature (see Appendix~\ref{2d_saliency_map} for details). Subsequently, the visual saliency of each feature can be estimated with the total intensity of each feature saliency map. 
 
 %-------------------------------------------------------------------------
 \section{Experiment}
