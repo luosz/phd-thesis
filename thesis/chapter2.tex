@@ -90,7 +90,9 @@ Each voxel's splat is weighted by its color and opacity specified by the transfe
 Because of the pre-shaded scheme, projecting these fuzzy splats leads to a blurry appearance of object boundaries in the resulting image.
 
 \subsection{Shear Warp}
-The shear warp technique \cite{lacroute_fast_1994} consists of three steps. Firstly, a volume data is transformed to a 3D shear which is parallel to the slices of the volume data. Secondly, the 3D shear is projected to a distorted intermediate image in 2D. Lastly, the intermediate image is warped to produce the final volume rendering image.
+The shear warp technique \cite{lacroute_fast_1994} consists of three steps.
+%Firstly, a volume data is transformed to a 3D shear which is parallel to the slices of the volume data. Secondly, the 3D shear is projected to a distorted intermediate image in 2D. Lastly, the intermediate image is warped to produce the final volume rendering image.
+Firstly, a 3D shear is applied to the volume data in directions parallel to the data slices. Secondly, the sheared data is projected to a distorted intermediate image in 2D. Lastly, the intermediate image is warped to produce the final volume rendering image.
 
 This technique is based on the factorization that is relatively fast in software implementation. However, compared to volume ray casting, shear warp has less accurate sampling and potentially worse image quality.
 
