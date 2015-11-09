@@ -1,7 +1,7 @@
 \chapter{Visibility-Weighted Saliency for Volume Visualization \label{visibility-weighted_saliency}}
 Volume visualization has been widely used to depict complicated 3D structures in volume data sets.
 However, obtaining clear visualization of the features of interest in a volume is still a major challenge.
-The clarity of features depends on the transfer function, the viewpoint and the spatial distribution of features in the volume data set.
+The clarity of features depends on the transfer function, the viewpoint and spatial distribution of features in the volume data set.
 In this chapter, we propose visibility-weighted saliency as a measure of visual saliency of features in volume rendered images, in order to assist users in choosing suitable viewpoints and designing effective transfer functions to visualize the features of interest. Visibility-weighted saliency is based on a computational measure of perceptual importance of voxels and the visibility of features in volume rendered images.
 The effectiveness of this scheme is demonstrated by test results on two volume data sets.
 
@@ -10,7 +10,7 @@ The effectiveness of this scheme is demonstrated by test results on two volume d
 Volume visualization is an active branch of scientific visualization. It is a method of extracting meaningful information from volumetric data sets, which usually contain complex structures of various material.
 First introduced by Levoy \cite{levoy_display_1988} for visualization of volume data, volume visualization has been widely used in various sciences to create insightful visualizations from both simulated and measured data.
 
-A crucial step in volume visualization is transfer function specification. Transfer functions assign visual properties, including color and opacity, to the volume data being visualized. Hence transfer functions determine which structures will be visible and how they will be rendered.
+A crucial step in volume visualization is transfer function specification. Transfer functions assign visual properties, including color and opacity, to the volume data being visualized. Hence, transfer functions determine which structures will be visible and how they will be rendered.
 An appropriate transfer function can quickly reveal large amounts of information of the data set to the viewer.
 However, obtaining an effective transfer function is a non-trivial task, which involves a significant amount of tweaking of color and opacity.
 A cause of this problem is the lack of an objective measure to quantify the quality of transfer functions \cite{correa_visibility_2011}.
@@ -84,7 +84,7 @@ A_{i}=(1-A_{i-1})a_{i}+A_{i-1}
 \addtag \]
 where $ a_{i} $ and $ c_{i} $ are opacity and color of voxel $ i $, and $A_{i}$ and $C_{i}$ are the accumulated opacity and color at  voxel $ i $.
 
-Therefore the visibility of voxel $ i $ can be calculated as
+Therefore, the visibility of voxel $ i $ can be calculated as
 \[ v_{i}=A_{i}-A_{i-1}=(1-A_{i-1})a_{i} 
 \addtag \]
 and the visibility field is simply the visibility of all the voxels in the volume $ V $
@@ -97,7 +97,7 @@ The visibility field is dependent on both the viewpoint and the transfer functio
 	\centering
 	\includegraphics[width=1\linewidth]{images/disks_combined}
 	\caption{A synthetic volume data consists of three solid disk-like objects. The images in the first row shows a final image and the corresponding visibility field from a viewpoint on the left.
-		The images in the second row shows the the final image and visibility field from a viewpoint on the right.
+		The images in the second row shows the final image and visibility field from a viewpoint on the right.
 		The visibility fields display what parts of the volume contribute most to the images and how tissues in the front occlude those in the back.}
 	\label{fig:disks_combined}
 \end{figure}
@@ -164,7 +164,7 @@ The advantage of using perceptually uniform color spaces is that the relative pe
 The visibility field indicates the contribution of voxels, which is how much each voxel contributes to the final image, and the saliency field indicates the conspicuity of voxels, which is how much each voxel stands out from its surroundings.
 The conspicuity in a 3D volume is similar to that in an 2D image and can be measured by the difference of visible properties between each location (voxel) and its surroundings \cite{duan_visual_2011}.
 It would be desirable to have an indicator that represents both the contribution and conspicuity of the voxels.
-Therefore we propose a visibility-weighted saliency field, by weighting the saliency of voxels by their visibility, given the volume is rendered with a specific transfer function from a specific viewpoint.
+Therefore, we propose a visibility-weighted saliency field, by weighting the saliency of voxels by their visibility, given the volume is rendered with a transfer function from a specific viewpoint.
 The visibility-weighted saliency for voxel $ i $ is
 \[ s_{i}(O,i,\sigma)= v_{i} L(O,i,\sigma)
 \addtag \]
@@ -421,7 +421,7 @@ There were 30 subjects participated in this experiment. Among the participants, 
 
 \subsection{Methods and Measurements}
 Participants would sit in front of a computer display viewing images generated from volume visualization. The first part of the experiment would investigate how participants perceive the visual saliency of different objects in the images. The participants' task would be to score the images on the scale of 1 to 5 by keyboard input. 
-In each trial, a screen indicating the feature of interest would be shown to the participant for approximately 3 seconds, followed by a screen displaying a volume rendered image for approximately 17 seconds.
+In each trial, a screen indicating the feature of interest would be shown to the participant for 3 seconds, followed by a screen displaying a volume rendered image for 17 seconds.
 The experiment would last approximately 20 minutes.
 %There would be a break scheduled midway through the experiment to allow the participant to rest.
 

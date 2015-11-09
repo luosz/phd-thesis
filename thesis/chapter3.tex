@@ -3,7 +3,7 @@ Volume visualization is a powerful technique for depicting layered structures in
 In particular, the specification of the transfer function is frequently a time-consuming and unintuitive task in volume rendering.
 In this chapter, we describe a global optimization and two user-driven refinement methods for modulating transfer functions in order to assist the exploration of volume data.
 This optimization is dependent on the distribution of scalar values of the volume data set and is designed to reduce general occlusion and improve the clarity of layers of structures in the resulting images.
-The user can explore a volume by interactively specifying different priority intensity ranges and observe which layers of structures are revealed. In addition we show how the technique can be applied for time-varying volume data sets by adaptively refining the transfer function based on the histogram of each time-step. 
+The user can explore a volume by interactively specifying different priority intensity ranges and observe which layers of structures are revealed. In addition, we show how the technique can be applied to time-varying volume data sets by adaptively refining the transfer function based on the histogram of each time-step. 
 Experimental results on various data sets are presented to demonstrate the effectiveness of our method.
 
 %-------------------------------------------------------------------------
@@ -79,7 +79,7 @@ The approach in this paper is based on our previous work% previous work by Luo a
 \cite{luo_information-guided_2014} on optimizing transfer functions by minimizing the variance of control point weighting, which is generated from the intensity distribution of the data set. User-selected regions are taken into account, in order to enhance priority intensity ranges of importance to the user in the resulting image, and the approach,  in contrast to others discussed previously, is viewpoint-independent.
 In this paper, we extend this further by introducing
 %In this paper, we present extensions to this work which introduce 
-an intensity-based method to facilitate interactive exploration of volume data sets. In addition, we provide a more generalized approach to the distribution of control points, which in the original paper was limited to simplified tent-shaped distrubtions. Finally we describe how to propagate optimisation of the transfer functions through different time-steps of time-varying data volume sets.
+an intensity-based method to facilitate interactive exploration of volume data sets. In addition, we provide a more generalized approach to the distribution of control points, which in the original paper was limited to simplified tent-shaped distributions. Finally, we describe how to propagate optimization of the transfer functions through different time-steps of time-varying data volume sets.
 %Recent work on incorporating
 %statistical and information metrics into time-varying
 %volumetric data includes work by Fang et al. \cite{fang_visualization_2007} on the time
@@ -215,7 +215,7 @@ $ p(x)=\frac{n_{x}}{n} $, where $ n_{x} $ is the number of voxels with intensity
 %In Bordoloi and Shen's work \cite{bordoloi_view_2005}, 
 
 Bordoloi and Shen \cite{bordoloi_view_2005} described a noteworthiness factor to denote the significance of the voxel to the visualization.
-The noteworthiness should be high for the voxels which are desired to be seen, and vice versa . The noteworthiness of voxel $ j $ is defined as
+The noteworthiness should be high for the voxels which are desired to be seen, and vice versa. The noteworthiness of voxel $ j $ is defined as
 $ W_{j}=\alpha_{j}I_{j}=-\alpha_{j}logf_{j} $
 , where $ \alpha_{j} $ is the opacity of voxel $ j $ looked up from the transfer function, $ I_{j} $ is the information carried by voxel $ j $, which can be derived from the frequency of its histogram bin $ f_{j} $. -log $ f_{j} $ represents the amount of information associated with voxel $ j $.
 
@@ -289,7 +289,7 @@ The two step sizes in reducing opacity and increasing opacity can both be user-s
 \label{interaction_methods}
 The above described optimizer is an approach to balance the global opacity and thus reduce occlusions in the rendered images. In other words, we de-emphasize the most prevalent voxels, which are considered to have a high probability of occluding the rest of the scene and in particular interior structures of the data.
 
-Although global optimization can help deliver images with better overall visibility, small details may be under-enhanced in the global optimization and certain structures in the image may have to be further enhanced for specific purposes. For instance, in an anatomical data set, the global optimization may guarantee that all structures of materials such as skin, bone and flesh are all visible however if the task of the user is specifically to study skin, this may be counter-productive. Thus it is clear that a flexible method guided by user interactions is necessary to achieve various visualization goals. 
+Although global optimization can help deliver images with better overall visibility, small details may be under-enhanced in the global optimization and certain structures in the image may have to be further enhanced for specific purposes. For instance, in an anatomical data set, the global optimization may guarantee that all structures of materials such as skin, bone and flesh are all visible however if the task of the user is specifically to study skin, this may be counter-productive. Thus, it is clear that a flexible method guided by user interactions is necessary to achieve various visualization goals. 
 
 In this section, we describe two alternative methods for prioritizing specific intensity ranges in the volume data. The first approach allows the user to interactively select a specific intensity range target that they are interested in and a hue-based distance factor is used to emphasize different intensity ranges based on the target identified by the user. Secondly, we describe a region-based optimization to provide an intuitive method of interaction by choosing regions of interest in the image that are then enhanced in the final rendering.
 
@@ -315,7 +315,7 @@ e_{h}(i)=\int_{x \in [x_{i}, x_{i+1}]} d_{h}(x)s(x) dx
 \]
 where $ s(x)=-\alpha(x)p(x) \log p(x), x \in [0,1], i \in [0,n]$.
 
-Hence the energy function with distance factors for the intensity $ x_{0} $ of the transfer function can be defined as the variance of edge weights with the distance factors
+Hence, the energy function with distance factors for the intensity $ x_{0} $ of the transfer function can be defined as the variance of edge weights with the distance factors
 \[
 E_{h}=\sum_{i=0}^{n}(e_{h}(i)-\overline{e_{h}(i)})^{2}
 \]
@@ -392,12 +392,12 @@ Since the distance is measured in the color space, the choice of colors for the 
 In time-varying data sets, the data value ranges and distributions change among time-steps. A single global transfer function may not be able to adequately catch the details of the data set.
 Therefore, we exploit the transfer function optimizer (as discussed in Section~\ref{sec:optimizer}) to locally refine the transfer function for each time-step in the data set.
 In this case, the user specifies a transfer function for a single time-step of the time-varying data set and using either of the two interaction methods (as discussed in Section~\ref{interaction_methods}) to specify priority intensity ranges.
-The transfer function designed for this time-step is taken as an input transfer function and optimised again based on the histogram of the next time-step. Subsequently, the output of next time-step is taken as input of the time-step after it and so forth.
+The transfer function designed for this time-step is taken as an input transfer function and optimized again based on the histogram of the next time-step. Subsequently, the output of next time-step is taken as input of the time-step after it and so forth.
 
 \section{Results and Discussions}
-In this section, we present some results to demonstrate the effectiveness of our approach on the CT-knee (379 $ \times $ 229 $ \times $ 305) and VisMale head (128 $ \times $ 256 $ \times $ 256) datasets \cite{website:Roettger_volume_2013} and a time-varying data set of a simulated turbulent vortex flow (128 $\times$ 128 $\times$ 128, 100 time-steps) \cite{ma_high_2000}.
+In this section, we present some results to demonstrate the effectiveness of our approach on the CT-knee (379 $ \times $ 229 $ \times $ 305) and VisMale head (128 $ \times $ 256 $ \times $ 256) data sets \cite{website:Roettger_volume_2013} and a time-varying data set of a simulated turbulent vortex flow (128 $\times$ 128 $\times$ 128, 100 time-steps) \cite{ma_high_2000}.
 %and four volumes of a horse embryo data set, which are the horse embryo at 35, 37, 39 and 42 days.
-Results were generated in our volume rendering system (Figure~\ref{fig:volume_visualizer}) on a computer equipped with an Intel Core i5-2410M CPU, 8GB of RAM and a NVIDIA GeForce GT 540M graphics card.
+Results were generated in our volume rendering system (Figure~\ref{fig:volume_visualizer}) on a computer equipped with an Intel Core i5-2410M CPU, 8GB of RAM and an NVIDIA GeForce GT 540M graphics card.
 %Tests were performed on a computer equipped with an Intel Core i5-2410M CPU, 8GB of RAM and a NVIDIA GeForce GT 540M graphics card.
 
 \begin{figure}
