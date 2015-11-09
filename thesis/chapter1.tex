@@ -15,6 +15,35 @@ The rendering of volume data requires every sample value (also called voxel, whi
 The design of an effective transfer function (see Section~\ref{literature_of_transfer_function} for details) is essential for visualizing volume data.
 %A wealth of techniques have been developed for transfer function design for static volume data \cite{pfister_transfer_2001} \cite{bernardon_transfer-function_2008} \cite{arens_survey_2010}.
 
+With volume rendering, both the exterior and interior of a volume data set can be revealed semi-transparently by specifying appropriate transfer functions. However, because of the 3D occlusion between structures, it is time-consuming and unintuitive for users to specify appropriate transfer functions. In practice, transfer functions are often specified in a trial and error manner with careful observation of changes in the resulting image \cite{kniss_interactive_2001}.
+The adjustments users made in transfer function specification are based on subjective perception of important features in a certain viewpoint.
+
+Objective measures such as voxel information \cite{bordoloi_view_2005} \cite{wang_information_2011}, visibility histograms \cite{emsenhuber_visibility_2008} \cite{correa_visibility-driven_2009} and volume saliency \cite{kim_saliency-guided_2006}, provide powerful feedback mechanisms of volume rendering. It is desirable to take advantage of these objective measures in order to automate the specification of transfer functions for emphasizing features of interest in volume visualization.
+
+%By speci-
+%fying appropriate opacities for extracted features, the ex-
+%terior and interior features can be simultaneously revealed
+%in a semi-transparent manner. 
+% 
+%However, in practice it is
+%rather difﬁcult and time-demanding to specify appropriate
+%opacities, due to 3D occlusion between features. The main
+%reason is that interaction in the transfer function domain
+%is mainly guided by careful observation of changes in the
+%rendered image [KKH01]. Decisions based on this kind
+%of adjustment are subjective and view-dependent.
+%
+%there is no quantitative metric to measure the inﬂu-
+%ence of each feature to the rendered image. While most
+%of the previous research focused on how to extract fea-
+%tures 
+%
+%very little attention has
+%been paid to quantitative analysis of the visibility of classi-
+%ﬁed features in the rendered image.
+ 
+
+
 %However, transfer function design for time-varying volume data has not been studied thoroughly.
 %A fundamental challenge in the analysis and classification of time-varying volume data is the lack of capability to track data change or evolution over time \cite{gu_transgraph_2011}.
 %Much of the work in the field of volume visualization has been focused on the synthesis of photorealistic images to assist in the visualization of structures contained in volume data sets.
