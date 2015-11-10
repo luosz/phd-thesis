@@ -5,13 +5,17 @@ This chapter provides an overview of the contributions of this thesis and direct
 \section{Summary of Contributions}
 We have presented a transfer function refinement approach, which exploits the entropy of voxels derived from volume to equalize the opacity transfer function, in order to reduce general occlusion and improve the clarity of features of interest in the resulting visualization.
 Furthermore, this approach assists the user in exploring and enhancing features of interest by interactively specifying either priority intensity ranges in the transfer function domain or regions of interests in the resulting visualization.
+Our approach is different from Ruiz et al.'s approach \cite{ruiz_automatic_2011}, where the transfer function is adjusted towards a user-defined target distribution by minimizing the informational divergence between the transfer function and the user-defined target distribution.
 
 In addition to view-independent information, we have proposed visibility-weighted saliency for measuring the view-dependent saliency of features of interest for volume visualization.
 This metric aims to assist users in choosing suitable viewpoints and designing effective transfer functions to visualize the features of interest.
+Compared to existing approaches such as visibility histogram \cite{correa_visibility_2011} and feature visibility \cite{wang_efficient_2011} which only use measure the visibility of voxels, our approach reflects two aspects of the resulting visualization, i.e. voxel visibility and visual saliency. Our approach is better at indicating the change of saturation and brightness of volume visualization than the existing approaches which do not take into account the visual saliency information. A user study was conducted to evaluate the efficiency of our metric as well as feature visibility and 2D saliency maps.
 
 Subsequently, we have described an automated transfer function optimization method based on the visibility-weighted saliency metric. This method takes into account the perceptual importance of voxels and the visibility of features, and automatically adjusts the transfer function to match the target saliency levels specified by the user. In addition, a parallel line search strategy is presented to improve the performance of the optimization algorithm.
 
 Finally, we have developed a novel visualization approach which modulates focus, emphasizing important information, by adjusting saturation and brightness of voxels based on an importance measure derived from temporal and multivariate information.
 By conducting a voxel-wise analysis of a number of consecutive frames, we acquire a volatility measure of each voxel. We then use intensity, volatility and additional multivariate information to determine opacity, saturation and brightness of the voxels.
+
+\section{Future Work}
 
 %-------------------------------------------------------------------------
