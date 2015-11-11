@@ -183,9 +183,10 @@ The user can explore a volume by interactively specifying different priority int
 Experimental results on various data sets are presented to demonstrate the effectiveness of our method.
 
 The clarity of features depends on the transfer function, the viewpoint and the spatial distribution of features in the volume data set.
-In addition to view-independent information (i.e. entropy of voxels), we propose visibility-weighted saliency as a measure of visual saliency of features in volume rendered images, in order to assist users in choosing suitable viewpoints and designing effective transfer functions to visualize the features of interest.
-Visibility-weighted saliency is based on a computational measure of perceptual importance of voxels and the visibility of features in volume rendered images.
-The effectiveness of this scheme is demonstrated by test results on various volume data sets.
+%In addition to view-independent information (i.e. entropy of voxels), we propose visibility-weighted saliency as a view-dependent measure of features in volume rendered images, in order to assist users in choosing suitable viewpoints and designing effective transfer functions to visualize the features of interest.
+%Visibility-weighted saliency is based on a computational measure of perceptual importance of voxels and the visibility of features in volume rendered images.
+%The effectiveness of this scheme is demonstrated by test results on various volume data sets.
+In addition to view-independent information (i.e. entropy of voxels), we propose a novel view-dependent measure called visibility-weighted saliency in order to assist users in choosing suitable viewpoints and designing effective transfer functions to visualize the features of interest in a volume rendered images. This measure is based on a computational measure of perceptual importance of voxels and the visibility of features in volume rendered images. The effectiveness of this scheme is demonstrated by test results on various volume data sets. 
 
 Subsequently, we present an automated transfer function optimization method based on the visibility-weighted saliency metric. This method takes into account the perceptual importance of voxels and the visibility of features, and automatically adjusts the transfer function to match the target saliency levels specified by the user. In addition, a parallel line search strategy is presented to improve the performance of the optimization algorithm.
 
