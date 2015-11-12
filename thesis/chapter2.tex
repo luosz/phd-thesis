@@ -238,6 +238,7 @@ Classical approaches to this problem try to detect boundary information between 
 The introduction of multidimensional transfer functions alleviates the material separation problem.
 Instead of classifying a voxel based on a single scalar value, multidimensional transfer functions allow a voxel to be classified based on a combination of values.
 Multidimensional transfer functions are very effective means to extract materials and their boundaries for both scalar and multivariate data.
+
 In addition, various user interfaces were proposed to simply the design of multidimensional transfer functions \cite{tzeng_novel_2003} \cite{tzeng_cluster-space_2004}.
 However, the parameter spaces of multidimensional transfer functions are more complex (compared to 1D transfer functions) and thus introduce problems such as requirement for large amount of user interaction, missing precision or the interaction being complex and unintuitive \cite{arens_survey_2010}.
 %As a result, the interaction of transfer functions becomes more complex and unintuitive.
@@ -253,7 +254,7 @@ Moreover, transfer function specification in general is an unintuitive or even m
 For instance, there are skin and fat tissues around the brain, and their intensities lie in the same range as the brain. If we want to visualize the brain by setting the scalar value range of the brain to opaque, the surrounding skin and fat tissue will also become opaque. Then the brain will be occluded by the surrounding soft tissues which make it difficult to explore the brain structure.
 Common approaches to this problem are to introduce explicit segmentation of structures of interest before the volume rendering process \cite{rezk-salama_opacity_2006}. In fact, the process of applying the transfer function could be interpreted as a segmentation problem.
 
-\subsubsection{Multidimensional Transfer Functions}
+\subsubsection{Multidimensional Transfer Functions \label{Multidimensional_Transfer_Functions}}
 Multidimensional transfer functions \cite{kniss_interactive_2001}, which are mappings from intensity and other variables, such as first and second derivatives to color and opacity, have demonstrated their effectiveness in distinguishing boundaries between materials in volume data.
 
 %Overlapping intensity intervals corresponding to different materials make boundary detection difficult. Classical approaches try to detect boundary information between tissues by introducing derived attributes such as first and second derivatives to isolate materials \cite{kindlmann_semi-automatic_1998} \cite{kniss_multidimensional_2002} \cite{kindlmann_transfer_2002}.
