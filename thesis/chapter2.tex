@@ -11,7 +11,7 @@ In this chapter, we present a brief review of the literature related to the conc
 %Volume rendering is called direct volume rendering, where no polygonal representations are generated in the process, whereas rendering from polygonal representations extracted from volumetric data sets is called indirect volume rendering.
 %Volume rendering can be performed using two main techniques, either by extracting a number of surfaces from the data and rendering these surfaces to the screen, called isosurface rendering or by rendering the volume itself as a complete block of data with no intermediary structures, usually called direct volume rendering (DVR).
 
-Volume rendering is used to display a two-dimensional (2D) image of three-dimensional (3D) data set. It can be considered as a projection of a 3D volumetric data set to a 2D image \cite{garcia_parallel_2006}.
+Volume rendering is used to display a two-dimensional (2D) image of three-dimensional (3D) data set. It can be considered as a process of projecting a 3D volumetric data set to a 2D image \cite{garcia_parallel_2006}.
 The majority of volume data sets are discretely sampled along 3D grids and contain scalar values usually acquired from medical imaging devices such as CT or MRI machines or computed from scientific simulations such as fluid simulation.
 Volume data sets have the form of 3D arrays and elements in the data sets are called voxels, which correspond to pixels in 2D images.
 Figure~\ref{fig:hadwiger_advanced_2009} illustrates how voxels (cubic elements) constitute a volume data set.
@@ -74,30 +74,37 @@ Since indirect volume rendering is not in the scope of this thesis, direct volum
 
 Volume rendering was initially used in medical imaging, and later became an essential technique in many sciences for portraying complex phenomena such as clouds, water flows, and molecular and biological structure \cite{rosenblum_scientific_1994}.
 %In addition to the realistic aspects of volume rendering, there is non-photorealistic volume rendering, which emphasizes the illustrative and artistic aspects of volume rendering.
-Volume visualization is another term for volume rendering, sometimes with emphasis on the expressing data rather than the realism of rendering.
+Volume visualization is another term for volume rendering, sometimes with emphasis on the effective expression of 
+data rather than the realism of rendering.
 
 Motivated by scientific visualization and medical imaging, where volume data is often acquired by devices such as CT and MRI scanners, or numerical simulation of natural phenomena, researchers have developed a wide variety of techniques to improve the performance and enhance the perception of volume visualization \cite{corcoran_enhancing_2013}.
 
 \subsection{Volume Ray Casting}
 Volume ray casting is a volume rendering technique that can produce very high quality results.
-Since the advent of programmable graphics processing units (GPU) and 3D textures, volume ray casting techniques often exploit the power of GPUs to achieve real-time performance. Thenceforth, GPU-based volume ray casting has become one of the most popular technique for visualizing volume data \cite{meyer-spradow_voreen:_2009}.
+Since the advent of programmable graphics processing units (GPU) and 3D textures, volume ray casting techniques have been able to exploit the power of GPUs to achieve real-time performance. GPU-based volume ray casting has become one of the most popular techniques for visualizing volume data \cite{meyer-spradow_voreen:_2009}.
 
 \subsection{Splatting}
 Splatting is a volume rendering technique that trades quality for speed by combining volume projection with a sparse data representation \cite{westover_splatting:_1991}. In splatting, only voxels within certain intensity ranges need to be projected and the projection is done with efficient rasterization schemes \cite{mueller_splatting_1999}.
 
-Typical splatting approaches classifies and shades voxels before the projection. Subsequently, each shaded voxel is projected to the screen using a 3D interpolation kernel. A 2D projection of the kernel is called a splat or footprint.
+Typical splatting approaches classify and shade voxels before the projection. Subsequently, each shaded voxel is projected to the screen using a 3D interpolation kernel. A 2D projection of the kernel is called a splat or footprint.
 Each voxel's splat is weighted by its color and opacity specified by the transfer function.
 Because of the pre-shaded scheme, projecting these fuzzy splats leads to a blurry appearance of object boundaries in the resulting image.
 
 \subsection{Shear Warp}
 The shear warp technique \cite{lacroute_fast_1994} consists of three steps.
 %Firstly, a volume data is transformed to a 3D shear which is parallel to the slices of the volume data. Secondly, the 3D shear is projected to a distorted intermediate image in 2D. Lastly, the intermediate image is warped to produce the final volume rendering image.
-Firstly, a 3D shear is applied to the volume data in directions parallel to the data slices. Secondly, the sheared data is projected to a distorted intermediate image in 2D. Lastly, the intermediate image is warped to produce the final volume rendering image.
+Firstly, a 3D shear is applied to the volume data in directions parallel to the data slices. Secondly, the sheared data is projected to a distorted intermediate image in 2D. Lastly, the intermediate image is warped to produce the final rendered volume image.
 
-This technique is based on the factorization that is relatively fast in software implementation. However, compared to volume ray casting, shear warp has less accurate sampling and potentially worse image quality.
+%This technique is based on the factorization that is relatively fast in software implementation.
+Shear warp is relatively fast in software implementation.
+However, compared to volume ray casting, shear warp has less accurate sampling and potentially worse image quality.
 
 \subsection{Texture-Based Volume Rendering}
-Because graphics cards are fast at texturing, texture-based volume rendering \cite{hibbard_interactivity_1989} can efficiently render slices of volume data with the texturing capability of graphics cards. There are 2D texture mapping and 3D texture. The former aligns the slices with the volume data, while the latter aligns the slices with the viewing plane and directly samples from the 3D volume, which requires graphics hardware support for 3D textures \cite{westermann_accelerated_2001}.
+Because graphics cards are fast at texturing, texture-based volume rendering \cite{hibbard_interactivity_1989} can efficiently render slices of volume data with the texturing capability of graphics cards.
+%There are 2D texture mapping and 3D texture. The former aligns the slices with the volume data, while the latter aligns the slices with the viewing plane and directly samples from the 3D volume, which requires graphics hardware support for 3D textures \cite{westermann_accelerated_2001}.
+In 2D texture mapping approaches, slices are aligned with the original volume data,
+while in 3D texture mapping approaches, slices are aligned with the viewing plane and directly sampled from the 3D volume,
+which requires graphics hardware support for 3D textures \cite{westermann_accelerated_2001}.
 
 Texture-based volume rendering techniques can produce images of reasonable quality. However, there may be noticeable transitions when the volume is rotated interactively.
 
@@ -111,16 +118,16 @@ Texture-based volume rendering techniques can produce images of reasonable quali
 
 %NPR models were adopted in visualization and hence formed the field illustrative visualization.
 Illustrative visualization, as a novel category of visualization, aims at visualizing data in a clear and understandable way using techniques from traditional hand-crafted illustrations.
-Illustrative visualization has been successful employed in medical visualization \cite{svakhine_illustration_2005} \cite{viola_importance-driven_2005} \cite{svakhine_illustration-inspired_2009}.
+Illustrative visualization has been successfully employed in medical visualization \cite{svakhine_illustration_2005} \cite{viola_importance-driven_2005} \cite{svakhine_illustration-inspired_2009}.
 
-Illustration-based styles are believed to be effective in conveying information. Researchers in the field of computer graphics and visualization have applied illustration-based styles in order to produce effective and expressive visualization. Stompel et al. \cite{stompel_visualization_2002} introduced feature enhancement techniques, such as strokes based, temporal domain enhancement, to enhance time-varying data obtained from the field of computational fluid dynamics (CFD).
+Illustration-based styles are believed to be effective in conveying information. Researchers in the field of computer graphics and visualization have applied illustration-based styles in order to produce effective and expressive visualization. Stompel et al. \cite{stompel_visualization_2002} introduced feature enhancement techniques, such as strokes-based, temporal domain enhancement, to enhance time-varying data obtained from the field of computational fluid dynamics (CFD).
 
-In scientific visualization, features of interest are often inner structures of the data sets, e.g. visualizing certain structures in anatomical data sets \cite{diaz_iriberri_enhanced_2013}.
-Inspired by techniques from illustration, various approaches are proposed to reveal different level of structures simultaneously in volume data sets.
+In scientific visualization, the features of interest are often inner structures of the data sets, e.g. visualizing internal organs in anatomical data sets \cite{diaz_iriberri_enhanced_2013}.
+Inspired by techniques from illustration, various approaches are proposed to reveal different levels of structures simultaneously in volume data sets.
 
-Two level rendering \cite{hauser_two-level_2001} \cite{hadwiger_high-quality_2003} \cite{corcoran_perceptual_2010} is a method of merging several volume rendering techniques into a single rendering. This method is useful when inner structures needs to be rendered along with semitransparent outer parts.
+Two-level rendering \cite{hauser_two-level_2001} \cite{hadwiger_high-quality_2003} \cite{corcoran_perceptual_2010} is a method of merging several volume rendering techniques into a single rendering. This method is useful when inner structures need to be rendered along with semitransparent outer parts.
 Focus and context \cite{wang_magic_2005} \cite{bruckner_illustrative_2006} \cite{chen_intelligent_2008} provides a means of revealing the interior of a volume data set in a feature-driven way and also retaining context information.
-Another alternative is the cutaway technique \cite{burns_feature_2007} \cite{sigg_intelligent_2012}, which makes inner structures clearly visible along with its spatial relation to the surrounding material.
+Another alternative is the cutaway technique \cite{burns_feature_2007} \cite{sigg_intelligent_2012}, which makes inner structures clearly visible along with their spatial relation to the surrounding material.
 
 %\subsubsection{Other NPR Techniques in Volume Visuailzation \label{painterly_rendering}}
 %Streamlines and textures are often used to represent flow directions \cite{urnessy_techniques_2004}. Interrante and Grosch \cite{interrante_strategies_1997} introduced volume LIC (Line Integral Convolution) to visualize 3D flow via volume textures.
@@ -171,7 +178,7 @@ Volume data are 3D entities with information inside them, but the data might not
 %, or might be too voluminous to be represented geometrically.
 %The goal of volume visualization is to gain insightful depictions of volume data.
 Because of the lack of explicit geometric information, %and limited semantics, 
-it is a major challenge to provide clear visualizations of the structures contained in a volume dataset.
+it is a major challenge to provide clear visualizations of the structures contained in a volume data set.
 Volume data may be rendered directly by mapping scalar values to visual properties (e.g. opacity and color), or an intermediate geometric representation may be extracted using techniques like Marching Cubes \cite{lorensen_marching_1987} and then rendered as geometric surfaces. The mapping, which assigns visual properties to volume data, is called a transfer function.
 
 Transfer function specification is an essential part in volume visualization.
@@ -179,29 +186,29 @@ Transfer function specification is an essential part in volume visualization.
 A simple one-dimensional transfer function is a mapping from scalar values to RGB and alpha values.
 The resulting visualization largely depends on how well the transfer function captures features of interest \cite{kniss_multidimensional_2002}.
 %Due to the complex nature of volumetric data sets, abstraction techniques is often used in order to provide better understanding of the data sets.
-However, it is non-trivial to obtain an effective transfer function. The specification is often a trial-and-error process, which involves a significant amount of tweaking of color and opacity. Figure~\ref{fig:multiple_glk_transfunction} shows how slight changes in the transfer function lead to significant changes in the resulting images. The adjustment of transfer functions is unintuitive and often difficult.
+However, it is non-trivial to obtain an effective transfer function. The specification is often achieved by a trial-and-error process, which involves a significant amount of tweaking of color and opacity. Figure~\ref{fig:multiple_glk_transfunction} shows how slight changes in the transfer function lead to significant changes in the resulting images. The adjustment of transfer functions is unintuitive and often difficult.
 
 \begin{figure}
         \centering
         \begin{minipage}{0.5\textwidth}
                 \centering
                 \includegraphics[width=1\linewidth]{images/glk_transfunction_tf.png}
-                \caption{Two transfer functions (TF)}
-                \label{fig:glk_transfunction_tf}
+                \subcaption{Two transfer functions (TF)}
+%                \label{fig:glk_transfunction_tf}
         \end{minipage}~
         \begin{minipage}{0.25\textwidth}
                 \centering
                 \includegraphics[width=1\linewidth]{images/glk_transfunction_1.png}
-                \caption{The result from the TF on the left in \ref{fig:glk_transfunction_tf}}
-                \label{fig:glk_transfunction_1}
+                \subcaption{The result from the TF on the left in (a)}
+%                \label{fig:glk_transfunction_1}
         \end{minipage}~
         ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
           %(or a blank line to force the subfigure onto a new line)        
         \begin{minipage}{0.25\textwidth}
                 \centering
                 \includegraphics[width=1\linewidth]{images/glk_transfunction_2.png}
-                \caption{The result from the TF on the right in \ref{fig:glk_transfunction_tf}}
-                \label{fig:glk_transfunction_2}
+                \subcaption{The result from the TF on the right in (a)}
+%                \label{fig:glk_transfunction_2}
         \end{minipage}    
         \caption{Slight changes in the transfer function causes significant difference in the resulting images \cite{kindlmann_transfer_2002}}
         \label{fig:multiple_glk_transfunction}
@@ -323,7 +330,7 @@ Visibility has been studied in measuring viewpoint quality \cite{bordoloi_view_2
 
 In traditional transfer function design, the visibility of structures revealed in volume rendering is a consequence of adjusting transfer function parameters, rather than a design parameter \cite{preim_visual_2013}.
 Correa and Ma \cite{correa_visibility-driven_2009} introduced visibility histograms to guide transfer function design for both manual and automatic adjustment.
-Visibility histograms (Figure~\ref{fig:correa_visibility-driven_2009}), which summarize the distribution of visibility of voxels from a given viewpoint, is a powerful feedback mechanism of volume visualization \cite{emsenhuber_visibility_2008}.
+Visibility histograms (Figure~\ref{fig:correa_visibility-driven_2009}), which summarize the distribution of visibility of voxels from a given viewpoint, are powerful feedback mechanisms of volume visualization \cite{emsenhuber_visibility_2008}.
 Visibility histograms encode the information required to measure the efficacy of transfer functions and are advantageous in guiding and automating the manipulation of transfer functions.
 
 \begin{figure}
@@ -386,11 +393,11 @@ Stompel et al. \cite{stompel_visualization_2002} demonstrated feature enhancemen
 
 Kniss and Hansen \cite{kniss_volume_2002} applied volume rendering with multidimensional transfer function to visualize multivariate weather simulations. In their approach, they combined the temperature and humidity as a multivariate field in order to assist the meteorologists in identifying the frontal zones. 
 
-Akiba et al. presented the use of time histogram for simultaneous classification of time-varying data in order to find transfer functions that classify all the time steps of the data set \cite{akiba_simultaneous_2006}.
+Akiba et al. \cite{akiba_simultaneous_2006} presented the use of time histograms for simultaneous classification of time-varying data in order to find transfer functions that classify all the time steps of the data set.
 
-Woodring and Shen presented a method for the comparison of different data fields through the expression of a volume shader that composes data fields together with set operations \cite{woodring_multi-variate_2006}.
+Woodring and Shen \cite{woodring_multi-variate_2006} presented a method for the comparison of different data fields through the expression of a volume shader that composes data fields together with set operations.
 
-Wang et al. introduced an importance measure based on conditional entropy and categorize temporal behaviors by clustering the importance curves over time \cite{wang_importance-driven_2008}.
+Wang et al. \cite{wang_importance-driven_2008} introduced an importance measure based on conditional entropy and categorize temporal behaviors by clustering the importance curves over time.
 
 Lee and Shen \cite{lee_visualization_2009} extended the Dynamic Time Warping (DTW) approach \cite{lee_visualizing_2009} to SUBDTW, in order to estimate when a trend appears and vanishes in a given time series. They modeled the temporal relationships as a state machine based on the beginning and ending times of the trends.
 
@@ -419,11 +426,11 @@ Jankun-Kelly and Ma \cite{jankun-kelly_study_2001} examined how to combine trans
 Woodring et al. \cite{woodring_high_2003} considered time-varying volume data as four-dimensional data field and provided a user interface to specify hyperplanes in 4D.
 Woodring and Shen \cite{woodring_chronovolumes_2003} introduced an alternative approach to render multiple time-steps in a sequence with different colors into a single image. This approach provides the context of surrounding time steps but coherence of color among time-steps is hard to maintain.
 
-Tikhonova et al. \cite{tikhonova_exploratory_2010} presented an exploratory approach based on a compact representation of each time step of the dataset in the form of ray attenuation functions. Ray attenuation functions are subsequently used for transfer function generation.
+Tikhonova et al. \cite{tikhonova_exploratory_2010} presented an exploratory approach based on a compact representation of each time step of the data set in the form of ray attenuation functions. Ray attenuation functions are subsequently used for transfer function generation.
 Akiba et al. \cite{akiba_simultaneous_2006} introduced the time histogram which allows simultaneous classification and specification of temporal transfer functions for the entire time series.
 
 A time-varying volume data set can be considered as a 3D array where each voxel contains a time-activity curve (TAC). Fang et al. \cite{fang_visualization_2007} described an approach for classifying time-varying volume data based on the temporal behavior of voxels and three different similarity measures that can be used in their approach.
-Woording and Shen \cite{woodring_multiscale_2009} presented a method that filters time-varying volume data into several time scales using wavelet transform and classifies the voxels by clustering the entire time series by time scale.
+Woodring and Shen \cite{woodring_multiscale_2009} presented a method that filters time-varying volume data into several time scales using a wavelet transform and classifies the voxels by clustering the entire time series by time scale.
 Lee and Shen \cite{lee_visualizing_2009} proposed a method for classifying time-varying features using time activity curves with the dynamic time warping distance metric.
 
 A single static transfer function maybe be able to capture dynamic features whose their intensity change over time.
@@ -446,17 +453,36 @@ In order to create coherent and feature-prominent animations of time-varying vol
 In contrast to traditional computer graphics, which has focused largely on creating photorealistic images of synthetic objects, non-photorealistic rendering is an area of computer graphics that focuses on creating abstract images with a wide variety of expressive styles \cite{haeberli_paint_1990}.
 In certain situations, non-photorealistic renderings are considered more effective and expressive than an equivalent photograph \cite{healey_perceptually_2004}.
 
-An essential problem in time-varying volume visualization is to visualize temporal variation and analysis of features. Traditionally, time-varying data has been visualized as snapshots of individual time steps or animation of snapshots of a sequence of time steps. These techniques are effective in making time-varying data understandable. However, they struggle when the complexity of data sets increased dramatically in recent years \cite{brambilla_illustrative_2012}.
+An essential problem in time-varying volume visualization is to visualize temporal variation and analysis of features. Traditionally, time-varying data has been visualized as snapshots of individual time steps or as an animation of snapshots of a sequence of time steps. These techniques are effective in making time-varying data understandable, however, they struggle when the complexity of data sets increased dramatically in recent years \cite{brambilla_illustrative_2012}.
 
 Compared to flow visualization, which is a well established branch of scientific visualization \cite{brambilla_illustrative_2012}, general time-varying volume visualization is still a relative young field.
 Illustrations for time-varying rendering could be divided into two categories, one is to enhance time-invariant features and the other is to enhance temporal features of time-varying volume data. The techniques in the first category focus on enhancing structural perception of volume models through the amplification of features and the addition of illumination effects \cite{rheingans_volume_2001} \cite{joshi_illustration-inspired_2005}. Examples of these techniques include boundary enhancement, oriented feature enhancement (silhouettes, fading, and sketch lines). The techniques in the second category focus on illustrating dynamic aspects such as movement of features. A few kinds of techniques have been proposed for this purpose. For example, there are speed lines, flow ribbons and strobe silhouettes, which are inspired by traditional animation \cite{joshi_illustration-inspired_2005} \cite{joshi_evaluation_2008} \cite{joshi_case_2009}; and there are extended silhouette and boundary enhancement domains, which are inspired by the techniques used by illustrators and other artists \cite{svakhine_illustration_2005}. Nevertheless, illustrations of temporal features of time-varying data requires more attention from researchers in the visualization community. The usefulness of illustrative approaches in time-varying volume visualization has not been studied as thoroughly as in other areas.
 
 \subsection{Vector Field Visualization}
-The visualization of vector fields plays a crucial role in visual interpretation and understand of the underlying flow features and patterns \cite{kuhn_clustering-based_2011} \cite{ma_coherent_2013}. Since flow patterns also exist in time-varying volume data, certain techniques for visualizing vector field could be incorporated into time-varying volume visualization, in order to depict the dynamic aspects of time-varying data.
+The visualization of vector fields plays a crucial role in visual interpretation and understanding of the underlying flow features and patterns \cite{kuhn_clustering-based_2011} \cite{ma_coherent_2013}. Since flow patterns also exist in time-varying volume data, certain techniques for visualizing vector fields could be incorporated into time-varying volume visualization, in order to depict the dynamic aspects of time-varying data.
 
 Line drawings are effective ways to depict complex information with simple means \cite{benard_state---art_2011}.
 Among vector field visualization techniques, streamline visualization is a simple but common way to convey the structure of 3D vector fields \cite{chen_illustrative_2011}. Streamlines have proven to give expressive visual representation if they are combined with appropriate seeding strategies \cite{annen_vector_2008}. Streamlines intuitively reveal flow patterns by integrating the flow path.
 
+\subsection{Feature Tracking}
+Feature extraction and tracking is an established technique for the analysis of time-varying data in various research fields, such as video analysis, computer vision and flow visualization \cite{muelder_interactive_2009}.
+In time-varying data, features are objects that evolve over time. Feature tracking aims to determine the correspondence between features in successive time steps and describe the evolution of features through time \cite{post_state_2003}.
+
+In practice, feature extraction and tracking are often employed in the exploration and analysis of time-varying volume visualization in order to better understand the dynamic nature of the underlying phenomena \cite{wang_information_2008} \cite{woodring_multiscale_2009} \cite{lee_visualizing_2009}.
+Feature extraction methods are often based on an analytic description of the feature of interest. Consequently, feature extraction and tracking could become a manual-driven and trial-and-error process in the case that properties cannot be easily defined and are sometimes unknown \cite{ma_machine_2007}.
+
+Tzeng and Ma \cite{tzeng_intelligent_2005} proposed an intelligent feature extraction and tracking algorithm, which applies machine learning to extract and track time-varying fluid flow features in volume data.
+They investigated the use of both neural networks and support vector machines in their approach and obtained promising results.
+
+Based on the observation that regions in time-varying volume data present specific pattern and textural features, Caben et al. \cite{caban_texture-based_2007} introduced a texture-based feature tracking technique which analyzes local textural properties and finds correspondent features in the time series.
+%In their technique, a combination of first-order, second-order and run-length matrices are used to analyze local textural features, and then similarity measurements are used to locate the best match of features in following time steps.
+Caban and Rheingans \cite{caban_texture-based_2008} extended this technique for transfer function design, in which the voxels' resulting opacity and color are based on local textural properties instead of intensity values.
+
+Gu and Wang \cite{gu_transgraph_2011} described the TransGraph, which is a graph-based representation for visualizing hierarchical state transition relationships. This approach provides an occlusion-free over map and allows controllable interaction to help users to track data transition over space and time.
+%The TransGraph assists the user in understanding time-varying volume data with an occlusion-free over map.
+%It also provides controllable interaction, which helps the user to track data transition over space and time.
+
+Hsieh et al. \cite{hsieh_feature_2013} introduced an particle swarm method for transfer function design. This method maps the frequency of particle occurrences to the color and opacity values and extract features after the particles finish searching for features in the volume data.
 
 \section{Information Theory in Visualization}
 Information theory \cite{shannon_mathematical_1948} was originally introduced to study the fundamental limit of reliable transmission of messages through a noisy communication channel. In information theory, information is considered as a set of possible messages, where the goal is to send the messages through a noisy communication channel and then to have the messages reconstructed with low probability of error.
@@ -467,9 +493,9 @@ In recent years, there is an emerging direction towards using the principles of 
 
 Chen and J{\"a}nicke \cite{chen_information-theoretic_2010} presented an information-theoretic framework for visualization. They examined the theoretical aspect of information and its relation to data communication and interpret different stages of the visualization pipeline using the taxonomy of information.
 
-Haidacher et at. \cite{haidacher_information-based_2008} proposed an approach of transfer function specification for multimodal data visualization. They considered the joint occurrence of multiple features from one or multiple variables in order to separate statistical features that only occur in a single variable from those that are present in both.
+Haidacher et al. \cite{haidacher_information-based_2008} proposed an approach for transfer function specification for multimodal data visualization. They considered the joint occurrence of multiple features from one or multiple variables in order to separate statistical features that only occur in a single variable from those that are present in both.
 
-Wang et al. \cite{wang_importance-driven_2008} introduced an approach to characterized the dynamic temporal behaviors of spatial blocks using importance curves, which are based on conditional entropy. Clustering is performed on the importance curves of all the spatial blocks to classify the underlying volume data set.
+Wang et al. \cite{wang_importance-driven_2008} introduced an approach to characterize the dynamic temporal behaviors of spatial blocks using importance curves, which are based on conditional entropy. Clustering is performed on the importance curves of all the spatial blocks to classify the underlying volume data set.
 
 Bruckner and M{\"o}ller \cite{bruckner_isosurface_2010} presented isosurface similarity maps as a similarity measurement of two isofurfaces based on the mutual information of their respective distance transforms. Furthermore, they developed an automatic method for identifying representative isovalues using isosurface similarity maps.
 
@@ -525,26 +551,6 @@ Lu \cite{lu_volume_2010} described a method for automatically selecting renderin
 Kersten-Oertel et al. \cite{kersten-oertel_evaluation_2014} presented empirical studies on the effect of six different perceptual cues for enhancing depth. In the user study, the subjects were asked to determine which one of two indicated vessels was closer to them, and were asked to respond as accurately and quickly as possible. Both the percentage of correct answers and response times were analyzed.
 
 Also for depth perception, D{\'i}az et al. \cite{diaz_perceptual_2015} conducted a user study to investigate the impact of well-known volumetric shading models \cite{kniss_model_2003} in stereoscopic desktop-based environments. In the results, the average time spent and average correctness of answers were analyzed.
-
-\section{Feature Tracking}
-Feature extraction and tracking is an established technique for the analysis of time-varying data in various research fields, such as video analysis, computer vision and flow visualization \cite{muelder_interactive_2009}.
-In time-varying data, features are objects that evolve over time. Feature tracking aims to determine the correspondence between features in successive time steps and describe the evolution of features through time \cite{post_state_2003}.
-
-In practice, feature extraction and tracking are often employed in the exploration and analysis of time-varying volume visualization in order to better understand the dynamic nature of the underlying phenomena \cite{wang_information_2008} \cite{woodring_multiscale_2009} \cite{lee_visualizing_2009}.
-Feature extraction methods are often based on an analytic description of the feature of interest. Consequently, feature extraction and tracking could become a manual-driven and trial-and-error process in the case that properties cannot be easily defined and are sometimes unknown \cite{ma_machine_2007}.
-
-Tzeng and Ma \cite{tzeng_intelligent_2005} proposed an intelligent feature extraction and tracking algorithm, which applies machine learning to extract and track time-varying fluid flow features in volume data.
-They investigated the use of both neural networks and support vector machines in their approach and obtained promising results.
-
-Based on the observation that regions in time-varying volume data present specific pattern and textural features, Caben et al. \cite{caban_texture-based_2007} introduced a texture-based feature tracking technique which analyzes local textural properties and finds correspondent features in the time series.
-%In their technique, a combination of first-order, second-order and run-length matrices are used to analyze local textural features, and then similarity measurements are used to locate the best match of features in following time steps.
-Caban and Rheingans \cite{caban_texture-based_2008} extended this technique for transfer function design, in which the voxels' resulting opacity and color are based on local textural properties instead of intensity values.
-
-Gu and Wang \cite{gu_transgraph_2011} described the TransGraph, which is a graph-based representation for visualizing hierarchical state transition relationships. This approach provides an occlusion-free over map and allows controllable interaction to help users to track data transition over space and time.
-%The TransGraph assists the user in understanding time-varying volume data with an occlusion-free over map.
-%It also provides controllable interaction, which helps the user to track data transition over space and time.
-
-Hsieh et al. \cite{hsieh_feature_2013} introduced an particle swarm method for transfer function design. This method maps the frequency of particle occurrences to the color and opacity values and extract features after the particles finish searching for features in the volume data.
 
 \section{Summary}
 We have presented a review of literature in the field of volume visualization.
