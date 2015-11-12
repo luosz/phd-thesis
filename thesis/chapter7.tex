@@ -9,13 +9,36 @@ Our approach is different from Ruiz et al. \cite{ruiz_automatic_2011}, where the
 
 In addition to view-independent information, we have proposed visibility-weighted saliency for measuring the view-dependent saliency of features of interest for volume visualization.
 This metric aims to assist users in choosing suitable viewpoints and designing effective transfer functions to visualize the features of interest.
-Compared to existing approaches such as visibility histogram \cite{correa_visibility_2011} and feature visibility \cite{wang_efficient_2011} which only use measure the visibility of voxels, our approach reflects two aspects of the resulting visualization, i.e. voxel visibility and visual saliency. Our approach is better at indicating the change of saturation and brightness of volume visualization than the existing approaches which do not take into account the visual saliency information. A user study was conducted to evaluate the efficiency of our metric as well as feature visibility and 2D saliency maps.
+Compared to existing approaches such as visibility histogram \cite{correa_visibility_2011} and feature visibility \cite{wang_efficient_2011} which only measure the visibility of voxels, our approach reflects two aspects of the resulting visualization, i.e. voxel visibility and visual saliency. Our approach is better at indicating the change of saturation and brightness of volume visualization than the existing approaches which do not take into account the visual saliency information. A user study was conducted to evaluate the efficiency of our metric in comparison to feature visibility and 2D feature saliency.
 
 Subsequently, we have described an automated transfer function optimization method based on the visibility-weighted saliency metric. This method takes into account the perceptual importance of voxels and the visibility of features, and automatically adjusts the transfer function to match the target saliency levels specified by the user. In addition, a parallel line search strategy is presented to improve the performance of the optimization algorithm.
 
 Finally, we have developed a novel visualization approach which modulates focus, emphasizing important information, by adjusting saturation and brightness of voxels based on an importance measure derived from temporal and multivariate information.
 By conducting a voxel-wise analysis of a number of consecutive frames, we acquire a volatility measure of each voxel. We then use intensity, volatility and additional multivariate information to determine opacity, saturation and brightness of the voxels.
 
-\section{Future Work}
+\section{Limitations and Future Work}
+
+Our approach requires to define intensity ranges (number of
+control points and region width) as an initial set-up for the
+transfer function. In addition, variations to the transfer function
+are limited to opacity values. Therefore prior knowledge
+of the data sets may be necessary in choosing optimal intensity
+ranges. In future work we plan to develop methods
+for identifying important features in the intensity ranges and
+refining the intensity ranges. In our implementation, RGB
+colour space is used in calculating the difference factors for
+region-based optimization. Other colour spaces especially
+perceptually uniform colour spaces such as CIE Lab will be
+investigated in future work.
+
+
+
+The main limitation of the approach is that variations to the transfer function are limited to opacity values, which limits, to some degree, the resulting variations in output. The initial choice of intensity ranges, number of control points and color mapping across the histograms can affect the quality of the final output and some prior knowledge of the data sets may be of benefit for optimal results. On the other hand the simple and straightforward techniques presented in this paper should be fully compatible with independent mechanisms for choosing optimal combinations of other visual parameters or indeed if the user wishes to combine these with more manual choices of parameters such as the color map.
+%We plan to investigate these areas in our future work.
+In addition, the transfer functions in our proposed system are always editable through the user interface. Users may benefit from the flexibility of further tweaking the intensity or opacity of the control points after the application of the automatic optimization discussed in this paper.
+
+
+
+
 
 %-------------------------------------------------------------------------

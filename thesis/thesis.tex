@@ -52,6 +52,9 @@
 \usepackage{braket}
 \newcommand\addtag{\refstepcounter{equation}\tag{\theequation}}
 
+%for including pdf
+\usepackage{pdfpages}
+
 % for quotes
 \usepackage{epigraph}
 \usepackage{etoolbox}
@@ -245,7 +248,7 @@ The method was tested in visualizing a multivariate hurricane data set. The resu
 \addcontentsline {toc}{chapter}{Appendices}       %% Force Appendices to appear in contents
 \begin{appendix}
  \include{appendix1}
-% \include{appendix2}
+ \include{appendix2}
 \end{appendix}
 
 
