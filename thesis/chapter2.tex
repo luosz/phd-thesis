@@ -242,10 +242,9 @@ In addition, various user interfaces were proposed to simply the design of multi
 However, the parameter spaces of multidimensional transfer functions are more complex (compared to 1D transfer functions) and thus introduce problems such as requirement for large amount of user interaction, missing precision or the interaction being complex and unintuitive \cite{arens_survey_2010}.
 %As a result, the interaction of transfer functions becomes more complex and unintuitive.
 
-There are other multidimensional transfer functions approaches, such as spatialized gradient-based transfer functions \cite{roettger_spatialized_2005}, distance-based transfer functions \cite{tappenbeck_distance-based_2006}, size-based transfer function \cite{correa_size-based_2008}, texture-based transfer functions \cite{caban_texture-based_2008} \cite{alper_selver_exploring_2015} and curvature based transfer functions \cite{kindlmann_curvature-based_2003}.
-Bruckner and Gr{\"o}ller introduced the concept of style transfer functions \cite{bruckner_style_2007}, which aim to produce more comprehensible images by using transfer functions that map input values to different non-photorealistic rendering styles.
-
 Another strategy is based on the selection of rendered images. This strategy lets the user select one or more favorite images to guide the further search of transfer functions \cite{marks_design_1997} \cite{wu_interactive_2007}. More recent approaches introduced visibility \cite{correa_visibility-driven_2009} \cite{correa_visibility_2011} or measures derived from information theory \cite{haidacher_information-based_2008} \cite{bruckner_isosurface_2010} \cite{ruiz_automatic_2011} \cite{bramon_information_2013}. Zhou et al. \cite{zhou_transfer_2012} studied the combination of 2D transfer functions with occlusion and size-based transfer functions.
+
+Bruckner and Gr{\"o}ller introduced the concept of style transfer functions \cite{bruckner_style_2007}, which aim to produce more comprehensible images by using transfer functions that map input values to different non-photorealistic rendering styles.
 
 Despite the advances of these methods, transfer function design for volume rendering is still an open research problem.
 The creation of transfer functions needs to be simplified and the functionality of transfer functions needs to be extended in order to realize the full potential of volume rendering. For instance, more sophisticated transfer functions are required in medical imaging, in order to address various domain specific visualization problems \cite{lindholm_spatial_2010}.
@@ -279,6 +278,7 @@ As one of the most common representations of voxel distributions, histograms are
 The introduction of gradient magnitude as a data metric aims to detect voxels that are of large deviation compared with other voxels by approximating gradient magnitude at each sample point in the volume, because the exact distribution of data is unknown due to information lost in the discrete sampling process.
 Kindlmann and Durkin \cite{kindlmann_semi-automatic_1998} extended Levoy's work \cite{levoy_display_1988} by introducing a higher dimensional transfer function domain based on gradient magnitudes and second derivatives. To emphasize different structures, Kniss et al. \cite{kniss_interactive_2001} presented a technique for interactively manipulating 2D histograms of gradient magnitudes and data values. In their work, material boundaries appear as arcs in the 2D histogram and can be selected with interactive widgets \cite{kniss_multidimensional_2002}.
 Kniss et al. \cite{kniss_gaussian_2003} presented Gaussian transfer functions, which are suitable for the classification of narrow features in multidimensional domains.
+
 Kindlmann et al. \cite{kindlmann_curvature-based_2003} proposed curvature-based transfer function to enhance the expressive and informative power of volume rendering. In their approach, volume data is rendered with contours to exhibit constant thickness in image space.
 
 {\v S}ereda et al. \cite{sereda_visualization_2006} proposed LH histograms for improving the identification and selection of boundaries in 2D intensity-gradient transfer functions. Subsequently, {\v S}ereda et al. \cite{sereda_automating_2006} presented a clustering method based on the LH histograms for semi-automatic transfer function design.
@@ -287,6 +287,9 @@ Haidacher et al. \cite{haidacher_volume_2010} described the statistical transfer
 
 Wang et al. \cite{wang_automating_2012} described a clustering approach on 2D density plots for automatic transfer function design. Their approach allows the user to interactively explore the pre-computed clusters in the feature space and merge or remove uninterested features to improve visualization quality.
 Ip et al. \cite{ip_hierarchical_2012} described a multilevel segmentation technique that mimics user exploration behaviors by recursively segmenting intensity-gradient histograms.
+
+There are other multidimensional transfer functions approaches, such as spatialized gradient-based transfer functions \cite{roettger_spatialized_2005}, distance-based transfer functions \cite{tappenbeck_distance-based_2006}, size-based transfer function \cite{correa_size-based_2008}, texture-based transfer functions \cite{caban_texture-based_2008} \cite{alper_selver_exploring_2015}.
+% and curvature based transfer functions \cite{kindlmann_curvature-based_2003}.
 
 In addition, parallel coordinates and dimensionality reduction algorithms (e.g. principal component analysis) were employed to support the design of transfer functions in multidimensional parameter spaces \cite{zhao_multi-dimensional_2010} \cite{guo_multi-dimensional_2011} \cite{kim_dimensionality_2010}.
 
