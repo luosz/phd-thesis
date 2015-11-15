@@ -311,9 +311,6 @@ Correa and Ma \cite{correa_visibility-driven_2009} proposed the visibility histo
 Zhou and Takatsuka \cite{zhou_automatic_2009} presented an automated approach for generating transfer functions, which can depict inclusion relationship between structures in the volume, and maximize opacity and color differences among the structures. This approach uses a residue flow model based on Darcy\rq s Law to differentiate the distribution of opacity between branches of a contour tree.
 Selver and G{\"u}zeli{\c s} \cite{alper_selver_semiautomatic_2009} introduced a semi-automatic method for transfer function initialization and optimization using volume histogram stacks and radial basis function networks.
 
-\cite{knoll_volume_2009}
-\cite{kotava_volume_2012}
-
 Inspired by how physicians interact with volume data to extract clinically relevant information, L{\"a}th{\'e}n et al. \cite{lathen_automatic_2012} proposed an optimization method for shifting transfer function presets, in order to better visualize contrast enhanced blood vessels.
 %Automatic Tuning of Spatially Varying Transfer Functions for Blood Vessel Visualization
 
@@ -494,6 +491,9 @@ Gu and Wang \cite{gu_transgraph_2011} described the TransGraph, which is a graph
 %It also provides controllable interaction, which helps the user to track data transition over space and time.
 
 Hsieh et al. \cite{hsieh_feature_2013} introduced a particle swarm method for transfer function design. This method maps the frequency of particle occurrences to the color and opacity values, and extract features after the particles finish searching for features in the volume data.
+
+Johnson and Huang \cite{johnson_distribution-driven_2009} introduced the use of local frequency distribution of intensity values in broader neighborhoods around each voxel to define features and found frequency distributions to contain meaningful information relevant to various feature queries.
+Cai et al. \cite{cai_rule-enhanced_2015} presented a rule-enhanced transfer function generation method to separate and highlight important structures in volume visualization. They defined a set of rules based on the frequency distribution of data attributes (i.e. intensity and gradient magnitude) and employed a genetic algorithm to select a set of rules that are most effective in distinguishing the target tissue from other tissues.
 
 \section{Information Theory in Visualization}
 Information theory \cite{shannon_mathematical_1948} was originally introduced to study the fundamental limit of reliable transmission of messages through a noisy communication channel. In information theory, information is considered as a set of possible messages, where the goal is to send the messages through a noisy communication channel and then to have the messages reconstructed with low probability of error.
