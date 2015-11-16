@@ -428,11 +428,11 @@ The experiment would last approximately 20 minutes.
 A widely used saliency model is the saliency map by Itti et al. \cite{itti_model_1998}.
 The architecture and components of this model mimic the properties of primate early vision.
 Three visual properties, i.e. intensity contrast, color opponency and orientation are considered in the model in order to determine whether an image pixel stands out from its surroundings.
-The saliency map is a 2D image indicating the visual saliency of pixels in the input image. Although 2D saliency maps can not be directly used to estimate the visual saliency of 3D features, an inverse distance weighting \cite{shepard_two-dimensional_1968} can be applied to divide a 2D saliency map into several feature saliency maps, one for each feature (see Appendix~\ref{2d_saliency_map} for details). Subsequently, the visual saliency of each feature can be estimated with the total intensity of each feature saliency map. 
+The saliency map is a 2D image indicating the visual saliency of pixels in the input image. Although 2D saliency maps can not be directly used to estimate the visual saliency of 3D features, an inverse distance weighting \cite{shepard_two-dimensional_1968} can be applied to divide a 2D saliency map into several feature saliency maps, one for each feature (see Appendix~\ref{2d_saliency_map} for details). Subsequently, the visual saliency of each feature can be estimated with the total intensity of each 2D feature saliency map. 
 
 \subsection{Data Analysis}
 Since the opinion scores obtained from participants in the experiment may not be normally distributed or consistently applied across participants and data sets, this structure of data may violate the assumptions of some standard statistical tests \cite{cunningham_experimental_2011}.
-Spearman's rank correlation does not assume normality of the variables.
+%Spearman's rank correlation does not assume normality of the variables.
 Because we are interested in the monotonic relationships between the variables, Spearman's rank correlation, which does not assume normality of the variables, would be suitable for evaluating the strength of monotonic associations of the observed scores (mean opinion scores) and scores calculated from computational metrics. 
 
 We applied the Spearman's rank correlation to analyze the monotonic association between the mean opinion scores (MOS) and three computational metrics, i.e. visibility-weighted saliency (VWS), feature visibility (FV) and 2D feature saliency (2DFS).
@@ -503,7 +503,7 @@ Figure~\ref{fig:mos_vs_metric} displays line plots of MOS versus VWS for each fe
 \subsection{Varying Saturation and Brightness in Transfer Functions}
 A major difference between our visibility-weighted saliency and the feature visibility is that our approach reflects two aspects of the resulting visualization, i.e. voxel visibility and visual saliency, while the feature visibility only reflects voxel visibility.
 Figure~\ref{fig:tooth_naive_optimized_linesearch} displays an image of the tooth data set and its feature visibility and visibility-weighted saliency.
-In figure~\ref{fig:tooth_naive_optimized_linesearch_red} and figure~\ref{fig:tooth_naive_optimized_linesearch_yellow}, the saturation and brightness of the red feature and the yellow feature are reduced respectively. As shown in the two figures, our approach reflects the change of saturation and brightness of volume visualization.
+In Figure~\ref{fig:tooth_naive_optimized_linesearch_red} and Figure~\ref{fig:tooth_naive_optimized_linesearch_yellow}, the saturation and brightness of the red feature and the yellow feature are reduced respectively. As shown in the two figures, our approach reflects the change of saturation and brightness of volume visualization.
 
 \begin{figure}
 	\centering
