@@ -66,7 +66,7 @@ Ruiz et al. \cite{ruiz_automatic_2011} proposed an automatic method to generate 
 For 2D images, intensity and color are the most important attributes. In volume visualization, the intensity and color in the final images result from the blending of alpha and color determined by user-specified transfer functions in a specific viewpoint.
 The saliency field is a view-independent scalar field that contains the visual saliency of each voxel in the volume data. The visual saliency of voxels represents the perceptual importance in 3D space, however it does not reflect how visible the voxels are in the final 2D images.
 
-In order to take into account both the visual saliency of voxels in 3D space and the contribution of the voxels to final 2D images, we propose a visibility-based saliency metric, which attempts to measure the impact of individual voxels as well as user-specified features on volume rendered images.
+In order to take into account both the visual saliency of voxels in 3D space and the contribution of the voxels to the final 2D images of the rendered data set, we propose a visibility-based saliency metric, which attempts to measure the impact of individual voxels as well as user-specified features on volume rendered images.
 This technique aims to assist users in gaining insight into the internal structure of the data set and understanding the contribution of different features to the final image.
 
 The visibility-based saliency field is based on a visibility field and a saliency field. The visibility field contains the opacity contribution of each voxel to the final 2D image and the saliency field represents the visual saliency of each voxel in the 3D volume data.
@@ -75,7 +75,7 @@ The visibility-based saliency field is based on a visibility field and a salienc
 In this section, we describe visibility fields, saliency fields, visibility-weighted saliency fields and weighted feature saliency. In order to better illustrate the effects of these techniques, we present the results of applying these techniques to an synthetic data set from two different viewpoints in our discussion.
 
 \subsection{Visibility Fields \label{visibility_fields}}
-Direct volume rendering (e.g. ray-casting) is a technique that renders a 2D projection of the 3D volume data set. The rendering of a volume, which essentially is a block of 3D data, involves alpha blending and color composition of voxels. The resulting 2D image is acquired by blending the color and opacity of voxels along the view direction. The transfer function determines the color and opacity of voxels based on their data attributes such as intensity. However, the contribution of a voxel to the rendered image is determined by both the opacity of this voxel and the opacity of those voxels in front of the current voxel in the view direction.
+Direct volume rendering (e.g. ray-casting) is a technique that renders a 2D projection of the 3D volume data set. The rendering of a volume, which essentially is a block of 3D data, involves alpha blending and color composition of voxels. The resulting 2D image is acquired by blending the color and opacity of voxels along the view direction. The transfer function determines the color and opacity of individual voxels based on their data attributes such as intensity. However, the contribution of a voxel to the rendered image is determined by both the opacity of this voxel and the opacity of those voxels in front of the current voxel in the view direction.
 This mechanism is described in the front-to-back compositing equations \cite{emsenhuber_visibility_2008}.
 \[
 C_{i}=(1-A_{i-1})c_{i}+C_{i-1}
@@ -92,14 +92,12 @@ and the visibility field is simply the visibility of all the voxels in the volum
 \[ V=\set{v_{i}|i \in V} 
 \addtag \]
 
-The visibility field is dependent on both the viewpoint and the transfer function, therefore it can be used to analyze the structure of the volume data. The visibility field is particularly useful for understanding what parts of the data set are being rendered and how different tissues occlude each other (Figure~\ref{fig:disks_combined}).
+The visibility field is dependent on both the viewpoint and the transfer function, therefore it can be used to analyze the visualization of the volume data. The visibility field is particularly useful for understanding what parts of the data set are being rendered and how different tissues occlude each other (Figure~\ref{fig:disks_combined}).
 
 \begin{figure}
 	\centering
 	\includegraphics[width=1\linewidth]{images/disks_combined}
-	\caption{A synthetic volume data consists of three solid disk-like objects. The images in the first row shows a final image and the corresponding visibility field from a viewpoint on the left.
-		The images in the second row shows the final image and visibility field from a viewpoint on the right.
-		The visibility fields display what parts of the volume contribute most to the images and how tissues in the front occlude those in the back.}
+	\caption{A synthetic volume data consisting of three solid disk-like features is shown. The images in the first row show the final image and the corresponding visibility field from a viewpoint on the left. The images in the second row shows the final image and visibility field from a viewpoint on the right. The visibility fields display what parts of the volume contribute most to the images and how tissues in the front occlude those in the back.}
 	\label{fig:disks_combined}
 \end{figure}
 
@@ -129,7 +127,7 @@ where $ w_{1} $ and $ w_{2} $ indicate the weights of the Gaussian-weighted aver
 
 Visual properties such as opacity and color values (e.g. brightness, saturation, hue) can be used as appearance attributes in the computation of a saliency field.
 Figure~\ref{fig:disks_saliency} displays the saliency fields computed from brightness and saturation of voxels respectively.
-Although opacity is an important visual property, the visibility field described in the previous section is derived from alpha blending, which has taken the opacity of voxels into account. Therefore, we compute the saliency fields using brightness and saturation instead of opacity. Brightness and saturation are also the appearance attributes Kim and Varshney \cite{kim_saliency-guided_2006} used in their saliency-based enhancement operator.
+Although opacity is an important visual property, the visibility field described in the previous section is derived from alpha blending, which has already taken the opacity of voxels into account. Therefore, we compute the saliency fields using brightness and saturation instead of opacity. Brightness and saturation are also the appearance attributes Kim and Varshney \cite{kim_saliency-guided_2006} used in their saliency-based enhancement operator.
 The saliency field is acquired by applying the center-surround operator to appearance attributes of voxels.
 The effect of the center-surround operator is to emphasize the center and de-emphasize the surroundings of voxels. This is shown in the exploded view of the saliency field (computed from brightness) and the volume data in Figure~\ref{fig:disks_saliency_half}.
 
@@ -163,7 +161,7 @@ The advantage of using perceptually uniform color spaces is that the relative pe
 
 \subsection{Visibility-Weighted Saliency Fields of Features \label{visibility_weighted_saliency}}
 The visibility field indicates the contribution of voxels, which is how much each voxel contributes to the final image, and the saliency field indicates the conspicuity of voxels, which is how much each voxel stands out from its surroundings.
-The conspicuity in a 3D volume is similar to that in an 2D image and can be measured by the difference of visible properties between each location (voxel) and its surroundings \cite{duan_visual_2011}.
+The conspicuity in a 3D volume is similar to that in a 2D image and can be measured by the difference of visible properties between each location (voxel) and its surroundings \cite{duan_visual_2011}.
 It would be desirable to have an indicator that represents both the contribution and conspicuity of the voxels.
 Therefore, we propose a visibility-weighted saliency field, by weighting the saliency of voxels by their visibility, given the volume is rendered with a transfer function from a specific viewpoint.
 The visibility-weighted saliency for voxel $ i $ is
@@ -172,7 +170,7 @@ The visibility-weighted saliency for voxel $ i $ is
 Hence we define $ S $ as the visibility-weighted saliency field of the volume $ V $.
 \[ S=\set{s_{i}(O,i,\sigma)|i \in V} 
 \addtag \]
-Therefore we define visibility-weighted saliency field of a feature $ F $ in the volume $ V $ as ($ F\subseteq V $).
+Therefore we define visibility-weighted saliency field of a feature $ F $ in the volume $ V $ ($ F\subseteq V $) as.
 \[ S_{F}=\set{s_{i}(O,i,\sigma)|i \in F} 
 \addtag \]
 
@@ -203,10 +201,11 @@ where $ u_{1}$ and $ u_{2}$ are weights of different appearance attributes. $ u_
 
 Figure~\ref{fig:disks_saliency_chart_left} and Figure~\ref{fig:disks_saliency_chart_right} display bar charts of our visibility-weighted saliency of the three features and the feature visibility by Wang et al. \cite{wang_efficient_2011} for comparison.
 We compute the saliency fields using brightness and saturation respectively and thus acquire two sets of feature saliency of the three features in the synthetic data set.
-In Figure~\ref{fig:disks_saliency_chart_left} and Figure~\ref{fig:disks_saliency_chart_right}, the feature saliency from brightness shows similar patterns as the feature visibility. However, the feature saliency from saturation gives the highest score to the middle disk (magenta color), which means the middle disk is significantly more salient than the other two (light green and dark green) in terms of saturation. The visibility-weighted feature saliency combines the feature saliency from brightness and saturation with user-specified weights. 
+In Figure~\ref{fig:disks_saliency_chart_left} and Figure~\ref{fig:disks_saliency_chart_right}, the feature saliency from brightness shows similar patterns as the feature visibility. However, the feature saliency from saturation gives the highest score to the middle disk (magenta color), which indicates the middle disk is significantly more salient than the other two (light green and dark green) in terms of saturation. The visibility-weighted feature saliency combines the feature saliency from brightness and saturation with user-specified weights. 
 %which combines the saliency fields derived from brightness and saturation of voxels.
 The visibility-weighted feature saliency can be used as a measure to indicate the saliency of features in volume rendered images.
-The weights of different appearance attributes should be adjusted according to the user's need in specific tasks.
+%The weights of different appearance attributes may be adjusted according to the user's need in specific tasks.
+Equal weights of appearance attributes are used in our implementation, however, more detailed perceptual studies may determine more ideal weights.
 
 \begin{figure}
 	\centering
@@ -236,19 +235,23 @@ The weights of different appearance attributes should be adjusted according to t
 	\centering
 	\begin{minipage}{.45\textwidth}
 		\includegraphics[width=1\linewidth]{images/disk_visibility_chart_left.png}
+		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.45\textwidth}
 		\includegraphics[width=1\linewidth]{images/disk_visibility_saliency_brightness_chart_left.png}
+		\subcaption{}
 	\end{minipage}
 	\begin{minipage}{.45\textwidth}
 		\includegraphics[width=1\linewidth]{images/disk_visibility_saliency_saturation_chart_left.png}
+		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.45\textwidth}
 		\includegraphics[width=1\linewidth]{images/disk_visibility_saliency_weighted_chart_left.png}
+		\subcaption{}
 	\end{minipage}
-	\caption{The feature visibility \cite{wang_efficient_2011} histogram at top-left shows the sum of visibility values of all the voxels belong to each feature.
-		The two histograms of visibility-weighted feature saliency from brightness and saturation respectively (at top-right and at bottom-left) show the sum of visibility-weighted saliency of all the voxels belong to each feature ($ W_{F}(O,i,\sigma) $ in Section~\ref{visibility_weighted_saliency}).
-		The histogram of weighted feature saliency (at bottom-right) shows the weighted feature saliency with equal weights of brightness and saturation ($ W_{F} $ in Section~\ref{weighted_feature_saliency}).
+	\caption{The feature visibility \cite{wang_efficient_2011} histogram at top-left shows the sum of visibility values of all the voxels belonging to each feature.
+		The two histograms of visibility-weighted feature saliency based brightness and saturation respectively (at top-right and at bottom-left) show the sum of visibility-weighted saliency of all the voxels belonging to each feature ($ W_{F}(O,i,\sigma) $ in Section~\ref{visibility_weighted_saliency}).
+		The histogram of visibility-weighted feature saliency (at bottom-right) shows the visibility-weighted feature saliency with equal weights of brightness and saturation ($ W_{F} $ in Section~\ref{weighted_feature_saliency}).
 		Feature visibility (top-left) and visibility-weighted feature saliency from brightness (top-right) both suggest that the top disk is the most visible and the bottom disk is the least visible.
 		However, the middle disk with magenta color is significantly more salient than the other two disks (light green and dark green) in terms of saturation (the histogram at bottom-left).
 	}
@@ -259,15 +262,19 @@ The weights of different appearance attributes should be adjusted according to t
 	\centering
 	\begin{minipage}{.45\textwidth}
 		\includegraphics[width=1\linewidth]{images/disk_visibility_chart_right.png}
+		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.45\textwidth}
 		\includegraphics[width=1\linewidth]{images/disk_visibility_saliency_brightness_chart_right.png}
+		\subcaption{}
 	\end{minipage}
 	\begin{minipage}{.45\textwidth}
 		\includegraphics[width=1\linewidth]{images/disk_visibility_saliency_saturation_chart_right.png}
+		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.45\textwidth}
 		\includegraphics[width=1\linewidth]{images/disk_visibility_saliency_weighted_chart_right.png}
+		\subcaption{}
 	\end{minipage}
 	\caption{Similar to Figure~\ref{fig:disks_saliency_chart_left}, in the viewpoint on the right in Figure~\ref{fig:disks_combined}, the bottom disk is the most visible according to feature visibility (histogram at top-left) and most salient according to feature saliency from brightness (histogram at top-right). However, feature saliency from saturation (histogram at bottom-left) suggests that the middle disk (magenta color) is significantly more salient than the other two (light green and dark green) in terms of saturation. The histogram at bottom-right is the weighted feature saliency with equal weights of brightness and saturation.}
 	\label{fig:disks_saliency_chart_right}
@@ -286,7 +293,7 @@ The weights of different appearance attributes should be adjusted according to t
 %\end{figure}
 
 %-------------------------------------------------------------------------
-\section{Use Case: Measure Feature Saliency with Different Transfer Functions}
+\section{Use Case: Measuring Feature Saliency Resulting from Different Transfer Functions}
 In this section, we present results of using our approach to measure visual saliency of features of a volume data set with two different transfer functions.
 
 A tooth data set \cite{website:Roettger_volume_2013} is rendered with two different transfer functions to demonstrate the effectiveness of our approach. The first transfer function (Figure~\ref{fig:tooth}) assigns equal opacity to the three features.
@@ -343,7 +350,7 @@ The feature visibility and weighted feature saliency in Figure~\ref{fig:tooth_sa
 	\begin{minipage}{.45\textwidth}
 		\includegraphics[width=1\linewidth]{images/tooth_visibility_saliency_weighted_chart.png}
 	\end{minipage}
-	\caption{Feature visibility (darker histogram on the left) and weighted feature saliency (brighter histogram on the right) of the three features, computed with the transfer function in Figure~\ref{fig:tooth}.}
+	\caption{Feature visibility \cite{wang_efficient_2011} (darker histogram on the left) and visibility-weighted saliency (brighter histogram on the right) of the three features, computed with the transfer function in Figure~\ref{fig:tooth}.}
 	\label{fig:tooth_saliency_chart}
 \end{figure}
 
@@ -406,7 +413,7 @@ The feature visibility and weighted feature saliency in Figure~\ref{fig:tooth_sa
 %To test a user’s perception of shape, an experiment was run that involved placement
 %of gauges on static images. This protocol was described in previous experiments such
 
-An experiment was performed to investigate how the visual saliency of objects in volume visualization was perceived by human users. The primary aim of volume visualization is to provide a clear impression of a certain part (i.e. a feature) of a volume data set while showing the rest of the data set for reference \cite{redmond_influencing_2010}.
+An experiment was performed to investigate how the visual saliency of objects in volume visualization was perceived by human users. A typical objective in volume visualization is to provide a clear impression of a certain part (i.e. a feature) of a volume data set while showing the rest of the data set for reference \cite{redmond_influencing_2010}.
 For this reason, it is necessary to test how well the shapes of features are perceived by human users.
 The aim of this experiment is to gather subjective opinion scores regarding how clear and distinct the features are in the images shown to the participants, and then compare the user opinion scores against the proposed computational visual saliency metric.
 
@@ -415,10 +422,11 @@ The aim of this experiment is to gather subjective opinion scores regarding how 
 
 \subsection{Source Images and Participants}
 %This section describes the human study and experiments performed using it.
-The volume rendering images used for the study were rendered by Voreen \cite{meyer-spradow_voreen:_2009} with a variety of transfer functions highlighting different features from various viewpoints. The volume data sets used in the experiment are publicly available on Internet.
+The volume rendering images used for the study were rendered by Voreen \cite{meyer-spradow_voreen:_2009} with a variety of transfer functions highlighting different features from various viewpoints. The volume data sets used in the experiment are publicly available on the Internet.
 8 volume data sets were used to produce images for the experiment and the images of 2 data sets (CThead and lobster) were only used in the training session at the beginning of the experiment.
 The results of 6 volume data sets were analyzed. These data sets are engine block, nucleon, head, tooth, foot, CT-Knee and MRbrain \cite{website:Roettger_volume_2013} \cite{website:Voreen_datasets_2013}.
-There were 30 people participated in the experiment. Among the participants, there were 20 males and 10 females, all aged between 22 and 39 years old. They consist of postgraduates, undergraduates and researchers. Over half of the participants have computer science background. Only one participant reported that he had slight color blindness (red-green). This participant confirmed that he had no problem in distinguishing the colors of features in the experiment.
+%There were 30 people participated in the experiment. Among the participants, there were 20 males and 10 females, all aged between 22 and 39 years old.
+30 participants (20 male and 10 female) took part in the experiment. All were aged between 22 and 39 years old and consisted of postgraduates, undergraduates and researchers. Over half of the participants have computer science background. Only one participant reported that he had slight color blindness (red-green). This participant confirmed that he had no problem in distinguishing the colors of features in the experiment.
 
 \subsection{Methods and Measurements}
 In the experiment, participants would sit in front of a computer display viewing images generated from volume visualization. The experiment would investigate how participants perceive the visual saliency of different objects in the images. The participants' task would be to score the images on a scale of 1 to 5 by keyboard input.
@@ -436,10 +444,11 @@ Since the opinion scores obtained from participants in the experiment may not be
 %Spearman's rank correlation does not assume normality of the variables.
 Because we are interested in the monotonic relationships between the variables, Spearman's rank correlation, which does not assume normality of the variables, would be suitable for evaluating the strength of monotonic associations of the observed scores (mean opinion scores) and scores calculated from computational metrics. 
 
-We applied the Spearman's rank correlation to analyze the monotonic association between the mean opinion scores (MOS) and three computational metrics, i.e. visibility-weighted saliency (VWS), feature visibility (FV) and 2D feature saliency (2DFS).
+We applied the Spearman's rank correlation to analyze the monotonic association between the mean opinion scores (MOS) and three computational metrics, i.e. our visibility-weighted saliency (VWS) metric, feature visibility (FV) based on \cite{wang_efficient_2011} and 2D feature saliency (2DFS).
+
 As shown in Figure~\ref{fig:mos_vs_vws}, there are strong positive correlations between MOS and VWS ($ 0.66985 $), and MOS and FS ($ 0.677018 $) respectively. On the other hand, there is a moderate positive correlation between MOS and 2DFS ($ 0.550472 $). Both VWS and FS are more monotonic correlated to MOS than 2DFS, and FV is slightly better than VWS by about $ 0.007 $.
 
-The p-values indicate statistical significance of the associations. In our results, the p-values for all the three cases are very small (below $2 \times 10^{-5} $). Therefore, we can reject the null hypothesis (there is no association between the two variables) and conclude that there are associations between the three pairs of variables respectively.
+The p-values indicate statistical significance of the associations. In our results, the p-values for all the three cases are very small (below $2 \times 10^{-5} $). Therefore, we can reject the null hypothesis (there is no association between the variables) and conclude that there are associations between MOS and VWS, FS and 2DFS respectively.
 
 In addition, we group MOS by features to provide a more detailed view of the correlation between MOS and VWS.
 Figure~\ref{fig:mos_vs_metric} displays line plots of MOS versus VWS for each feature of the data sets separately, with the data points sorted by VWS on the x axis.
