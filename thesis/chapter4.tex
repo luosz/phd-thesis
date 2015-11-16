@@ -501,6 +501,71 @@ Figure~\ref{fig:mos_vs_metric} displays line plots of MOS versus VWS for each fe
 \end{figure}
 
 \subsection{Varying Saturation and Brightness in Transfer Functions}
+A major difference between our visibility-weighted saliency and the feature visibility is that our approach reflects two aspects of the resulting visualization, i.e. voxel visibility and visual saliency, while the feature visibility only reflects voxel visibility.
+Figure~\ref{fig:tooth_naive_optimized_linesearch} displays an image of the tooth data set and its feature visibility and visibility-weighted saliency.
+In figure~\ref{fig:tooth_naive_optimized_linesearch_red} and figure~\ref{fig:tooth_naive_optimized_linesearch_yellow}, the saturation and brightness of the red feature and the yellow feature are reduced respectively. As shown in the two figures, our approach reflects the change of saturation and brightness of volume visualization.
+
+\begin{figure}
+	\centering
+	\begin{minipage}{.24\textwidth}
+		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.24\textwidth}
+		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch_visibility_chart}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.24\textwidth}
+		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch_visibility_saliency_weighted_chart}
+		\subcaption{}
+	\end{minipage}
+	\caption{(a) The tooth data set; (b) Feature visibility; (c) Visibility-weighted saliency}
+	\label{fig:tooth_naive_optimized_linesearch}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{minipage}{.24\textwidth}
+		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch_red_low_saturation}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.24\textwidth}
+		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch_red_low_saturation_visibility_saliency_weighted_chart}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.24\textwidth}
+		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch_red_low_brightness}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.24\textwidth}
+		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch_red_low_brightness_visibility_saliency_weighted_chart}
+		\subcaption{}
+	\end{minipage}
+	\caption{(a) Low saturation for the red feature; (b) The visibility-weighted saliency of (a); (c) Low brightness for the red feature; (d) The visibility-weighted saliency of (c)}
+	\label{fig:tooth_naive_optimized_linesearch_red}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{minipage}{.24\textwidth}
+		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch_yellow_low_saturation}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.24\textwidth}
+		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch_yellow_low_saturation_visibility_saliency_weighted_chart}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.24\textwidth}
+		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch_yellow_low_brightness}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.24\textwidth}
+		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch_yellow_low_brightness_visibility_saliency_weighted_chart}
+		\subcaption{}
+	\end{minipage}
+	\caption{(a) Low saturation for the yellow feature; (b) The visibility-weighted saliency of (a); (c) Low brightness for the yellow feature; (d) The visibility-weighted saliency of (c)}
+	\label{fig:tooth_naive_optimized_linesearch_yellow}
+\end{figure}
 
 
 %-------------------------------------------------------------------------
@@ -508,5 +573,5 @@ Figure~\ref{fig:mos_vs_metric} displays line plots of MOS versus VWS for each fe
 In this paper, we propose visibility-weighted saliency as an improved measure of the visual saliency of features in volume rendered images, in order to assist users in choosing suitable viewpoints and designing effective transfer functions to visualize the features of interest.
 %The visibility-weighted saliency are presented in two different ways, i.e. visibility-weighted saliency fields and feature saliency histograms. Visibility-weighted saliency fields display the spatial distribution of visual saliency of features and feature saliency histograms provide quantitative information about the perceptual importance of the features.
 With visibility-weighted saliency, the saliency of features rendered in different viewpoints with different transfer functions can be measured in a quantitative and fully automated way.
-In future work we plan to validate our work by conducting an eye-tracking-based user study. In addition, we would like to study other appearance attributes apart from brightness and saturation, and study the weighting between these attributes.
+%In future work we plan to validate our work by conducting an eye-tracking-based user study. In addition, we would like to study other appearance attributes apart from brightness and saturation, and study the weighting between these attributes.
 %-------------------------------------------------------------------------

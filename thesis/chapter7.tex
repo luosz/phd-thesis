@@ -33,7 +33,7 @@ The major limitation of the visibility-weighted saliency metric presented in Cha
 
 The center-surround operator \cite{kim_saliency-guided_2006} we used in computing saliency fields of volume data is essentially a Laplace differential operator. This operator can handle scalar fields of data attributes such as opacity, saturation and brightness. However, computing the difference between colors and orientations is more complicated, we have not yet integrated it in our model.
 
-In the future, we would like to examine the feasibility of using other data attributes, e.g. hue and orientation. The difference between colors could be computed for each pair of voxels in a color space, e.g. the perceptually uniform LAB color space. The orientations of voxels could be estimated using the Gabor filter, which would be similar to the construction of the orientation conspicuity map \cite{itti_model_1998}.
+In the future, we would like to examine the feasibility of using other appearance attributes such as hue and orientation, as well as the weighting between these attributes. The difference between colors could be computed for each pair of voxels in a color space, e.g. the perceptually uniform LAB color space. The orientations of voxels could be estimated using the Gabor filter, which would be similar to the construction of the orientation conspicuity map \cite{itti_model_1998}.
 
 %For instance, ch4: what are the outstanding questions  and limitations of the work on the metric e.g. that for saliency it assumes centre surrond mechanism base on saturation/brightness but not other factors e.g. hue, orientation etc.
 \subsection{Selective Saturation and Brightness}
