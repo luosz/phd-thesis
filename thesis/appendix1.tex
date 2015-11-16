@@ -25,7 +25,7 @@ Figure~\ref{fig:engine_naive_saliencemap} shows the 2D saliency map $ S $ and th
 The saliency maps in Figure~\ref{fig:engine_naive_saliencemap} are enhanced (multiplied by 8) for better contrast in illustrations. However, the original (i.e. not enhanced) saliency maps are used in the actual computation.
 
 In practice, saliency resulting from a visual feature is not sharply delimited by the boundary of the feature, instead strong feature edges tend to attract attention increasing saliency in a small distribution around the edge.
-After distributing the 2D saliency map $ S $ into feature saliency maps $ S_{i} (i \in \{1,...,n\})$ using the inverse distance weighting, a small amount of bright pixels around the boundary of the engine block remain in the residual saliency image $ S' $, as shown in Figure~\ref{fig:engine_naive_saliencemap_left}~(a).
+After distributing the 2D saliency map $ S $ into feature saliency maps $ S_{i} (i \in \{1, ... ,n\})$ using the inverse distance weighting, a small amount of bright pixels around the boundary of the engine block remain in the residual saliency image $ S' $, as shown in Figure~\ref{fig:engine_naive_saliencemap_left}~(a).
 Let the residual saliency image be $ S' $.
 \[ S'=S- \sum_{j=1}^{n} S_{j} \]
 
@@ -34,16 +34,22 @@ We distribute this residual saliency image $ S' $ to the features according to t
 Firstly, we apply a Gaussian filter with kernel size $ k $ to each feature saliency map $ S_{i} $ and get a Gaussian image $ G_{i} $.
 The kernel size $ k $ should be large in order to allow the resulting Gaussian image to have non-zero pixels to cover the bright pixels in the residual saliency image $ S' $.
 Let $ g_{i} $ be a pixel in the Gaussian image $ G_{i} $.
-Secondly, we distribute the residual saliency image $ S' $ into $ n $ images ($ S'_{1} $ ... $ S'_{n} $).
+Secondly, we distribute the residual saliency image $ S' $ into $ n $ images ($ S'_{1} , ... , S'_{n} $).
 %\[ G_{i}=Gaussian(S_{i},k) \]
 \[ s'_{i} = \frac{ g_{i} }{ \sum_{j=1}^{n} g_{j} }s' \]
 where $ s' $ is a pixel in $ S' $.
 Figure~\ref{fig:engine_naive_leftgaussian} displays the residual saliency images ($ S'_{1} $, $ S'_{2} $) of the two features on the engine block. 
 
-Finally, we pixel-wisely add the image $ S'_{i} $ to the feature saliency map $ S_{i} $ and obtain the total feature saliency map $ T_{i} $ of the $i$-$th$ feature.
+Thirdly, we pixel-wisely add the image $ S'_{i} $ to the feature saliency map $ S_{i} $ and obtain the total feature saliency map $ T_{i} $ of the $i$-$th$ feature.
 \[ T_{i} =S_{i}+S'_{i}\]
 
-Figure~\ref{fig:engine_naive_saliencemap_features} displays the total feature saliency maps of the red feature and the green feature of the engine block.
+Figure~\ref{fig:engine_naive_saliencemap_features} (a) and (b) display the total feature saliency maps of the red feature and the green feature respectively.
+
+Finally, as shown in Figure~\ref{fig:engine_naive_saliencemap_features} (c), we compute the 2D feature saliency using the sum of intensity values of the total feature saliency maps, i.e. $ T_{i}$ for $ i \in \{1, ... ,n\} $.
+Hence, the 2D feature saliency of the $i$-$th$  feature is
+\[ FS_{i}=\frac{Intensity(T_{i})}{ \sum_{j=1}^{n} Intensity(T_{j}) } \]
+
+A histogram of the 2D feature saliency of the two features of the engine block is shown in Figure~\ref{fig:engine_naive_saliencemap_features} (c).
 
 \begin{figure}
 	\centering
@@ -122,8 +128,11 @@ Figure~\ref{fig:engine_naive_saliencemap_features} displays the total feature sa
 	\begin{minipage}{.33\textwidth}
 		\includegraphics[width=1\linewidth]{images/engine_naive_saliencemap_2}
 		\subcaption{$ T_{2} $}
+	\end{minipage}~
+	\begin{minipage}{.33\textwidth}
+		\includegraphics[width=1\linewidth]{images/engine_naive_2DFS}
+		\subcaption{2D feature saliency}
 	\end{minipage}
-	\caption{The total feature saliency maps of the two features}
+	\caption{(a) and (b) The total feature saliency maps of the two features; (c) 2D feature saliency of the two features}
 	\label{fig:engine_naive_saliencemap_features}
 \end{figure}
-
