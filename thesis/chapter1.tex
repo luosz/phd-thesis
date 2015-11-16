@@ -24,8 +24,6 @@ However, because of 3D occlusion between structures and the indirect control ove
 In practice, this is typically achieved using a trial-and-error approach: modifications are made to the transfer function and changes in the resulting visualization are carefully observed in order to inform further modifications to the transfer function \cite{kniss_interactive_2001}.
 The adjustments users made in transfer function specification are based on subjective perception of important features in a certain viewpoint.
 
-Objective measures such as voxel information \cite{bordoloi_view_2005} \cite{wang_information_2011}, visibility histograms \cite{emsenhuber_visibility_2008} \cite{correa_visibility-driven_2009} and volume saliency \cite{kim_saliency-guided_2006}, provide powerful feedback mechanisms of volume rendering. It is desirable to take advantage of these objective measures in order to automate the specification of transfer functions for emphasizing features of interest in volume visualization.
-
 %By speci-
 %fying appropriate opacities for extracted features, the ex-
 %terior and interior features can be simultaneously revealed
@@ -65,13 +63,20 @@ Objective measures such as voxel information \cite{bordoloi_view_2005} \cite{wan
 
 %The main goal of our research is to investigate the optimization of visualization parameters (in particular transfer functions) and the use of NPR techniques, and develop a methodology which incorporates these two types of techniques to facilitate the user's exploration of the data sets. NPR techniques are effective forms of abstraction and they have proven their usefulness in expressing features that cannot be shown using realistic depiction of scenes and objects. The combination of standard volume visualization and NPR techniques will bring the opportunity to provide expressive visualization and assist the user in accomplishing his/her task efficiently.
 
+Objective measures such as voxel information \cite{bordoloi_view_2005} \cite{wang_information_2011}, visibility histograms \cite{emsenhuber_visibility_2008} \cite{correa_visibility-driven_2009} and volume saliency \cite{kim_saliency-guided_2006}, provide powerful feedback mechanisms of volume rendering. It is desirable to take advantage of these objective measures in order to automate the specification of transfer functions for emphasizing features of interest in volume visualization.
+
 The main goal of our research is to investigate the optimization of visualization parameters (in particular transfer functions) with information derived from volume data and feedback mechanisms
 % (e.g. visibility and visual saliency in resulting images) 
 from the volume rendering process.
-
 We hypothesize that the importance of voxels (sample values in volume data) are associated with their information content. Therefore, the transfer functions of volume visualization can be optimized based on the information within the data sets and user input which indicates the user's interest.
 
-In addition, we investigate the use of visibility and visual saliency as feedback for emphasizing features of interest in volume data sets with automated optimization techniques.
+%feasibility
+%In all of the above, the issue of visibility is more a
+%consequence of transfer function design than a design
+%parameter. 
+
+Another motivation is that in current volume rendering systems, appropriate transfer functions are often obtained by trial-and-error.
+We hypothesize that combining automated optimization techniques with feedback mechanisms such as visibility and visual saliency can provide an intuitive means for obtaining clear visualization of features of interest in volume data
 %In addition, we investigate the feasibility of propagating the optimization approach from static volume data to time-varying data.
 
 %A small number of approaches have been proposed for using information theory in volume visualization. However, most available approaches are not designed for the visualization of time-varying data and thus they have not taken the coherence issues into account.
