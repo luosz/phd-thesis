@@ -25,11 +25,11 @@ Figure~\ref{fig:engine_naive_saliencemap} shows the 2D saliency map $ S $ and th
 The saliency maps in Figure~\ref{fig:engine_naive_saliencemap} are enhanced (multiplied by 8) for better contrast in illustrations. However, the original (i.e. not enhanced) saliency maps are used in the actual computation.
 
 In practice, saliency resulting from a visual feature is not sharply delimited by the boundary of the feature, instead strong feature edges tend to attract attention increasing saliency in a small distribution around the edge.
-After distributing the 2D saliency map $ S $ into feature saliency maps $ S_{i} (i \in \{1,...,n\})$ using the inverse distance weighting, a small amount of bright pixels around the boundary of the engine block remain in the residual saliency image $ S' $, as shown in Figure~\ref{fig:engine_naive_saliencemap_features}~(a).
+After distributing the 2D saliency map $ S $ into feature saliency maps $ S_{i} (i \in \{1,...,n\})$ using the inverse distance weighting, a small amount of bright pixels around the boundary of the engine block remain in the residual saliency image $ S' $, as shown in Figure~\ref{fig:engine_naive_saliencemap_left}~(a).
 Let the residual saliency image be $ S' $.
 \[ S'=S- \sum_{j=1}^{n} S_{j} \]
 
-We distribute this residual saliency image $ S' $ to the features according to their influence in the region. The influence of the features are approximated by Gaussians of the feature saliency images.
+We distribute this residual saliency image $ S' $ to the features according to their influence in the region. The influence of the features are approximated by Gaussians of the feature saliency images, as shown in (b) and (c) of Figure~\ref{fig:engine_naive_saliencemap_left}.
 %We distribute these values and add them to the feature saliency maps using another weighting based on the Gaussians of the feature saliency maps $ S_{i}$.
 Firstly, we apply a Gaussian filter with kernel size $ k $ to each feature saliency map $ S_{i} $ and get a Gaussian image $ G_{i} $.
 The kernel size $ k $ should be large in order to allow the resulting Gaussian image to have non-zero pixels to cover the bright pixels in the residual saliency image $ S' $.
@@ -38,11 +38,12 @@ Secondly, we distribute the residual saliency image $ S' $ into $ n $ images ($ 
 %\[ G_{i}=Gaussian(S_{i},k) \]
 \[ s'_{i} = \frac{ g_{i} }{ \sum_{j=1}^{n} g_{j} }s' \]
 where $ s' $ is a pixel in $ S' $.
+Figure~\ref{fig:engine_naive_leftgaussian} displays the residual saliency images ($ S'_{1} $, $ S'_{2} $) of the two features on the engine block. 
 
 Finally, we pixel-wisely add the image $ S'_{i} $ to the feature saliency map $ S_{i} $ and obtain the total feature saliency map $ T_{i} $ of the $i$-$th$ feature.
 \[ T_{i} =S_{i}+S'_{i}\]
 
-Figure~\ref{fig:engine_naive_saliencemap_features}~(b) and (c) respectively display the final feature saliency maps of the red feature and the green feature of the engine block.
+Figure~\ref{fig:engine_naive_saliencemap_features} displays the total feature saliency maps of the red feature and the green feature of the engine block.
 
 \begin{figure}
 	\centering
