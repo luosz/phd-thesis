@@ -436,9 +436,9 @@ Spearman's rank correlation does not assume normality of the variables.
 Because we are interested in the monotonic relationships between the variables, Spearman's rank correlation, which does not assume normality of the variables, would be suitable for evaluating the strength of monotonic associations of the observed scores (mean opinion scores) and scores calculated from computational metrics. 
 
 We applied the Spearman's rank correlation to analyze the monotonic association between the mean opinion scores (MOS) and three computational metrics, i.e. visibility-weighted saliency (VWS), feature visibility (FV) and 2D feature saliency (2DFS).
-As shown in Figure~\ref{fig:mos_vs_vws}, there are strong positive correlations between MOS and VWS ($ 0.66985 $), and MOS and FS ($ 0.677018 $) respectively. On the other hand, there is a moderate positive correlation between MOS and 2DFS ($ 0.545858 $). Both VWS and FS are more monotonic correlated to MOS than 2DFS, and FV is slightly better than VWS by about $ 0.007 $.
+As shown in Figure~\ref{fig:mos_vs_vws}, there are strong positive correlations between MOS and VWS ($ 0.66985 $), and MOS and FS ($ 0.677018 $) respectively. On the other hand, there is a moderate positive correlation between MOS and 2DFS ($ 0.550472 $). Both VWS and FS are more monotonic correlated to MOS than 2DFS, and FV is slightly better than VWS by about $ 0.007 $.
 
-The p-values indicate statistical significance of the associations. In our results, the p-values for all the three cases are very small (less than $2 \times 10^{-5} $). Therefore, we can reject the null hypothesis (there is no association between the two variables) and conclude that there are associations between the three pairs of variables respectively.
+The p-values indicate statistical significance of the associations. In our results, the p-values for all the three cases are very small (below $2 \times 10^{-5} $). Therefore, we can reject the null hypothesis (there is no association between the two variables) and conclude that there are associations between the three pairs of variables respectively.
 
 In addition, we group MOS by features to provide a more detailed view of the correlation between MOS and VWS.
 Figure~\ref{fig:mos_vs_metric} displays line plots of MOS versus VWS for each feature of the data sets separately, with the data points sorted by VWS on the x axis.
@@ -455,7 +455,7 @@ Figure~\ref{fig:mos_vs_metric} displays line plots of MOS versus VWS for each fe
 	\end{minipage}~
 	\begin{minipage}{.33\textwidth}
 		\includegraphics[width=1\linewidth]{images/mos_vs_2dfs}
-		\subcaption{ Spearman's $\rho=0.545858 $, P-value$=1.9628 \times 10^{-5} $ }
+		\subcaption{ Spearman's $\rho=0.550472 $, P-value$=1.61418 \times 10^{-5} $ }
 	\end{minipage}
 	\caption{Spearman's rank correlation of 54 opinion scores against the corresponding visibility-weighted saliency (VWS), feature visibility (FV) and 2D feature saliency (2DFS) respectively. There are strong positive correlations between MOS and VWS (a) and between MOS and FV (b). There is a moderate positive correlation between MOS and 2DFS (c).}
 	\label{fig:mos_vs_vws}
