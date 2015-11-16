@@ -3,15 +3,18 @@
 A saliency map is a model of visual attention using bottom-up features such as intensity, color and orientation of an image.
 In order to use 2D saliency maps \cite{itti_model_1998} to estimate visual saliency of 3D features in volume visualization, an inverse distance weighting \cite{shepard_two-dimensional_1968} can be applied to divide a 2D saliency map into several feature saliency maps, one for each feature. Subsequently, the visual saliency of each feature can be estimated with the total intensity of each feature saliency map.
 
-%The distance between a pixel of each feature and the pixel in the final image is necessary in computing the inverse distance weighting.
-We render an image $ P_{i} $ of each feature separately with the same settings (viewpoint, screen size etc.) as the final image and compute a saliency map $ S $ of the final image.
+The distance between a pixel of each feature and the pixel in the final image is necessary in computing the inverse distance weighting.
+Hence, we perform volume rendering of each feature separately, i.e. other intensity ranges in the transfer function are set to zero except for the feature.
+These feature images $ P_{i} (i \in \{1,...,n\})$ are rendered with the same settings (viewpoint, screen size etc.) as the final image.
+In addition, a 2D saliency map $ S $ of the final image $ P $ is computed using the model by Itti et al. \cite{itti_model_1998}.
+
 Let $ w_{i} $ be the weight of a pixel $ p $ in the $i$-$th$ feature
 \[ w_{i} = \frac{ \frac{1}{d_{i}^{m}} }{ \sum_{j=1}^{n} \frac{1}{d_{j}^{m}} } \]
 where $ d_{i} $ is the color distance between the pixel $ p $ in the final image and the corresponding pixel $ p_{i} $ in the $i$-$th$ feature image.
 $ n $ is the number of features.
 $ m $ is a user-defined coefficient for controlling the bias of the weighting. Pixels with small distances would have larger weights when $ m $ increases. $ m=1 $ is used and the color distance $ d_{i} $ is computed in the LAB color space in our implementation
 
-Then the corresponding pixel $ s_{i} $ in the $i$-$th$  feature saliency map is
+Then the corresponding pixel $ s_{i} $ in the $i$-$th$  feature saliency map $ S_{i} $ is
 \[ s_{i}=w_{i}s \]
 where $ s $ is the pixel in the 2D saliency map $ S $ of the final image.
 
@@ -19,19 +22,24 @@ Therefore, we can obtain $ n $ feature saliency maps by performing the above a p
 
 Figure~\ref{fig:engine_naive} shows an engine block ($ P $) and its two features ($ P_{1} , P_{2} $).
 Figure~\ref{fig:engine_naive_saliencemap} shows the 2D saliency map $ S $ and the two feature saliency maps($ S_{1} , S_{2} $) obtained using the above operation.
-The saliency maps in Figure~\ref{fig:engine_naive_saliencemap} are enhanced (multiplied by 8) for better contrast in illustrations. The original saliency maps are used in our implementation.
+The saliency maps in Figure~\ref{fig:engine_naive_saliencemap} are enhanced (multiplied by 8) for better contrast in illustrations. However, the original (i.e. not enhanced) saliency maps are used in the actual computation.
 
-After dividing the 2D saliency map $ S $ into feature saliency maps with the inverse distance weighting, there are a small amount of bright pixels (around the boundary of the engine block) left in the 2D saliency map $ S $, as shown in Figure~\ref{fig:engine_naive_saliencemap_features}~(a). Let this left saliency image be $ S' $.
-We divide these values and add them to the feature saliency maps using another weighting with the Gaussian of the current feature saliency maps.
-Firstly, we apply a Gaussian filter with kernel size $ k $ to each feature saliency map $ S_{i} $ and get the Gaussian image $ G_{i} $.
-The kernel size $ k $ should be large in order to allow the resulting Gaussian image to have non-zero pixels to cover the bright pixels in the left saliency image $ S' $.
+In practice, saliency resulting from a visual feature is not sharply delimited by the boundary of the feature, instead strong feature edges tend to attract attention increasing saliency in a small distribution around the edge.
+After distributing the 2D saliency map $ S $ into feature saliency maps $ S_{i} (i \in \{1,...,n\})$ using the inverse distance weighting, a small amount of bright pixels around the boundary of the engine block remain in the residual saliency image $ S' $, as shown in Figure~\ref{fig:engine_naive_saliencemap_features}~(a).
+Let the residual saliency image be $ S' $.
+\[ S'=S- \sum_{j=1}^{n} S_{j} \]
+
+We distribute this residual saliency image $ S' $ to the features according to their influence in the region. The influence of the features are approximated by Gaussians of the feature saliency images.
+%We distribute these values and add them to the feature saliency maps using another weighting based on the Gaussians of the feature saliency maps $ S_{i}$.
+Firstly, we apply a Gaussian filter with kernel size $ k $ to each feature saliency map $ S_{i} $ and get a Gaussian image $ G_{i} $.
+The kernel size $ k $ should be large in order to allow the resulting Gaussian image to have non-zero pixels to cover the bright pixels in the residual saliency image $ S' $.
 Let $ g_{i} $ be a pixel in the Gaussian image $ G_{i} $.
-Secondly, we divide the left saliency image $ S' $ into $ n $ images ($ S'_{1} $ ... $ S'_{n} $).
+Secondly, we distribute the residual saliency image $ S' $ into $ n $ images ($ S'_{1} $ ... $ S'_{n} $).
 %\[ G_{i}=Gaussian(S_{i},k) \]
 \[ s'_{i} = \frac{ g_{i} }{ \sum_{j=1}^{n} g_{j} }s' \]
 where $ s' $ is a pixel in $ S' $.
 
-Finally, we pixel-wisely add the image $ S'_{i} $ to the feature saliency map $ S_{i} $ and obtain the final feature saliency map.
+Finally, we pixel-wisely add the image $ S'_{i} $ to the feature saliency map $ S_{i} $ and obtain the total feature saliency map $ T_{i} $ of the $i$-$th$ feature.
 \[ T_{i} =S_{i}+S'_{i}\]
 
 Figure~\ref{fig:engine_naive_saliencemap_features}~(b) and (c) respectively display the final feature saliency maps of the red feature and the green feature of the engine block.
@@ -40,17 +48,17 @@ Figure~\ref{fig:engine_naive_saliencemap_features}~(b) and (c) respectively disp
 	\centering
 	\begin{minipage}{.33\textwidth}
 		\includegraphics[width=1\linewidth]{images/engine_naive}
-		\subcaption{}
+		\subcaption{$ P $}
 	\end{minipage}~
 	\begin{minipage}{.33\textwidth}
 		\includegraphics[width=1\linewidth]{images/engine_naive_1}
-		\subcaption{}
+		\subcaption{$ P_{1} $}
 	\end{minipage}~
 	\begin{minipage}{.33\textwidth}
 		\includegraphics[width=1\linewidth]{images/engine_naive_2}
-		\subcaption{}
+		\subcaption{$ P_{2} $}
 	\end{minipage}
-	\caption{An engine block (a) and its red feature (b) and green features (c) respectively}
+	\caption{(a) An engine block; (b) and (c) isolated volume rendering images of the red feature and the green feature}
 	\label{fig:engine_naive}
 \end{figure}
 
@@ -58,17 +66,17 @@ Figure~\ref{fig:engine_naive_saliencemap_features}~(b) and (c) respectively disp
 	\centering
 	\begin{minipage}{.33\textwidth}
 		\includegraphics[width=1\linewidth]{images/engine_naive_saliencemap}
-		\subcaption{}
+		\subcaption{$ S $}
 	\end{minipage}~
 	\begin{minipage}{.33\textwidth}
 		\includegraphics[width=1\linewidth]{images/engine_naive_saliencemap_1_overlap}
-		\subcaption{}
+		\subcaption{$ S_{1} $}
 	\end{minipage}~
 	\begin{minipage}{.33\textwidth}
 		\includegraphics[width=1\linewidth]{images/engine_naive_saliencemap_2_overlap}
-		\subcaption{}
+		\subcaption{$ S_{2} $}
 	\end{minipage}
-	\caption{2D saliency maps (a) and the two feature saliency maps (b) and (c). The saliency maps are enhanced (multiplied by 8) for better contrast in illustrations.}
+	\caption{(a) The 2D saliency map; (b) and (c) the feature saliency maps of the two features. The saliency maps are enhanced (multiplied by 8) for better contrast in illustrations.}
 	\label{fig:engine_naive_saliencemap}
 \end{figure}
 
@@ -76,17 +84,45 @@ Figure~\ref{fig:engine_naive_saliencemap_features}~(b) and (c) respectively disp
 	\centering
 	\begin{minipage}{.33\textwidth}
 		\includegraphics[width=1\linewidth]{images/engine_naive_saliencemap_left}
-		\subcaption{}
+		\subcaption{$ S' $}
 	\end{minipage}~
 	\begin{minipage}{.33\textwidth}
+		\includegraphics[width=1\linewidth]{images/engine_naive_gaussian_1}
+		\subcaption{$ G_{1} $}
+	\end{minipage}~
+	\begin{minipage}{.33\textwidth}
+		\includegraphics[width=1\linewidth]{images/engine_naive_gaussian_2}
+		\subcaption{$ G_{2} $}
+	\end{minipage}
+	\caption{(a) The residual saliency image; (b) and (c) the Gaussians of the two feature saliency maps with a kernel size of one eighth of the image width}
+	\label{fig:engine_naive_saliencemap_left}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{minipage}{.33\textwidth}
+		\includegraphics[width=1\linewidth]{images/engine_naive_leftgaussian_1}
+		\subcaption{$ S'_{1} $}
+	\end{minipage}~
+	\begin{minipage}{.33\textwidth}
+		\includegraphics[width=1\linewidth]{images/engine_naive_leftgaussian_2}
+		\subcaption{$ S'_{2} $}
+	\end{minipage}
+	\caption{The residual saliency images of the two features}
+	\label{fig:engine_naive_leftgaussian}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{minipage}{.33\textwidth}
 		\includegraphics[width=1\linewidth]{images/engine_naive_saliencemap_1}
-		\subcaption{}
+		\subcaption{$ T_{1} $}
 	\end{minipage}~
 	\begin{minipage}{.33\textwidth}
 		\includegraphics[width=1\linewidth]{images/engine_naive_saliencemap_2}
-		\subcaption{}
+		\subcaption{$ T_{2} $}
 	\end{minipage}
-	\caption{Values left in the 2D saliency map (a) and the two final feature saliency maps (b) and (c) after adding the values left in (a)}
+	\caption{The total feature saliency maps of the two features}
 	\label{fig:engine_naive_saliencemap_features}
 \end{figure}
 
