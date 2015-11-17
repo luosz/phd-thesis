@@ -298,6 +298,8 @@ Figure~\ref{fig:tooth_naive_optimized} (a), (c) and (d) display volume rendered 
 Figure~\ref{fig:tooth_naive_optimized} (g) and (h) are the evolution of visibility-weighted saliency of each feature over iterations, in gradient descent with fixed step sizes and parallel line search respectively. Figure~\ref{fig:tooth_naive_optimized} (i) and (i) illustrate the relationship between the visibility-weighted saliency and opacity of features, in the iterations of the two gradient descent methods respectively.
 The evolutions of the objective function are also shown in Figure~\ref{fig:nucleon_naive_tooth_naive_rms} (b) and Figure~\ref{fig:nucleon_naive_tooth_naive_rms_linesearch} (b).
 
+As shown in Table~\ref{table:performance_table}, the two line search methods require much fewer steps than the fixed step-size method to converge. Although the two line search methods use the same numbers of steps, our parallel line search method only took about half the time of the traditional line search method.
+
 %Objective function
 %Figure~\ref{fig:nucleon_strong_red_rms}
 
@@ -546,7 +548,7 @@ vortex & Steps to converge & 56 & 21 & 21 \\
 & Time (seconds) & 24.95 & 25.42 & 14.92 \\
 \end{tabular}
 \caption[Table caption text]{Performance of the 3 optimization approaches on 4 volume data sets. ($ F<0.01 $ is regarded as convergence.)}
-\label{table:nucleon_table}
+\label{table:performance_table}
 \end{table}
 
 %\begin{table}[h]
