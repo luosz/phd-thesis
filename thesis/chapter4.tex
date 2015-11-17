@@ -423,8 +423,8 @@ The aim of this experiment is to gather subjective opinion scores regarding how 
 \subsection{Source Images and Participants}
 %This section describes the human study and experiments performed using it.
 The volume rendering images used for the study were rendered by Voreen \cite{meyer-spradow_voreen:_2009} with a variety of transfer functions highlighting different features from various viewpoints. The volume data sets used in the experiment are publicly available on the Internet.
-8 volume data sets were used to produce images for the experiment and the images of 2 data sets (CThead and lobster) were only used in the training session at the beginning of the experiment.
-The results of 6 volume data sets were analyzed. These data sets are engine block, nucleon, head, tooth, foot, CT-Knee and MRbrain \cite{website:Roettger_volume_2013} \cite{website:Voreen_datasets_2013}.
+9 volume data sets were used to produce images for the experiment and the images of 2 data sets (CThead and lobster) were only used in the training session at the beginning of the experiment.
+The results of 7 volume data sets were analyzed. These data sets are engine block, foot, MRbrain, nucleon, vismale, tooth, vismale and horse embryo \cite{website:Roettger_volume_2013} \cite{website:Voreen_datasets_2013}.
 %There were 30 people participated in the experiment. Among the participants, there were 20 males and 10 females, all aged between 22 and 39 years old.
 30 participants (20 male and 10 female) took part in the experiment. All were aged between 22 and 39 years old and consisted of postgraduates, undergraduates and researchers. Over half of the participants have computer science background. Only one participant reported that he had slight color blindness (red-green). This participant confirmed that he had no problem in distinguishing the colors of features in the experiment.
 
@@ -432,6 +432,7 @@ The results of 6 volume data sets were analyzed. These data sets are engine bloc
 In the experiment, participants would sit in front of a computer display viewing images generated from volume visualization. The experiment would investigate how participants perceive the visual saliency of different objects in the images. The participants' task would be to score the images on a scale of 1 to 5 by keyboard input.
 In each trial, a screen indicating the feature of interest would be shown to the participant for 3 seconds, followed by a screen displaying a volume rendered image for 17 seconds.
 The experiment would last approximately 20 minutes.
+Some images were shown more than once in the experiment in order to detect whether the participants's scores are consistent during the experiment.
 
 \subsection{2D Feature Saliency}
 A widely used saliency model is the saliency map by Itti et al. \cite{itti_model_1998}.
@@ -452,6 +453,8 @@ The p-values indicate statistical significance of the associations. In our resul
 
 In addition, we group MOS by features to provide a more detailed view of the correlation between MOS and VWS.
 Figure~\ref{fig:mos_vs_metric} displays line plots of MOS versus VWS for each feature of the data sets separately, with the data points sorted by VWS on the x axis.
+Because some images were shown more than once in the experiment, the resulting data points have the same VWS and very similar MOS in the line plots.
+Although the line plots are not strictly monotonic (i.e. MOS and VWS are not strictly monotonically correlated), we notice that they have loose monotonic associations.
 
 \begin{figure}
 	\centering
@@ -482,16 +485,15 @@ Figure~\ref{fig:mos_vs_metric} displays line plots of MOS versus VWS for each fe
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.24\textwidth}
-		\includegraphics[width=1\linewidth]{images/mos_vs_metric_MRbrain_feature_2}
+		\includegraphics[width=1\linewidth]{images/mos_vs_metric_horse_embryo_feature_1}
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.24\textwidth}
-		\includegraphics[width=1\linewidth]{images/mos_vs_metric_nucleon_feature_2}
+		\includegraphics[width=1\linewidth]{images/mos_vs_metric_MRbrain_feature_2}
 		\subcaption{}
 	\end{minipage}
-
 	\begin{minipage}{.24\textwidth}
-		\includegraphics[width=1\linewidth]{images/mos_vs_metric_nucleon_feature_3}
+		\includegraphics[width=1\linewidth]{images/mos_vs_metric_nucleon_feature_2}
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.24\textwidth}

@@ -32,7 +32,7 @@ Let the residual saliency image be $ S' $.
 We distribute this residual saliency image $ S' $ to the features according to their influence in the region. The influence of the features are approximated by Gaussians of the feature saliency images, as shown in (b) and (c) of Figure~\ref{fig:engine_naive_saliencemap_left}.
 %We distribute these values and add them to the feature saliency maps using another weighting based on the Gaussians of the feature saliency maps $ S_{i}$.
 Firstly, we apply a Gaussian filter with kernel size $ k $ to each feature saliency map $ S_{i} $ and get a Gaussian image $ G_{i} $.
-The kernel size $ k $ should be large in order to allow the resulting Gaussian image to have non-zero pixels to cover the bright pixels in the residual saliency image $ S' $.
+In practice, the kernel size $ k $ should be large enough in order to allow the resulting Gaussian images to have non-zero pixels cover most of the bright pixels in the residual saliency image $ S' $.
 Let $ g_{i} $ be a pixel in the Gaussian image $ G_{i} $.
 Secondly, we distribute the residual saliency image $ S' $ into $ n $ images ($ S'_{1} , ... , S'_{n} $).
 %\[ G_{i}=Gaussian(S_{i},k) \]
