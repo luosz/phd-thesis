@@ -1,7 +1,7 @@
 \chapter{Visibility-Weighted Saliency for Volume Visualization \label{visibility-weighted_saliency}}
-Volume visualization has been widely used to depict complicated 3D structures in volume data sets.
-However, obtaining clear visualization of the features of interest in a volume is still a major challenge.
-The clarity of features depends on the transfer function, the viewpoint and spatial distribution of features in the volume data set.
+%Volume visualization has been widely used to depict complicated 3D structures in volume data sets.
+%However, obtaining clear visualization of the features of interest in a volume is still a major challenge.
+In volume visualization, the clarity of features depends on the transfer function, the viewpoint and spatial distribution of features in the volume data set.
 In this chapter, we propose visibility-weighted saliency as a measure of visual saliency of features in volume rendered images, in order to assist users in choosing suitable viewpoints and designing effective transfer functions to visualize the features of interest. Visibility-weighted saliency is based on a computational measure of perceptual importance of voxels and the visibility of features in volume rendered images.
 The effectiveness of this scheme is demonstrated by test results on two volume data sets.
 
@@ -457,6 +457,8 @@ In addition, we group MOS by features to provide a more detailed view of the cor
 Figure~\ref{fig:mos_vs_metric} displays line plots of MOS versus VWS for each feature of the data sets separately, with the data points sorted by VWS on the x axis.
 Because some images were shown more than once in the experiment, the resulting data points have the same VWS and very similar MOS in the line plots.
 Although the line plots are not strictly monotonic (i.e. MOS and VWS are not strictly monotonically correlated), we notice that they have loose monotonic associations.
+
+The analysis of the experiment results indicates that our VWS is better than 2DFS and equivalent to FV in terms of predicting human perception of visual saliency in volume rendering images.
 
 \begin{figure}
 	\centering
