@@ -1,5 +1,8 @@
 \chapter{Selective Saturation and Brightness for Visualizing Time-Varying Volume Data \label{selective_saturation_brightness}}
-Time-varying volume data is used in many areas of science and engineering. However visualizations of such data are not easy for users to visually process due to the amount of information that can be presented simultaneously. In this chapter, we propose a novel visualization approach which modulates focus, emphasizing important information, by adjusting saturation and brightness of voxels based on an importance measure derived from temporal and multivariate information. By conducting a voxel-wise analysis of a number of consecutive frames, we acquire a volatility measure of each voxel. We then use intensity, volatility and additional multivariate information to determine opacity, saturation and brightness of the voxels. The method was tested in visualizing a multivariate hurricane data set. The results suggest that our approach can give the user a more detailed understanding of the data by presenting multivariate information variables in one self-contained visualization.
+Time-varying volume data is used in many areas of science and engineering. However visualizations of such data are not easy for users to visually process due to the amount of information that can be presented simultaneously. In this chapter, we propose a novel visualization approach which modulates focus, emphasizing important information, by adjusting saturation and brightness of voxels based on an importance measure derived from temporal and multivariate information. By conducting a voxel-wise analysis of a number of consecutive frames, we acquire a volatility measure of each voxel.
+Subsequently, the opacity, saturation and brightness are used to represent intensity, volatility and additional multivariate information in the data set.
+%We then use intensity, volatility and additional multivariate information to determine opacity, saturation and brightness of the voxels.
+The method was tested in visualizing a multivariate hurricane data set. The results suggest that our approach can give the user a more detailed understanding of the data by presenting multivariate information variables, including time-variant characteristics, in one self-contained visualization.
 
 %-------------------------------------------------------------------------
 \section{Introduction}
@@ -31,7 +34,10 @@ The third approach is to compute a weighted sum of all the values. This approach
 
 %-------------------------------------------------------------------------
 \section{Method}
-In this poster, we propose an intuitive approach of using color mappings in HSB space to effectively represent multivariate time-variant data. We use opacity to represent the main variable and saturation to represent the volatility of the main variable. In addition, brightness can be used to represent other information such as an additional variable from a multivariate or multidimensional data set. 
+In this section, we propose an intuitive approach of using color mappings in HSB space to effectively represent multivariate time-variant data. We use opacity to represent the main variable and saturation to represent the volatility (a temporal characteristic) of the main variable. In addition, brightness can be used to represent other information such as an additional variable from a multivariate or multidimensional data set. This allows constraining hues, which are sometimes chosen based on some domain knowledge and changing hues across different time steps could be unintuitive.
+%Maybe you could add the point (made in one of the previous chapters) that this 
+%allows constraining hues, which are sometimes chosen based on some domain 
+%knowledge and changing hues across different timesteps could be unintuitive
 
 %Figure~\ref{fig:saturation_brightness} is a 2D map where saturation is mapped to the x axis and brightness to the y axis. It illustrates how the look of red color and cyan color change when their saturation and brightness vary.
 
@@ -184,6 +190,7 @@ The strong red color near the hurricane eye indicates where the hurricane was in
 
 %-------------------------------------------------------------------------
 \section{Conclusions}
-Our main contribution is a mechanism for exploiting saturation and brightness to modulate focus in time-variant volume visualization using an importance measure that is based on volatility. In addition, we demonstrate how additional variables in a multivariate data set could be communicated simultaneously through the brightness channel. Preliminary results indicate that the approach can provide more visual information for the test data set. In future work we plan to conduct perceptual experiments to quantitatively evaluate the mechanism and determine the optimal parameters for the approach.
+Our main contribution is a mechanism for exploiting saturation and brightness to modulate focus in time-variant volume visualization using an importance measure that is based on volatility. In addition, we demonstrate how additional variables in a multivariate data set could be communicated simultaneously through the brightness channel. Preliminary results indicate that the approach can provide more visual information for the test data set.
+%In future work we plan to conduct perceptual experiments to quantitatively evaluate the mechanism and determine the optimal parameters for the approach.
 
 %-------------------------------------------------------------------------

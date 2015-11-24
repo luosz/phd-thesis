@@ -35,11 +35,13 @@ The center-surround operator \cite{kim_saliency-guided_2006} we used in computin
 
 In the future, we would like to examine the feasibility of using other appearance attributes such as hue and orientation, as well as the weighting between these attributes. The difference between colors could be computed for each pair of voxels in a color space, e.g. the perceptually uniform LAB color space. The orientations of voxels could be estimated using the Gabor filter, which would be similar to the construction of the orientation conspicuity map \cite{itti_model_1998}.
 
+In addition to transfer function optimization, we would like to implement an automatic viewpoint optimization technique based on the proposed metric.
+
 %For instance, ch4: what are the outstanding questions  and limitations of the work on the metric e.g. that for saliency it assumes centre surrond mechanism base on saturation/brightness but not other factors e.g. hue, orientation etc.
 \subsection{Selective Saturation and Brightness}
 We have not applied the visibility-weighted saliency metric to the work in Chapter~\ref{selective_saturation_brightness}. One reason is that the work in Chapter~\ref{selective_saturation_brightness} was done before Chapter~\ref{visibility-weighted_saliency} and Chapter~\ref{transfer_function_optimization}. On the other hand, it is difficult to apply the proposed metric to measure the features in Chapter~\ref{selective_saturation_brightness}'s work, because the feature definition and transfer functions are very different from those in the previous chapters. Instead of defining features on intensity ranges, volatility (temporal standard deviation) are used in the feature definition in Chapter~\ref{selective_saturation_brightness}.
 
 In the future, we would like to investigate how to apply the visibility-weighted saliency metric to other types of feature definitions and how automated optimization techniques can be exploited to better visualize time-varying and multivariate volume data sets. Automatic color scheme generation \cite{zhou_automatic_2009} for transfer functions would also be studied in the future work.
-In addition to transfer function optimization, we would like to implement an automatic viewpoint optimization technique based on the proposed metric.
+We would also like to conduct perceptual experiments to quantitatively evaluate the mechanism and determine the optimal parameters for the approach.
 
 %-------------------------------------------------------------------------
