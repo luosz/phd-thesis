@@ -44,6 +44,7 @@ Hue(i) = C(i) \\
 Saturation(i) = Clip(a \times std(i)) \\
 Brightness(i) = 1-Clip(b \times Y(i)) \\
 Alpha(i) = X(i) 
+\addtag
 \end{align*}
 where std(i) is the volatility and C(i) can be either a user-specified constant hue or mapped to a variable such as X(i). Clip is a function that clips the value to the range [0, 1]. $a$ and $b$ are scale factors for saturation and brightness respectively, which are determined by the user based on the distribution of variables X and Y in the data set. Variables X(i) and Y(i) are normalized to the range [0, 1].
 

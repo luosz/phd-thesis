@@ -75,11 +75,14 @@ Chan et al. \cite{chan_perception-based_2009} developed a system to optimize tra
 Correa and Ma \cite{correa_visibility-driven_2009} proposed the visibility histogram to guide the transfer function design. In a later work \cite{correa_visibility_2011}, they generalized the visibility histogram and proposed a semi-automatic method for generating transfer functions by maximizing the visibility of important structures based on the visibility histogram, which represents the contribution of voxels to the resulting image.
 Ruiz et al. \cite{ruiz_automatic_2011} also used visibility as a main parameter for the transfer function specification. Their method obtains the opacity transfer function by minimizing the informational divergence between the visibility distribution captured by a set of viewpoints and a target distribution defined by the user. Later, Bramon et al. \cite{bramon_information_2013} extended this approach to deal with multimodal information.
 
-The approach in this paper is based on our previous work% previous work by Luo and Dingliana
-\cite{luo_information-guided_2014} on optimizing transfer functions by minimizing the variance of control point weighting, which is generated from the intensity distribution of the data set. User-selected regions are taken into account, in order to enhance priority intensity ranges of importance to the user in the resulting image, and the approach,  in contrast to others discussed previously, is viewpoint-independent.
-In this paper, we extend this further by introducing
-%In this paper, we present extensions to this work which introduce 
-an intensity-based method to facilitate interactive exploration of volume data sets. In addition, we provide a more generalized approach to the distribution of control points, which in the original paper was limited to simplified tent-shaped distributions. Finally, we describe how to propagate optimization of the transfer functions through different time-steps of time-varying data volume sets.
+%The approach in this paper is based on our previous work% previous work by Luo and Dingliana
+%\cite{luo_information-guided_2014} on optimizing transfer functions by minimizing the variance of control point weighting, which is generated from the intensity distribution of the data set. User-selected regions are taken into account, in order to enhance priority intensity ranges of importance to the user in the resulting image, and the approach,  in contrast to others discussed previously, is viewpoint-independent.
+%In this paper, we extend this further by introducing
+%%In this paper, we present extensions to this work which introduce 
+%an intensity-based method to facilitate interactive exploration of volume data sets. In addition, we provide a more generalized approach to the distribution of control points, which in the original paper was limited to simplified tent-shaped distributions. Finally, we describe how to propagate optimization of the transfer functions through different time-steps of time-varying data volume sets.
+
+%%%%%%%%%%%%%%%%
+
 %Recent work on incorporating
 %statistical and information metrics into time-varying
 %volumetric data includes work by Fang et al. \cite{fang_visualization_2007} on the time
@@ -173,7 +176,7 @@ air & fat & soft tissue & bone (cancellous/dense)\\
 \label{fig:drawing_distribution}
 \end{figure}
 
-In the specification of a 1D (intensity-based) transfer function, the user essentially assigns a color and/or opacity to a certain point in the histogram of scalar values in the data set. In practice, the user would be presented with an interface that allows them to set up several control points which corresponds to a certain kind of material or structure. The user then defines a mapping from each control points to some visual property (e.g. color) resulting in voxels of the corresponding intensity to be rendered in that color.
+In the specification of a 1D (intensity-based) transfer function, the user essentially assigns a color and/or opacity to a certain point in the histogram of scalar values in the data set. In practice, the user would be presented with an interface that allows them to set up several control points which corresponds to a certain kind of material or structure. The user then defines a mapping from each control point to some visual property (e.g. color) resulting in voxels of the corresponding intensity to be rendered in that color.
 Figure~\ref{fig:konig_mastering_2000} displays four typical shapes used in transfer function design.
 %All the four shapes can reveal structures in volume data sets.
 If a volume data set contains complex structures, tent-like shapes are desirable in revealing isosurfaces of structures and seeing through inner structures. Otherwise, the ramp shape and other shapes can also reveal structures effectively.% \cite{zhou_automatic_2009}
@@ -200,7 +203,8 @@ In computer graphics, information-theoretic measures, such as entropy and mutual
 \cite{bramon_information-theoretic_2013}, flow visualization \cite{xu_information-theoretic_2010}, multi-modal visualization \cite{haidacher_information-based_2008} \cite{bramon_information_2013} and transfer function design \cite{bruckner_isosurface_2010} \cite{ip_hierarchical_2012}.
 Information theory provides a theoretic framework to measure the information content (or uncertainty) of a random variable represented as a distribution \cite{wang_information_2011}.
 Consider a discrete random variable X which has a set of possible values $\{a_{0},a_{1},...,a_{n-1} \}$ with probabilities of occurrence $\{ p_{0},p_{1},...,p_{n-1} \}$, we can measure the uncertainty of the outcome with the entropy H(X), which is defined by
-\[  H(X)=-\sum_{x \in X} p(x) \log p(x) \]
+\[  H(X)=-\sum_{x \in X} p(x) \log p(x) 
+\addtag \]
 where the summation is over the corresponding alphabet and the convention $ 0\log 0=0 $ is taken% \cite{sbert_information_2011}
 .
 The term $ -\log p(x) $ represents the information content associated with the result x.
@@ -220,40 +224,53 @@ $ W_{j}=\alpha_{j}I_{j}=-\alpha_{j}logf_{j} $
 , where $ \alpha_{j} $ is the opacity of voxel $ j $ looked up from the transfer function, $ I_{j} $ is the information carried by voxel $ j $, which can be derived from the frequency of its histogram bin $ f_{j} $. -log $ f_{j} $ represents the amount of information associated with voxel $ j $.
 
 \section{Method}
-In this section, we present a transfer function refinement approach for modulating the opacity associated with the control points in a transfer function and combine it with user interaction to specify priority areas or intensity values of importance in the resulting image. In previous work \cite{luo_information-guided_2014} we proposed a weighting of control points of transfer functions and an optimization method to minimize the energy function based on this weighting. However, this approach was limited to refining transfer functions with tent-like shapes and processing static volume data sets. 
-In this paper we extend this approach with a more general distribution of weightings and energy function, so that it can handle any form of one-dimensional transfer function based on control points. In addition, an interaction widget (as in Figure~\ref{fig:CT-Knee_hue_selection}) is introduced to allow users to explore the data sets by emphasizing certain intensity values and see the optimized output immediately.
+In this section, we present a transfer function refinement approach for modulating the opacity associated with the control points in a transfer function and combine it with user interaction to specify priority areas or intensity values of importance in the resulting image.
+%In previous work \cite{luo_information-guided_2014} we proposed a weighting of control points of transfer functions and an optimization method to minimize the energy function based on this weighting. However, this approach was limited to refining transfer functions with tent-like shapes and processing static volume data sets. 
+%In this paper we extend this approach with a more general distribution of weightings and energy function, so that it can handle any form of one-dimensional transfer function based on control points.
+In addition, an interaction widget (as in Figure~\ref{fig:CT-Knee_hue_selection}) is introduced to allow users to explore the data sets by emphasizing certain intensity values and see the optimized output immediately.
 %In order to help the user explore the data sets, we combine the automatic optimization process with intuitive user interaction to specify priority areas or intensity values of importance in the resulting image.
 
 In our approach, the user has control of the transfer functions by setting up control points as input for the optimization or tweaking the resulting transfer functions after the optimization. For example, the user can leave out less relevant data ranges by not covering the data ranges with shapes formed by control points (as in Figure~\ref{fig:konig_mastering_2000}). In the case of refining existing transfer functions, users also have the flexibility to refine the input transfer functions partially and keep certain control points constant during the optimization.
 
-\subsection{Weighting of Transfer Function Components}
+\subsection{Weighting of Transfer Function Components \label{weighting_of_transfer_function_components}}
 The goal of our transfer function refinement approach is to balance the opacity settings so that voxels of more significance contribute more and voxels of less significance contribute less to the resulting images.
 %An assumption we made in this thesis (Section \ref{motivation}) is that the importance of voxels are associated with their information content. 
 %In our approach, the intensity range of the transfer function are normalized to $ [0,1] $.
-Given the intensity of the control points $ v_{1},v_{2},...,v_{n} $ of the transfer function $ t $ are $ x_{1},x_{2},...,x_{n} $ and the corresponding opacity are $ \alpha(x_{1}),\alpha(x_{2}),...,\alpha(x_{n}) $. The intensity range of the transfer function is normalized to $ [0,1] $.
+%Given the intensity of the control points $ v_{1},v_{2},...,v_{n} $ of the transfer function $ t $ are $ x_{1},x_{2},...,x_{n} $ and the corresponding opacity are $ \alpha(x_{1}),\alpha(x_{2}),...,\alpha(x_{n}) $. The intensity range of the transfer function is normalized to $ [0,1] $.
+Given control points $ v_{1},v_{2},...,v_{n} $ of the transfer function with intensity values $ x_{1},x_{2},...,x_{n} $ and corresponding opacity values $ \alpha(x_{1}),\alpha(x_{2}),...,\alpha(x_{n}) $, the intensity range of the transfer function is normalized to $ [0,1] $.
 For the convenience of discussion, two control points $ v_{0} $ and $ v_{n+1} $ are added to the lower bound and the upper bound respectively, and $ x_{0}=0 $, $ \alpha(x_{0})=0 $, $ x_{n+1}=1 $ and $ \alpha(x_{n+1})=0 $.
+
+%Given 
+%control points v_1, v_2,... of 
+%the transfer function with 
+%intensities x_1, ... and 
+%corresponding opacities 
+%\alpha_1, ..., \alpha_n 
+%respectively, the intensity range 
+%of the transfer function is 
+%normalised to [0,1].
 
 Similar to the noteworthiness factor by Bordoloi and Shen \cite{bordoloi_view_2005}, opacity and probability (derived from the intensity histogram) are also used in our weighting.
 We define the significance factor of the intensity $ x $ as
 \[
 s(x)=-\alpha(x)p(x) \log p(x), x \in [0,1]
-\]
+\addtag \]
 In the significance factor $ s(x)$, $ p(x) $ is computed from the histogram of the data set, and $ \alpha(x) $ is the opacity function that we want to modulate.
 The significance factor should be high for the voxels which are desired to be seen, and vice versa.
 Then we define the weight of the $ i $-th edge (the segment between $ v_{i} $ and $ v_{i+1} $) as
 \[
 e(i)=\int_{x \in [x_{i}, x_{i+1}]} s(x) dx
-\]
+\addtag \]
 where $ i \in [0,n]$ and $ x \in [0,1] $.
 
-Hence the energy function with distance factors for the intensity $ x_{0} $ of the transfer function can be defined as the variance of edge weights with the distance factors
+Hence, the energy function of the transfer function can be defined as the variance of edge weights
 \[
 E=\sum_{i=0}^{n}(e(i)-\overline{e(i)})^{2}
-\]
+\addtag \]
 where $ \overline{e(i)} $ is the mean of edge weights, i.e.
 \[
 \overline{e(i)}= \frac{\sum_{i=0}^{n}e(i)}{n}
-\]
+\addtag \]
 %
 %and define the significance factor of the $ i $-th control point as the sum of the weights of its two adjacent edges
 %\[
@@ -270,7 +287,7 @@ where $ \overline{e(i)} $ is the mean of edge weights, i.e.
 
 Consequently, minimizing the energy function is equivalent to flattening the curve of the edge weights.
 
-\subsection{Optimizer}
+\subsection{Optimizer \label{optimizer}}
 \label{sec:optimizer}
 Constraints are introduced in the search of the parameter space. Control points would only be moved vertically in the transfer function domain. In other words, only the opacity associated with control points would be changed. The intensity of control points remains the same. Also, those control points that are marked as constant would not be updated in the optimization process.
 These constraints are based on our assumption that the intensity intervals associated with control points are the user's intensity intervals of interest. The user has explored the volume data and set up the transfer function according to his/her needs. Our algorithm aims to help the user reduce occlusion while preserving the user's knowledge or judgments of the data set.
@@ -283,10 +300,9 @@ A greedy strategy is employed in our algorithm to minimize the energy function. 
 %reducing the opacity of the highest control point (with highest significance factor) and increasing the opacity of the lowest control point (with non-zero lowest significance factor).
 
 In our implementation, the optimization ends when it reaches a user-specified iteration count.
-The two step sizes in reducing opacity and increasing opacity can both be user-specified, or the first one is user-specified and the second one is computed based on the first one and the ratio of the significance factors of the two chosen control points. The ratio of the two step sizes affects the overall opacity of the resulting image, for instance, the image becomes more opaque or translucent.
+The two step sizes in reducing opacity and increasing opacity can both be user-specified, or the first one is user-specified and the second one is computed based on the first one and the ratio of the significance factors of the two chosen control points. The ratio of the two step sizes affects the overall opacity of the resulting image, for instance, the image becomes more opaque or translucent. See Section~\ref{automatic_transfer_function_refinement} for results of this global refinement.
 
-\subsection{Distance Factors for Prioritizing Intensity Ranges}
-\label{interaction_methods}
+\subsection{Prioritizing Intensity Ranges \label{interaction_methods}}
 The above described optimizer is an approach to balance the global opacity and thus reduce occlusions in the rendered images. In other words, we de-emphasize the most prevalent voxels, which are considered to have a high probability of occluding the rest of the scene and in particular interior structures of the data.
 
 Although global optimization can help deliver images with better overall visibility, small details may be under-enhanced in the global optimization and certain structures in the image may have to be further enhanced for specific purposes. For instance, in an anatomical data set, the global optimization may guarantee that all structures of materials such as skin, bone and flesh are all visible however if the task of the user is specifically to study skin, this may be counter-productive. Thus, it is clear that a flexible method guided by user interactions is necessary to achieve various visualization goals. 
@@ -300,32 +316,34 @@ In this section, we describe two alternative methods for prioritizing specific i
 %Assume each control point is assigned a unique color, we can get the difference of hue in HSV color space between a specific color and the color of a control point.
 
 We introduce distance factors for intensity values to prioritize the specific intensity ranges.
-In our implementation, the user can select an intensity value by clicking on a color palette, which uses the same color map in the transfer function.
+In our implementation, the user can select an intensity value that they would like to enhance by clicking on a color palette, which uses the same color map in the transfer function.
 Assume each control point is assigned a unique intensity value, we can get the difference between a specific intensity value and the intensity value of a control point.
 
 Given the selected intensity $ x_{0} $, we define the distance factor of the $ i $-th control point $ x(i) $ as
-\[  D_{h}(i)=|x_{0}-x(i)|, i \in [0,n+1] \]
+\[  D_{h}(i)=|x_{0}-x(i)|, i \in [0,n+1] 
+\addtag \]
 Linear interpolation is used to obtain the distance factor $ d_{h}(x) $ for the intensity $ x \in [x_{i},x_{i+1}) $
 
-\[ d_{h}(x)=D_{h}(i) + (D_{h}(i+1)-D_{h}(i))\frac{x-x_{i}}{x_{i+1}-x{i}} \]
+\[ d_{h}(x)=D_{h}(i) + (D_{h}(i+1)-D_{h}(i))\frac{x-x_{i}}{x_{i+1}-x{i}} 
+\addtag \]
 
 Therefore, we define the weight of the $ i $-th edge (the segment between $ v_{i} $ and $ v_{i+1} $) with the distance factors as
 \[
 e_{h}(i)=\int_{x \in [x_{i}, x_{i+1}]} d_{h}(x)s(x) dx
-\]
+\addtag \]
 where $ s(x)=-\alpha(x)p(x) \log p(x), x \in [0,1], i \in [0,n]$.
 
 Hence, the energy function with distance factors for the intensity $ x_{0} $ of the transfer function can be defined as the variance of edge weights with the distance factors
 \[
 E_{h}=\sum_{i=0}^{n}(e_{h}(i)-\overline{e_{h}(i)})^{2}
-\]
+\addtag \]
 where $ \overline{e_{h}(i)} $ is the mean of edge weights $e_{h}(i)$.
 %, i.e.
 %\[
 %\overline{e_{h}(i)}= \frac{\sum_{i=0}^{n}e_{h}(i)}{n}
 %\]
 
-To use the energy function $ E_{h} $ described in this section, we simply need to replace the original energy function with $ E_{h} $ in the previously described optimization algorithm.
+To use the energy function $ E_{h} $ described in this section, we simply need to replace the original energy function (mentioned in Section~\ref{weighting_of_transfer_function_components}) with $ E_{h} $ in the previously described optimization algorithm.
 
 %In our approach, the sum of the squared distances $ D_{s} $ between each pixel in the region $ R $ and the $ i $-th control point is used to measure the difference between the region and the control point.
 %\[ D_{s}(R,i)=\sum_{r \in R}d(r,c(i))^{2} , i \in [1,n] \]
@@ -339,7 +357,10 @@ To use the energy function $ E_{h} $ described in this section, we simply need t
 \subsubsection{Distance Factors for User-Selected Regions}
 %In our approach, user manipulations are supported in the transfer function domain. Users can specify opacity values for control points in the transfer function to indicate their importance.
 %This user-specified weighting would be taken into account in the optimization process.
-In addition to selecting a specific intensity value, the distance factors can also be calculated using a region selected by the user. This region-based selection provides an intuitive method for the user to prioritize specific intensity ranges by selecting a region with the colors of interest in the resulting image.
+
+%In addition to selecting a specific intensity value, the distance factors can also be calculated using a region selected by the user. This region-based selection provides an intuitive method for the user to prioritize specific intensity ranges by selecting a region with the colors of interest in the resulting image.
+
+Selecting a specific target intensity value as in the previous section provides a means of prioritizing the visualization towards the user's requirement. However, in practice, the user often has an imprecise idea of the exact intensity range that he/she wishes to focus on. Thus, we provide a more intuitive option that allows the user to prioritize the visualization by selecting a region on the screen containing voxels in the intensity range of interest to the user.
 
 We introduce region-based distance factors to prioritize the user's region of interest.
 %The difference factors indicate the dissimilarity in color between a selected region in the final image and each control point.
@@ -347,24 +368,27 @@ We introduce region-based distance factors to prioritize the user's region of in
 Assume each control point is assigned a unique color, we can get the difference between the color of a pixel in the region (which is selected in image space) and the color of a control point (HSV color space is used in our implementation).
 
 Given the color of the $ i $-th control point is $ c(i) $, the distance between the color of a pixel $ r $ in the region $ R $ and the color of the $ i $-th control point is denoted by $ d(r,c(i)) $. In our approach, the sum of the distances $ D $ between each pixel in the region $ R $ and the $ i $-th control point is used to measure the difference between the region and the control point.
-\[ D(R,i)=\sum_{r \in R}d(r,c(i)) , i \in [0,n+1] \]
+\[ D(R,i)=\sum_{r \in R}d(r,c(i)) , i \in [0,n+1] 
+\addtag \]
 %We define the distance factor between the region $ R $ and the $ i $-th control point as
 Given the selected region $ R $, we define the distance factor of the $ i $-th control point as 
-\[ W_{R}(i)=\frac{D(R,i)}{\sum_{i=1}^{n}D(R,i)}, i \in [0,n+1] \]
+\[ W_{R}(i)=\frac{D(R,i)}{\sum_{i=1}^{n}D(R,i)}, i \in [0,n+1] 
+\addtag \]
 Linear interpolation is used to obtain the distance factor $ w_{R}(x) $ for the intensity $ x \in [x_{i},x_{i+1}) $
 
-\[ w_{R}(x)=W_{R}(i) + (W_{R}(i+1)-W_{R}(i))\frac{x-x_{i}}{x_{i+1}-x{i}} \]
+\[ w_{R}(x)=W_{R}(i) + (W_{R}(i+1)-W_{R}(i))\frac{x-x_{i}}{x_{i+1}-x{i}} 
+\addtag \]
 
 Therefore, we define the weight of the $ i $-th edge (the segment between $ v_{i} $ and $ v_{i+1} $) with the distance factors as
 \[
 e_{R}(i)=\int_{x \in [x_{i}, x_{i+1}]} w_{R}(x)s(x) dx
-\]
+\addtag \]
 where $ s(x)=-\alpha(x)p(x) \log p(x), x \in [0,1], i \in [0,n]$.
 
 Hence, the energy function with distance factors for the region $ R $ of the transfer function can be defined as the variance of edge weights with the distance factors
 \[
 E_{R}=\sum_{i=0}^{n}(e_{R}(i)-\overline{e_{R}(i)})^{2}
-\]
+\addtag \]
 where $ \overline{e_{R}(i)} $ is the mean of edge weights $e_{R}(i)$.
 %, i.e.
 %\[
@@ -383,12 +407,13 @@ The distance factors described in this section measure the dissimilarity between
 Since we are minimizing the energy function, which is the variance of the edge weights, reducing the distance factors of those control points, which are related to the selected region, will result in their opacity values being increased. As a result, the features (in this case, the intensity intervals) in the selected regions will be enhanced and other features will be de-emphasized in the rendered image.
 %The distances in $ D_{s}(R,i) $ are squared, therefore, it results in a weighting which is more biased towards the selected region, compared to the weighting based on non-squared distances.
 %It thus leads to further enhanced features with further weaken context in the rendered images.
-Since the distance is measured in the color space, the choice of colors for the control points affects the measured distance and thus affects the weighting function.
+See Section~\ref{transfer_function_refinement_with_user-selected_regions} for sample results of this optimization.
+%Since the distance is measured in the color space, the choice of colors for the control points affects the measured distance and thus affects the weighting function.
 %For the purpose of generating satisfactory weighting, control points are better to be assigned colors which are dispersed in the color space.
 
 %In addition, other color spaces could be adopted in this approach. The CIE L*u*v* (abbreviated CIELUV) color space, which is a perceptually uniform representation of the color volume, is a potential alternative in terms of measuring difference. Because the CIE L*u*v* color space is perceptually uniform, it has the characteristic that equally distances in the color space correspond to equal perceptual differences, at least for reasonable small distances \cite{ebert_designing_2002}.
 
-\subsection{Adaptive Transfer Functions for Time-Varying Data Sets}
+\subsection{Adaptive Transfer Functions for Time-Varying Data Sets \label{adative_transfer_functions_for_time-varying_data_sets}}
 In time-varying data sets, the data value ranges and distributions change among time-steps. A single global transfer function may not be able to adequately catch the details of the data set.
 Therefore, we exploit the transfer function optimizer (as discussed in Section~\ref{sec:optimizer}) to locally refine the transfer function for each time-step in the data set.
 In this case, the user specifies a transfer function for a single time-step of the time-varying data set and using either of the two interaction methods (as discussed in Section~\ref{interaction_methods}) to specify priority intensity ranges.
@@ -421,15 +446,15 @@ Note that the transfer functions consisting of equidistant and equal height tent
 %The other is continuous transfer functions (as in Figure~\ref{fig:tf_CT-Knee_spectrum_16_ramp} and Figure~\ref{fig:tf_CT-Knee_spectrum_16_ramp_balance}), which are continuous ramps with control points of different colors.
 
 The initial opacity values of control points will affect the overall opacity level of the resulting image after optimization. Because there are omitted intensity ranges (the gaps) in transfer functions with tent-like shapes, the initial opacity values should be higher in transfer functions with tent-like shapes than in continuous transfer functions.
-In transfer functions with tent-like shapes (as discussed in Section~\ref{sec:background}), the opacity of the top control points are set to $ 1/2 $ and the opacity of the bottom control points are set to 0. The bottom control points are fixed to 0 in order to keep the tent-like shapes in the transfer functions. By contrast, all control points in continuous transfer functions are movable vertically except that control points $ v_{0} $ and $ v_{n+1} $ are fixed and serve as the boundary. The opacity of control points are set to $ 1/6 $ in continuous transfer functions.
+In transfer functions with tent-like shapes (as discussed in Section~\ref{sec:background}), the opacity of the top control points are set to $ 1/2 $ (medium level of opacity) and the opacity of the bottom control points are set to 0. The bottom control points are fixed to 0 in order to keep the tent-like shapes in the transfer functions. By contrast, all control points in continuous transfer functions are movable vertically except that control points $ v_{0} $ and $ v_{n+1} $ are fixed and serve as the boundary. The opacity of control points are set to $ 1/6 $ (an empirical value to make the volume rendering images to be of similar opacity level to tent-like transfer functions with opacity of 1/2) in continuous transfer functions.
 The color maps used in the transfer functions in our system are evenly sampled from a spectrum (with hue from $ 0^\circ $ to $ 360^\circ $ in HSV color space).
 %In the transfer functions, every three adjacent control points with the same color are considered a control point group corresponding to an intensity range.
 In the optimization, the two step sizes for reducing opacity and increasing are both set to $ 1/256 $.
 %The results below are rendered with Voreen \cite{meyer-spradow_voreen:_2009} after transfer function optimization using our approach.
 
-\subsection{Automatic Transfer Function Refinement}
+\subsection{Automatic Transfer Function Refinement \label{automatic_transfer_function_refinement}}
 %\emph{Global Optimisation Results:}
-Firstly, we demonstrate the global optimization with continuous transfer functions.
+Firstly, we demonstrate the global optimization discussed in Section~\ref{weighting_of_transfer_function_components} and Section~\ref{optimizer} with continuous transfer functions.
 In Figure~\ref{fig:tf_CT-Knee_spectrum_16_ramp}, the CT-Knee data set is rendered with a naive transfer function consisting of 6 tent-like shapes of various colors with equal opacity. Figure~\ref{fig:tf_CT-Knee_spectrum_16_ramp_balance} shows the resulting image rendered with the optimized transfer function.
 We tested this specific example as joints are popular regions of interest in medical visualization.
 % and a number of researchers have extended volume rendering techniques to examine joints of human body \cite{borland_volumetric_2006}. 
@@ -510,7 +535,7 @@ of tent-like shapes (a) Preliminary view of data set (b) A transfer function wit
 \subsection{Transfer Function Refinement with User-Selected Intensity Values}
 %optimising the transfer function to *improve* the exploration of volume data
 %In this paragraph, we discuss the results of optimisation with distance factors for user-selected intensity values.
-Figure~\ref{fig:CT-Knee_series} shows three images of a CT-Knee data set while different colors are selected for optimization. Since the colors of the transfer function are generated in HSV color space by varying the hue component, the difference of intensity values are mapped to the difference of hue in HSV color space. By clicking on the color palette (Figure~\ref{fig:CT-Knee_hue_selection}), the transfer function is instantly optimized for the corresponding intensity values.
+Figure~\ref{fig:CT-Knee_series} shows three images of a CT-Knee data set where different colors are selected for optimization based on the approach discussed in Section~\ref{interaction_methods}. Since the colors of the transfer function are generated in HSV color space by varying the hue component, the difference of intensity values are mapped to the difference of hue in HSV color space. By clicking on the color palette (Figure~\ref{fig:CT-Knee_hue_selection}), the transfer function is instantly optimized for the corresponding intensity values.
 
 \begin{figure}
     \centering	
@@ -564,11 +589,11 @@ Figure~\ref{fig:CT-Knee_series} shows three images of a CT-Knee data set while d
 	\label{fig:CT-Knee_series}	
 \end{figure}
 
-\subsection{Transfer Function Refinement with User-Selected Regions}
+\subsection{Transfer Function Refinement with User-Selected Regions \label{transfer_function_refinement_with_user-selected_regions}}
 %\emph{Region-based optimisation}
 Figure~\ref{fig:VisMale_spectrum_4_} shows the VisMale data set with a generated transfer function of 4 tent-like shapes. Figure~\ref{fig:VisMale_histogram} shows the intensity histogram of the data set.
 %Figure~\ref{fig:VisMale_spectrum_4_balance_1000_} shows the image after optimization.
-After the optimization (Figure~\ref{fig:VisMale_spectrum_4_balance_1000_}), the outside of the head is less opaque so the inner structures are revealed to the user. However, the intermediate material (i.e. the skull) also becomes less clear. If the goal is to make the skull more visible, the user could select a region consisting of parts of the skull to generate a weighting and perform further optimization of the transfer function. If the material of interest is occluded by surrounding materials, the user could use an axis-aligned clipping plane in order to accurately select voxels of the skull whilst minimizing the accidental tagging of the surrounding material (Figure~\ref{fig:VisMale_spectrum_4_clipplane_selection}).
+After the optimization (Figure~\ref{fig:VisMale_spectrum_4_balance_1000_}) based on Section~\ref{optimizer}, the outside of the head is less opaque so the inner structures are revealed to the user. However, the intermediate material (i.e. the skull) also becomes less clear. If the goal is to make the skull more visible, the user could select a region consisting of parts of the skull to generate a weighting and perform further optimization of the transfer function based on the approach discussed in Section~\ref{interaction_methods}. If the material of interest is occluded by surrounding materials, the user could use an axis-aligned clipping plane in order to accurately select voxels of the skull whilst minimizing the accidental tagging of the surrounding material (Figure~\ref{fig:VisMale_spectrum_4_clipplane_selection}).
 %In this step, a clipping plane is used in order to allow the user to more accurately select voxels of the skull whilst minimizing the accidental tagging of the surrounding material.
 As shown in Figure~\ref{fig:VisMale_spectrum_4_clipplane_region_1000}, the skull becomes more clear after the region-based optimization.
 
@@ -741,7 +766,7 @@ Figure~\ref{fig:vortex_time_histogram} shows the intensity histograms of the two
 \section{Conclusions}
 %The global optimization aims at alleviating occlusion problems in volume rendering. For example, large obstacles, which are common in CT scans of anatomical structures, tend to occlude the rest of structures in the data. If the obstacles has enough opacity, the final image would be dominated by the obstacles. Instead of refining the transfer function based on visibility contribution of voxels \cite{correa_visibility_2011} \cite{ruiz_automatic_2011}, we address this problem by introducing probability distribution from the occurrence of intensity values. Our approach is view-independent and does not required to perform another pass of volume rendering to compute the accumulated opacity for each voxel. Therefore our approach is lightweight and should has better performance compared to approaches which rely on view-dependent visibility distribution.
 
-In this paper, the global optimization aims to alleviate excessive occlusion problems in volume rendering. However, instead of computing the view-dependent visibility of each voxel as is necessitated in other similar approaches \cite{correa_visibility_2011} \cite{ruiz_automatic_2011}, we achieve this by balancing the opacity of voxels based on the distribution of intensity values. Our view-independent approach is relatively lightweight and should have better performance in contrast to other techniques.
+In this chapter, we presented a global optimization technique which aims to alleviate excessive occlusion problems in volume rendering. However, instead of computing the view-dependent visibility of each voxel as is necessitated in other similar approaches \cite{correa_visibility_2011} \cite{ruiz_automatic_2011}, we achieve this by balancing the opacity of voxels based on the distribution of intensity values. Our view-independent approach is relatively lightweight and should have better performance in contrast to other techniques.
 %We have implemented an optimization method for improving the exploration of volume data sets.
 In addition, we propose two interactive methods that extend on the optimization technique in order to enhance specific intensity ranges within the data as identified by the user.
 %The process is fast and intuitive and allows the user to provide customised views of the data to aid in exploration of the volume data set.
