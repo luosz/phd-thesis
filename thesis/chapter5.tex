@@ -87,13 +87,13 @@ Feature 1 (the purple structure in Figure~\ref{fig:nucleon_naive}) is the exteri
 The visibility-weighted saliency of Feature 1 increases as its opacity increases,
 %as shown in the 3D scalar fields that the brightness and opacity increase along $ x $ axis.
 as demonstrated by the fact that both the brightness and opacity of the corresponding 3D field increases along the $x$-axis.
-Similar patterns also appear in the other 2 scalar fields, the visibility-weighted saliency of feature 2 (the red structure in Figure~\ref{fig:nucleon_naive}) and feature 3 (the green structure in Figure~\ref{fig:nucleon_naive}) also increase as their opacity increase.
+Similar patterns also appear in the other 2 scalar fields, the visibility-weighted saliencies of Feature 2 (the red structure in Figure~\ref{fig:nucleon_naive}) and Feature 3 (the green structure in Figure~\ref{fig:nucleon_naive}) also increase as their opacity values increase.
 
 %I Suggest: ", as demonstrated by the fact that both the brightness and opacity of the corresponding 3D field increases along the x-axis."
 
 %Thus it is reasonable to assume that the visibility-weighted saliency of a feature is a monotonic function of its opacity.
 
-Moreover, feature 1 is the exterior of the nucleon, its visibility-weighted saliency is almost not influenced by the opacity of other features. On the other hand, the visibility-weighted saliency of feature 2 is influenced by both the opacity of feature 1 and feature 2. In addition, the visibility-weighted saliency of feature 3 is drastically influenced by the opacity of feature 1, feature 2 and feature 3, as feature 3 is an interior structure and can be easily occluded by the other 2 features.
+Moreover, Feature 1 is the exterior of the nucleon, its visibility-weighted saliency is almost not influenced by the opacity of other features. On the other hand, the visibility-weighted saliency of Feature 2 is influenced by both the opacity of Feature 1 and Feature 2. In addition, the visibility-weighted saliency of Feature 3 is drastically influenced by the opacity of Feature 1, Feature 2 and Feature 3, as Feature 3 is an interior structure and can be easily occluded by the other 2 features.
 
 In order to demonstrate the distribution of the objective function in the parameter space $ x \in [0,1] $, $ y \in [0,1] $ and $ z \in [0,1] $, we sample the parameter space with sampling interval $ 0.1 $, from 0 to 1 along each axis. There are 11 sampling points along each axis, which results in 1331 sampling points in the parameter space. In Figure~\ref{fig:nucleon_parameterspace}, the parameter space is rendered as a density plot with a color function resembling a temperate map which gradually changes from orange to blue.
 
@@ -133,7 +133,7 @@ In order to demonstrate the distribution of the objective function in the parame
 		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_densityplot3}
 		\subcaption{}
 	\end{minipage}
-	\caption{Visibility-weighted saliency of the 3 features are mapped to brightness and opacity of the 3D fields in (a), (b) and (c) respectively. The visibility-weighted saliency of feature 2 (red) is affected by both the opacity of feature 1 (purple) and feature 2. The visibility-weighted saliency of feature 3 (green) is affected by the opacity of feature 1, feature 2 and feature 3.}
+	\caption{Visibility-weighted saliency of the 3 features are mapped to brightness and opacity of the 3D fields in (a), (b) and (c) respectively. The visibility-weighted saliency of Feature 2 (red) is affected by both the opacity of Feature 1 (purple) and Feature 2. The visibility-weighted saliency of Feature 3 (green) is affected by the opacity of Feature 1, Feature 2 and Feature 3.}
 	\label{fig:nucleon_densityplot}
 \end{figure}
 
@@ -142,7 +142,7 @@ In order to demonstrate the distribution of the objective function in the parame
 	\begin{minipage}{.6\textwidth}
 		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_parameterspace}
 	\end{minipage}
-	\caption{Each position (x, y, z) in the parameter space represents 3 features with opacity values (x, y, z). The value of the objective function (with \{0.1, 0.3, 0.6\} as target) is mapped to the color in the parameter space (with sampling interval $ 0.1 $). Only the high and low values are visible and the data range in the middle is set to transparent.}
+	\caption{Each position (x, y, z) in the parameter space represents 3 features with opacity values (x, y, z). The value of the objective function (with \{0.1, 0.3, 0.6\} as target) is mapped to the color in the parameter space (with sampling interval $ 0.1 $). For clarity, only the high and low values are visible and the data range in the middle is set to transparent.}
 	\label{fig:nucleon_parameterspace}
 \end{figure}
 
@@ -154,13 +154,13 @@ Given a continuously differentiable function $ f(x) $ with $ x \in \mathbb{R}^{n
 \[ x_{k+1}=x_{k}- \alpha_{k} g_{k} , k \geq 0 \]
 for $ \alpha_{k} $ small enough, then $ f(x_{k+1}) \leq f(x_{k}) $. The gradient varies as the iteration proceeds, tending to zero as it approaches a local minimum. When the gradient decreases, the iteration step sizes also decrease. So hopefully the sequence $ {x_{k}} $ converges to the desired local minimum after performing the iteration.
 
-In gradient descent methods, we can either take very small step sizes and reevaluate the gradient at every steps, or take large steps each time. If the step size is too small, it may end up in a laborious situation that the objective function converges very slowly. If the step size is too large, it results in a more zigzag path and may have the risk of missing the local minimum and thus cannot converge.
+In gradient descent methods, we can either take very small step sizes and reevaluate the gradient at every step, or take large steps each time. If the step size is too small, it may end up in a laborious situation that the objective function converges very slowly. If the step size is too large, it results in a more zigzag path and may have the risk of missing the local minimum and thus cannot converge.
 
 \subsection{Estimating Descent Directions \label{estimating_descent_directions}}
 In each step of the optimization, the descent direction $ g_{k} $ has to be updated. 
 As previously discussed, the visibility-weighted saliency of a feature increases as its feature opacity increases. 
 %The visibility-weighted saliency of a feature is a monotonic function of the opacity of the feature. 
-However, the relationship between the visibility-weighted saliency and the opacity of a feature also depends the viewpoint of rendering and the spatial distribution of voxels of every features in the volume data set. An exact derivative of the visibility-weighted saliency with respect to the opacity of the feature cannot be determined in advance.
+However, the relationship between the visibility-weighted saliency and the opacity of a feature also depends on the viewpoint of rendering and the spatial distribution of voxels of every feature in the volume data set. An exact derivative of the visibility-weighted saliency with respect to the opacity of the feature cannot be determined in advance.
 
 In the following subsections, two methods for estimating descent directions are described.
 
@@ -173,14 +173,14 @@ However, $ \frac{\partial W_{i}}{\partial x_{i}} $ cannot be determined without 
 
 For a function $ f(x) $, its first-order derivative can be estimated by a backward difference divided by a small step.
 \[ \frac{\nabla_{d}[f](x)}{d}=\frac{f(x)-f(x-d)}{d} \]
-where $ d $ is nonzero number.
+where $ d $ is a nonzero number.
 When $ d $ is small, the backward difference divided by $ d $ approximates the derivative. Assuming that $ f $ is differentiable, the error in this approximation can be derived from Taylor's theorem.
 \[ \frac{\nabla_{d}[f](x)}{d}-f'(x)=\mathcal{O}(d) \to 0 , \; as \; d \to 0 \]
 
 The backward difference is used here to approximate $ \frac{\partial W_{i}}{\partial x_{i}} $, hence we have
 \[ \frac{\partial W_{i}}{\partial x_{i}} \approx \frac{\nabla_{d}[W_{i}](x_{i})}{d} \]
 
-The evaluation of the objective function $ F $ is very computationally expensive. In our implementation, a small step size $ d $ is adopted, therefore the backward difference can calculated from values of the objective function, visibility-weighted saliency and steps of the previous iteration. In this case, no extra evaluation of the visibility-weighted saliency and the objective function is required.
+The evaluation of the objective function $ F $ is very computationally expensive. In our implementation, a small step size $ d $ is adopted, therefore the backward difference can be calculated from values of the objective function, visibility-weighted saliency and steps of the previous iteration. In this case, no extra evaluation of the visibility-weighted saliency and the objective function is required.
 %Similarly, the backward difference can calculated from previous values of the visibility-weighted saliency and step positions.
 
 Furthermore, if the function $ W_{i} $ of $ x_{i} $ is approximately a linear function, the partial derivative $ \frac{\partial W_{i}}{\partial x_{i}} $ becomes constant and could be replaced by an empirical constant $ b_{i} $. In this case, the gradient of the objective function with respect to the visibility-weighted saliency is used instead, which should be more computationally efficient.
@@ -200,10 +200,10 @@ The first-order derivative can be estimated by backward difference of the object
 We have tested the descent directions discussed above with several volume data sets with various step sizes.
 All the above described methods worked with small step sizes. As the step size increases, using $ \frac{\partial F}{\partial W_{i}} \frac{\nabla_{d}[W_{i}](x_{i})}{d} $ as descent directions would be unstable. While using $ \frac{\partial F}{\partial W_{i}} b_{i} $ and $ \frac{ \nabla_{d}[F](x_{i}) }{ \nabla_{d}[F'](x_{i}) } $ as descent directions would be still stable even when the step sizes are large. In our implementation, $ b_{i}=1 $ is used and this yields desirable results.
 
-Gradient descent was performed on several volume data sets with various transfer functions, using the two normalized descent directions computed from $ [ \frac{\partial F}{\partial W_{1}} b_{1} ... \frac{\partial F}{\partial W_{n}} b_{n} ] $ (method 1)
+Gradient descent was performed on several volume data sets with various transfer functions, using the two normalized descent directions computed from $ [ \frac{\partial F}{\partial W_{1}} b_{1} ... \frac{\partial F}{\partial W_{n}} b_{n} ] $ (Method 1)
  and 
-$ [ \frac{ \nabla_{d}[F](x_{1}) }{ \nabla_{d}[F'](x_{1}) }  ... \frac{ \nabla_{d}[F](x_{n}) }{ \nabla_{d}[F'](x_{n}) } ] $ (method 2).
-In these preliminary results (Figure~\ref{fig:nucleon_naive_tooth_naive_rms}), the convergence speeds of the two methods were similar, with method 2 slightly faster in some cases.
+$ [ \frac{ \nabla_{d}[F](x_{1}) }{ \nabla_{d}[F'](x_{1}) }  ... \frac{ \nabla_{d}[F](x_{n}) }{ \nabla_{d}[F'](x_{n}) } ] $ (Method 2).
+In these preliminary results (Figure~\ref{fig:nucleon_naive_tooth_naive_rms}), the convergence speeds of the two methods were similar, with Method 2 slightly faster in some cases.
 
 \begin{figure}
 	\centering
@@ -280,7 +280,7 @@ The parallel line search is shown as follows.
 The mechanism of the parallel line search is sightly different from the sequential line search. In the sequential line search, if the current candidate point does not meet the condition, the line search is terminated and the next candidate point would not be evaluated. By contrast, the parallel line search would always evaluate all the candidate points and pick the one with least value of the objective function. However, these two methods would have the same behavior if the objective function is a convex function.
 
 The parallel line search strategy would introduce extra overhead of starting and terminating threads. Moreover, the number of threads should not exceed the number of cores of the processor, otherwise multiple threads have to share the same core and this would cause performance impact. The parallel line search is beneficial only when the evaluation of the objective function is more expensive than the parallel overhead.
-In our case, the evaluation of the objective function is very computationally expensive. It requires to compute the visibility fields, which in turn requires to perform a pass of slice-based volume rendering.
+In our case, the evaluation of the objective function is very computationally expensive. It requires computing the visibility fields, which in turn requires that a pass of slice-based volume rendering is performed.
 
 Figure~\ref{fig:nucleon_naive_tooth_naive_rms_linesearch} displays results of applying the two line search methods in optimizing transfer functions. The two curves of objective functions are mostly overlapping, which indicates the two methods acts almost the same in choosing step sizes.
 
@@ -314,8 +314,8 @@ Figure~\ref{fig:nucleon_naive_optimized} shows the optimization results of Figur
 Figure~\ref{fig:nucleon_naive_optimized} (b) to (d) are the optimized transfer function, the visibility histogram and the visibility-weighted saliency histogram respectively. Figure~\ref{fig:nucleon_naive_optimized} (e) and (f) are the evolution of visibility-weighted saliency of each feature over iterations. Figure~\ref{fig:nucleon_naive_optimized} (g) and (h) show scatter plots of visibility-weighted saliency and opacity in the iteration steps, with lines connecting adjacent steps.
 The evolutions of the objective function are also shown in Figure~\ref{fig:nucleon_naive_tooth_naive_rms} (a) and Figure~\ref{fig:nucleon_naive_tooth_naive_rms_linesearch} (a).
 
-Figure~\ref{fig:tooth_naive_optimized} (a), (c) and (d) display volume rendered images of the tooth data set before transfer function optimization. Figure~\ref{fig:tooth_naive_optimized} (b), (e) and (f) shows those after transfer function optimization.
-Figure~\ref{fig:tooth_naive_optimized} (g) and (h) are the evolution of visibility-weighted saliency of each feature over iterations, in gradient descent with fixed step sizes and parallel line search respectively. Figure~\ref{fig:tooth_naive_optimized} (i) and (i) illustrate the relationship between the visibility-weighted saliency and opacity of features, in the iterations of the two gradient descent methods respectively.
+Figure~\ref{fig:tooth_naive_optimized} (a), (c) and (d) display volume rendered images of the tooth data set before transfer function optimization. Figure~\ref{fig:tooth_naive_optimized} (b), (e) and (f) shows the same data sets after transfer function optimization.
+Figure~\ref{fig:tooth_naive_optimized} (g) and (h) are the evolution of visibility-weighted saliency of each feature over 10 iterations (along the $x$-axis), in gradient descent with fixed step sizes and parallel line search respectively. Figure~\ref{fig:tooth_naive_optimized} (i) and (i) illustrate the relationship between the visibility-weighted saliency and opacity of features, in the iterations of the two gradient descent methods respectively.
 The evolutions of the objective function are also shown in Figure~\ref{fig:nucleon_naive_tooth_naive_rms} (b) and Figure~\ref{fig:nucleon_naive_tooth_naive_rms_linesearch} (b).
 
 As shown in Table~\ref{table:performance_table}, the two line search methods require much fewer steps than the fixed step-size method to converge. Although the two line search methods use the same numbers of steps, our parallel line search method only took about half the time of the traditional line search method.
