@@ -1,4 +1,7 @@
 \chapter{Transfer Function Optimization Using Visibility-Weighted Saliency \label{transfer_function_optimization}}
+In this chapter, we present a transfer function optimization approach using the visibility-weighted saliency metric discussed in Chapter~\ref{visibility-weighted_saliency}.
+This is an automated approach that adjust transfer functions to match the visibility-weighted saliency towards user-specified targets.
+In addition, a parallel line search strategy is presented for exploiting the computing power of multi-core processors to improve the performance of the transfer function optimization approach.
 
 \section{Introduction}
 Volume visualization is an effective means of discovering meaningful features in volume data sets.
@@ -11,38 +14,45 @@ The saliency of a feature in the final image depends on the opacity value assign
 
 %Therefore, it is desirable to have an automated method to assist the user in the design of transfer functions. In this chapter, we propose an optimization approach to automatically refine a user-defined transfer function towards target saliency levels specified by the user.
 
-Therefore, it is desirable to have an automated method to assist the user in the design of transfer functions that match target saliency levels specified by the user. In this chapter, we propose an optimization approach that supports this requirement by automatically refining a user-defined transfer function towards any given saliency distribution. 
+Therefore, it is desirable to have an automated method to assist the user in the design of transfer functions that match target saliency levels specified by the user. In this chapter, we propose an optimization approach that supports this requirement by automatically refining a user-defined transfer function towards any given saliency distribution.
+Moreover, we present a parallel line search strategy to improve the performance of the transfer function optimization.
 
 \section{Related Work}
 % line search \cite{armijo_minimization_1966}
 % conjugate gradient descent \cite{shewchuk_introduction_1994}
 Transfer function specification is a non-trivial and unintuitive task in volume visualization. Compared to typical transfer function approaches, which are often subjective, it is desirable to have objective feedback regarding the clarity of features in volume visualization.
 
-Based on the perception principles, Chen et al. \cite{chan_perception-based_2009} introduced several image quality measures to enhance the perceived quality of semitransparent features.
+Based on the perceptual principles, Chen et al. \cite{chan_perception-based_2009} introduced several image quality measures to enhance the perceived quality of semitransparent features.
 J{\"a}nicke and Chen \cite{janicke_salience-based_2010} described a quality metric for analyzing the saliency of visualization images and demonstrated its usefulness with examples from information visualization, volume visualization and flow visualization.
 
 Correa and Ma \cite{correa_visibility-driven_2009} introduced visibility histograms to guide transfer function design for both manual and automatic adjustment.
-Visibility histograms (Figure~\ref{fig:correa_visibility-driven_2009}), which summarize the distribution of visibility of voxels from a given viewpoint, is a powerful feedback mechanism of volume visualization \cite{emsenhuber_visibility_2008}.
-Want et al. \cite{wang_efficient_2011} extended visibility histograms to feature visibility, in order to measures the influence of each feature to the resulting images. They described a scheme that allows user to specify desired visibility for features of interest and subsequently the opacity transfer function is optimized using an active set algorithm \cite{polyak_conjugate_1969}.
+Visibility histograms (Figure~\ref{fig:correa_visibility-driven_2009}), which summarize the distribution of visibility of voxels from a given viewpoint, are a powerful feedback mechanism for volume visualization \cite{emsenhuber_visibility_2008}.
+Wang et al. \cite{wang_efficient_2011} extended visibility histograms to feature visibility, in order to measures the influence of each feature to the resulting images. They described a scheme that allows users to specify a desired visibility for features of interest and subsequently the opacity transfer function is optimized using an active set algorithm \cite{polyak_conjugate_1969}.
 
 %\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
 
 Researchers have developed a variety of parallel strategies to accelerate sequential optimization algorithms \cite{spedicato_algorithms_2012}.
 %\cite{koko_parallel_1998}
-Phua et al. \cite{phua_parallel_1998} proposed a parallel extension to quasi-Newton methods \cite{yang_optimization_2001}. Their approach generates several search directions at each iteration and then apply different line search and scaling strategies in parallel along each search direction.
-Peachey et al. \cite{peachey_parallel_2009} presented another approach to parallelize the quasi-Newton methods. Their approach evaluates the objective function in parallel over a cluster of computers and continue to the next iteration before all evaluations finish in order to accelerate convergence, in a scenario that the objective function evaluation typically require minutes or hours in their applications.
+Phua et al. \cite{phua_parallel_1998} proposed a parallel extension to quasi-Newton methods \cite{yang_optimization_2001}. Their approach generates several search directions at each iteration and then applies different line search and scaling strategies in parallel along each search direction.
+Peachey et al. \cite{peachey_parallel_2009} presented another approach to parallelize the quasi-Newton methods.
+In their applications, the objective function evaluation typically require minutes or hours. Therefore, they introduced an approach that evaluates the objective function in parallel over a cluster of computers and continues to the next iteration before all evaluations finish in order to accelerate convergence.
 
 %-------------------------------------------------------------------------
 \section{Method}
-In Chapter~\ref{visibility-weighted_saliency}, visibility-weighted saliency was proposed as a measure of visual saliency of features in volume rendered images, in order to assist users in choosing suitable viewpoints and designing effective transfer functions to visualize the features of interest. In this chapter, we describe an automated transfer function optimization approach based on the visibility-weighted saliency metric, which indicates the perceptual importance of voxels and the visibility of features in volume rendered images.
+In Chapter~\ref{visibility-weighted_saliency}, visibility-weighted saliency was proposed as a measure of visual saliency of features in volume visualization. This metric indicates the perceptual importance of voxels and the visibility of features in volume rendered images and can be utilized to assist users in choosing suitable viewpoints and designing effective transfer functions to visualize the features of interest.
+In this chapter, we describe a transfer function optimization approach based on the visibility-weighted saliency metric in order to automatically adjust the volume visualization to satisfy user-specified targets set on the visibility-weighted saliency for the features.
 
-The approach described in Chapter~\ref{transfer_function_refinement} is an automated method of optimizing transfer functions, based on the intensity distribution of voxels in the volume data set. However, this approach does not take into account the spatial distribution of voxels and the viewpoint of the visualization. Visibility-weighted saliency, on the other hand, takes into account both of these two aspects. The visibility-weighted saliency consists of two component fields, i.e. saliency field and visiblity fields. Saliency fields are essentially difference of Gaussians, which include the information of local neighborhoods of voxels, and visibility fields are computed from opacity contribution of voxels to volume rendered images, which indicate viewpoint dependent occlusions of the voxels.
+The approach described in Chapter~\ref{transfer_function_refinement} is an automated method of optimizing transfer functions, based on the intensity distribution of voxels in the volume data set. However, this approach does not take into account the spatial distribution of voxels and the viewpoint of the visualization. Visibility-weighted saliency, on the other hand, takes into account both of these two aspects. The visibility-weighted saliency consists of two component fields, i.e. saliency field and visiblity fields. Saliency fields are essentially difference of Gaussians, which include the information of local neighborhoods of voxels.
+Visibility fields are computed from opacity contribution of voxels to volume rendered images, which indicate viewpoint dependent occlusions of the voxels.
 
-Constraints are introduced in the search of the parameter space. Only the opacity of features would be changed in the transfer function domain. The definition of features (e.g. the data intervals) and the colors of features remain the same.
-done the classification of features.
+Constraints are introduced in the search of the parameter space. Only the opacity of features are changed in the transfer function domain. The definition of features (e.g. intensity ranges on 1D transfer functions) and the colors of features remain the same.
+%done the classification of features.
 These constraints are based on the assumption that the user has explored the volume data and done the classification of features.
 % set up the transfer function according to his/her needs.
-Our algorithm aims to help the user adjust the saliency distribution and reduce occlusion while preserving the user's knowledge or judgments of the data set.
+Our approach aims to help the user adjust the saliency distribution and reduce occlusion while preserving the user's knowledge or judgments of the data set.
+While the approach discussed in Chapter~\ref{transfer_function_refinement} was designed for exploring and visual search of volume data, the approach in this chapter could aid in analysis, understanding or closer inspection of the data.
+
+%Should maybe say here and/or in the conclusions that (while Ch3 was for exploring, visual search of data) the contributions of this chapter could aid in analysis, understanding or closer inspection of the data
 
 \subsection{Objective Function}
 Users define target importance values for each feature defined in the transfer function domain.
@@ -57,20 +67,30 @@ where $ W_{F}=u_{1}W_{F}(O_{b},i,\sigma)+u_{2}W_{F}(O_{s},i,\sigma) $ is the vis
 As previously described in Section~\ref{weighted_feature_saliency}, multiple saliency fields computed from different appearance attributes can be combined together in order to represent different aspects of the visual saliency of voxels.
 In our implementation, $ W_{F}=u_{1}W_{F}(O_{b},i,\sigma)+u_{2}W_{F}(O_{s},i,\sigma) $ is a weighted sum of visibility-weighted saliency values computed using brightness and saturation of voxels respectively, and $ u_{1} $ and $ u_{2} $ are weights of the two appearance attributes.
 
-However, the visibility-weighted saliency $ W_{i} $ is not a variable that can be directly modified. Instead, $ W_{i} $ is a complicated function of the color and opacity of voxels in feature $ i $ and is also influenced by the viewpoint of rendering. A visibility-weighted saliency field is a combination of a visibility field and a saliency field. The saliency field is a view-independent field based on the color of every voxels in the volume data set, while the visibility field is a view-dependent field computed from the opacity contribution of every voxels to the final image when rendered from a certain viewpoint.
+However, the visibility-weighted saliency $ W_{i} $ is not a variable that can be directly modified. Instead, $ W_{i} $ is a complicated function of the color and opacity of voxels in feature $ i $ and is also influenced by the viewpoint of rendering. A visibility-weighted saliency field is a combination of a visibility field and a saliency field. The saliency field is a view-independent field based on the color of every voxel in the volume data set, while the visibility field is a view-dependent field computed from the opacity contribution of every voxel to the final image when rendered from a certain viewpoint.
 
 The computation of visibility fields is non-trivial. In order to compute a visibility field, a slice-based rendering is performed on a series of quads which are parallel to the viewing plane, one for each slice.
 Subsequently, the visibility values are computed by subtracting the accumulated opacity of the previous slice from that of the current slice. After collecting the visibility values of all voxels, the visibility field can be constructed. The details of visibility fields were previously described in Section~\ref{visibility_fields}.
 
-The evaluation of the objective function is computationally expensive. However, in an iterative optimization, the visibility field and visibility-weighted saliency have to be recompute at each step after the feature opacity value are updated.
+The evaluation of the objective function is computationally expensive. However, in an iterative optimization, the visibility field and visibility-weighted saliency have to be recomputed at each step after the feature opacity values are updated.
 
 \subsection{Parameter Space}
 We use a nucleon data set \cite{website:Voreen_datasets_2013} to demonstrate how the visibility-weighted saliency of features change when the feature opacity values change. As displayed in Figure~\ref{fig:nucleon_naive}, three features are defined in the transfer function for the nucleon data set.
 
-The dimension of the parameter space is the same as the number of features defined by the user. In this case, three features are defined for the nucleon data set. The opacity of each feature is mapped to an axis in the parameter space. Therefore, the opacity values of the 3 features are mapped to $ x, y, z $ axes of a 3D scalar field respectively. Figure~\ref{fig:nucleon_densityplot} displays three 3D scalar fields, one for each feature, to provide an intuitive overview of the relationship between the feature opacity values and the visibility-weighted saliency values.
+The dimension of the parameter space is the same as the number of features defined by the user. In this case, three features are defined for the nucleon data set. The opacity of each feature is mapped to an axis in the parameter space. Therefore, the opacity values of the 3 features are mapped to $ x, y, z $ axes of a 3D scalar field respectively.
+%Figure~\ref{fig:nucleon_densityplot} displays three 3D scalar fields, one for each feature, to provide an intuitive overview of the relationship between the feature opacity values and the visibility-weighted saliency values.
+Figure~\ref{fig:nucleon_densityplot} displays a visualization of three 3D scalar fields representing this parameter space.
+One field is presented for each feature to provide an intuitive overview of the relationship between the feature opacity values and the visibility-weighted saliency values. In order to avoid confusion, please note that this has no spatial relationship to the actual 3D volume data (which is itself a 3D scalar field).
+%I suggest saying something like; Figure 5.2 displays a visualization of three 3D scalar fields representing this parameter space. One field is presented for each feature to provide an intuitive overview of ....  . In order to avoid confusion, please note that  this has no spatial relationship to the actual 3D volume data (which is itself a 3D scalar field).
 
 Feature 1 (the purple structure in Figure~\ref{fig:nucleon_naive}) is the exterior of the nucleon data set, the visibility-weighted saliency of this feature is shown in the 3D scalar fields in the same color at the left in Figure~\ref{fig:nucleon_densityplot}.
-The visibility-weighted saliency of feature 1 increases as its opacity increases, as shown in the 3D scalar fields that the brightness and opacity increase along $ x $ axis. Similar patterns also appear in the other 2 scalar fields, the visibility-weighted saliency of feature 2 (the red structure in Figure~\ref{fig:nucleon_naive}) and feature 3 (the green structure in Figure~\ref{fig:nucleon_naive}) also increase as their opacity increase.
+The visibility-weighted saliency of Feature 1 increases as its opacity increases,
+%as shown in the 3D scalar fields that the brightness and opacity increase along $ x $ axis.
+as demonstrated by the fact that both the brightness and opacity of the corresponding 3D field increases along the $x$-axis.
+Similar patterns also appear in the other 2 scalar fields, the visibility-weighted saliency of feature 2 (the red structure in Figure~\ref{fig:nucleon_naive}) and feature 3 (the green structure in Figure~\ref{fig:nucleon_naive}) also increase as their opacity increase.
+
+%I Suggest: ", as demonstrated by the fact that both the brightness and opacity of the corresponding 3D field increases along the x-axis."
+
 %Thus it is reasonable to assume that the visibility-weighted saliency of a feature is a monotonic function of its opacity.
 
 Moreover, feature 1 is the exterior of the nucleon, its visibility-weighted saliency is almost not influenced by the opacity of other features. On the other hand, the visibility-weighted saliency of feature 2 is influenced by both the opacity of feature 1 and feature 2. In addition, the visibility-weighted saliency of feature 3 is drastically influenced by the opacity of feature 1, feature 2 and feature 3, as feature 3 is an interior structure and can be easily occluded by the other 2 features.
