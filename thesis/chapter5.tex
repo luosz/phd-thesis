@@ -320,6 +320,13 @@ The evolutions of the objective function are also shown in Figure~\ref{fig:nucle
 
 As shown in Table~\ref{table:performance_table}, the two line search methods require much fewer steps than the fixed step-size method to converge. Although the two line search methods use the same numbers of steps, our parallel line search method only took about half the time of the traditional line search method.
 
+Figure~\ref{fig:CT-Knee_naive_optimized}
+Figure~\ref{fig:vortex_naive_optimized}
+Figure~\ref{fig:CT-Knee_naive_vortex_naive_rms_linesearch}
+Figure~\ref{fig:vorts_naive}
+Figure~\ref{fig:vorts_static}
+Figure~\ref{fig:vorts_dynamic}
+
 %Objective function
 %Figure~\ref{fig:nucleon_strong_red_rms}
 
@@ -547,7 +554,7 @@ As shown in Table~\ref{table:performance_table}, the two line search methods req
 		\includegraphics[width=1\linewidth]{images/vortex_naive_rms_fixed_linesearch_parallel}
 		\subcaption{}
 	\end{minipage}
-	\caption{The line search and parallel line search are applied to transfer function optimization on the nuclon data set (a) and the tooth data set (b). The two methods both converge ($F<0.01$) at step 4 for the nucleon data set and both converge at step 5 for the tooth data set. The two line search methods made very similar choices in step sizes.}
+	\caption{The line search and parallel line search are applied to transfer function optimization on the CT-Knee data set (a) and the first time step of the vortex data set (b). The two methods both converge ($F<0.01$) at step 4 for the nucleon data set and both converge at step 5 for the tooth data set. The two line search methods made very similar choices in step sizes.}
 	\label{fig:CT-Knee_naive_vortex_naive_rms_linesearch}
 \end{figure}
 
@@ -573,20 +580,44 @@ vortex & Steps to converge & 56 & 21 & 21 \\
 
 \begin{figure}
 	\centering
-	\begin{minipage}{.33\textwidth}
-		\includegraphics[width=1\linewidth]{images/vorts}
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/vorts_naive_vws}
 		\subcaption{}
 	\end{minipage}~
-	\begin{minipage}{.33\textwidth}
-		\includegraphics[width=1\linewidth]{images/vorts_static}
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/vorts_naive_2dfs}
+		\subcaption{}
+	\end{minipage}
+	\caption{(a) VWS and (b) 2DFS of the vortex data set with a naive transfer function}
+	\label{fig:vorts_naive}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/vorts_static_vws}
 		\subcaption{}
 	\end{minipage}~
-	\begin{minipage}{.33\textwidth}
-		\includegraphics[width=1\linewidth]{images/vorts_optimized_parallelsearch}
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/vorts_static_2dfs}
+		\subcaption{}
+	\end{minipage}
+	\caption{(a) VWS and (b) 2DFS of the vortex data set with a static transfer function only optimized for the first time step}
+	\label{fig:vorts_static}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/vorts_dynamic_vws}
 		\subcaption{}
 	\end{minipage}~
-	\caption{}
-	\label{fig:vorts_time}
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/vorts_dynamic_2dfs}
+		\subcaption{}
+	\end{minipage}
+	\caption{(a) VWS and (b) 2DFS of the vortex data set with a dynamic transfer function optimized for each time step}
+	\label{fig:vorts_dynamic}
 \end{figure}
 
 %\begin{table}[h]
