@@ -100,7 +100,7 @@ The visibility field is dependent on both the viewpoint and the transfer functio
 \begin{figure}
 	\centering
 	\includegraphics[width=1\linewidth]{images/disks_combined}
-	\caption{A synthetic volume data consisting of three solid disk-like features is shown. The images in the first row show the final image and the corresponding visibility field from a viewpoint on the left. The images in the second row shows the final image and visibility field from a viewpoint on the right. The visibility fields display what parts of the volume contribute most to the images and how tissues in the front occlude those in the back.}
+	\caption{A synthetic volume data set consisting of three solid disk-like features is shown. The images in the first row show the final image and the corresponding visibility field from a viewpoint on the left. The images in the second row shows the final image and visibility field from a viewpoint on the right. The visibility fields display what parts of the volume contribute most to the images and how tissues in the front occlude those in the back.}
 	\label{fig:disks_combined}
 \end{figure}
 
@@ -173,7 +173,7 @@ The visibility-weighted saliency for voxel $ i $ is
 Hence we define $ S $ as the visibility-weighted saliency field of the volume $ V $.
 \[ S=\set{s_{i}(O,i,\sigma)|i \in V} 
 \addtag \]
-Therefore we define visibility-weighted saliency field of a feature $ F $ in the volume $ V $ ($ F\subseteq V $) as.
+Therefore, we define visibility-weighted saliency field of a feature $ F $ in the volume $ V $ ($ F\subseteq V $) as.
 \[ S_{F}=\set{s_{i}(O,i,\sigma)|i \in F} 
 \addtag \]
 
@@ -208,7 +208,7 @@ In Figure~\ref{fig:disks_saliency_chart_left} and Figure~\ref{fig:disks_saliency
 %which combines the saliency fields derived from brightness and saturation of voxels.
 The visibility-weighted feature saliency can be used as a measure to indicate the saliency of features in volume rendered images.
 %The weights of different appearance attributes may be adjusted according to the user's need in specific tasks.
-Equal weights of appearance attributes are used in our implementation, however, more detailed perceptual studies may determine more ideal weights.
+Equal weights of appearance attributes are assumed for now in our implementation, however, more detailed perceptual studies may determine more ideal weights.
 
 \begin{figure}
 	\centering
