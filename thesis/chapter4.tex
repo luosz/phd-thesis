@@ -252,11 +252,11 @@ Equal weights of appearance attributes are assumed for now in our implementation
 		\includegraphics[width=1\linewidth]{images/disk_visibility_saliency_weighted_chart_left.png}
 		\subcaption{}
 	\end{minipage}
-	\caption{The feature visibility \cite{wang_efficient_2011} histogram at top-left shows the sum of visibility values of all the voxels belonging to each feature.
-		The two histograms of visibility-weighted feature saliency based brightness and saturation respectively (at top-right and at bottom-left) show the sum of visibility-weighted saliency of all the voxels belonging to each feature ($ W_{F}(O,i,\sigma) $ in Section~\ref{visibility_weighted_saliency}).
-		The histogram of visibility-weighted feature saliency (at bottom-right) shows the visibility-weighted feature saliency with equal weights of brightness and saturation ($ W_{F} $ in Section~\ref{weighted_feature_saliency}).
-		Feature visibility (top-left) and visibility-weighted feature saliency from brightness (top-right) both suggest that the top disk is the most visible and the bottom disk is the least visible.
-		However, the middle disk with magenta color is significantly more salient than the other two disks (light green and dark green) in terms of saturation (the histogram at bottom-left).
+	\caption{(a) The feature visibility \cite{wang_efficient_2011} histogram shows the sum of visibility values of all the voxels belonging to each feature.
+		(b) \& (c) The two histograms of visibility-weighted feature saliency based brightness and saturation respectively show the sum of visibility-weighted saliency of all the voxels belonging to each feature ($ W_{F}(O,i,\sigma) $ in Section~\ref{visibility_weighted_saliency}).
+		(d) The histogram of visibility-weighted feature saliency shows the visibility-weighted feature saliency with equal weights of brightness and saturation ($ W_{F} $ in Section~\ref{weighted_feature_saliency}).
+		Feature visibility (a) and visibility-weighted feature saliency from brightness (b) both suggest that the top disk is the most visible and the bottom disk is the least visible.
+		However, the middle disk with magenta color is significantly more salient than the other two disks (light green and dark green) in terms of saturation (c).
 	}
 	\label{fig:disks_saliency_chart_left}
 \end{figure}
@@ -279,7 +279,7 @@ Equal weights of appearance attributes are assumed for now in our implementation
 		\includegraphics[width=1\linewidth]{images/disk_visibility_saliency_weighted_chart_right.png}
 		\subcaption{}
 	\end{minipage}
-	\caption{Similar to Figure~\ref{fig:disks_saliency_chart_left}, in the viewpoint on the right in Figure~\ref{fig:disks_combined}, the bottom disk is the most visible according to feature visibility (histogram at top-left) and most salient according to feature saliency from brightness (histogram at top-right). However, feature saliency from saturation (histogram at bottom-left) suggests that the middle disk (magenta color) is significantly more salient than the other two (light green and dark green) in terms of saturation. The histogram at bottom-right is the visibility-weighted feature saliency with equal weights of brightness and saturation.}
+	\caption{Similar to Figure~\ref{fig:disks_saliency_chart_left}, in the viewpoint on the right in Figure~\ref{fig:disks_combined}, the bottom disk is the most visible according to feature visibility (a) and most salient according to feature saliency from brightness (b). However, feature saliency from saturation (c) suggests that the middle disk (magenta color) is significantly more salient than the other two (light green and dark green) in terms of saturation. The histogram (d) is the visibility-weighted feature saliency with equal weights of brightness and saturation.}
 	\label{fig:disks_saliency_chart_right}
 \end{figure}
 
@@ -454,7 +454,7 @@ We applied the Spearman's rank correlation to analyze the monotonic association 
 
 As shown in Figure~\ref{fig:mos_vs_vws}, there are strong positive correlations between MOS and VWS ($ 0.66985 $), and MOS and FS ($ 0.677018 $) respectively. On the other hand, there is a moderate positive correlation between MOS and 2DFS ($ 0.550472 $). Both VWS and FS are more monotonic correlated to MOS than 2DFS, and FV is slightly better than VWS by about $ 0.007 $.
 
-The p-values indicate statistical significance of the associations. In our results, the p-values for all the three cases are very small (below $2 \times 10^{-5} $). Therefore, we can reject the null hypothesis (there is no association between the variables) and conclude that there are associations between MOS and VWS, FS and 2DFS respectively.
+The p-values indicate statistical significance of the associations. In our results, the p-values for all the three cases are very small (below $2 \times 10^{-5} $). Therefore, we can reject the null hypothesis (there is no association between each pair of variables) and conclude that there are associations between MOS and VWS, FS and 2DFS respectively.
 
 In addition, we group MOS by features to provide a more detailed view of the correlation between MOS and VWS.
 Figure~\ref{fig:mos_vs_metric} displays line plots of MOS versus VWS for each feature of the data sets separately, with the data points sorted by VWS on the x axis.
@@ -593,8 +593,12 @@ In Figure~\ref{fig:tooth_naive_optimized_linesearch_red} and Figure~\ref{fig:too
 
 %-------------------------------------------------------------------------
 \section{Conclusions}
-In this paper, we propose visibility-weighted saliency as an improved measure of the visual saliency of features in volume rendered images, in order to assist users in choosing suitable viewpoints and designing effective transfer functions to visualize the features of interest.
+In this chapter, we propose visibility-weighted saliency as an improved measure of the visual saliency of features in volume rendered images, in order to assist users in choosing suitable viewpoints and designing effective transfer functions to visualize the features of interest.
+According to our results, the proposed visibility-weighted saliency is as good as feature visibility and better than 2D feature saliency. Our visibility-weighted saliency also captures changes in saliency due to brightness/contrast changes, which is not taken into account by feature visibility.
+%but that it is captures changes in 
+%saliency due to brightness/contrast
+
 %The visibility-weighted saliency are presented in two different ways, i.e. visibility-weighted saliency fields and feature saliency histograms. Visibility-weighted saliency fields display the spatial distribution of visual saliency of features and feature saliency histograms provide quantitative information about the perceptual importance of the features.
-With visibility-weighted saliency, the saliency of features rendered in different viewpoints with different transfer functions can be measured in a quantitative and fully automated way.
+With visibility-weighted saliency, the perceptual importance of features rendered in different viewpoints with different transfer functions can be measured in a quantitative and fully automated way.
 %In future work we plan to validate our work by conducting an eye-tracking-based user study. In addition, we would like to study other appearance attributes apart from brightness and saturation, and study the weighting between these attributes.
 %-------------------------------------------------------------------------
