@@ -460,6 +460,10 @@ In addition, we group MOS by features to provide a more detailed view of the cor
 Figure~\ref{fig:mos_vs_metric} displays line plots of MOS versus VWS for each feature of the data sets separately, with the data points sorted by VWS on the x axis.
 Because some images were shown more than once in the experiment, the resulting data points have the same VWS and very similar MOS in the line plots.
 Although the line plots are not strictly monotonic (i.e. MOS and VWS are not strictly monotonically correlated), we notice that they have loose monotonic associations.
+Figure~\ref{fig:vismale_feature2_charts} and Figure~\ref{fig:vismale_feature1_charts} display the volume rendered images and their visibility-weighted saliency histograms represented by the data points in Figure~\ref{fig:mos_vs_metric} (g) and (h) respectively.
+The curve in Figure~\ref{fig:vismale_feature2_charts} is strictly monotonic, which indicates that VWS and MOS are well correlated for the Feature 2 (the greeen feature) in the VisMale data set.
+Figure~\ref{fig:vismale_feature1_charts} shows a case where VWS and MOS are not completely correlated. Figure~\ref{fig:vismale_feature1_charts} (e) and (g) are represented by the third and the fourth (from left to right) data points in Figure~\ref{fig:mos_vs_metric} (h). Figure~\ref{fig:vismale_feature1_charts} (f) and (h) are the corresponding visibility-weighted saliency histograms of (e) and (g).
+Figure~\ref{fig:vismale_feature1_charts} (g) received a higher score than (e) from VWS, but MOS gave the opposite ranking of the two volume rendered images.
 
 The analysis of the experiment results indicates that our VWS is better than 2DFS and equivalent to FV in terms of predicting human perception of visual saliency in volume rendering images.
 
@@ -557,7 +561,7 @@ The analysis of the experiment results indicates that our VWS is better than 2DF
 		\includegraphics[width=1\linewidth]{images/vismale_strong_green_visibility_saliency_weighted_chart}
 		\subcaption{}
 	\end{minipage}
-	\caption{Line plots of MOS versus VWS for each feature of the data sets separately}
+	\caption{Visibility-weighted saliency values of the green feature are represented by the data points in Figure~\ref{fig:mos_vs_metric} (g)}
 	\label{fig:vismale_feature2_charts}
 \end{figure}
 
@@ -595,7 +599,7 @@ The analysis of the experiment results indicates that our VWS is better than 2DF
 		\includegraphics[width=1\linewidth]{images/vismale_naive_optimized_red_1000_visibility_saliency_weighted_chart}
 		\subcaption{}
 	\end{minipage}
-	\caption{Line plots of MOS versus VWS for each feature of the data sets separately}
+	\caption{Visibility-weighted saliency values of the red feature are represented by the data points in Figure~\ref{fig:mos_vs_metric} (h)}
 	\label{fig:vismale_feature1_charts}
 \end{figure}
 
