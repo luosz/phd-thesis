@@ -300,7 +300,7 @@ Figure~\ref{fig:nucleon_naive_tooth_naive_rms_linesearch} displays results of ap
 
 %-------------------------------------------------------------------------
 \section{Results and Discussions}
-In this section, we present some results to demonstrate the effectiveness of our approach on the nucleon data set ($ 41 \times 41 \times 41 $), a tooth data set ($ 140 \times 120 \times 161 $), a CT-knee (379 $ \times $ 229 $ \times $ 305) data set \cite{website:Roettger_volume_2013} and one time-step of a simulated turbulent vortex flow (128 $\times$ 128 $\times$ 128, 100 time-steps) \cite{ma_high_2000}.
+In this section, we present some results to demonstrate the effectiveness of our approach on the nucleon data set ($ 41 \times 41 \times 41 $), a tooth data set ($ 140 \times 120 \times 161 $), a CT-knee (379 $ \times $ 229 $ \times $ 305) data set \cite{website:Roettger_volume_2013} and one time-step of a simulated turbulent vortex flow (128 $\times$ 128 $\times$ 128, 100 time-steps) \cite{website:Ma_repository_2013}.
 %and four volumes of a horse embryo data set, which are the horse embryo at 35, 37, 39 and 42 days.
 Results were obtained in our experimental programs written in Wolfram Mathematica on a computer equipped with an Intel Core i7-950 processor, 16GB of RAM and a NVIDIA GeForce GTX 750 Ti graphics card.
 %Tests were performed on a computer equipped with an Intel Core i5-2410M CPU, 8GB of RAM and a NVIDIA GeForce GT 540M graphics card.
@@ -308,26 +308,39 @@ Results were obtained in our experimental programs written in Wolfram Mathematic
 In the results, we display the transfer functions and volume rendered images before and after transfer function optimization, as well as the evolution of visibility-weighted saliency and opacity values of features during the iterations.
 The feature visibility histograms \cite{wang_efficient_2011} are displayed along with the visibility-weighted saliency histograms for comparison.
 0.05 is used as the step size and the objective function $ F $ falling below 0.01 is regarded as convergence.
-The two optimization methods shown in the results are gradient descent with fixed step size and gradient descent with parallel line search, both using the method 1 mentioned in Section~\ref{estimating_descent_directions} for estimating descent directions.
+The two optimization methods shown in the results are gradient descent with fixed step size and gradient descent with parallel line search, both using the Method 1 discussed in Section~\ref{estimating_descent_directions} for estimating descent directions.
 
 Figure~\ref{fig:nucleon_naive_optimized} shows the optimization results of Figure~\ref{fig:nucleon_naive}. In Figure~\ref{fig:nucleon_naive_optimized} (a), the three features from outside to inside appear in different transparency levels, from weak to strong. This reveals a clear perspective of the three structures.
-Figure~\ref{fig:nucleon_naive_optimized} (b) to (d) are the optimized transfer function, the feature visibility histogram and the visibility-weighted saliency histogram respectively. Figure~\ref{fig:nucleon_naive_optimized} (e) and (f) are the evolution of visibility-weighted saliency of each feature over iterations. Figure~\ref{fig:nucleon_naive_optimized} (g) and (h) show scatter plots of visibility-weighted saliency and opacity in the iteration steps, with lines connecting adjacent steps.
-The evolutions of the objective function are also shown in Figure~\ref{fig:nucleon_naive_tooth_naive_rms} (a) and Figure~\ref{fig:nucleon_naive_tooth_naive_rms_linesearch} (a).
+Figure~\ref{fig:nucleon_naive_optimized} (b) to (d) are the optimized transfer function, the feature visibility histogram and the visibility-weighted saliency histogram respectively.
+Figure~\ref{fig:nucleon_naive_optimized} (e) and (f) are the evolution of visibility-weighted saliency of each feature over 10 iterations, in the gradient descent with fixed step sizes and adaptive step sizes using the parallel line search respectively. Figure~\ref{fig:nucleon_naive_optimized} (g) and (h) show scatter plots of visibility-weighted saliency and opacity in the iteration steps, with lines connecting adjacent steps.
+The evolutions of the objective function are also shown in Figure~\ref{fig:nucleon_naive_tooth_naive_rms} (a) and Figure~\ref{fig:nucleon_naive_tooth_naive_rms_linesearch} (a) respectively
 
 Figure~\ref{fig:tooth_naive_optimized} (a), (c) and (d) display volume rendered images of the tooth data set before transfer function optimization. Figure~\ref{fig:tooth_naive_optimized} (b), (e) and (f) shows the same data sets after transfer function optimization.
-Figure~\ref{fig:tooth_naive_optimized} (g) and (h) are the evolution of visibility-weighted saliency of each feature over 10 iterations (along the $x$-axis), in gradient descent with fixed step sizes and parallel line search respectively. Figure~\ref{fig:tooth_naive_optimized} (i) and (i) illustrate the relationship between the visibility-weighted saliency and opacity of features, in the iterations of the two gradient descent methods respectively.
+Figure~\ref{fig:tooth_naive_optimized} (g) and (h) are the evolution of visibility-weighted saliency of each feature, over 50 iterations in the gradient descent with fixed step sizes, and over 10 iterations in adaptive step sizes using the parallel line search respectively. Figure~\ref{fig:tooth_naive_optimized} (i) and (j) illustrate the relationship between the visibility-weighted saliency and opacity of features, in the iterations of the two gradient descent methods respectively.
 The evolutions of the objective function are also shown in Figure~\ref{fig:nucleon_naive_tooth_naive_rms} (b) and Figure~\ref{fig:nucleon_naive_tooth_naive_rms_linesearch} (b).
 
-We also performed the optimization on a CT-Knee data set and the first time-step of a vortex data set.
-Figure~\ref{fig:CT-Knee_naive_optimized}
-Figure~\ref{fig:vortex_naive_optimized}
-Figure~\ref{fig:CT-Knee_naive_vortex_naive_rms_linesearch}
+Figure~\ref{fig:CT-Knee_naive_optimized} shows the volume rendered images of a CT-Knee data set ((a) and (b)), and the feature visibility histograms and the visibility-weighted saliency histograms ((c) to (f)) before and after optimization respectively.
 
-As shown in Table~\ref{table:performance_table}, the two line search methods require much fewer steps than the fixed step-size method to converge. Although the two line search methods use the same numbers of steps, our parallel line search method only took about half the time of the traditional line search method.
+Figure~\ref{fig:vortex_naive_optimized} shows the volume rendered images of the first time-step of a vortex data set ((a) and (b)), and the feature visibility histograms and the visibility-weighted saliency histograms ((c) to (f)) before and after optimization respectively.
 
+The evolution of visibility-weighted saliency of each feature and the relationship between the visibility-weighted saliency and opacity of features, in the iterations of the two gradient descent methods are displayed in Figure~\ref{fig:CT-Knee_naive_optimized} (g) to (j) and Figure~\ref{fig:vortex_naive_optimized} (g) to (j) for the CT-Knee data set and the vortex data set respectively.
 
-Figure~\ref{fig:vorts_static}
-Figure~\ref{fig:vorts_dynamic}
+In the optimized results of these 4 data sets, the visibility-weighted saliency values of the 3 features are very close to the user-specified targets, as shown in Figure~\ref{fig:nucleon_naive_optimized} (d), Figure~\ref{fig:tooth_naive_optimized} (f), and Figure~\ref{fig:CT-Knee_naive_optimized} (f).
+
+Figure~\ref{fig:CT-Knee_naive_vortex_naive_rms_linesearch} displays the evolution of the objective function in the optimization of the CT-Knee data set and the vortex data set.
+We noticed the two line search methods require much fewer steps to converge than the fixed step-size method and they made the same choices of adaptive step sizes during the iterations (the two curves completely overlapped).
+Although the two line search methods use the same numbers of steps, our parallel line search method only took about half the time of the sequential line search method (Table~\ref{table:performance_table}).
+
+\subsubsection{Transfer Function Optimization For Time-Varying Data Sets}
+Similar to the approach discussed in Section~\ref{adaptive_transfer_functions_for_time-varying_data_sets}, we apply our transfer function optimization on all the time steps of the vortex data set. Our optimizer dynamically optimizes the transfer function to the same user-specified target (equal weights i.e. (1/3, 1/3, 1/3) were set as target in this test) for each time step of the time-varying data set. 
+
+Figure~\ref{fig:vorts_static} displays the temporal curves of the visibility-weighted saliency (VWS) and 2D feature saliency (2DFS, discussed in Section~\ref{2d_feature_saliency}) of the visualization with a static transfer function (optimized for the first time step) respectively.
+Similarly, Figure~\ref{fig:vorts_dynamic} displays the temporal curves of the VWS and 2DFS of the visualization with a dynamic transfer function (optimized for each time step) respectively.
+The VWS curves in Figure~\ref{fig:vorts_dynamic} (a) are more converged than the VWS curves in Figure~\ref{fig:vorts_static} (a) because the dynamic transfer function is constantly optimized towards the target (1/3, 1/3, 1/3).
+
+The 2DFS curves in Figure~\ref{fig:vorts_static} (b) and Figure~\ref{fig:vorts_dynamic} (b) are provided as comparison for the fact that 2DFS is an image space technique independent from VWS. We notice that there are more small changes in the 2DFS curves in Figure~\ref{fig:vorts_static} (b) and the three curves (representing the 2DFS of the three features) cross each other more often than the 2DFS curves in Figure~\ref{fig:vorts_static} (b).
+
+Time step 30 and 80 rendered with the static transfer function and the dynamic transfer function are displayed in Figure~\ref{fig:vorts_50_80_static} and Figure~\ref{fig:vorts_50_80_dynamic} respectively. We notice the dynamic transfer function can maintain similar level of visual saliency for the purple feature when the sizes and proportions of the features change over time.
 
 %Objective function
 %Figure~\ref{fig:nucleon_strong_red_rms}
@@ -620,6 +633,34 @@ vortex & Steps to converge & 56 & 21 & 21 \\
 	\end{minipage}
 	\caption{(a) VWS and (b) 2DFS of the vortex data set with a dynamic transfer function optimized for each time step}
 	\label{fig:vorts_dynamic}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/vorts30_static}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/vorts80_static}
+		\subcaption{}
+	\end{minipage}
+	\caption{Time step 30 (a) and time step 80 (b) rendered with a static transfer function only optimized for the first time step}
+	\label{fig:vorts_50_80_static}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/vorts30_optimized_parallelsearch}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{images/vorts80_optimized_parallelsearch}
+		\subcaption{}
+	\end{minipage}
+	\caption{Time step 30 (a) and time step 80 (b) rendered with a dynamic transfer function optimized for each time step}
+	\label{fig:vorts_50_80_dynamic}
 \end{figure}
 
 %\begin{table}[h]

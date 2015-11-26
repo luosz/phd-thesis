@@ -652,7 +652,7 @@ As shown in Figure~\ref{fig:VisMale_spectrum_4_clipplane_region_1000}, the skull
 %	\label{fig:2_level}	
 %\end{figure}
 
-\subsection{Adaptive Transfer Functions for Time-Varying Data Sets}
+\subsection{Adaptive Transfer Functions for Time-Varying Data Sets \label{adaptive_transfer_functions_for_time-varying_data_sets}}
 We demonstrate our approach on a turbulent vortex data set \cite{website:Ma_repository_2013}, which consists of 100 time-steps. Our optimizer adaptively propagates transfer functions for the time-varying data set. Specifically, the transfer function of the previous time-step is taken as input to generate the transfer function for the next time-step.
 Therefore, the transfer functions are locally optimized for each time-step of the time-varying data set, but as the input transfer function comes from the immediate preceding time-step, the resulting transfer functions also exhibit reasonable temporal coherency assuming the data set is also coherent.
 As the difference of intensity histograms among consecutive time-steps is hard to notice, only the images of the first time-step and a time-step in the middle of the data set are displayed here.
