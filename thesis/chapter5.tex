@@ -27,7 +27,7 @@ J{\"a}nicke and Chen \cite{janicke_salience-based_2010} described a quality metr
 
 Correa and Ma \cite{correa_visibility-driven_2009} introduced visibility histograms to guide transfer function design for both manual and automatic adjustment.
 Visibility histograms (Figure~\ref{fig:correa_visibility-driven_2009}), which summarize the distribution of visibility of voxels from a given viewpoint, are a powerful feedback mechanism for volume visualization \cite{emsenhuber_visibility_2008}.
-Wang et al. \cite{wang_efficient_2011} extended visibility histograms to feature visibility, in order to measures the influence of each feature to the resulting images. They described a scheme that allows users to specify a desired visibility for features of interest and subsequently the opacity transfer function is optimized using an active set algorithm \cite{polyak_conjugate_1969}.
+Wang et al. \cite{wang_efficient_2011} extended visibility histograms to feature visibility histograms, in order to measures the influence of each feature to the resulting images. They described a scheme that allows users to specify a desired visibility for features of interest and subsequently the opacity transfer function is optimized using an active set algorithm \cite{polyak_conjugate_1969}.
 
 %\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
 
@@ -115,7 +115,7 @@ In order to demonstrate the distribution of the objective function in the parame
 	\includegraphics[width=1\linewidth]{images/nucleon_naive_visibility_saliency_weighted_chart}
 	\subcaption{}
 \end{minipage}
-\caption{(a) A nucleon data set \cite{website:Voreen_datasets_2013}; (b) A naive transfer function with equal opacitity values for each feature; (c) The visibility histogram \cite{wang_efficient_2011}; (d) The visibility-weighted saliency histogram}
+\caption{(a) A nucleon data set \cite{website:Voreen_datasets_2013}; (b) A naive transfer function with equal opacitity values for each feature; (c) The feature visibility histogram \cite{wang_efficient_2011}; (d) The visibility-weighted saliency histogram}
 \label{fig:nucleon_naive}
 \end{figure}
 
@@ -311,19 +311,21 @@ The feature visibility histograms \cite{wang_efficient_2011} are displayed along
 The two optimization methods shown in the results are gradient descent with fixed step size and gradient descent with parallel line search, both using the method 1 mentioned in Section~\ref{estimating_descent_directions} for estimating descent directions.
 
 Figure~\ref{fig:nucleon_naive_optimized} shows the optimization results of Figure~\ref{fig:nucleon_naive}. In Figure~\ref{fig:nucleon_naive_optimized} (a), the three features from outside to inside appear in different transparency levels, from weak to strong. This reveals a clear perspective of the three structures.
-Figure~\ref{fig:nucleon_naive_optimized} (b) to (d) are the optimized transfer function, the visibility histogram and the visibility-weighted saliency histogram respectively. Figure~\ref{fig:nucleon_naive_optimized} (e) and (f) are the evolution of visibility-weighted saliency of each feature over iterations. Figure~\ref{fig:nucleon_naive_optimized} (g) and (h) show scatter plots of visibility-weighted saliency and opacity in the iteration steps, with lines connecting adjacent steps.
+Figure~\ref{fig:nucleon_naive_optimized} (b) to (d) are the optimized transfer function, the feature visibility histogram and the visibility-weighted saliency histogram respectively. Figure~\ref{fig:nucleon_naive_optimized} (e) and (f) are the evolution of visibility-weighted saliency of each feature over iterations. Figure~\ref{fig:nucleon_naive_optimized} (g) and (h) show scatter plots of visibility-weighted saliency and opacity in the iteration steps, with lines connecting adjacent steps.
 The evolutions of the objective function are also shown in Figure~\ref{fig:nucleon_naive_tooth_naive_rms} (a) and Figure~\ref{fig:nucleon_naive_tooth_naive_rms_linesearch} (a).
 
 Figure~\ref{fig:tooth_naive_optimized} (a), (c) and (d) display volume rendered images of the tooth data set before transfer function optimization. Figure~\ref{fig:tooth_naive_optimized} (b), (e) and (f) shows the same data sets after transfer function optimization.
 Figure~\ref{fig:tooth_naive_optimized} (g) and (h) are the evolution of visibility-weighted saliency of each feature over 10 iterations (along the $x$-axis), in gradient descent with fixed step sizes and parallel line search respectively. Figure~\ref{fig:tooth_naive_optimized} (i) and (i) illustrate the relationship between the visibility-weighted saliency and opacity of features, in the iterations of the two gradient descent methods respectively.
 The evolutions of the objective function are also shown in Figure~\ref{fig:nucleon_naive_tooth_naive_rms} (b) and Figure~\ref{fig:nucleon_naive_tooth_naive_rms_linesearch} (b).
 
-As shown in Table~\ref{table:performance_table}, the two line search methods require much fewer steps than the fixed step-size method to converge. Although the two line search methods use the same numbers of steps, our parallel line search method only took about half the time of the traditional line search method.
-
+We also performed the optimization on a CT-Knee data set and the first time-step of a vortex data set.
 Figure~\ref{fig:CT-Knee_naive_optimized}
 Figure~\ref{fig:vortex_naive_optimized}
 Figure~\ref{fig:CT-Knee_naive_vortex_naive_rms_linesearch}
-Figure~\ref{fig:vorts_naive}
+
+As shown in Table~\ref{table:performance_table}, the two line search methods require much fewer steps than the fixed step-size method to converge. Although the two line search methods use the same numbers of steps, our parallel line search method only took about half the time of the traditional line search method.
+
+
 Figure~\ref{fig:vorts_static}
 Figure~\ref{fig:vorts_dynamic}
 
@@ -356,7 +358,7 @@ Figure~\ref{fig:vorts_dynamic}
 %	\caption{Before optimization, the transfer function strongly emphasizes the red feature, which occludes the green feature inside. (Left: the volume rendered image of the nucleon data set; Middle: the transfer function; Right: the visibility-weighted saliency histogram)}
 %	\label{fig:nucleon_strong_red}
 %\end{figure}
-%
+
 \begin{figure}
 	\centering
 	\begin{minipage}{.3\textwidth}
@@ -393,7 +395,7 @@ Figure~\ref{fig:vorts_dynamic}
 		\includegraphics[width=1\linewidth]{images/nucleon_naive_saliencyopacity_parallelsearch}
 		\subcaption{}
 	\end{minipage}
-	\caption{After optimization to target \{0.1, 0.3, 0.6\}, all the 3 features are visible and the green feature inside is particularly emphasized. (a) The optimized volume rendered image of the nucleon data set; (b) The optimized transfer function; (c) The visibility histogram \cite{wang_efficient_2011}; (d) The visibility-weighted saliency histogram)}
+	\caption{After optimization to target \{0.1, 0.3, 0.6\}, all the 3 features are visible and the green feature inside is particularly emphasized. (a) The optimized volume rendered image of the nucleon data set; (b) The optimized transfer function; (c) The feature visibility histogram \cite{wang_efficient_2011}; (d) The visibility-weighted saliency histogram)}
 	\label{fig:nucleon_naive_optimized}
 \end{figure}
 
@@ -578,28 +580,28 @@ vortex & Steps to converge & 56 & 21 & 21 \\
 \label{table:performance_table}
 \end{table}
 
-\begin{figure}
-	\centering
-	\begin{minipage}{.49\textwidth}
-		\includegraphics[width=1\linewidth]{images/vorts_naive_vws}
-		\subcaption{}
-	\end{minipage}~
-	\begin{minipage}{.49\textwidth}
-		\includegraphics[width=1\linewidth]{images/vorts_naive_2dfs}
-		\subcaption{}
-	\end{minipage}
-	\caption{(a) VWS and (b) 2DFS of the vortex data set with a naive transfer function}
-	\label{fig:vorts_naive}
-\end{figure}
+%\begin{figure}
+%	\centering
+%	\begin{minipage}{.49\textwidth}
+%		\includegraphics[width=1\linewidth]{images/vorts_VWS}
+%		\subcaption{}
+%	\end{minipage}~
+%	\begin{minipage}{.49\textwidth}
+%		\includegraphics[width=1\linewidth]{images/vorts_2DFS}
+%		\subcaption{}
+%	\end{minipage}
+%	\caption{(a) VWS and (b) 2DFS of the vortex data set with a naive transfer function}
+%	\label{fig:vorts_naive}
+%\end{figure}
 
 \begin{figure}
 	\centering
 	\begin{minipage}{.49\textwidth}
-		\includegraphics[width=1\linewidth]{images/vorts_static_vws}
+		\includegraphics[width=1\linewidth]{images/vorts_static_VWS}
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.49\textwidth}
-		\includegraphics[width=1\linewidth]{images/vorts_static_2dfs}
+		\includegraphics[width=1\linewidth]{images/vorts_static_2DFS}
 		\subcaption{}
 	\end{minipage}
 	\caption{(a) VWS and (b) 2DFS of the vortex data set with a static transfer function only optimized for the first time step}
@@ -609,11 +611,11 @@ vortex & Steps to converge & 56 & 21 & 21 \\
 \begin{figure}
 	\centering
 	\begin{minipage}{.49\textwidth}
-		\includegraphics[width=1\linewidth]{images/vorts_dynamic_vws}
+		\includegraphics[width=1\linewidth]{images/vorts_optimized_parallelsearch_VWS}
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.49\textwidth}
-		\includegraphics[width=1\linewidth]{images/vorts_dynamic_2dfs}
+		\includegraphics[width=1\linewidth]{images/vorts_optimized_parallelsearch_2DFS}
 		\subcaption{}
 	\end{minipage}
 	\caption{(a) VWS and (b) 2DFS of the vortex data set with a dynamic transfer function optimized for each time step}
