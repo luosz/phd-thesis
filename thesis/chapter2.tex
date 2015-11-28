@@ -99,6 +99,10 @@ Shear warp is relatively fast in software implementation.
 However, compared to volume ray casting, shear warp has less accurate sampling and potentially worse image quality.
 
 \subsection{Texture-Based Volume Rendering}
+%http://web.cse.ohio-state.edu/~crawfis/cis694L/Slides/TextureSlicing.pdf
+%http://cs.boisestate.edu/~alark/cs564/lectures/Volume_Visualization.pdf
+
+Texture-based volume rendering techniques render slices in the volume as texture-mapped polygons with the opacity and color of voxels determined by the transfer function and interpolation and then merge the polygons from back to front in compositing operations support by the hardware \cite{rezk-salama_interactive_2000}.
 Because graphics cards are fast at texturing, texture-based volume rendering \cite{hibbard_interactivity_1989} can efficiently render slices of volume data with the texturing capability of graphics cards.
 %There are 2D texture mapping and 3D texture. The former aligns the slices with the volume data, while the latter aligns the slices with the viewing plane and directly samples from the 3D volume, which requires graphics hardware support for 3D textures \cite{westermann_accelerated_2001}.
 In 2D texture mapping approaches, slices are aligned with the original volume data,
@@ -116,7 +120,7 @@ Texture-based volume rendering techniques can produce images of reasonable quali
 %In certain situations, non-photorealistic renderings are considered more effective and expressive than an equivalent photograph \cite{healey_perceptually_2004}.
 
 %NPR models were adopted in visualization and hence formed the field illustrative visualization.
-Illustrative visualization, as a novel category of visualization, aims at visualizing data in a clear and understandable way using techniques from traditional hand-crafted illustrations.
+Illustrative visualization, as a novel category of visualization, aims to visualize data in a clear and understandable way using techniques from traditional hand-crafted illustrations.
 Illustrative visualization has been successfully employed in medical visualization \cite{svakhine_illustration_2005} \cite{viola_importance-driven_2005} \cite{svakhine_illustration-inspired_2009}.
 
 Illustration-based styles are believed to be effective in conveying information. Researchers in the field of computer graphics and visualization have applied illustration-based styles in order to produce effective and expressive visualization. Stompel et al. \cite{stompel_visualization_2002} introduced feature enhancement techniques, such as strokes-based, temporal domain enhancement, to enhance time-varying data obtained from the field of computational fluid dynamics (CFD).
