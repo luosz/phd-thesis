@@ -90,7 +90,7 @@
 \renewcommand{\thesisauthor}{Shengzhou Luo}            %% Your official UT name.
 \renewcommand{\thesismonth}{October}                  %% Your month of graduation.
 \renewcommand{\thesisyear}{2015}                      %% Your year of graduation.
-\renewcommand{\thesistitle}{Transfer Function Optimization and Enhancement for Volume Visualization}            %% The title of your thesis; use mixed-case.
+\renewcommand{\thesistitle}{Transfer Function Optimization for Volume Visualization Based on Visibility and Saliency}            %% The title of your thesis; use mixed-case.
 \renewcommand{\thesisauthorpreviousdegrees}{MPhil}  %% Your previous degrees, abbreviated; separate multiple degrees by commas.
 \renewcommand{\thesissupervisor}{John Dingliana}      %% Your thesis supervisor; use mixed-case and don't use any titles or degrees.
 % \renewcommand{\thesiscosupervisor}{}                %% Your PhD. thesis co-supervisor; if any.
@@ -181,7 +181,7 @@ One time-consuming and unitintuitive part of the process is the specification of
 This thesis proposes and investigates novel automated optimization techniques for emphasizing features of interest in volume visualization using information content associated with volume data and objective measures such as visual saliency and visibility of voxels.
 
 We describe a global optimization and two user-driven refinement methods for modulating transfer functions in order to assist the exploration of volume data.
-This optimization is dependent on the distribution of scalar values of the volume data set and is designed to reduce general occlusion and improve the clarity of layers of structures in the resulting images.
+This optimization is dependent on the distribution of the scalar values of the volume data set and is designed to reduce general occlusion and improve the clarity of layers of structures in the resulting images.
 The user can explore a volume by interactively specifying different priority intensity ranges and observe which layers of structures are revealed. In addition, we show how the technique can be applied to time-varying volume data sets by adaptively refining the transfer function based on the histogram of each time-step. 
 Experimental results on various data sets are presented to demonstrate the effectiveness of our method.
 
@@ -189,7 +189,8 @@ The clarity of features depends on the transfer function, the viewpoint and the 
 %In addition to view-independent information (i.e. entropy of voxels), we propose visibility-weighted saliency as a view-dependent measure of features in volume rendered images, in order to assist users in choosing suitable viewpoints and designing effective transfer functions to visualize the features of interest.
 %Visibility-weighted saliency is based on a computational measure of perceptual importance of voxels and the visibility of features in volume rendered images.
 %The effectiveness of this scheme is demonstrated by test results on various volume data sets.
-In addition to view-independent information (i.e. entropy of voxels), we propose a novel view-dependent measure called visibility-weighted saliency in order to assist users in choosing suitable viewpoints and designing effective transfer functions to visualize the features of interest in a volume rendered images. This measure is based on a computational measure of perceptual importance of voxels and the visibility of features in volume rendered images. The effectiveness of this scheme is demonstrated by test results on various volume data sets. 
+In addition to view-independent information, % (i.e. entropy of voxels), 
+we propose a novel view-dependent measure called visibility-weighted saliency in order to assist users in choosing suitable viewpoints and designing effective transfer functions to visualize the features of interest in a volume rendered images. This measure is based on a computational measure of perceptual importance of voxels and the visibility of features in volume rendered images. The effectiveness of this scheme is demonstrated by test results on various volume data sets.
 
 Subsequently, we present an automated transfer function optimization method based on the visibility-weighted saliency metric. This method takes into account the perceptual importance of voxels and the visibility of features, and automatically adjusts the transfer function to match the target saliency levels specified by the user. In addition, a parallel line search strategy is presented to improve the performance of the optimization algorithm.
 
