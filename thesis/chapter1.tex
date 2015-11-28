@@ -91,8 +91,9 @@ The focus of this thesis is on methods for enhancing user understanding of featu
 
 In this research, we focus on the visualization of volume data sets, particularly the scalar field data acquired from medical imaging (e.g. CT and MRI scans) and generated from flow simulations (e.g. computational fluid dynamics).
 
-The features of interest in a volume data set are specified by user-defined transfer functions.
-Therefore, manual segmentation by domain experts or computational expensive automatic segmentation techniques are not in the scope of this thesis.
+The features of interest in a volume data set are specified by initial user-defined transfer functions.
+Therefore, manual segmentation by domain experts or computationally expensive automatic segmentation techniques are not in the scope of this thesis.
+Moreover, this thesis focuses on direct volume rendering techniques. Indirect volume rendering techniques, which require the reconstruction of 3D surfaces, are not in scope of this thesis.
 
 %Flow data which are often in the form of vector fields are not under the focus of our research.
 %Furthermore, we investigate techniques which are applicable to consumer level devices rather than expensive dedicated visualization hardware. As such, this constrains the amount of memory and processing power available, and therefore fast techniques with low memory requirement are necessary.
@@ -164,7 +165,7 @@ Chapter~\ref{transfer_function_refinement}
 presents a novel approach for transfer function refinement, which is an optimization of transfer functions based on the distribution (i.e. the histogram) of the volume data. This optimization also allows the user to prioritize specific regions by generating weightings for transfer function components based on user-selected regions.
 
 Chapter~\ref{visibility-weighted_saliency}
-describes visibility-weighted saliency as a measure of visual saliency of features in volume rendered images, in order to assist users in choosing suitable viewpoints and designing effective transfer functions to visualize the features of interest. Visibility-weighted saliency is based on a computational measure of perceptual importance of voxels and the visibility of features in volume rendered images.
+describes visibility-weighted saliency as an important measure of visual saliency of features in volume rendered images, in order to assist users in choosing suitable viewpoints and designing effective transfer functions to visualize the features of interest. Visibility-weighted saliency is based on a computational measure of perceptual importance of voxels and the visibility of features in volume rendered images.
 
 Chapter~\ref{transfer_function_optimization}
 provides a detailed description of an automated transfer function optimization approach based on the visibility-weighted saliency metric, which indicates the perceptual importance of voxels and the visibility of features in volume rendered images.

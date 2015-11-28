@@ -13,7 +13,7 @@ In this chapter, we present a brief review of the literature related to the conc
 
 Volume rendering is used to display a two-dimensional (2D) image of three-dimensional (3D) data set. It can be considered as a process of projecting a 3D volumetric data set to a 2D image \cite{garcia_parallel_2006}.
 The majority of volume data sets are discretely sampled along 3D grids and contain scalar values usually acquired from medical imaging devices such as CT or MRI machines or computed from scientific simulations such as fluid simulation.
-Volume data sets have the form of 3D arrays and elements in the data sets are called voxels, which correspond to pixels in 2D images.
+Volume data sets have the form of 3D arrays and elements in the data sets are called voxels, which are analogues to pixels in 2D images.
 Figure~\ref{fig:hadwiger_advanced_2009} illustrates how voxels (cubic elements) constitute a volume data set.
 An example of volume rendering is provided in Figure~\ref{fig:multiple_VisMale}, which shows a sliced image and a volume rendered image of a head data set.
 
@@ -64,17 +64,16 @@ An example of volume rendering is provided in Figure~\ref{fig:multiple_VisMale},
 
 %A volume renderer maps every voxel (an element in volume data) to an opacity and a color with a transfer function, which is a piecewise linear function or an arbitrary table. Once converted to an RGBA value, the composed RGBA result is projected on corresponding pixel of the frame buffer with certain volume rendering techniques.
 
-
-
-Traditionally, volume rendering techniques are categorized as direct volume rendering and indirect volume rendering.
-Indirect volume rendering is actually surface rendering. It is done by extracting surfaces (polygon meshes) from volume data sets and rendering these surfaces to the screen. A typical method for extracting polygonal meshes from 3D discrete scalar fields (volume data sets) is Marching cubes \cite{lorensen_marching_1987}.
+Traditionally, volume rendering techniques are categorized as either direct volume rendering or indirect volume rendering.
+Indirect volume rendering is actually surface rendering. It is done by extracting surfaces (polygon meshes) from volume data sets and rendering these surfaces to the screen. A typical method for extracting polygonal meshes from volume data is Marching Cubes \cite{lorensen_marching_1987}.
+%3D discrete scalar fields (volume data sets) is Marching Cubes \cite{lorensen_marching_1987}.
 
 In contrast to surface rendering, direct volume rendering displays images of a 3D volume data set as a complete block of data without extracting geometric surfaces from the data \cite{levoy_display_1988}. Direct volume rendering consists of a variety of techniques for generating images from 3D scalar fields.
-Since indirect volume rendering is not in the scope of this thesis, direct volume rendering would henceforth be referred to as volume rendering.
+Since indirect volume rendering is not in the scope of this thesis, direct volume rendering is henceforth referred to as volume rendering within this thesis.
 
 Volume rendering was initially used in medical imaging, and later became an essential technique in many sciences for portraying complex phenomena such as clouds, water flows, and molecular and biological structure \cite{rosenblum_scientific_1994}.
 %In addition to the realistic aspects of volume rendering, there is non-photorealistic volume rendering, which emphasizes the illustrative and artistic aspects of volume rendering.
-Volume visualization is another term for volume rendering, sometimes with emphasis on the effective expression of 
+Volume visualization is a synonymous term for volume rendering, sometimes with emphasis on the effective expression of 
 data rather than the realism of rendering.
 
 Motivated by scientific visualization and medical imaging, where volume data is often acquired by devices such as CT and MRI scanners, or numerical simulation of natural phenomena, researchers have developed a wide variety of techniques to improve the performance and enhance the perception of volume visualization \cite{corcoran_enhancing_2013}.
