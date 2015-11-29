@@ -125,14 +125,32 @@ Illustrative visualization has been successfully employed in medical visualizati
 
 Illustration-based styles are believed to be effective in conveying information. Researchers in the field of computer graphics and visualization have applied illustration-based styles in order to produce effective and expressive visualization. Stompel et al. \cite{stompel_visualization_2002} introduced feature enhancement techniques, such as strokes-based, temporal domain enhancement, to enhance time-varying data obtained from the field of computational fluid dynamics (CFD).
 
-In scientific visualization, the features of interest are often inner structures of the data sets, e.g. visualizing internal organs in anatomical data sets.
+In scientific visualization, features of interest are often inner structures of the data sets, e.g. visualizing internal organs in anatomical data sets.
+In addition, depicting only the features of interest is not sufficient, because the user is often interested in exploring the features within the context of the whole volume data.
+
 Inspired by techniques from illustration, various approaches are proposed to reveal different levels of structures simultaneously in volume data sets.
+Two-level volume rendering \cite{hauser_two-level_2001} \cite{hadwiger_high-quality_2003} \cite{corcoran_perceptual_2010} is a method of merging several volume rendering techniques into a single rendering. This method is useful when inner structures need to be rendered along with semitransparent outer parts.
+Focus and context \cite{wang_magic_2005} \cite{bruckner_illustrative_2006} \cite{chen_intelligent_2008} techniques reveal the interior of a volume data set in a feature-driven way and also retain the context information.
+Cutaway techniques \cite{burns_feature_2007} \cite{sigg_intelligent_2012} make inner structures clearly visible along with their spatial relation to the surrounding material.
+In exploded views \cite{bruckner_exploded_2006}, the occluding objects are decomposed and displaced so that the internal details are visible.
+In contrast, structure extrusion techniques \cite{diaz_adaptive_2012} make features of interest visible by extruding them off the clipping plane and preserving the context by adapting the extruded region.
 
-Two-level rendering \cite{hauser_two-level_2001} \cite{hadwiger_high-quality_2003} \cite{corcoran_perceptual_2010} is a method of merging several volume rendering techniques into a single rendering. This method is useful when inner structures need to be rendered along with semitransparent outer parts.
-Focus and context \cite{wang_magic_2005} \cite{bruckner_illustrative_2006} \cite{chen_intelligent_2008} provides a means of revealing the interior of a volume data set in a feature-driven way and also retaining context information.
-Another alternative is the cutaway technique \cite{burns_feature_2007} \cite{sigg_intelligent_2012}, which makes inner structures clearly visible along with their spatial relation to the surrounding material.
+%There are other alternative techniques, e.g. exploded views \cite{bruckner_exploded_2006} and structure extrusions \cite{diaz_adaptive_2012}.
+% generate cuts on
+% volumetric models through the manipulation of a clipping
+% plane
 
-%Diaz et al. \cite{diaz_adaptive_2012}
+% In this way, the user may interactively specify how
+% much portion of each visible structure needs to be extruded
+% off the cutting plane.
+
+% In
+% this paper we present a new editing technique based on the use of clipping planes, direct structure extrusion, and
+% illustrative methods, which preserves the context by adapting the extruded region to the structures of interest of the
+% volumetric model. 
+%an exploded view the object is decomposed into sev-
+%eral parts which are displaced so that internal details are visible 
+%D{\'i}az et al. \cite{diaz_adaptive_2012}
 %\cite{diaz_iriberri_enhanced_2013}
 
 %\subsubsection{Other NPR Techniques in Volume Visuailzation \label{painterly_rendering}}
@@ -235,7 +253,7 @@ Various strategies have been proposed for transfer function design \cite{hadwige
 %Data-centric strategies examine the properties of volume data sets.
 %However, certain features are difficult to be extracted and visualized with 1D transfer functions, e.g. CT and MRI data sets which contain complex boundaries between multiple materials.
 %Overlapping intensity intervals corresponding to different materials make boundary separation difficult.
-However, features with overlapping intensity intervals are difficult to be extracted and visualized with 1D transfer functions.
+However, features with overlapping intensity intervals are difficult to extract and visualize with 1D transfer functions.
 When one intensity value or interval is associated with multiple boundaries, a 1D transfer function is unable to render them in isolation \cite{kniss_multidimensional_2002}.
 %Overlapping intensity intervals corresponding to different materials make boundary detection difficult.
 %However, certain features of interest in volume data are difficult to extract and visualize with 1D transfer functions. For instance, many medical data sets created from CT or MRI scans contain a complex combination of boundaries between multiple materials. This situation is problematic for 1D transfer functions because of the potential for overlap between the data value intervals spanned by the different boundaries. When one data value or data range is associated with multiple boundaries, a 1D transfer function is unable to render them in isolation \cite{kniss_multidimensional_2002}.
@@ -244,19 +262,20 @@ Classical approaches to this problem try to detect boundary information between 
 The introduction of multidimensional transfer functions alleviates the material separation problem.
 Instead of classifying a voxel based on a single scalar value, multidimensional transfer functions allow a voxel to be classified based on a combination of values.
 Multidimensional transfer functions are very effective means to extract materials and their boundaries for both scalar and multivariate data.
+Multidimensional transfer functions are discussed in more detail in the next subsection.
 
-In addition, various user interfaces were proposed to simply the design of multidimensional transfer functions \cite{tzeng_novel_2003} \cite{tzeng_cluster-space_2004}.
+In addition, various user interfaces were proposed to simplify the design of multidimensional transfer functions \cite{tzeng_novel_2003} \cite{tzeng_cluster-space_2004}.
 However, the parameter spaces of multidimensional transfer functions are more complex (compared to 1D transfer functions) and thus introduce problems such as requirement for large amount of user interaction, missing precision or the interaction being complex and unintuitive \cite{arens_survey_2010}.
 %As a result, the interaction of transfer functions becomes more complex and unintuitive.
 
-Another strategy is based on the selection of rendered images. This strategy lets the user select one or more favorite images to guide the further search of transfer functions \cite{marks_design_1997} \cite{wu_interactive_2007}. More recent approaches introduced visibility \cite{correa_visibility-driven_2009} \cite{correa_visibility_2011} or measures derived from information theory \cite{haidacher_information-based_2008} \cite{bruckner_isosurface_2010} \cite{ruiz_automatic_2011} \cite{bramon_information_2013}. Zhou et al. \cite{zhou_transfer_2012} studied the combination of 2D transfer functions with occlusion and size-based transfer functions.
+Another strategy is based on the selection of rendered images. This strategy lets the user select one or more favorite images to guide the further search of transfer functions \cite{marks_design_1997} \cite{wu_interactive_2007}. More recent approaches introduced visibility \cite{correa_visibility-driven_2009} \cite{correa_visibility_2011} or measures derived from information theory \cite{haidacher_information-based_2008} \cite{bruckner_isosurface_2010} \cite{ruiz_automatic_2011} \cite{bramon_information_2013}. Zhou et al. studied the combination of 2D transfer functions with occlusion and size-based transfer functions \cite{zhou_transfer_2012}.
 
 Bruckner and Gr{\"o}ller introduced the concept of style transfer functions \cite{bruckner_style_2007}, which aim to produce more comprehensible images by using transfer functions that map input values to different non-photorealistic rendering styles.
 
 Despite the advances of these methods, transfer function design for volume rendering is still an open research problem.
 The creation of transfer functions needs to be simplified and the functionality of transfer functions needs to be extended in order to realize the full potential of volume rendering. For instance, more sophisticated transfer functions are required in medical imaging, in order to address various domain specific visualization problems \cite{lindholm_spatial_2010}.
 
-Moreover, transfer function specification in general is an unintuitive or even monotonous task for average users, because it is usually an iterative process of trial and error.
+Moreover, transfer function specification in general is an unintuitive or even monotonous task for average users, because it usually involves an iterative process of trial and error.
 For instance, there are skin and fat tissues around the brain, and their intensities lie in the same range as the brain. If we want to visualize the brain by setting the scalar value range of the brain to opaque, the surrounding skin and fat tissue will also become opaque. Then the brain will be occluded by the surrounding soft tissues which make it difficult to explore the brain structure.
 Common approaches to this problem are to introduce explicit segmentation of structures of interest before the volume rendering process \cite{rezk-salama_opacity_2006}. In fact, the process of applying the transfer function could be interpreted as a segmentation problem.
 
@@ -295,10 +314,10 @@ Haidacher et al. \cite{haidacher_volume_2010} described the statistical transfer
 Wang et al. \cite{wang_automating_2012} described a clustering approach on 2D density plots for automatic transfer function design. Their approach allows the user to interactively explore the pre-computed clusters in the feature space and merge or remove uninterested features to improve visualization quality.
 Ip et al. \cite{ip_hierarchical_2012} described a multilevel segmentation technique that mimics user exploration behaviors by recursively segmenting intensity-gradient histograms.
 
-There are other multidimensional transfer functions approaches, such as spatialized gradient-based transfer functions \cite{roettger_spatialized_2005}, distance-based transfer functions \cite{tappenbeck_distance-based_2006}, size-based transfer function \cite{correa_size-based_2008}, texture-based transfer functions \cite{caban_texture-based_2008} \cite{alper_selver_exploring_2015}.
+There are other multidimensional transfer function approaches, such as spatialized gradient-based transfer functions \cite{roettger_spatialized_2005}, distance-based transfer functions \cite{tappenbeck_distance-based_2006}, size-based transfer function \cite{correa_size-based_2008}, texture-based transfer functions \cite{caban_texture-based_2008} \cite{alper_selver_exploring_2015}.
 % and curvature based transfer functions \cite{kindlmann_curvature-based_2003}.
 
-In addition, parallel coordinates and dimensionality reduction algorithms (e.g. principal component analysis) were employed to support the design of transfer functions in multidimensional parameter spaces \cite{zhao_multi-dimensional_2010} \cite{guo_multi-dimensional_2011} \cite{kim_dimensionality_2010}.
+In addition, parallel coordinates and dimensionality reduction algorithms (e.g. principal component analysis) have been employed to support the design of transfer functions in multidimensional parameter spaces \cite{zhao_multi-dimensional_2010} \cite{guo_multi-dimensional_2011} \cite{kim_dimensionality_2010}.
 
 \section{Automated Transfer Function Generation}
 Researches have proposed various approaches to automate the design of transfer functions and provide acceptable suggestions which can be further edited by users. However, the usefulness of a transfer function mostly depends on the underlying question the user wants to answer. Moreover, users' tasks vary drastically from one domain to another. Therefore, most techniques work semi-automatically and very few techniques consider domain knowledge in the design process \cite{zudilova-seinstra_trends_2008}.
@@ -311,10 +330,10 @@ Rezk-Salama et al. \cite{rezk-salama_automatic_2000} presented high-level semant
 %\cite{jani_opacity_2005}
 Wu and Qu \cite{wu_interactive_2007} developed a method that uses editing operations and stochastic search of the transfer function parameters to maximize the similarity between volume-rendered images given by the user.
 Maciejewski et al. \cite{maciejewski_structuring_2009} described a method to structure attribute space in order to guide users to regions of interest within the transfer function histogram.
-Chan et al. \cite{chan_perception-based_2009} developed a system to optimize transparency automatically in volume rendering based on Metelli\rq s episcotister model to improve the perceptual quality of transparent structures.
+Chan et al. \cite{chan_perception-based_2009} developed a system to optimize transparency automatically in volume rendering based on Metelli's episcotister model to improve the perceptual quality of transparent structures.
 Correa and Ma \cite{correa_visibility-driven_2009} proposed the visibility histogram to guide the transfer function design.
 
-Zhou and Takatsuka \cite{zhou_automatic_2009} presented an automated approach for generating transfer functions, which can depict inclusion relationship between structures in the volume, and maximize opacity and color differences among the structures. This approach uses a residue flow model based on Darcy\rq s Law to differentiate the distribution of opacity between branches of a contour tree.
+Zhou and Takatsuka \cite{zhou_automatic_2009} presented an automated approach for generating transfer functions, which can depict inclusion relationships between structures in the volume, and maximize opacity and color differences among the structures. This approach uses a residue flow model based on Darcy's Law to differentiate the distribution of opacity between branches of a contour tree.
 Selver and G{\"u}zeli{\c s} \cite{alper_selver_semiautomatic_2009} introduced a semi-automatic method for transfer function initialization and optimization using volume histogram stacks and radial basis function networks.
 
 Inspired by how physicians interact with volume data to extract clinically relevant information, L{\"a}th{\'e}n et al. \cite{lathen_automatic_2012} proposed an optimization method for shifting transfer function presets, in order to better visualize contrast enhanced blood vessels.
@@ -325,7 +344,7 @@ Inspired by how physicians interact with volume data to extract clinically relev
 %\cite{jung_opacity-driven_2014}
 %%Opacity-driven volume clipping for slice of interest (SOI) visualisation of multi-modality PET-CT volumes
 
-Maciejewski et al. proposed a non-parametric method to generate transfer function \cite{maciejewski_structuring_2009}.
+Maciejewski et al. proposed a non-parametric method to generate transfer functions \cite{maciejewski_structuring_2009}.
 In their later work \cite{maciejewski_abstracting_2013}, instead of using the attributes, metrics representing relationships and correlations in the underlying data were used in the method.
 
 %A number of approaches have been proposed to automate the design of transfer functions.
@@ -377,9 +396,7 @@ Cai et al. \cite{cai_automatic_2013} described a method to derive opacity transf
 %%Opacity modulation based peeling for direct volume rendering
 
 In addition, various methods were proposed regarding the use of visibility for enhancing different aspects of volume visualization.
-
 Marchesin et al. \cite{marchesin_per-pixel_2010} introduced a volume rendering technique that manipulates the voxel opacity values in a view-dependent way, in order to enhance visibility of internal structures in the volume data set.
-
 Bronstad et al. \cite{bronstad_visibility_2012} described local opacity transfer functions with feature detection along the ray profile implemented on the GPU. In their approach, visibility histograms are employed to access the performance of the feature detection algorithm.
 
 Jung et al. \cite{jung_dual-modal_2012} presented a dual-modal visualization method, which uses visibility metrics to provide visual feedback regarding the occlusion caused by the volume data in one modal on the other modal.
@@ -387,7 +404,6 @@ Jung et al. \cite{jung_visibility-driven_2013} extended visibility histograms to
 They demonstrated the use of visibility histograms together with region of interest segmentation was effective in visualizing PET-CT volume data sets.
 
 Instead of computing the visibility of all voxels, Zheng et al. \cite{zheng_visibility_2013} employed local visibility histograms to ensure both the features of interest and contextual information are visible in multimodal volume visualization.
-
 Schlegel and Pajarola \cite{schlegel_visibility-difference_2013} proposed a visibility-difference entropy metric. They presented an automated approach using this metric for generating a set of transfer function candidates with high ratings and are strongly distinct in what they reveal.
 
 Qin et al. \cite{qin_voxel_2015} presented the voxel visibility model as a quality metric for transfer function design.
@@ -401,13 +417,10 @@ However, multivariate volume data sets are usually mapped to a scalar dimension 
 %\cite{ebert_designing_2002}
 
 Stompel et al. \cite{stompel_visualization_2002} demonstrated feature enhancements using non-photorealistic rendering and hardware-accelerated techniques to generate perceptually effective visualization of multidimensional and multivariate volume data sets.
-
 Kniss and Hansen \cite{kniss_volume_2002} applied volume rendering with multidimensional transfer function to visualize multivariate weather simulations. In their approach, they combined the temperature and humidity as a multivariate field in order to assist the meteorologists in identifying the frontal zones. 
 
 Akiba et al. \cite{akiba_simultaneous_2006} presented the use of time histograms for simultaneous classification of time-varying data in order to find transfer functions that classify all the time steps of the data set.
-
 Woodring and Shen \cite{woodring_multi-variate_2006} presented a method for the comparison of different data fields through the expression of a volume shader that composes data fields together with set operations.
-
 Wang et al. \cite{wang_importance-driven_2008} introduced an importance measure based on conditional entropy and categorize temporal behaviors by clustering the importance curves over time.
 
 Lee and Shen \cite{lee_visualizing_2009} introduced dynamic time warping (DTW) to measure the shape similarity between two time series with an optimal warping of time in order to account for the phase shift of the feature in time. Subsequently, they extended DTW to SUBDTW \cite{lee_visualization_2009}, in order to estimate when a trend appears and vanishes in a given time series. They modeled the temporal relationships as a state machine based on the beginning and ending times of the trends.
@@ -422,16 +435,16 @@ Data analysis techniques for high dimensional spaces, such as parallel coordinat
 %\cite{liu_multivariate_2014}
 
 \section{Time-Varying Volume Visualization}
-Although researchers have developed a great number of visualization techniques for time-invariant volume data, how to effectively explore and understand time-varying volume data remains a challenging problem. Finding good transfer functions for time-invariant volume data itself has proven difficult \cite{pfister_transfer_2001}.
+Although researchers have developed a great number of visualization techniques for static volume data \cite{pfister_transfer_2001}, how to effectively explore and understand time-varying volume data remains a challenging problem.
+%Finding good transfer functions for static volume data itself has proven difficult \cite{pfister_transfer_2001}.
+Finding good transfer functions for time-varying volume data is more difficult than for static volume data, as data value ranges and distributions change over time.
 %Finding good transfer functions for time-varying volume data is even more difficult, as data value ranges and distributions change over time.
 %Although researchers have developed a great number of visualization techniques for static volume data, how to effectively explore and understand time-varying volume data remains a challenging problem.
-Finding good transfer functions for time-varying volume data is more difficult than for static volume data, as data value ranges and distributions change over time.
 
 \subsection{Transfer Functions for Time-Varying Volume Visualization}
-Coherence is an important issue of transfer function design for time-varying volume data. Ideally, a single transfer function should be used for the whole time-varying data set in order to obtain coherent visualization. More than one color or opacity map can be misleading or physically meaningless, because the transition from one transfer function to another may cause sudden changes in the resulting images. However, this practice is not always applicable to general time-varying data sets. In some cases, the intensity distributions change significantly over time, thus applying a single transfer function to all frames becomes inappropriate.
+Coherence is an important issue in transfer function design for time-varying volume data. Ideally, a single transfer function should be used for the whole time-varying data set in order to obtain coherent visualization. More than one color or opacity map can be misleading or physically meaningless, because the transition from one transfer function to another may cause sudden changes in the resulting images. However, the practice of using a single transfer function is not always applicable to general time-varying data sets. In some cases, the intensity distributions change significantly over time, thus applying a single transfer function to all frames becomes ineffective.
 
 Volume data sets are inherently 3D representations. Automated analysis methods, such as temporal trends or statistical aggregates e.g. mean values and standard deviations, are often applied in order to abstract dynamic characteristics of the data sets \cite{kehrer_visualization_2013}.
-
 %Jankun-Kelly and Ma \cite{jankun-kelly_study_2001} examined how to combine transfer functions for different time-steps to generate a coherent transfer function.
 Jankun-Kelly and Ma \cite{jankun-kelly_study_2001} examined how to combine transfer functions for different time-steps to generate a coherent transfer function.
 Woodring et al. \cite{woodring_high_2003} considered time-varying volume data as four-dimensional data field and provided a user interface to specify hyperplanes in 4D.
@@ -444,8 +457,8 @@ A time-varying volume data set can be considered as a 3D array where each voxel 
 Woodring and Shen \cite{woodring_multiscale_2009} presented a method that filters time-varying volume data into several time scales using a wavelet transform and classifies the voxels by clustering the entire time series by time scale.
 Lee and Shen \cite{lee_visualizing_2009} proposed a method for classifying time-varying features using time activity curves with the dynamic time warping distance metric.
 
-A single static transfer function maybe be able to capture dynamic features whose their intensity change over time.
-To address this problem, Woodring et al. \cite{woodring_semi-automatic_2009} utilized a method called temporal clustering and sequencing to find dynamic features in value space and create dynamic transfer functions through time-series analysis (Figure~\ref{fig:woodring_semi-automatic_2009}).
+A single static transfer function may be able to capture dynamic features whose intensities change over time.
+To address this problem, Woodring et al. \cite{woodring_semi-automatic_2009} utilized a method called temporal clustering and sequencing to find dynamic features and create dynamic transfer functions through time-series analysis (Figure~\ref{fig:woodring_semi-automatic_2009}).
 
 \begin{figure}
 	\centering
@@ -467,7 +480,7 @@ In certain situations, non-photorealistic renderings are considered more effecti
 An essential problem in time-varying volume visualization is to visualize temporal variation and analysis of features. Traditionally, time-varying data has been visualized as snapshots of individual time steps or as an animation of snapshots of a sequence of time steps. These techniques are effective in making time-varying data understandable, however, they struggle when the complexity of data sets increased dramatically in recent years \cite{brambilla_illustrative_2012}.
 
 Compared to flow visualization, which is a well established branch of scientific visualization \cite{brambilla_illustrative_2012}, general time-varying volume visualization is still a relative young field.
-Illustrations for time-varying rendering could be divided into two categories, one is to enhance time-invariant features and the other is to enhance temporal features of time-varying volume data. The techniques in the first category focus on enhancing structural perception of volume models through the amplification of features and the addition of illumination effects \cite{rheingans_volume_2001} \cite{joshi_illustration-inspired_2005}. Examples of these techniques include boundary enhancement, oriented feature enhancement (silhouettes, fading, and sketch lines). The techniques in the second category focus on illustrating dynamic aspects such as movement of features. A few kinds of techniques have been proposed for this purpose. For example, there are speed lines, flow ribbons and strobe silhouettes, which are inspired by traditional animation \cite{joshi_illustration-inspired_2005} \cite{joshi_evaluation_2008} \cite{joshi_case_2009}; and there are extended silhouette and boundary enhancement domains, which are inspired by the techniques used by illustrators and other artists \cite{svakhine_illustration_2005}. Nevertheless, illustrations of temporal features of time-varying data requires more attention from researchers in the visualization community. The usefulness of illustrative approaches in time-varying volume visualization has not been studied as thoroughly as in other areas.
+Illustrations for time-varying rendering could be divided into two categories, one is to enhance time-invariant features and the other is to enhance temporal features of time-varying volume data. The techniques in the first category focus on enhancing structural perception of volume models through the amplification of features and the addition of illumination effects \cite{rheingans_volume_2001} \cite{joshi_illustration-inspired_2005}. Examples of these techniques include boundary enhancement, oriented feature enhancement (silhouettes, fading, and sketch lines). The techniques in the second category focus on illustrating dynamic aspects such as movement of features. A number of techniques have been proposed for this purpose. For example, there are speed lines, flow ribbons and strobe silhouettes, which are inspired by traditional animation \cite{joshi_illustration-inspired_2005} \cite{joshi_evaluation_2008} \cite{joshi_case_2009}; and there are extended silhouette and boundary enhancement domains, which are inspired by the techniques used by illustrators and other artists \cite{svakhine_illustration_2005}. Nevertheless, illustrations of temporal features of time-varying data requires more attention from researchers in the visualization community. The usefulness of illustrative approaches in time-varying volume visualization has not been studied as thoroughly as in other areas.
 
 \subsection{Vector Field Visualization}
 The visualization of vector fields plays a crucial role in visual interpretation and understanding of the underlying flow features and patterns \cite{kuhn_clustering-based_2011} \cite{ma_coherent_2013}. Since flow patterns also exist in time-varying volume data, certain techniques for visualizing vector fields could be incorporated into time-varying volume visualization, in order to depict the dynamic aspects of time-varying data.
@@ -476,14 +489,14 @@ Line drawings are effective ways to depict complex information with simple means
 Among vector field visualization techniques, streamline visualization is a simple but common way to convey the structure of 3D vector fields \cite{chen_illustrative_2011}.
 Streamlines have proven to be expressive in vector field visualization if they are combined with appropriate seeding strategies \cite{annen_vector_2008}.
 %Streamlines intuitively reveal flow patterns by integrating the flow path.
-Texture patterns generated by line integral convolution are used in 2D vector field visualization. Rezk-Salama et al. \cite{rezk-salama_interactive_1999} introduced volume rendering as means to efficiently render 3D line integral convolution for visualizing 3D vector fields.
+Texture patterns generated by line integral convolution are used in 2D vector field visualization. Rezk-Salama et al. \cite{rezk-salama_interactive_1999} introduced volume rendering as a means to efficiently render 3D line integral convolution for visualizing 3D vector fields.
 
 \subsection{Feature Tracking}
 Feature extraction and tracking is an established technique for the analysis of time-varying data in various research fields, such as video analysis, computer vision and flow visualization \cite{muelder_interactive_2009}.
 In time-varying data, features are objects that evolve over time. Feature tracking aims to determine the correspondence between features in successive time steps and describe the evolution of features through time \cite{post_state_2003}.
 
 In practice, feature extraction and tracking are often employed in the exploration and analysis of time-varying volume visualization in order to better understand the dynamic nature of the underlying phenomena \cite{wang_information_2008} \cite{woodring_multiscale_2009} \cite{lee_visualizing_2009}.
-Feature extraction methods are often based on an analytic description of the feature of interest. Consequently, feature extraction and tracking could become a manual-driven and trial-and-error process in the case that properties cannot be easily defined and are sometimes unknown \cite{ma_machine_2007}.
+Feature extraction methods are often based on an analytic description of the feature of interest. Consequently, feature extraction and tracking could become manual-driven and trial-and-error processes when properties cannot be easily defined or unknown \cite{ma_machine_2007}.
 
 Tzeng and Ma \cite{tzeng_intelligent_2005} proposed an intelligent feature extraction and tracking algorithm, which applies machine learning to extract and track time-varying fluid flow features in volume data.
 They investigated the use of both neural networks and support vector machines in their approach and obtained promising results.
@@ -492,11 +505,11 @@ Based on the observation that regions in time-varying volume data present specif
 %In their technique, a combination of first-order, second-order and run-length matrices are used to analyze local textural features, and then similarity measurements are used to locate the best match of features in following time steps.
 Caban and Rheingans \cite{caban_texture-based_2008} extended this technique for transfer function design, in which the voxels' resulting opacity and color are based on local textural properties instead of intensity values.
 
-Gu and Wang \cite{gu_transgraph_2011} described the TransGraph, which is a graph-based representation for visualizing hierarchical state transition relationships. This approach provides an occlusion-free over map and allows controllable interaction to help users to track data transition over space and time.
+Gu and Wang \cite{gu_transgraph_2011} described the TransGraph, which is a graph-based representation for visualizing hierarchical state transition relationships. This approach provides an occlusion-free overview map and allows controllable interaction to help users to track data transition over space and time.
 %The TransGraph assists the user in understanding time-varying volume data with an occlusion-free over map.
 %It also provides controllable interaction, which helps the user to track data transition over space and time.
 
-Hsieh et al. \cite{hsieh_feature_2013} introduced a particle swarm method for transfer function design. This method maps the frequency of particle occurrences to the color and opacity values, and extract features after the particles finish searching for features in the volume data.
+Hsieh et al. \cite{hsieh_feature_2013} introduced a particle swarm method for transfer function design. This method maps the frequency of particle occurrences to color and opacity values, and extracts features after the particles finish searching for features in the volume data.
 
 Johnson and Huang \cite{johnson_distribution-driven_2009} introduced the use of local frequency distribution of intensity values in broader neighborhoods around each voxel to define features and found frequency distributions to contain meaningful information relevant to various feature queries.
 Cai et al. \cite{cai_rule-enhanced_2015} presented a rule-enhanced transfer function generation method to separate and highlight important structures in volume visualization. They defined a set of rules based on the frequency distribution of data attributes and employed a genetic algorithm to select a set of rules that are most effective in distinguishing the target tissue from other tissues.
@@ -508,7 +521,7 @@ Traditional applications of information theory, such as data compression and dat
 
 In recent years, there is an emerging direction towards using the principles of information theory to solve challenging problems in scientific visualization \cite{wang_information_2011}. These problems include view selection \cite{bordoloi_view_2005} \cite{takahashi_feature-driven_2005} \cite{feixas_unified_2009}, streamline seeding and selection \cite{xu_information-theoretic_2010} \cite{lee_view_2011}, transfer function for multimodal data \cite{bramon_multimodal_2012}, representative isosurface selection \cite{wang_lod_2006}, time-varying and multivariate data analysis \cite{wang_importance-driven_2008} and information channel between objects and viewpoints \cite{ruiz_viewpoint_2010}.
 
-Chen and J{\"a}nicke \cite{chen_information-theoretic_2010} presented an information-theoretic framework for visualization. They examined the theoretical aspect of information and its relation to data communication and interpret different stages of the visualization pipeline using the taxonomy of information.
+Chen and J{\"a}nicke \cite{chen_information-theoretic_2010} presented an information-theoretic framework for visualization. Examining the theoretical aspect of information and its relation to data communication, they interpreted different stages of the visualization pipeline using the taxonomy of information.
 
 Haidacher et al. \cite{haidacher_information-based_2008} proposed an approach for transfer function specification for multimodal data visualization. They considered the joint occurrence of multiple features from one or multiple variables in order to separate statistical features that only occur in a single variable from those that are present in both.
 
@@ -521,18 +534,18 @@ Ruiz et al. \cite{ruiz_automatic_2011} presented an approach to generate transfe
 Bramon et al. \cite{bramon_information_2013} proposed an automatic method to visualize multimodal data by combining several information-theoretic strategies to define colors and opacity values of the multimodal transfer function.
 They set an information channel between two registered input data sets to define the fused color and minimize the informational divergence between the visibility distribution captured by a set of viewpoints and a target distribution proposed by the user to obtain the opacity.
 
-\section{Computational Saliency}
+\section{Computational Saliency in Visualization}
 %Predicting salient locations has many real world applications, such as navigational assistance, robot control, surveillance systems, object detection and scene understanding.
 
-Predicting salient regions in images \cite{zhao_learning_2013} can be exploited as a useful feedback for improving visualizations.
-Inspired by mechanisms of the human visual system, various computational models of visual saliency have been proposed to predict gaze allocation \cite{itti_model_1998} \cite{parkhurst_modeling_2002} \cite{harel_graph-based_2006} \cite{chikkerur_what_2010} \cite{mahadevan_spatiotemporal_2010} \cite{duan_visual_2011}.
+Predicting salient regions in images \cite{zhao_learning_2013} can be exploited as useful feedback for improving visualizations.
+Inspired by mechanisms of the human visual system, various computational models of visual saliency have been proposed to predict gaze allocation in an image \cite{itti_model_1998} \cite{parkhurst_modeling_2002} \cite{harel_graph-based_2006} \cite{chikkerur_what_2010} \cite{mahadevan_spatiotemporal_2010} \cite{duan_visual_2011}.
 
 J{\"a}nicke and Chen \cite{janicke_salience-based_2010} described a quality metric for analyzing the saliency of visualization images and demonstrated its usefulness with examples from information visualization, volume visualization and flow visualization.
+Corcoran et al. \cite{corcoran_perceptual_2010} compared the effectiveness of various stylized volume visualization techniques on the basis of shape perception.
 
 Kim et al. \cite{kim_spatiotemporal_2011} extended their previous work on detecting salient regions in images \cite{kim_saliency_2010} to detect salient regions in both images and videos. Both approaches use the self-ordinal resemblance measure to compute the spatial saliency. Then the spatiotemporal saliency map is generated by combining the spatial saliency with the temporal saliency, which is the sum of absolute differences of temporal gradients of the center and the surrounding regions.
 
 Lee et al. \cite{lee_mesh_2005} presented mesh saliency, which is defined in a scale-dependent manner using a center-surround operator on Gaussian-weighted mean curvatures. They observed that their approach was able to capture the most visually interesting regions on a mesh.
-
 Kim and Varshney \cite{kim_saliency-guided_2006} introduced the use of center-surround operators to compute saliency fields of volume data. In their user study, they found that their approach was better at eliciting viewer attention than the traditional Gaussian regional enhancement approaches.
 
 Shen et al. \cite{shen_save:_2014} proposed the use of saliency to assist volume exploration. They described a method for inferring interaction position in volume visualization, in order to help users pick focused features conveniently.

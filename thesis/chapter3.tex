@@ -1,6 +1,4 @@
 \chapter{Information-Guided Transfer Function Refinement for Exploring Volume Data \label{transfer_function_refinement}}
-Volume visualization is a powerful technique for depicting layered structures in 3D volume data sets. However, it is a major challenge to obtain clear visualizations of a volume with layers clearly revealed.
-In particular, the specification of the transfer function is frequently a time-consuming and unintuitive task in volume rendering.
 In this chapter, we describe a global optimization and two user-driven refinement methods for modulating transfer functions in order to assist the exploration of volume data.
 This optimization is dependent on the distribution of scalar values of the volume data set and is designed to reduce general occlusion and improve the clarity of layers of structures in the resulting images.
 The user can explore a volume by interactively specifying different priority intensity ranges and observe which layers of structures are revealed. In addition, we show how the technique can be applied to time-varying volume data sets by adaptively refining the transfer function based on the histogram of each time-step. 
@@ -8,24 +6,29 @@ Experimental results on various data sets are presented to demonstrate the effec
 
 %-------------------------------------------------------------------------
 \section{Introduction}
+Volume visualization is a powerful technique for depicting layered structures in 3D volume data sets.
+%However, it is a major challenge to obtain clear visualizations of a volume with layers clearly revealed.
+%In particular, the specification of transfer functions is frequently a time-consuming and unintuitive task in volume rendering.
+Transfer functions play an essential role in volume visualization.
+Through the assignment of visual properties, including color and opacity, to the volume data being visualized,
+transfer functions impact the final rendering of the data set and thus affect which structures will be 
+visible to the user.
+However, obtaining an effective transfer function is a non-trivial task, which often entails time-consuming tweaking until a desired aesthetic quality is achieved in the resulting rendering.
+Although a number of automatic or semi-automatic approaches have been developed, transfer function design remains a challenging problem \cite{pfister_transfer_2001} \cite{arens_survey_2010}.
+
 %Volume rendering is the process of depicting information within volume data sets, which usually contain complex structures of various materials or dynamic phenomena. The majority of such datasets are discretely sampled along a three-dimensional grid and contain scalar values usually acquired from imaging devices such as CT or MRI machines. In other cases, such as in flow visualization, the datasets are often generated from simulations and may constitute a 3D vector field or multi-variate data of even higher complexity.
 %%Volume data is stored as an array of voxels (a three-dimensional extension of pixels), the atomic entities that contain information such as the density or other properties of a discretised position in 3D space.
 %Such datasets are ubiquitous in science, medicine and engineering but are difficult to deal with as the data typically does not consist of surfaces and edges, which are the typical primitives of a 3D graphics pipeline. Because of the lack of explicit geometric information, %and limited semantics, 
 %it is a major challenge to provide clear visualizations of the structures contained in a volume dataset.
 
 %A crucial step in volume rendering is transfer function specification.
-Transfer functions play an essential role in volume rendering.
-Through the assignment of visual properties, including color and opacity, to the volume data being visualized,
-transfer functions impact the final rendering of the data set and thus affect which structures will be 
-visible to the user.
+
 %However, obtaining an effective transfer function is a non-trivial task, which typically involves a significant amount of tweaking of color and opacity.
-However obtaining an effective transfer function is a non-trivial task, which often entails time-consuming tweaking until 
-a desired aesthetic quality is achieved in the resulting rendering.
+
 %Multi-dimensional transfer functions were developed to distinguish transitions between tissues by utilizing data properties such as gradient and second derivatives.
 %%However, high-dimensional transfer functions require high amount of user interaction and the means of interaction is often unintuitive.
 %However, the design of high-dimensional transfer functions is usually a very involved and unituitive process for the user.
-Although a number of automatic or semi-automatic approaches have been developed, 
-transfer function design remains a challenging problem \cite{pfister_transfer_2001} \cite{arens_survey_2010}.
+
 %In interactive volume rendering systems, users can obtain good transfer functions via trial-and-error modification of visualization parameters, but the process often entails time-consuming tweaking until a desired aesthetic quality is achieved in the resulting rendering.
 %In addition to the complex structures contained in volume data, users have differing goals or features of interest depending on their specific tasks. Therefore, it is almost impossible to generate a transfer function that would suit all kinds of visualization tasks. Also, different subsets of the data may occlude each other and thus result in ineffective visualization.
 
@@ -61,7 +64,8 @@ exploratory approaches with simple and efficient interaction are highly desirabl
 %Figure~\ref{fig:tf_nucleon} shows a typical interface for transfer function specification. The control points specify color and opacity for their intensity values. The x-axis is intensity and the y-axis is opacity. Each control point is also assigned a color. The color and opacity of an intensity value is obtained by linear interpolations of the color and opacity of the two adjacent control points. The typical process of transfer function specification involves iterations of assigning colors to control points, moving control points around and then observing the resulting rendered images.
 %A rendered image of a nucleon data set is displayed in Figure~\ref{fig:nucleon}. The three components (sets of control points) in Figure~\ref{fig:tf_nucleon} correspond to the three layers in the rendered image.
 
-In this paper, we propose a novel approach to refine the transfer function based on the distribution of the scalar values of the volume data set.
+%In this paper, 
+We propose a novel approach to refine the transfer function based on the distribution of the scalar values of the volume data set.
 %Our approach provides the ability for users to specify priority intensity ranges in an intuitive way, thus facilitating more interactive exploration of volume data sets.
 %This optimization can be done automatically as an initial global optimization with no assumptions of the data set.
 Firstly, we propose an automatic step to refine the transfer function that improves the rendering of volume data by reducing overall occlusions with no previous assumptions of the data set. Furthermore, we propose two interactive methods that extend on the optimization technique in order to enhance specific intensity ranges within the data as identified by the user. The process is fast and intuitive and allows the user to provide customized views of the data to aid in visual exploration of the volume data set.
@@ -69,7 +73,9 @@ Firstly, we propose an automatic step to refine the transfer function that impro
 \section{Related Work}
 %More recent approaches introduced visibility
 %\cite{correa_visibility_2011}
-A number of approaches have been proposed to automate the design of transfer functions.
+A number of approaches have been proposed to automate the design of transfer functions,
+and these are discussed in detail in Section~\ref{literature_of_transfer_function}. Here, we briefly discuss the most closely related previous works to the contribution of this chapter.
+
 Maciejewski et al. \cite{maciejewski_structuring_2009} described a method to structure attribute space in order to guide users to regions of interest within the transfer function histogram.
 Chan et al. \cite{chan_perception-based_2009} developed a system to optimize transparency automatically in volume rendering based on Metelli's episcotister model to improve the perceptual quality of transparent structures.
 Correa and Ma \cite{correa_visibility-driven_2009} proposed the visibility histogram to guide the transfer function design. In a later work \cite{correa_visibility_2011}, they generalized the visibility histogram and proposed a semi-automatic method for generating transfer functions by maximizing the visibility of important structures based on the visibility histogram, which represents the contribution of voxels to the resulting image.
