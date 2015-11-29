@@ -7,10 +7,10 @@ The effectiveness of this scheme is demonstrated by test results on two volume d
 
 %-------------------------------------------------------------------------
 \section{Introduction}
-Volume visualization is an active branch of scientific visualization. It is a method of extracting meaningful information from volumetric data sets, which usually contain complex structures of various material.
-First introduced by Levoy \cite{levoy_display_1988} for visualization of volume data, volume visualization has been widely used in various sciences to create insightful visualizations from both simulated and measured data.
+%Volume visualization is an active branch of scientific visualization. It is a method of extracting meaningful information from volumetric data sets, which usually contain complex structures of various material. First introduced by Levoy \cite{levoy_display_1988} for visualization of volume data, volume visualization has been widely used in various sciences to create insightful visualizations from both simulated and measured data.
 
-A crucial step in volume visualization is transfer function specification. Transfer functions assign visual properties, including color and opacity, to the volume data being visualized. Hence, transfer functions determine which structures will be visible and how they will be rendered.
+A crucial step in volume visualization is transfer function specification.
+Transfer functions assign visual properties, including color and opacity, to the volume data being visualized. Hence, transfer functions determine which structures will be visible and how they will be rendered.
 An appropriate transfer function can quickly reveal large amounts of information of the data set to the viewer.
 However, obtaining an effective transfer function is a non-trivial task, which involves a significant amount of tweaking of color and opacity.
 A cause of this problem is the lack of an objective measure to quantify the quality of transfer functions \cite{correa_visibility_2011}.
@@ -21,10 +21,8 @@ Kim and Varshney \cite{kim_saliency-guided_2006} introduced the saliency field, 
 However, salient voxels may be occluded by other voxels close to the viewer in certain viewpoints and thus these salient voxels become invisible in the volume rendered image. In order to measure the visual saliency of features in volume rendered images, it is necessary to consider both the saliency and the visibility of the voxels which form the feature.
 
 In this chapter, we propose visibility-weighted saliency as an improved measure of the visual saliency of features in volume rendered images. Visibility-weighted saliency is a combination of feature visibility \cite{wang_efficient_2011} and saliency fields \cite{kim_saliency-guided_2006}.
-Feature visibility measures the contribution of each feature to the volume rendered image and saliency fields measure
-%the visual saliency of each voxel in its local neighborhood.
-how strongly each voxel stands out in its local neighborhood.
-The visibility-weighted saliency are presented in two different ways, i.e. visibility-weighted saliency fields and feature saliency histograms. Visibility-weighted saliency fields display the spatial distribution of visual saliency of features and feature saliency histograms provide quantitative information about the perceptual importance of the features.
+Feature visibility measures the contribution of each feature to the volume rendered image and saliency fields measure how strongly each voxel stands out in its local neighborhood.
+The visibility-weighted saliency is presented in two different ways, i.e. visibility-weighted saliency fields and feature saliency histograms. Visibility-weighted saliency fields display the spatial distribution of visual saliency of features and feature saliency histograms provide quantitative information about the perceptual importance of the features.
 With visibility-weighted saliency, the saliency of features rendered in different viewpoints with different transfer functions can be measured in a quantitative and fully automated way.
 Thus, this technique can be used to guide users in choosing appropriate viewpoints and designing effective transfer functions for the features of interest in volume visualization.
 This technique is also useful for understanding how much different parts of the volume contribute to the final image and how different tissues occlude each other and interfere with each other's visibility.
