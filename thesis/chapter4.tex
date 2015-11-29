@@ -425,17 +425,49 @@ The aim of this experiment is to gather subjective opinion scores regarding how 
 %This section describes the human study and experiments performed using it.
 The volume rendering images used for the study were rendered by Voreen \cite{meyer-spradow_voreen:_2009} with a variety of transfer functions highlighting different features from various viewpoints. The volume data sets used in the experiment are publicly available on the Internet.
 8 volume data sets were used to produce images for the experiment and the images of 2 data sets (CThead and lobster) were only used in the training session at the beginning of the experiment.
-The results of 6 volume data sets were analyzed. These data sets are engine block, foot, MRbrain, nucleon, vismale, tooth and vismale
+The results of 6 volume data sets were analyzed. As shown in Figure~\ref{fig:experiment_data_sets}, these data sets are engine block, foot, MRbrain, nucleon, tooth and VisMale
 %and horse embryo 
 \cite{website:Roettger_volume_2013} \cite{website:Voreen_datasets_2013}.
 %There were 30 people participated in the experiment. Among the participants, there were 20 males and 10 females, all aged between 22 and 39 years old.
-30 participants (20 male and 10 female) took part in the experiment. All were aged between 22 and 39 years old and consisted of postgraduates, undergraduates and researchers. Over half of the participants have computer science background. Only one participant reported that he had slight color blindness (red-green). This participant confirmed that he had no problem in distinguishing the colors of features in the experiment.
+30 participants (20 male and 10 female) took part in the experiment. All were aged between 22 and 39 years old and consisted of postgraduates, undergraduates and researchers. Over half of the participants had a computer science background. Only one participant reported that he had slight red-green color blindness, but this participant confirmed that he had no problem in distinguishing the colors of features in the experiment.
+
+\begin{figure}
+\centering
+\begin{minipage}{.15\textwidth}
+\includegraphics[width=1\linewidth]{images/engine_naive}
+\subcaption{engine block}
+\end{minipage}~
+\begin{minipage}{.15\textwidth}
+	\includegraphics[width=1\linewidth]{images/foot_naive}
+	\subcaption{foot}
+\end{minipage}~
+\begin{minipage}{.15\textwidth}
+	\includegraphics[width=1\linewidth]{images/MRbrain_naive}
+	\subcaption{MRbrain}
+\end{minipage}~
+\begin{minipage}{.15\textwidth}
+	\includegraphics[width=1\linewidth]{images/nucleon_naive}
+	\subcaption{nucleon}
+\end{minipage}~
+\begin{minipage}{.15\textwidth}
+	\includegraphics[width=1\linewidth]{images/tooth_naive}
+	\subcaption{tooth}
+\end{minipage}~
+\begin{minipage}{.15\textwidth}
+	\includegraphics[width=1\linewidth]{images/vismale_naive}
+	\subcaption{VisMale}
+\end{minipage}
+\caption{Volume data sets used in the experiment}
+\label{fig:experiment_data_sets}
+\end{figure}
 
 \subsection{Methods and Measurements}
-In the experiment, participants would sit in front of a computer display viewing images generated from volume visualization. The experiment would investigate how participants perceive the visual saliency of different objects in the images. The participants' task would be to score the images on a scale of 1 to 5 by keyboard input.
-In each trial, a screen indicating the feature of interest would be shown to the participant for 3 seconds, followed by a screen displaying a volume rendered image for 17 seconds.
-The experiment would last approximately 20 minutes.
-Some images were shown more than once in the experiment in order to detect whether the participants's scores are consistent during the experiment.
+In the experiment, participants were asked to sit in front of a computer display viewing images generated from volume visualization. The experiment sought to investigate how participants perceive the visual saliency of different objects in the images. The participants' task was to score the images on a scale of 1 to 5 by keyboard input.
+In each trial, a screen indicating the feature of interest was shown to the participant for 3 seconds, followed by a screen displaying a volume rendered image for 17 seconds.
+The duration of the full experiment was approximately 20 minutes.
+
+Some images were shown more than once in the experiment in order to detect whether the participants's scores were consistent during the experiment. We analyzed the sum of differences of the repeated images's scores and noticed that the scores by the participant with slight red-green color blindness were significantly less consistent than other participants.
+Hence, the scores by this participant were excluded and the other 29 participants's scores were used in the data analysis.
 
 \subsection{2D Feature Saliency \label{2d_feature_saliency}}
 A widely used saliency model is the saliency map by Itti et al. \cite{itti_model_1998}.
@@ -450,7 +482,7 @@ Because we are interested in the monotonic relationships between the variables, 
 
 We applied the Spearman's rank correlation to analyze the monotonic association between the mean opinion scores (MOS) and three computational metrics, i.e. our visibility-weighted saliency (VWS) metric, feature visibility (FV) based on \cite{wang_efficient_2011} and 2D feature saliency (2DFS).
 
-As shown in Figure~\ref{fig:mos_vs_vws}, there are strong positive correlations between MOS and VWS ($ 0.66985 $), and MOS and FS ($ 0.677018 $) respectively. On the other hand, there is a moderate positive correlation between MOS and 2DFS ($ 0.550472 $). Both VWS and FS are more monotonic correlated to MOS than 2DFS, and FV is slightly better than VWS by about $ 0.007 $.
+As shown in Figure~\ref{fig:mos_vs_vws}, there are strong positive correlations between MOS and VWS ($ 0.67508 $), and MOS and FS ($ 0.678626 $) respectively. On the other hand, there is a moderate positive correlation between MOS and 2DFS ($ 0.550472 $). Both VWS and FS are more monotonic correlated to MOS than 2DFS, and FV is slightly better than VWS by about $ 0.0036 $.
 
 The p-values indicate statistical significance of the associations. In our results, the p-values for all the three cases are very small (below $2 \times 10^{-5} $). Therefore, we can reject the null hypothesis (there is no association between each pair of variables) and conclude that there are associations between MOS and VWS, FS and 2DFS respectively.
 
@@ -471,11 +503,11 @@ The analysis of the experiment results indicates that our VWS is better than 2DF
 	\centering
 	\begin{minipage}{.33\textwidth}
 		\includegraphics[width=1\linewidth]{images/mos_vs_vws.png}
-		\subcaption{ Spearman's $\rho=0.66985 $, P-value$=3.03794 \times 10^{-8} $ }
+		\subcaption{ Spearman's $\rho=0.67508 $, P-value$=2.16005 \times 10^{-8} $ }
 	\end{minipage}~
 	\begin{minipage}{.33\textwidth}
 		\includegraphics[width=1\linewidth]{images/mos_vs_visibility}
-		\subcaption{ Spearman's $\rho=0.677018 $, P-value$=1.90023 \times 10^{-8} $ }
+		\subcaption{ Spearman's $\rho=0.678626 $, P-value$=1.70738 \times 10^{-8} $ }
 	\end{minipage}~
 	\begin{minipage}{.33\textwidth}
 		\includegraphics[width=1\linewidth]{images/mos_vs_2dfs}
@@ -516,11 +548,11 @@ The analysis of the experiment results indicates that our VWS is better than 2DF
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.24\textwidth}
-		\includegraphics[width=1\linewidth]{images/mos_vs_metric_vismale_feature_2}
+		\includegraphics[width=1\linewidth]{images/mos_vs_metric_VisMale_feature_2}
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.24\textwidth}
-		\includegraphics[width=1\linewidth]{images/mos_vs_metric_vismale_feature_1}
+		\includegraphics[width=1\linewidth]{images/mos_vs_metric_VisMale_feature_1}
 		\subcaption{}
 	\end{minipage}
 	\caption{Line plots of MOS versus VWS for each feature of the data sets separately}
