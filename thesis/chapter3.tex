@@ -436,7 +436,7 @@ Results were generated in our volume rendering system (Figure~\ref{fig:volume_vi
 	\begin{minipage}{.9\textwidth}
         \centering
         \includegraphics[width=\textwidth]{volume_visualizer.png}
-        \caption{A screen shot of our volume rendering system}
+        \caption{A screenshot of our volume rendering system}
         \label{fig:volume_visualizer}
 	\end{minipage}
 \end{figure}
@@ -599,8 +599,8 @@ Figure~\ref{fig:CT-Knee_series} shows three images of a CT-Knee data set where d
 %\emph{Region-based optimisation}
 Figure~\ref{fig:VisMale_spectrum_4_} shows the VisMale data set with a generated transfer function of 4 tent-like shapes. Figure~\ref{fig:VisMale_histogram} shows the intensity histogram of the data set.
 %Figure~\ref{fig:VisMale_spectrum_4_balance_1000_} shows the image after optimization.
-After the optimization (Figure~\ref{fig:VisMale_spectrum_4_balance_1000_}) based on Section~\ref{optimizer}, the outside of the head is less opaque so the inner structures are revealed to the user. However, the intermediate material (i.e. the skull) also becomes less clear. If the goal is to make the skull more visible, the user could select a region consisting of parts of the skull to generate a weighting and perform further optimization of the transfer function based on the approach discussed in Section~\ref{interaction_methods}. If the material of interest is occluded by surrounding materials, the user could use an axis-aligned clipping plane in order to accurately select voxels of the skull whilst minimizing the accidental tagging of the surrounding material (Figure~\ref{fig:VisMale_spectrum_4_clipplane_selection}).
-%In this step, a clipping plane is used in order to allow the user to more accurately select voxels of the skull whilst minimizing the accidental tagging of the surrounding material.
+After the optimization (Figure~\ref{fig:VisMale_spectrum_4_balance_1000_}) based on Section~\ref{optimizer}, the outside of the head is less opaque so the inner structures are revealed to the user. However, the intermediate material (i.e. the skull) also becomes less clear. If the goal is to make the skull more visible, the user could select a region consisting of parts of the skull to generate a weighting and perform further optimization of the transfer function based on the approach discussed in Section~\ref{interaction_methods}. If the material of interest is occluded by surrounding materials, the user could use an axis-aligned clipping plane in order to accurately select voxels of the skull while minimizing the accidental tagging of the surrounding material (Figure~\ref{fig:VisMale_spectrum_4_clipplane_selection}).
+%In this step, a clipping plane is used in order to allow the user to more accurately select voxels of the skull while minimizing the accidental tagging of the surrounding material.
 As shown in Figure~\ref{fig:VisMale_spectrum_4_clipplane_region_1000}, the skull becomes more clear after the region-based optimization.
 
 %A transfer function is manually specified (Figure~\ref{fig:multiple_CT-Knee}) to reveal parts of the bones. The global optimization is performed and more parts of the bones are revealed (Figure~\ref{fig:multiple_CT-Knee_balance}). However, the knee joint is still partial occluded. Then we selected a region of the bones and optimize the transfer function based on the weighting generated for this region. The knee joint is clearly exposed in the resulting images (Figure~\ref{fig:multiple_CT-Knee_region_distance}).

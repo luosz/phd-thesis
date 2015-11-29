@@ -125,13 +125,22 @@ Illustrative visualization has been successfully employed in medical visualizati
 
 Illustration-based styles are believed to be effective in conveying information. Researchers in the field of computer graphics and visualization have applied illustration-based styles in order to produce effective and expressive visualization. Stompel et al. \cite{stompel_visualization_2002} introduced feature enhancement techniques, such as strokes-based, temporal domain enhancement, to enhance time-varying data obtained from the field of computational fluid dynamics (CFD).
 
-In scientific visualization, features of interest are often inner structures of the data sets, e.g. visualizing internal organs in anatomical data sets.
+%In scientific visualization, features of interest are often inner structures of the data sets, e.g. visualizing internal organs in anatomical data sets.
+%In addition, depicting only the features of interest is not sufficient, because the user is often interested in exploring the features within the context of the whole volume data.
+
+In scientific visualization, features of interest may often comprise inner structures of the data sets, e.g. visualizing internal organs in anatomical data.
 In addition, depicting only the features of interest is not sufficient, because the user is often interested in exploring the features within the context of the whole volume data.
 
-Inspired by techniques from illustration, various approaches are proposed to reveal different levels of structures simultaneously in volume data sets.
-Two-level volume rendering \cite{hauser_two-level_2001} \cite{hadwiger_high-quality_2003} \cite{corcoran_perceptual_2010} is a method of merging several volume rendering techniques into a single rendering. This method is useful when inner structures need to be rendered along with semitransparent outer parts.
-Focus and context \cite{wang_magic_2005} \cite{bruckner_illustrative_2006} \cite{chen_intelligent_2008} techniques reveal the interior of a volume data set in a feature-driven way and also retain the context information.
-Cutaway techniques \cite{burns_feature_2007} \cite{sigg_intelligent_2012} make inner structures clearly visible along with their spatial relation to the surrounding material.
+%Inspired by techniques from illustration, various approaches are proposed to reveal different levels of structures simultaneously in volume data sets.
+%Two-level volume rendering \cite{hauser_two-level_2001} \cite{hadwiger_high-quality_2003} \cite{corcoran_perceptual_2010} is a method of merging several volume rendering techniques into a single rendering. This method is useful when inner structures need to be rendered along with semitransparent outer parts.
+%Focus and context \cite{wang_magic_2005} \cite{bruckner_illustrative_2006} \cite{chen_intelligent_2008} techniques reveal the interior of a volume data set in a feature-driven way and also retain the context information.
+%Cutaway techniques \cite{burns_feature_2007} \cite{sigg_intelligent_2012} make inner structures clearly visible along with their spatial relation to the surrounding material.
+%In exploded views \cite{bruckner_exploded_2006}, the occluding objects are decomposed and displaced so that the internal details are visible.
+%In contrast, structure extrusion techniques \cite{diaz_adaptive_2012} make features of interest visible by extruding them off the clipping plane and preserving the context by adapting the extruded region.
+
+Inspired by techniques from illustration, various approaches have been proposed to reveal different levels of structures simultaneously in volume data sets.
+Two-level volume rendering \cite{hauser_two-level_2001} \cite{hadwiger_high-quality_2003} \cite{corcoran_perceptual_2010}, also related to focus and context visualisation \cite{wang_magic_2005} \cite{bruckner_illustrative_2006} \cite{chen_intelligent_2008}, is a method of merging two volume rendering techniques into a single rendering. A more detailed rendering method is used to emphasize the features of interest while the background information is kept in a de-emphasized form for contextual reference. This method can be useful when inner structures need to be rendered along with semitransparent outer parts.
+Cutaway techniques \cite{burns_feature_2007} \cite{sigg_intelligent_2012}, similar to those used by technical illustrators, involve selectively removing a spatial segment of the volume and can be used make inner structures clearly visible while preserving a sense of their spatial relationship with the surrounding material.
 In exploded views \cite{bruckner_exploded_2006}, the occluding objects are decomposed and displaced so that the internal details are visible.
 In contrast, structure extrusion techniques \cite{diaz_adaptive_2012} make features of interest visible by extruding them off the clipping plane and preserving the context by adapting the extruded region.
 
@@ -517,7 +526,7 @@ Cai et al. \cite{cai_rule-enhanced_2015} presented a rule-enhanced transfer func
 \section{Information Theory in Visualization}
 Information theory \cite{shannon_mathematical_1948} was originally introduced to study the fundamental limit of reliable transmission of messages through a noisy communication channel. In information theory, information is considered as a set of possible messages, where the goal is to send the messages through a noisy communication channel and then to have the messages reconstructed with low probability of error.
 
-Traditional applications of information theory, such as data compression and data communication, focus on the efficient throughput of a communication channel, whilst visualization focuses on the effectiveness in aiding the perceptual and cognitive process for data understanding and knowledge discovery \cite{sbert_information_2009}.
+Traditional applications of information theory, such as data compression and data communication, focus on the efficient throughput of a communication channel, while visualization focuses on the effectiveness in aiding the perceptual and cognitive process for data understanding and knowledge discovery \cite{sbert_information_2009}.
 
 In recent years, there is an emerging direction towards using the principles of information theory to solve challenging problems in scientific visualization \cite{wang_information_2011}. These problems include view selection \cite{bordoloi_view_2005} \cite{takahashi_feature-driven_2005} \cite{feixas_unified_2009}, streamline seeding and selection \cite{xu_information-theoretic_2010} \cite{lee_view_2011}, transfer function for multimodal data \cite{bramon_multimodal_2012}, representative isosurface selection \cite{wang_lod_2006}, time-varying and multivariate data analysis \cite{wang_importance-driven_2008} and information channel between objects and viewpoints \cite{ruiz_viewpoint_2010}.
 
