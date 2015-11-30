@@ -1,11 +1,13 @@
 \chapter{Selective Saturation and Brightness for Visualizing Time-Varying Volume Data \label{selective_saturation_brightness}}
+
+%-------------------------------------------------------------------------
+\section{Introduction}
+
 Time-varying volume data is used in many areas of science and engineering, however, visualizations of such data are not easy for users to visually process due to the amount of information that can be presented simultaneously. In this chapter, we propose a novel visualization approach which modulates focus, emphasizing important information, by adjusting saturation and brightness of voxels based on an importance measure derived from temporal and multivariate information. By conducting a voxel-wise analysis of a number of consecutive frames, we acquire a volatility measure of each voxel.
 Subsequently, the opacity, saturation and brightness are used to represent intensity, volatility and additional multivariate information in the data set.
 %We then use intensity, volatility and additional multivariate information to determine opacity, saturation and brightness of the voxels.
-The method was tested in visualizing a multivariate hurricane data set. The results suggest that our approach can give the user a more detailed understanding of the data by presenting multivariate information variables, including time-variant characteristics, in one self-contained visualization.
+The method was tested in visualizing a multivariate hurricane data set and a smoke data set. The results suggest that our method can give the user a more detailed understanding of the data by presenting multivariate information variables, including time-variant characteristics, in one self-contained visualization.
 
-%-------------------------------------------------------------------------
-%\section{Introduction}
 %With the development of more advanced techniques for scientific simulation, where various physical measurements at many time-steps can be simulated at extremely high detail, providing intuitive and effective tools for the analysis and visualization of such data becomes increasingly challenging.
 %
 %Color mappings are often used in visualization to represent various types of information. Although traditional color transfer functions are often in RGB color space, transfer functions designed in (hue, saturation and brightness) color space can be more intuitive and meaningful in terms of conveying quantitative information or for classifications of the data.
@@ -64,7 +66,6 @@ where std(i) is the volatility and C(i) can be either a user-specified constant 
 %\label{fig:saturation_brightness}
 %\end{figure}
 
-
 %\begin{figure}
 %\centering
 %\begin{minipage}{.15\textwidth}
@@ -94,101 +95,121 @@ where std(i) is the volatility and C(i) can be either a user-specified constant 
 \section{Results}
 We tested our method on the hurricane data set from the National Center for Atmospheric Research provided for the IEEE Visualization 2004 Contest.
 The hurricane model is Hurricane Isabel, which was a very strong hurricane in the west Atlantic region in September of 2003.
-%The size of the data set is 500 (longitude) $ \times $ 500 (latitude) $ \times $ 100 (height) $ \times $ 48 (time). One time-step is one hour in the simulation.
+The resolution of the data set is 500 (longitude) $ \times $ 500 (latitude) $ \times $ 100 (height) $ \times $ 48 (time). One time-step is one hour in the simulation.
 The variables we used in the tests are cloud moisture mixing ratio (kg water/kg dry air) and total precipitation mixing ratio (sum of mixing ratios of graupel, rain and snow). The ground in the hurricane data set, which is a height field of the surface topography, is rendered with relief mapping and presented as background in the visualization results.
 
 In Figure~\ref{fig:hurricane_gray}, the cloud, volatility of cloud and precipitation at frame 40 are displayed in grayscale for comparison.
-Figure~\ref{fig:hurricane_frames} shows images of 3 frames of the hurricane rendered with cloud, volatility of cloud and precipitation. Cloud is used as variable X and precipitation as variable Y. The temporal standard deviation is calculated using the recent 10 frames.
+Figure~\ref{fig:hurricane_hsba} shows images of 3 frames of the hurricane rendered with cloud, volatility of cloud and precipitation. Cloud is used as variable X and precipitation as variable Y. The temporal standard deviation is calculated using the recent 10 frames.
+Figure~\ref{fig:hurricane_40_cyan} (a) displays a 3D perspective view of the visualization in Figure~\ref{fig:hurricane_hsba} (b).
 The strong red color near the hurricane eye indicates where the hurricane was in previous several frames and the clouds with more precipitation are darker in the images.
 %Figure~\ref{fig:hurricane_40_cyan} displays a more realistic rendering of the same frame in Figure~\ref{fig:hurricane_40_defaultangle}, with a cyan hue and used precipitation to adjust both saturation and brightness.
+
+Figure~\ref{fig:hurricane_40_cyan} (b) displays a visualization of the frame 40 of the hurricane in a cyan hue with both saturation and brightness representing the precipitation. Figure~\ref{fig:hurricane_40_cyan} (c) provides a 3D perspective view of the visualization in Figure~\ref{fig:hurricane_40_cyan} (b). Note how parts of the hurricane are desaturated and darkened based on the precipitation.
 
 \begin{figure}
 \centering
 \begin{minipage}{.33\textwidth}
 \includegraphics[width=1\linewidth]{images/hurricane_cloud_gray_40}
+\subcaption{}
 %\caption{Cloud at frame 40}
 %\label{fig:hurricane_cloud_gray}
 \end{minipage}~
 \begin{minipage}{.33\textwidth}
 \includegraphics[width=1\linewidth]{images/hurricane_std_gray_40}
+\subcaption{}
 %\caption{Volatility of cloud at frame 40}
 %\label{fig:hurricane_std_gray}
 \end{minipage}~
 \begin{minipage}{.33\textwidth}
-\centering
 \includegraphics[width=1\linewidth]{images/hurricane_precip_gray_40}
+\subcaption{}
 %\caption{Precipitation at frame 40}
 %\label{fig:hurricane_precip_gray}
 \end{minipage}
-\caption{Cloud (left), volatility of cloud (middle) and precipitation (right) at frame 40}
+\caption{Cloud (a), volatility of cloud (b) and precipitation (c) at frame 40}
 \label{fig:hurricane_gray}
 \end{figure}
 
 \begin{figure}
 \centering
 \begin{minipage}{.33\textwidth}
-\centering
 \includegraphics[width=1\linewidth]{images/hsba_0_10std_1-10precip_cloud_35}
+\subcaption{}
 \end{minipage}~
 \begin{minipage}{.33\textwidth}
-\centering
 \includegraphics[width=1\linewidth]{images/hsba_0_10std_1-10precip_cloud_40}
+\subcaption{}
 \end{minipage}~
 \begin{minipage}{.33\textwidth}
-\centering
 \includegraphics[width=1\linewidth]{images/hsba_0_10std_1-10precip_cloud_45}
+\subcaption{}
 \end{minipage}
-\caption{Adjusting saturation and brightness of frame 35 (left), frame 40 (middle) and frame 45 (right)}
-\label{fig:hurricane_frames}
+\caption{Adjusting saturation and brightness of frame 35 (a), frame 40 (b) and frame 45 (c)}
+\label{fig:hurricane_hsba}
 \end{figure}
 
-%We also tested our method on a time-varying smoke simulation based on an implementation of \cite{fedkiw_visual_2001}. Figure~\ref{fig:smoke} to Figure~\ref{fig:smoke_gradient} are smoke density, volatility of smoke density and gradient magnitude of smoke density rendered in grayscale for comparison.
-%The gradient magnitude is the Euclidean norm of the gradient at a voxel position,
-%% approximated using discrete derivatives of Gaussians in each dimension.
-%and the temporal standard deviation is calculated using the recent 10 frames.
-%In Figure~\ref{fig:smoke_hsba_red}, smoke density is used as variable X and gradient magnitude as variable Y. The image was rendered with a constant hue (red) and parameters $a=10$ and $b=5$ were used. 
-%
-%\begin{figure}
-%\centering
-%%\begin{minipage}{.24\textwidth}
-%%\includegraphics[width=1\linewidth]{images/hsba_cyan_10precip_1-10precip_cloud_40_defaultangle}
-%%\caption{A more realistic rendering with both saturation and brightness representing precipitation at frame 40. Hue is cyan, a=10 and b=10}
-%%\label{fig:hurricane_40_cyan}
-%%\end{minipage}
-%
-%\begin{minipage}{.10\textwidth}
-%\includegraphics[width=1\linewidth]{images/smoke_160_.png}
-%\caption{Smoke density at frame 160}
-%\label{fig:smoke}
-%\end{minipage}~
-%\begin{minipage}{.10\textwidth}
-%\includegraphics[width=1\linewidth]{images/smoke_std_160_.png}
-%\caption{Smoke volatility at frame 160}
-%\label{fig:smoke_std}
-%\end{minipage}~
-%\begin{minipage}{.10\textwidth}
-%\centering
-%\includegraphics[width=1\linewidth]{images/smoke_gradient_160_.png}
-%\caption{Smoke gradient magnitude at frame 160}
-%\label{fig:smoke_gradient}
-%\end{minipage}~
-%%\begin{minipage}{.24\textwidth}
-%%	\centering
-%%	\includegraphics[width=1\linewidth]{images/smoke_hsba_intensity_10std_5gradient_intensity_160.png}
-%%	\caption{Smoke density as variable X and gradient magnitude as variable Y at frame 160. Hue is X(i), a=10 and b=5}
-%%	\label{fig:smoke_hsba_intensity}
-%%\end{minipage}~
-%\begin{minipage}{.15\textwidth}
-%	\centering
-%	\includegraphics[width=1\linewidth]{images/smoke_hsba_red_10std_5gradient_intensity_160.png}
-%	\caption{Part of the smoke is desaturated and darkened.}
-%	\label{fig:smoke_hsba_red}
-%\end{minipage}
-%\end{figure}
+We also tested our method on a time-varying smoke simulation based on an implementation of the approach by Fedkiw et al. \cite{fedkiw_visual_2001}. Figure~\ref{fig:smoke_gray} shows the smoke density, volatility of smoke density and gradient magnitude of smoke density rendered in grayscale for comparison.
+The gradient magnitude is the Euclidean norm of the gradient at a voxel position,
+% approximated using discrete derivatives of Gaussians in each dimension.
+and the temporal standard deviation is calculated using the recent 10 frames.
+In Figure~\ref{fig:smoke_hsba}, the smoke density was used as variable X and gradient magnitude as variable Y and the parameters were $a=10$ and $b=5$.
+The hue was mapped to the smoke density in Figure~\ref{fig:smoke_hsba} (a) and a constant red hue was used in Figure~\ref{fig:smoke_hsba} (b).
+
+\begin{figure}
+\centering
+\begin{minipage}{.34\textwidth}
+\includegraphics[width=1\linewidth]{images/hsba_0_10std_1-10precip_cloud_40_defaultangle}
+\subcaption{}
+\end{minipage}~
+\begin{minipage}{.32\textwidth}
+\includegraphics[width=1\linewidth]{images/hsba_cyan_10precip_1-10precip_cloud_40}
+\subcaption{}
+\end{minipage}~
+\begin{minipage}{.34\textwidth}
+\includegraphics[width=1\linewidth]{images/hsba_cyan_10precip_1-10precip_cloud_40_defaultangle}
+\subcaption{}
+\end{minipage}
+\caption{(a) Figure~\ref{fig:hurricane_hsba} (b) in a 3D perspective view; (b) The hurricane at frame 40 rendered with both saturation and brightness representing the precipitation. Hue is cyan, a=10 and b=10; (c) A 3D perspective view of (b)}
+\label{fig:hurricane_40_cyan}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{minipage}{.33\textwidth}
+\includegraphics[width=1\linewidth]{images/smoke_160_.png}
+\subcaption{}
+\end{minipage}~
+\begin{minipage}{.33\textwidth}
+\includegraphics[width=1\linewidth]{images/smoke_std_160_.png}
+\subcaption{}
+\end{minipage}~
+\begin{minipage}{.33\textwidth}
+\includegraphics[width=1\linewidth]{images/smoke_gradient_160_.png}
+\subcaption{}
+\end{minipage}
+\caption{Smoke density (a), volatility of density (b) and gradient magnitude of density (c) at frame 160}
+\label{fig:smoke_gray}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{minipage}{.33\textwidth}
+\includegraphics[width=1\linewidth]{images/smoke_hsba_intensity_10std_5gradient_intensity_160.png}
+%\caption{Smoke density as variable X and gradient magnitude as variable Y at frame 160. Hue is X(i), a=10 and b=5}
+\subcaption{}
+\end{minipage}~
+\begin{minipage}{.33\textwidth}
+\includegraphics[width=1\linewidth]{images/smoke_hsba_red_10std_5gradient_intensity_160.png}
+%\caption{Part of the smoke is desaturated and darkened.}
+\subcaption{}
+\end{minipage}
+\caption{(a) Smoke density as variable X and gradient magnitude as variable Y at frame 160. Hue is X(i), a=10 and b=5; (b) Hue is red. Note how parts of the smoke are desaturated and darkened based on the volatility and gradient magnitude}
+\label{fig:smoke_hsba}
+\end{figure}
 
 %-------------------------------------------------------------------------
 \section{Conclusions}
-Our main contribution is a mechanism for exploiting saturation and brightness to modulate focus in time-variant volume visualization using an importance measure that is based on volatility. In addition, we demonstrate how additional variables in a multivariate data set could be communicated simultaneously through the brightness channel. Preliminary results indicate that the approach can provide more visual information for the test data set.
+Our main contribution is a mechanism for exploiting saturation and brightness to modulate focus in time-variant volume visualization using an importance measure that is based on volatility. In addition, we demonstrate how additional variables in a multivariate data set could be communicated simultaneously through the brightness channel. Preliminary results indicate that the approach can provide more visual information for the test data sets.
 %In future work we plan to conduct perceptual experiments to quantitatively evaluate the mechanism and determine the optimal parameters for the approach.
 
 %-------------------------------------------------------------------------
