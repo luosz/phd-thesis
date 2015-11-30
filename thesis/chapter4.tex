@@ -100,7 +100,7 @@ The visibility field is dependent on both the viewpoint and the transfer functio
 
 \begin{figure}
 	\centering
-	\includegraphics[width=1\linewidth]{images/disks_combined}
+	\includegraphics[width=0.95\linewidth]{images/disks_combined}
 	\caption{A synthetic volume data set consisting of three solid disk-like features is shown. The images in the first row show the final image and the corresponding visibility field from a viewpoint on the left. The images in the second row shows the final image and visibility field from a viewpoint on the right. The visibility fields display what parts of the volume contribute most to the images and how tissues in the front occlude those in the back.}
 	\label{fig:disks_combined}
 \end{figure}
@@ -141,25 +141,29 @@ The advantage of using perceptually uniform color spaces is that the relative pe
 
 \begin{figure}
 	\centering
-	\begin{minipage}{.45\textwidth}
+	\begin{minipage}{.4\textwidth}
 		\includegraphics[width=1\linewidth]{images/disks_saliency}
+		\subcaption{}
 	\end{minipage}~
-	\begin{minipage}{.45\textwidth}
+	\begin{minipage}{.4\textwidth}
 		\includegraphics[width=1\linewidth]{images/disks_saliency_saturation}
+		\subcaption{}
 	\end{minipage}
-	\caption{The saliency fields computed from brightness (left) and saturation of voxels (right) respectively.}
+	\caption{The saliency fields computed from brightness (a) and saturation (b) of voxels respectively.}
 	\label{fig:disks_saliency}
 \end{figure}
 
 \begin{figure}
 	\centering
-	\begin{minipage}{.45\textwidth}
+	\begin{minipage}{.4\textwidth}
 		\includegraphics[width=1\linewidth]{images/disks_saliency_half}
+		\subcaption{}
 	\end{minipage}~
-	\begin{minipage}{.45\textwidth}
+	\begin{minipage}{.4\textwidth}
 		\includegraphics[width=1\linewidth]{images/disks_half}
+		\subcaption{}
 	\end{minipage}
-	\caption{The saliency fields emphasize the center and de-emphasize the surroundings of voxels. As in the clipped views of the saliency field (left) and the volume data set (right), the three solid disks are represented as hollow shapes in the saliency field.}
+	\caption{The saliency fields emphasize the center and de-emphasize the surroundings of voxels. As in the clipped views of the saliency field (a) and the volume data set (b), the three solid disks are represented as hollow shapes in the saliency field.}
 	\label{fig:disks_saliency_half}
 \end{figure}
 
@@ -215,23 +219,29 @@ Equal weights of appearance attributes are assumed for now in our implementation
 	\centering
 	\begin{minipage}{.3\textwidth}
 		\includegraphics[width=1\linewidth]{images/disks_visibility_saliency_feature1_left}
+		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.3\textwidth}
 		\includegraphics[width=1\linewidth]{images/disks_visibility_saliency_feature2_left}
+		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.3\textwidth}
 		\includegraphics[width=1\linewidth]{images/disks_visibility_saliency_feature3_left}
+		\subcaption{}
 	\end{minipage}
 	\begin{minipage}{.3\textwidth}
 		\includegraphics[width=1\linewidth]{images/disks_visibility_saliency_feature1_right}
+		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.3\textwidth}
 		\includegraphics[width=1\linewidth]{images/disks_visibility_saliency_feature2_right}
+		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.3\textwidth}
 		\includegraphics[width=1\linewidth]{images/disks_visibility_saliency_feature3_right}
+		\subcaption{}
 	\end{minipage}
-	\caption{Visibility-weighted saliency fields of the three disks. The first column shows the saliency fields of the top disk in the two viewpoints in Figure~\ref{fig:disks_combined}. The second and the third columns show the saliency fields for the middle disk and the bottom disk in the two viewpoints respectively.}
+	\caption{Visibility-weighted saliency fields of the three disks. The first column ((a) and (d)) shows the saliency fields of the top disk in the two viewpoints in Figure~\ref{fig:disks_combined}. The second column ((b) and (e)) and the third column ((c) and (f)) show the saliency fields for the middle disk and the bottom disk in the two viewpoints respectively.}
 	\label{fig:disks_visibility_saliency_fields}
 \end{figure}
 
@@ -317,11 +327,13 @@ The feature visibility and visibility-weighted feature saliency in Figure~\ref{f
 	\centering
 	\begin{minipage}{.6\textwidth}
 		\includegraphics[width=1\linewidth]{images/tooth_naive.png}
+		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.3\textwidth}
 		\includegraphics[width=1\linewidth]{images/tooth_tf.png}
+		\subcaption{}
 	\end{minipage}
-	\caption{A tooth data set with a transfer function revealing three features: cementum \& pulp chamber (blue), dentine (red) and enamel (yellow). Equal opacity is assigned to the three features in the transfer function.}
+	\caption{A tooth data set (a) with a transfer function (b) revealing three features: cementum \& pulp chamber (blue), dentine (red) and enamel (yellow). Equal opacity is assigned to the three features in the transfer function.}
 	\label{fig:tooth}
 \end{figure}
 
@@ -329,14 +341,17 @@ The feature visibility and visibility-weighted feature saliency in Figure~\ref{f
 	\centering
 	\begin{minipage}{.3\textwidth}
 		\includegraphics[width=1\linewidth]{images/tooth_visibility_saliency_feature1.png}
+		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.3\textwidth}
 		\includegraphics[width=1\linewidth]{images/tooth_visibility_saliency_feature2.png}
+		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.3\textwidth}
 		\includegraphics[width=1\linewidth]{images/tooth_visibility_saliency_feature3.png}
+		\subcaption{}
 	\end{minipage}
-	\caption{Visibility-weighted saliency fields of the three features, computed with the transfer function in Figure~\ref{fig:tooth}. From left to right, the features are cementum \& pulp chamber, dentine and enamel.}
+	\caption{Visibility-weighted saliency fields of the three features, computed with the transfer function in Figure~\ref{fig:tooth}. From left to right, the features are cementum \& pulp chamber (a), dentine (b) and enamel (c).}
 	\label{fig:tooth_saliency_field}
 \end{figure}
 
@@ -344,6 +359,7 @@ The feature visibility and visibility-weighted feature saliency in Figure~\ref{f
 	\centering
 	\begin{minipage}{.45\textwidth}
 		\includegraphics[width=1\linewidth]{images/tooth_naive_visibility_chart}
+		\subcaption{}
 	\end{minipage}~
 	%\begin{minipage}{.2\textwidth}
 	%\includegraphics[width=1\linewidth]{images/tooth_visibility_saliency_brightness_chart.png}
@@ -353,8 +369,9 @@ The feature visibility and visibility-weighted feature saliency in Figure~\ref{f
 	%\end{minipage}~
 	\begin{minipage}{.45\textwidth}
 		\includegraphics[width=1\linewidth]{images/tooth_naive_visibility_saliency_weighted_chart}
+		\subcaption{}
 	\end{minipage}
-	\caption{Feature visibility \cite{wang_efficient_2011} (darker histogram on the left) and visibility-weighted saliency (brighter histogram on the right) of the three features, computed with the transfer function in Figure~\ref{fig:tooth}.}
+	\caption{Feature visibility \cite{wang_efficient_2011} (a) and visibility-weighted saliency (b) of the three features, computed with the transfer function in Figure~\ref{fig:tooth}.}
 	\label{fig:tooth_saliency_chart}
 \end{figure}
 
@@ -362,11 +379,13 @@ The feature visibility and visibility-weighted feature saliency in Figure~\ref{f
 	\centering
 	\begin{minipage}{.6\textwidth}
 		\includegraphics[width=1\linewidth]{images/tooth_balance_gpu.png}
+		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.3\textwidth}
 		\includegraphics[width=1\linewidth]{images/tooth_balance_tf.png}
+		\subcaption{}
 	\end{minipage}
-	\caption{A tooth data set with a transfer function particularly highlighting the enamel (yellow)}
+	\caption{A tooth data set with a transfer function particularly highlighting the enamel (the yellow feature)}
 	\label{fig:tooth_2}
 \end{figure}
 
@@ -374,14 +393,17 @@ The feature visibility and visibility-weighted feature saliency in Figure~\ref{f
 	\centering
 	\begin{minipage}{.3\textwidth}
 		\includegraphics[width=1\linewidth]{images/tooth_2_visibility_saliency_feature1.png}
+		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.3\textwidth}
 		\includegraphics[width=1\linewidth]{images/tooth_2_visibility_saliency_feature2.png}
+		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.3\textwidth}
 		\includegraphics[width=1\linewidth]{images/tooth_2_visibility_saliency_feature3.png}
+		\subcaption{}
 	\end{minipage}
-	\caption{Visibility-weighted saliency field of the three features, computed with the transfer function in Figure~\ref{fig:tooth_2}. From left to right, the features are cementum \& pulp chamber, dentine and enamel.}
+	\caption{Visibility-weighted saliency field of the three features, computed with the transfer function in Figure~\ref{fig:tooth_2}. From left to right, the features are cementum \& pulp chamber (a), dentine (b) and enamel (c).}
 	\label{fig:tooth_saliency_field_2}
 \end{figure}
 
@@ -389,6 +411,7 @@ The feature visibility and visibility-weighted feature saliency in Figure~\ref{f
 	\centering
 	\begin{minipage}{.45\textwidth}
 		\includegraphics[width=1\linewidth]{images/tooth_balance_visibility_chart}
+		\subcaption{}
 	\end{minipage}~
 	%\begin{minipage}{.2\textwidth}
 	%\includegraphics[width=1\linewidth]{images/tooth_2_visibility_saliency_brightness_chart.png}
@@ -398,8 +421,9 @@ The feature visibility and visibility-weighted feature saliency in Figure~\ref{f
 	%\end{minipage}~
 	\begin{minipage}{.45\textwidth}
 		\includegraphics[width=1\linewidth]{images/tooth_balance_visibility_saliency_weighted_chart}
+		\subcaption{}
 	\end{minipage}
-	\caption{Feature visibility (darker histogram on the left) and visibility-weighted feature saliency (brighter histogram on the right) of the three features, computed with the transfer function in Figure~\ref{fig:tooth_2}.}
+	\caption{Feature visibility (a) and visibility-weighted feature saliency (b) of the three features, computed with the transfer function in Figure~\ref{fig:tooth_2}.}
 	\label{fig:tooth_saliency_chart_2}
 \end{figure}
 
