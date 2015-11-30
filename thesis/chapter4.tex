@@ -665,8 +665,8 @@ The analysis of the experiment results indicates that our VWS is better than 2DF
 \subsection{Varying Saturation and Brightness in Transfer Functions}
 A major difference between our visibility-weighted saliency and the feature visibility is that our approach reflects two aspects of the resulting visualization, i.e. voxel visibility and visual saliency, while the feature visibility only reflects voxel visibility.
 Figure~\ref{fig:tooth_naive_optimized_linesearch} displays an image of the tooth data set and its feature visibility and visibility-weighted saliency.
-In Figure~\ref{fig:tooth_naive_optimized_linesearch_low_saturation}, the saturation of the red feature is reduced. Our visibility-weighted saliency is aware of the saturation change, thus the red feature has lower VWS and the yellow feature has higher VWS in Figure~\ref{fig:tooth_naive_optimized_linesearch_low_saturation} (b).
-On the other hand, the feature visibility is not aware of the saturation change and is the same as in Figure~\ref{fig:tooth_naive_optimized_linesearch} (b).
+In Figure~\ref{fig:tooth_naive_optimized_linesearch_low_saturation}, the saturation of the red feature is reduced. Our visibility-weighted saliency is aware of the saturation change, thus the red feature has lower VWS and the yellow feature has higher VWS in Figure~\ref{fig:tooth_naive_optimized_linesearch_low_saturation} (c).
+On the other hand, the feature visibility is not aware of the saturation change, thus the feature visibility in Figure~\ref{fig:tooth_naive_optimized_linesearch_low_saturation} (b) is the same as that in Figure~\ref{fig:tooth_naive_optimized_linesearch} (b).
 
 \begin{figure}
 	\centering
@@ -693,10 +693,14 @@ On the other hand, the feature visibility is not aware of the saturation change 
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.24\textwidth}
+		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch_red_low_saturation_visibility_chart}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.24\textwidth}
 		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch_red_low_saturation_visibility_saliency_weighted_chart}
 		\subcaption{}
 	\end{minipage}
-	\caption{(a) The saturation of the red feature is reduced; (b) The visibility-weighted saliency of (a): the red feature has lower VWS and the yellow has higher VWS.}
+	\caption{(a) The saturation of the red feature is reduced; (b) The feature visibility is the same as in Figure~\ref{fig:tooth_naive_optimized_linesearch} (b); (c) The visibility-weighted saliency of (a): the red feature has lower VWS and the yellow has higher VWS.}
 	\label{fig:tooth_naive_optimized_linesearch_low_saturation}
 \end{figure}
 %

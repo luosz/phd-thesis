@@ -6,7 +6,8 @@ A saliency map is a model of visual attention using bottom-up features such as i
 %intensity and orientation. Another bottom-up feature of visual 
 %input is depth, the distance between eye (or sensor) and objects 
 %in the visual field.
-However, traditional saliency maps were designed to provide an indication of visual saliency for 2D images with no clue of particular objects or 3D features in the scene.
+%However, traditional saliency maps were designed to provide an indication of visual saliency for 2D images with no clue of particular objects or 3D features in the scene.
+However, the traditional map provides an indication of saliency for a points on an image and not the saliency of a particular object or 3D feature.
 In order to use 2D saliency maps \cite{itti_model_1998} to estimate visual saliency of 3D features in volume visualization, an inverse distance weighting \cite{shepard_two-dimensional_1968} can be applied to divide a 2D saliency map into several feature saliency maps, one for each feature. Subsequently, the visual saliency of each feature can be estimated with the total intensity of each feature saliency map.
 
 The distance between a pixel of each feature and the pixel in the final image is necessary in computing the inverse distance weighting.
