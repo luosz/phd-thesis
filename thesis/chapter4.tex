@@ -101,7 +101,7 @@ The visibility field is dependent on both the viewpoint and the transfer functio
 \begin{figure}
 	\centering
 	\includegraphics[width=0.95\linewidth]{images/disks_combined}
-	\caption{A synthetic volume data set consisting of three solid disk-like features is shown. The images in the first row show the final image and the corresponding visibility field from a viewpoint on the left. The images in the second row shows the final image and visibility field from a viewpoint on the right. The visibility fields display what parts of the volume contribute most to the images and how tissues in the front occlude those in the back.}
+	\caption[A synthetic volume data set consisting of three solid disk-like features is shown.]{A synthetic volume data set consisting of three solid disk-like features is shown. The images in the first row show the final image and the corresponding visibility field from a viewpoint on the left. The images in the second row shows the final image and visibility field from a viewpoint on the right. The visibility fields display what parts of the volume contribute most to the images and how tissues in the front occlude those in the back.}
 	\label{fig:disks_combined}
 \end{figure}
 
@@ -241,7 +241,7 @@ Equal weights of appearance attributes are assumed for now in our implementation
 		\includegraphics[width=1\linewidth]{images/disks_visibility_saliency_feature3_right}
 		\subcaption{}
 	\end{minipage}
-	\caption{Visibility-weighted saliency fields of the three disks. The first column ((a) and (d)) shows the saliency fields of the top disk in the two viewpoints in Figure~\ref{fig:disks_combined}. The second column ((b) and (e)) and the third column ((c) and (f)) show the saliency fields for the middle disk and the bottom disk in the two viewpoints respectively.}
+	\caption[Visibility-weighted saliency fields of the three disks.]{Visibility-weighted saliency fields of the three disks. The first column ((a) and (d)) shows the saliency fields of the top disk in the two viewpoints in Figure~\ref{fig:disks_combined}. The second column ((b) and (e)) and the third column ((c) and (f)) show the saliency fields for the middle disk and the bottom disk in the two viewpoints respectively.}
 	\label{fig:disks_visibility_saliency_fields}
 \end{figure}
 
@@ -263,7 +263,7 @@ Equal weights of appearance attributes are assumed for now in our implementation
 		\includegraphics[width=1\linewidth]{images/disk_visibility_saliency_weighted_chart_left}
 		\subcaption{}
 	\end{minipage}
-	\caption{(a) The feature visibility \cite{wang_efficient_2011} histogram shows the sum of visibility values of all the voxels belonging to each feature.
+	\caption[(a) The feature visibility \cite{wang_efficient_2011} histogram shows the sum of visibility values of all the voxels belonging to each feature.]{(a) The feature visibility \cite{wang_efficient_2011} histogram shows the sum of visibility values of all the voxels belonging to each feature.
 		(b) \& (c) The two histograms of visibility-weighted feature saliency based on brightness and saturation respectively show the sum of visibility-weighted saliency of all the voxels belonging to each feature ($ W_{F}(O,i,\sigma) $ in Section~\ref{visibility_weighted_saliency}).
 		(d) The histogram of visibility-weighted feature saliency shows the visibility-weighted feature saliency with equal weights of brightness and saturation ($ W_{F} $ in Section~\ref{weighted_feature_saliency}).
 		Feature visibility (a) and visibility-weighted feature saliency from brightness (b) both suggest that the top disk is the most visible and the bottom disk is the least visible.
@@ -290,7 +290,7 @@ Equal weights of appearance attributes are assumed for now in our implementation
 		\includegraphics[width=1\linewidth]{images/disk_visibility_saliency_weighted_chart_right}
 		\subcaption{}
 	\end{minipage}
-	\caption{Similar to Figure~\ref{fig:disks_saliency_chart_left}, in the viewpoint on the right in Figure~\ref{fig:disks_combined}, the bottom disk is the most visible according to feature visibility (a) and most salient according to feature saliency from brightness (b). However, feature saliency from saturation (c) suggests that the middle disk (magenta color) is significantly more salient than the other two (light green and dark green) in terms of saturation. The histogram (d) is the visibility-weighted feature saliency with equal weights of brightness and saturation.}
+	\caption[Similar to Figure~\ref{fig:disks_saliency_chart_left}, in the viewpoint on the right in Figure~\ref{fig:disks_combined}, the bottom disk is the most visible according to feature visibility (a) and most salient according to feature saliency from brightness (b).]{Similar to Figure~\ref{fig:disks_saliency_chart_left}, in the viewpoint on the right in Figure~\ref{fig:disks_combined}, the bottom disk is the most visible according to feature visibility (a) and most salient according to feature saliency from brightness (b). However, feature saliency from saturation (c) suggests that the middle disk (magenta color) is significantly more salient than the other two (light green and dark green) in terms of saturation. The histogram (d) is the visibility-weighted feature saliency with equal weights of brightness and saturation.}
 	\label{fig:disks_saliency_chart_right}
 \end{figure}
 
@@ -540,7 +540,7 @@ The analysis of the experiment results indicates that our VWS is better than 2DF
 		\includegraphics[width=1\linewidth]{images/mos_vs_2dfs}
 		\subcaption{ Spearman's $\rho=0.550472 $, P-value$=1.61418 \times 10^{-5} $ }
 	\end{minipage}
-	\caption{Spearman's rank correlation of 54 opinion scores against the corresponding visibility-weighted saliency (VWS), feature visibility (FV) and 2D feature saliency (2DFS) respectively. There are strong positive correlations between MOS and VWS (a) and between MOS and FV (b). There is a moderate positive correlation between MOS and 2DFS (c).}
+	\caption[Spearman's rank correlation of 54 opinion scores against the corresponding visibility-weighted saliency (VWS), feature visibility (FV) and 2D feature saliency (2DFS) respectively.]{Spearman's rank correlation of 54 opinion scores against the corresponding visibility-weighted saliency (VWS), feature visibility (FV) and 2D feature saliency (2DFS) respectively. There are strong positive correlations between MOS and VWS (a) and between MOS and FV (b). There is a moderate positive correlation between MOS and 2DFS (c).}
 	\label{fig:mos_vs_vws}
 \end{figure}
 
