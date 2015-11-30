@@ -1,28 +1,26 @@
 \chapter{Selective Saturation and Brightness for Visualizing Time-Varying Volume Data \label{selective_saturation_brightness}}
-Time-varying volume data is used in many areas of science and engineering. However visualizations of such data are not easy for users to visually process due to the amount of information that can be presented simultaneously. In this chapter, we propose a novel visualization approach which modulates focus, emphasizing important information, by adjusting saturation and brightness of voxels based on an importance measure derived from temporal and multivariate information. By conducting a voxel-wise analysis of a number of consecutive frames, we acquire a volatility measure of each voxel.
+Time-varying volume data is used in many areas of science and engineering, however, visualizations of such data are not easy for users to visually process due to the amount of information that can be presented simultaneously. In this chapter, we propose a novel visualization approach which modulates focus, emphasizing important information, by adjusting saturation and brightness of voxels based on an importance measure derived from temporal and multivariate information. By conducting a voxel-wise analysis of a number of consecutive frames, we acquire a volatility measure of each voxel.
 Subsequently, the opacity, saturation and brightness are used to represent intensity, volatility and additional multivariate information in the data set.
 %We then use intensity, volatility and additional multivariate information to determine opacity, saturation and brightness of the voxels.
 The method was tested in visualizing a multivariate hurricane data set. The results suggest that our approach can give the user a more detailed understanding of the data by presenting multivariate information variables, including time-variant characteristics, in one self-contained visualization.
 
 %-------------------------------------------------------------------------
-\section{Introduction}
-With the development of more advanced techniques for scientific simulation, where various physical measurements at many time-steps can be simulated at extremely high detail, providing intuitive and effective tools for the analysis and visualization of such data becomes increasingly challenging.
+%\section{Introduction}
+%With the development of more advanced techniques for scientific simulation, where various physical measurements at many time-steps can be simulated at extremely high detail, providing intuitive and effective tools for the analysis and visualization of such data becomes increasingly challenging.
+%
+%Color mappings are often used in visualization to represent various types of information. Although traditional color transfer functions are often in RGB color space, transfer functions designed in (hue, saturation and brightness) color space can be more intuitive and meaningful in terms of conveying quantitative information or for classifications of the data.
 
-Color mappings are often used in visualization to represent various types of information. Although traditional color transfer functions are often in RGB color space, transfer functions designed in HSB (hue, saturation and brightness) color space can be more intuitive and meaningful in terms of conveying quantitative information or for classifications of the data.
 %-------------------------------------------------------------------------
 \section{Related Work}
-The visualization of time-varying data is an important and active topic in the visualization community. Transfer function specification for static volume data has been widely studied over the years \cite{pfister_transfer_2001}. However, less work has been done for transfer function design of time-varying data.
+The visualization of time-varying data is an important and active topic in the visualization community. Transfer function specification for static volume data has been widely studied over the years \cite{pfister_transfer_2001}. However, much less work has been done for transfer function design of time-varying data.
 
-Jankun-Kelly and Ma first studied  transfer function specification for time-varying data \cite{jankun-kelly_study_2001}.
+Jankun-Kelly and Ma first studied transfer function specification for time-varying data \cite{jankun-kelly_study_2001}.
 Kniss and Hansen applied the techniques from multidimensional transfer function based volume rendering to the visualization of multivariate data from weather simulations \cite{kniss_volume_2002}.
 %Akiba et al. presented the use of time histogram for simultaneous classification of time-varying data in order to find transfer functions that classify all the time steps of the data set \cite{akiba_simultaneous_2006}.
 %Woodring and Shen presented a method for the comparison of different data fields through the expression of a volume shader that composes data fields together with set operations \cite{woodring_multi-variate_2006}.
 %Wang et al. introduced an importance measure based on conditional entropy and categorize temporal behaviors by clustering the importance curves over time \cite{wang_importance-driven_2008}.
-
 %Data analysis techniques for high dimensional spaces, such as parallel coordinates \cite{akiba_visualizing_2007} \cite{guo_scalable_2012} and principal component analysis \cite{liu_multivariate_2014}, were also investigated for exploring multivariate time-varying data sets.
-
 %\cite{luo_information-guided_2014}.
-
 Akiba et al. \cite{akiba_visualizing_2007} described three approaches for the data-fusion problem in multivariate data visualization.
 One approach, which is to use one variable for each color channel in RGB space, is popular because of its simplicity but is limiting due to the difficulty for viewers to interpret the resulting color.
 The second approach, is to use one of the values based on some criterion e.g. \cite{hastreiter_integrated_1998}
@@ -34,7 +32,7 @@ The third approach is to compute a weighted sum of all the values. This approach
 
 %-------------------------------------------------------------------------
 \section{Method}
-In this section, we propose an intuitive approach of using color mappings in HSB space to effectively represent multivariate time-variant data. We use opacity to represent the main variable and saturation to represent the volatility (a temporal characteristic) of the main variable. In addition, brightness can be used to represent other information such as an additional variable from a multivariate or multidimensional data set. This allows constraining hues, which are sometimes chosen based on some domain knowledge and changing hues across different time steps could be unintuitive.
+In this section, we propose an intuitive approach of using color mappings in the HSB color space to effectively represent multivariate time-variant data. We use opacity to represent the main variable and saturation to represent the volatility (a temporal characteristic) of the main variable. In addition, brightness can be used to represent other information such as an additional variable from a multivariate or multidimensional data set. This allows constraining hues, which are sometimes chosen based on some domain knowledge and changing hues across different time steps could be unintuitive.
 %Maybe you could add the point (made in one of the previous chapters) that this 
 %allows constraining hues, which are sometimes chosen based on some domain 
 %knowledge and changing hues across different timesteps could be unintuitive
@@ -44,7 +42,7 @@ In this section, we propose an intuitive approach of using color mappings in HSB
 For a multivariate data set with two variables X, Y, we use variable X of voxels for the alpha channel and modulate the saliency of voxels by adjusting saturation and brightness based on the volatility of variable X and the values of variable Y respectively.
 The volatility is measured by temporal standard deviation std(i), which is the standard deviation of the i-th voxel in the recent n consecutive frames, where n is a user specified number.
 %We use temporal standard deviation of voxels as a measure of volatility. The temporal standard deviation std(i) is acquired by calculating standard deviation of the i-th voxel in the recent n consecutive frames, where n is a user specified number.
-The hue, saturation, brightness and alpha of the i-th voxel (an element in a volume data set) in HSB color space are defined as follows:
+The hue, saturation, brightness and alpha of the i-th voxel (an element in a volume data set) in the HSB color space are defined as follows:
 \begin{align*}
 Hue(i) = C(i) \\
 Saturation(i) = Clip(a \times std(i)) \\

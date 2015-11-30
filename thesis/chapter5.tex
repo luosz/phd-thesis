@@ -22,8 +22,8 @@ Moreover, we present a parallel line search strategy to improve the performance 
 % conjugate gradient descent \cite{shewchuk_introduction_1994}
 Transfer function specification is a non-trivial and unintuitive task in volume visualization. Compared to typical transfer function approaches, which are often subjective, it is desirable to have objective feedback regarding the clarity of features in volume visualization.
 
-Based on the perceptual principles, Chen et al. \cite{chan_perception-based_2009} introduced several image quality measures to enhance the perceived quality of semitransparent features.
-J{\"a}nicke and Chen \cite{janicke_salience-based_2010} described a quality metric for analyzing the saliency of visualization images and demonstrated its usefulness with examples from information visualization, volume visualization and flow visualization.
+%Based on the perceptual principles, Chen et al. \cite{chan_perception-based_2009} introduced several image quality measures to enhance the perceived quality of semitransparent features.
+%J{\"a}nicke and Chen \cite{janicke_salience-based_2010} described a quality metric for analyzing the saliency of visualization images and demonstrated its usefulness with examples from information visualization, volume visualization and flow visualization.
 
 Correa and Ma \cite{correa_visibility-driven_2009} introduced visibility histograms to guide transfer function design for both manual and automatic adjustment.
 Visibility histograms (Figure~\ref{fig:correa_visibility-driven_2009}), which summarize the distribution of visibility of voxels from a given viewpoint, are a powerful feedback mechanism for volume visualization \cite{emsenhuber_visibility_2008}.
@@ -35,7 +35,7 @@ Researchers have developed a variety of parallel strategies to accelerate sequen
 %\cite{koko_parallel_1998}
 Phua et al. \cite{phua_parallel_1998} proposed a parallel extension to quasi-Newton methods \cite{yang_optimization_2001}. Their approach generates several search directions at each iteration and then applies different line search and scaling strategies in parallel along each search direction.
 Peachey et al. \cite{peachey_parallel_2009} presented another approach to parallelize the quasi-Newton methods.
-In their applications, the objective function evaluation typically require minutes or hours. Therefore, they introduced an approach that evaluates the objective function in parallel over a cluster of computers and continues to the next iteration before all evaluations finish in order to accelerate convergence.
+In their applications, the objective function evaluation typically requires minutes or hours of processing time. Therefore, they introduced an approach that evaluates the objective function in parallel over a cluster of computers and continues to the next iteration before all evaluations finish in order to accelerate convergence.
 
 %-------------------------------------------------------------------------
 \section{Method}
@@ -50,12 +50,12 @@ Constraints are introduced in the search of the parameter space. Only the opacit
 These constraints are based on the assumption that the user has explored the volume data and done the classification of features.
 % set up the transfer function according to his/her needs.
 Our approach aims to help the user adjust the saliency distribution and reduce occlusion while preserving the user's knowledge or judgments of the data set.
-While the approach discussed in Chapter~\ref{transfer_function_refinement} was designed for exploring and visual search of volume data, the approach in this chapter could aid in analysis, understanding or closer inspection of the data.
+While the approach discussed in Chapter~\ref{transfer_function_refinement} was designed for exploration and visual search of volume data, the approach in this chapter could aid in analysis, understanding or closer inspection of the data.
 
 %Should maybe say here and/or in the conclusions that (while Ch3 was for exploring, visual search of data) the contributions of this chapter could aid in analysis, understanding or closer inspection of the data
 
 \subsection{Objective Function}
-Users define target importance values for each feature defined in the transfer function domain.
+Users define target importance values for each feature in the transfer function domain.
 Our transfer function optimizer adjusts the transfer function to match the visibility-weighted saliency with the user-defined target saliency values.
 Multiple saliency fields computed from different appearance attributes can be combined together in order to represent different aspects of the visual saliency of voxels.
 In our implementation, brightness and saturation are used respectively to compute visibility-weighted saliency fields and define the weighted sum of the two sets of feature saliency as visibility-weighted feature saliency.
@@ -340,7 +340,7 @@ The VWS curves in Figure~\ref{fig:vorts_dynamic} (a) are more converged than the
 
 The 2DFS curves in Figure~\ref{fig:vorts_static} (b) and Figure~\ref{fig:vorts_dynamic} (b) are provided as comparison for the fact that 2DFS is an image space technique independent from VWS. We notice that there are more small changes in the 2DFS curves in Figure~\ref{fig:vorts_static} (b) and the three curves (representing the 2DFS of the three features) cross each other more often than the 2DFS curves in Figure~\ref{fig:vorts_static} (b).
 
-Time step 30 and 80 rendered with the static transfer function and the dynamic transfer function are displayed in Figure~\ref{fig:vorts_50_80_static} and Figure~\ref{fig:vorts_50_80_dynamic} respectively. We notice the dynamic transfer function can maintain similar level of visual saliency for the purple feature when the sizes and proportions of the features change over time.
+Time step 30 and 80 rendered with the static transfer function and the dynamic transfer function are displayed in Figure~\ref{fig:vorts_50_80_static} and Figure~\ref{fig:vorts_50_80_dynamic} respectively. As coherence can be an important factor in time-varying visualization, we notice the dynamic transfer function can maintain similar level of visual saliency for the purple feature when the sizes and proportions of the features change over time.
 
 %Objective function
 %Figure~\ref{fig:nucleon_strong_red_rms}
