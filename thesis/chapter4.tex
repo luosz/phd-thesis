@@ -476,17 +476,17 @@ Three visual properties, i.e. intensity contrast, color opponency and orientatio
 The saliency map is a 2D image indicating the visual saliency of pixels in the input image. Although 2D saliency maps can not be directly used to estimate the visual saliency of 3D features, an inverse distance weighting \cite{shepard_two-dimensional_1968} can be applied to divide a 2D saliency map into several feature saliency maps, one for each feature (see Appendix~\ref{2d_saliency_map} for details). Subsequently, the visual saliency of each feature can be estimated with the total intensity of each 2D feature saliency map. 
 
 \subsection{Data Analysis}
-Since the opinion scores obtained from participants in the experiment may not be normally distributed or consistently applied across participants and data sets, this structure of data may violate the assumptions of some standard statistical tests \cite{cunningham_experimental_2011}.
+%Since the opinion scores obtained from participants in the experiment may not be normally distributed or consistently applied across participants and data sets, this structure of data may violate the assumptions of some standard statistical tests \cite{cunningham_experimental_2011}.
 %Spearman's rank correlation does not assume normality of the variables.
-Because we are interested in the monotonic relationships between the variables, Spearman's rank correlation, which does not assume normality of the variables, would be suitable for evaluating the strength of monotonic associations of the observed scores (mean opinion scores) and scores calculated from computational metrics. 
+Because we are interested in the monotonic relationships between the variables, Spearman's rank correlation \cite{cunningham_experimental_2011}, which does not assume normality of the variables, would be suitable for evaluating the strength of monotonic associations of the observed scores (mean opinion scores) and scores calculated from computational metrics. 
 
-We applied the Spearman's rank correlation to analyze the monotonic association between the mean opinion scores (MOS) and three computational metrics, i.e. our visibility-weighted saliency (VWS) metric, feature visibility (FV) based on \cite{wang_efficient_2011} and 2D feature saliency (2DFS).
+We applied the Spearman's rank correlation to analyze the monotonic association between the mean opinion scores (MOS) and three computational metrics, i.e. our visibility-weighted saliency (VWS) metric, feature visibility (FV) \cite{wang_efficient_2011} and 2D feature saliency (2DFS) discussed in Section~\ref{2d_feature_saliency}.
 
-As shown in Figure~\ref{fig:mos_vs_vws}, there are strong positive correlations between MOS and VWS ($ 0.67508 $), and MOS and FS ($ 0.678626 $) respectively. On the other hand, there is a moderate positive correlation between MOS and 2DFS ($ 0.550472 $). Both VWS and FS are more monotonic correlated to MOS than 2DFS, and FV is slightly better than VWS by about $ 0.0036 $.
+As shown in Figure~\ref{fig:mos_vs_vws}, there are strong positive correlations between MOS and VWS ($ 0.67508 $), and MOS and FV ($ 0.678626 $) respectively. On the other hand, there is a moderate positive correlation between MOS and 2DFS ($ 0.550472 $). Both VWS and FS are more monotonically correlated to MOS than 2DFS, and FV is slightly better than VWS by about $ 0.0036 $.
 
 The p-values indicate statistical significance of the associations. In our results, the p-values for all the three cases are very small (below $2 \times 10^{-5} $). Therefore, we can reject the null hypothesis (there is no association between each pair of variables) and conclude that there are associations between MOS and VWS, FS and 2DFS respectively.
 
-In addition, we group MOS by features to provide a more detailed view of the correlation between MOS and VWS.
+In addition, we group MOS by features to provide a more detailed view of the correlation between MOS and VWS across individual data sets.
 Figure~\ref{fig:mos_vs_metric} displays line plots of MOS versus VWS for each feature of the data sets separately, with the data points sorted by VWS on the x axis.
 Because some images were shown more than once in the experiment, the resulting data points have the same VWS and very similar MOS in the line plots.
 Although the line plots are not strictly monotonic (i.e. MOS and VWS are not strictly monotonically correlated), we notice that they have loose monotonic associations.
@@ -497,7 +497,7 @@ The curve in Figure~\ref{fig:vismale_feature2_charts} is strictly monotonic, whi
 Figure~\ref{fig:vismale_feature1_charts} shows a case where VWS and MOS are not completely correlated. Figure~\ref{fig:vismale_feature1_charts} (e) and (g) are represented by the third and the fourth (from left to right) data points respectively in Figure~\ref{fig:mos_vs_metric} (h).
 For Feature 1 (the red feature) of the VisMale data set, Figure~\ref{fig:vismale_feature1_charts} (g) received a higher score than (e) from VWS, but MOS gave the opposite ranking of the two volume rendered images.
 
-The analysis of the experiment results indicates that our VWS is better than 2DFS and equivalent to FV in terms of predicting human perception of visual saliency in volume rendering images.
+The analysis of the experiment results indicates that our VWS is better than 2DFS and equivalent to FV in terms of predicting human perception of visual saliency of features in volume rendering images.
 
 \begin{figure}
 	\centering
@@ -635,11 +635,11 @@ The analysis of the experiment results indicates that our VWS is better than 2DF
 	\label{fig:vismale_feature1_charts}
 \end{figure}
 
-
 \subsection{Varying Saturation and Brightness in Transfer Functions}
 A major difference between our visibility-weighted saliency and the feature visibility is that our approach reflects two aspects of the resulting visualization, i.e. voxel visibility and visual saliency, while the feature visibility only reflects voxel visibility.
 Figure~\ref{fig:tooth_naive_optimized_linesearch} displays an image of the tooth data set and its feature visibility and visibility-weighted saliency.
-In Figure~\ref{fig:tooth_naive_optimized_linesearch_red} and Figure~\ref{fig:tooth_naive_optimized_linesearch_yellow}, the saturation and brightness of the red feature and the yellow feature are reduced respectively. As shown in the two figures, our approach reflects the change of saturation and brightness of volume visualization.
+In Figure~\ref{fig:tooth_naive_optimized_linesearch_low_saturation}, the saturation of the red feature is reduced. Our visibility-weighted saliency is aware of the saturation change, thus the red feature has lower VWS and the yellow feature has higher VWS in Figure~\ref{fig:tooth_naive_optimized_linesearch_low_saturation} (b).
+On the other hand, the feature visibility is not aware of the saturation change and is the same as in Figure~\ref{fig:tooth_naive_optimized_linesearch} (b).
 
 \begin{figure}
 	\centering
@@ -668,45 +668,59 @@ In Figure~\ref{fig:tooth_naive_optimized_linesearch_red} and Figure~\ref{fig:too
 	\begin{minipage}{.24\textwidth}
 		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch_red_low_saturation_visibility_saliency_weighted_chart}
 		\subcaption{}
-	\end{minipage}~
-	\begin{minipage}{.24\textwidth}
-		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch_red_low_brightness}
-		\subcaption{}
-	\end{minipage}~
-	\begin{minipage}{.24\textwidth}
-		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch_red_low_brightness_visibility_saliency_weighted_chart}
-		\subcaption{}
 	\end{minipage}
-	\caption{(a) Low saturation for the red feature; (b) The visibility-weighted saliency of (a); (c) Low brightness for the red feature; (d) The visibility-weighted saliency of (c)}
-	\label{fig:tooth_naive_optimized_linesearch_red}
+	\caption{(a) The saturation of the red feature is reduced; (b) The visibility-weighted saliency of (a): the red feature has lower VWS and the yellow has higher VWS.}
+	\label{fig:tooth_naive_optimized_linesearch_low_saturation}
 \end{figure}
-
-\begin{figure}
-	\centering
-	\begin{minipage}{.24\textwidth}
-		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch_yellow_low_saturation}
-		\subcaption{}
-	\end{minipage}~
-	\begin{minipage}{.24\textwidth}
-		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch_yellow_low_saturation_visibility_saliency_weighted_chart}
-		\subcaption{}
-	\end{minipage}~
-	\begin{minipage}{.24\textwidth}
-		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch_yellow_low_brightness}
-		\subcaption{}
-	\end{minipage}~
-	\begin{minipage}{.24\textwidth}
-		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch_yellow_low_brightness_visibility_saliency_weighted_chart}
-		\subcaption{}
-	\end{minipage}
-	\caption{(a) Low saturation for the yellow feature; (b) The visibility-weighted saliency of (a); (c) Low brightness for the yellow feature; (d) The visibility-weighted saliency of (c)}
-	\label{fig:tooth_naive_optimized_linesearch_yellow}
-\end{figure}
+%
+%\begin{figure}
+%	\centering
+%	\begin{minipage}{.24\textwidth}
+%		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch_red_low_saturation}
+%		\subcaption{}
+%	\end{minipage}~
+%	\begin{minipage}{.24\textwidth}
+%		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch_red_low_saturation_visibility_saliency_weighted_chart}
+%		\subcaption{}
+%	\end{minipage}~
+%	\begin{minipage}{.24\textwidth}
+%		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch_red_low_brightness}
+%		\subcaption{}
+%	\end{minipage}~
+%	\begin{minipage}{.24\textwidth}
+%		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch_red_low_brightness_visibility_saliency_weighted_chart}
+%		\subcaption{}
+%	\end{minipage}
+%	\caption{(a) Low saturation for the red feature; (b) The visibility-weighted saliency of (a); (c) Low brightness for the red feature; (d) The visibility-weighted saliency of (c)}
+%	\label{fig:tooth_naive_optimized_linesearch_red}
+%\end{figure}
+%
+%\begin{figure}
+%	\centering
+%	\begin{minipage}{.24\textwidth}
+%		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch_yellow_low_saturation}
+%		\subcaption{}
+%	\end{minipage}~
+%	\begin{minipage}{.24\textwidth}
+%		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch_yellow_low_saturation_visibility_saliency_weighted_chart}
+%		\subcaption{}
+%	\end{minipage}~
+%	\begin{minipage}{.24\textwidth}
+%		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch_yellow_low_brightness}
+%		\subcaption{}
+%	\end{minipage}~
+%	\begin{minipage}{.24\textwidth}
+%		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch_yellow_low_brightness_visibility_saliency_weighted_chart}
+%		\subcaption{}
+%	\end{minipage}
+%	\caption{(a) Low saturation for the yellow feature; (b) The visibility-weighted saliency of (a); (c) Low brightness for the yellow feature; (d) The visibility-weighted saliency of (c)}
+%	\label{fig:tooth_naive_optimized_linesearch_yellow}
+%\end{figure}
 
 %-------------------------------------------------------------------------
 \section{Conclusions}
 In this chapter, we propose visibility-weighted saliency as an improved measure of the visual saliency of features in volume rendered images, in order to assist users in choosing suitable viewpoints and designing effective transfer functions to visualize the features of interest.
-According to our results, the proposed visibility-weighted saliency is as good as feature visibility and better than 2D feature saliency. Our visibility-weighted saliency also captures changes in saliency due to brightness/contrast changes, which is not taken into account by feature visibility.
+According to the results of our experiment, the proposed visibility-weighted saliency metric is as effective as feature visibility and better than 2D feature saliency at predicting the visual saliency of features in volume data. Our visibility-weighted saliency also captures changes in saliency due to brightness/contrast, which is not taken into account by feature visibility.
 %but that it is captures changes in 
 %saliency due to brightness/contrast
 
