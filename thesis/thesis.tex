@@ -180,27 +180,28 @@ Finally, I would like to especially thank my parents, my sister and Lu Han, to w
 %This thesis proposes and investigates novel automated optimization techniques for emphasizing features of interest in volume visualization using information content associated with volume data and objective measures such as visual saliency and visibility of voxels.
 	
 Volume data is widely used in scientific and medical research, and volume visualization techniques aim to provide effective and flexible methods for analyzing and exploring complex structures in such data. However, obtaining clear visualization of features of interest in volume data is still a major challenge.
+One time-consuming and unitintuitive part of the process is the specification of an appropriate transfer function, which determines the classification and visibility of features. In practice, this is typically achieved using a trial-and-error approach: modifications are made to the transfer function and changes in the resulting visualization are carefully observed in order to inform further modifications to the transfer function.
+%Due to this indirect control over the final visualization, further exacerbated by 3D occlusion between structures, it is a difficult task to specify appropriate transfer functions to clearly reveal specific features of interest in the volume data set.
 
-One time-consuming and unitintuitive part of the process is the specification of an appropriate transfer function, which determines the classification and visibility of features. In practice, this is typically achieved using a trial-and-error approach: modifications are made to the transfer function and changes in the resulting visualization are carefully observed in order to inform further modifications to the transfer function. Due to this indirect control over the final visualization, further exacerbated by 3D occlusion between structures, it is a difficult task to specify appropriate transfer functions to clearly reveal specific features of interest in the volume data set.
-
-This thesis proposes and investigates novel automated optimization techniques for emphasizing features of interest in volume visualization using information content associated with volume data and objective measures such as visual saliency and visibility of voxels.
+This thesis proposes and investigates novel automated optimization techniques for transfer functions, in order to emphasize features of interest. These techniques exploit information content associated with volume data and objective measures based on visual saliency and visibility in volume visualization.
 
 We describe a global optimization and two user-driven refinement methods for modulating transfer functions in order to assist the exploration of volume data.
 This optimization is dependent on the distribution of the scalar values of the volume data set and is designed to reduce general occlusion and improve the clarity of layers of structures in the resulting images.
-The user can explore a volume by interactively specifying different priority intensity ranges and observe which layers of structures are revealed. In addition, we show how the technique can be applied to time-varying volume data sets by adaptively refining the transfer function based on the histogram of each time-step. 
-Experimental results on various data sets are presented to demonstrate the effectiveness of our method.
-
-The clarity of features depends on the transfer function, the viewpoint and the spatial distribution of features in the volume data set.
+%The user can explore a volume by interactively specifying different priority intensity ranges and observe which layers of structures are revealed. In addition, we show how the technique can be applied to time-varying volume data sets by adaptively refining the transfer function based on the histogram of each time-step. 
+%Experimental results on various data sets are presented to demonstrate the effectiveness of our method.
+%The clarity of features depends on the transfer function, the viewpoint and the spatial distribution of features in the volume data set.
 %In addition to view-independent information (i.e. entropy of voxels), we propose visibility-weighted saliency as a view-dependent measure of features in volume rendered images, in order to assist users in choosing suitable viewpoints and designing effective transfer functions to visualize the features of interest.
 %Visibility-weighted saliency is based on a computational measure of perceptual importance of voxels and the visibility of features in volume rendered images.
 %The effectiveness of this scheme is demonstrated by test results on various volume data sets.
-In addition to view-independent information, % (i.e. entropy of voxels), 
-we propose a novel view-dependent measure called visibility-weighted saliency in order to assist users in choosing suitable viewpoints and designing effective transfer functions to visualize the features of interest in a volume rendered images. This measure is based on a computational measure of perceptual importance of voxels and the visibility of features in volume rendered images. The effectiveness of this scheme is demonstrated by test results on various volume data sets.
 
+In addition to view-independent information, % (i.e. entropy of voxels), 
+we propose a novel view-dependent measure called visibility-weighted saliency in order to assist users in choosing suitable viewpoints and designing effective transfer functions to visualize the features of interest in a volume rendered images. This measure is based on a computational measure of perceptual importance of voxels and the visibility of features in volume rendered images.
+
+%The effectiveness of this scheme is demonstrated by test results on various volume data sets.
 Subsequently, we present an automated transfer function optimization method based on the visibility-weighted saliency metric. This method takes into account the perceptual importance of voxels and the visibility of features, and automatically adjusts the transfer function to match the target saliency levels specified by the user. In addition, a parallel line search strategy is presented to improve the performance of the optimization algorithm.
 
 Finally, we describe a multivariate visualization approach which modulates focus, emphasizing important information, by adjusting saturation and brightness of voxels based on an importance measure derived from temporal and multivariate information.
-The method was tested in visualizing a multivariate hurricane data set. The results suggest that our approach can give the user an intuitive understanding of the data by presenting multivariate information variables in one self-contained visualization.
+%The method was tested in visualizing a multivariate hurricane data set. The results suggest that our approach can give the user an intuitive understanding of the data by presenting multivariate information variables in one self-contained visualization.
 
 %Volume visualization is a powerful technique for depicting layered structures in 3D volume data sets.
 %Volume visualization has been widely used to depict complicated 3D structures in volume data sets.
