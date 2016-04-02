@@ -491,7 +491,7 @@ Our approach is relatively lightweight, e.g. we observed that the optimization f
 \caption{~}
 \label{fig:CT-Knee_histogram}
 \end{subfigure}
-\caption{Before optimization: CT-Knee with a continuous transfer 
+\caption[Before optimization: CT-Knee with a continuous transfer function]{Before optimization: CT-Knee with a continuous transfer 
 function (a) Preliminary view of data set (b) A continuous transfer 
 function with a ramp (c) Histogram of the data set}
 \label{fig:tf_CT-Knee_spectrum_16_ramp}
@@ -504,7 +504,7 @@ function with a ramp (c) Histogram of the data set}
 \includegraphics[width=\textwidth]{CT-Knee_spectrum_16_ramp_balance.png}    
 \caption{~}
 \end{subfigure}
-\caption{The transfer function from Figure~\ref{fig:tf_CT-Knee_spectrum_16_ramp} after optimization: (a) Optimized transfer function) (b) Optimized output}
+\caption[After optimization: CT-Knee with the continuous transfer function]{The transfer function from Figure~\ref{fig:tf_CT-Knee_spectrum_16_ramp} after optimization: (a) Optimized transfer function) (b) Optimized output}
 \label{fig:tf_CT-Knee_spectrum_16_ramp_balance}
 
 \end{figure}
@@ -521,7 +521,8 @@ function with a ramp (c) Histogram of the data set}
 \caption{~}
 \label{fig:tf_CT-Knee_spectrum_6_bump_}
 \end{subfigure}
-\caption{Before optimization: CT-Knee rendered with a transfer function consisting 
+\caption[Before optimization: CT-Knee rendered with a transfer function consisting 
+of tent-like shapes]{Before optimization: CT-Knee rendered with a transfer function consisting 
 of tent-like shapes (a) Preliminary view of data set (b) A transfer function with 6 tent-like shapes}
 \label{fig:tf_CT-Knee_spectrum_6}
 
@@ -533,7 +534,7 @@ of tent-like shapes (a) Preliminary view of data set (b) A transfer function wit
 \includegraphics[width=\textwidth]{CT-Knee_spectrum_6_bump_balance.png}
 \caption{~}
 \end{subfigure}
-\caption{The transfer function from Figure~\ref{fig:tf_CT-Knee_spectrum_6} after optimization: (a) Optimized transfer function (b) Optimized output}
+\caption[After optimization: CT-Knee rendered with the transfer function consisting of tent-like shapes]{The transfer function from Figure~\ref{fig:tf_CT-Knee_spectrum_6} after optimization: (a) Optimized transfer function (b) Optimized output}
 \label{fig:tf_CT-Knee_spectrum_6_balance_1000}
 \end{figure}
 
@@ -570,7 +571,7 @@ Figure~\ref{fig:CT-Knee_series} shows three images of a CT-Knee data set where d
 	        \label{fig:tf_CT-Knee_hue_14.png}
 	\end{subfigure}	
 	
-	\caption[The 3 chosen colors (corresponding to different intensity values) and the transfer functions after optimization for each intensity value.]{The 3 chosen colors (corresponding to different intensity values) and the transfer functions after optimization for each intensity value. The same transfer function as shown in Figure~\ref{fig:tf_CT-Knee_spectrum_16_ramp} is used as input to the optimizer. Note how the transfer functions are enhanced for the specific intensity ranges as compared to the result of global optimization in Figure~\ref{fig:tf_CT-Knee_spectrum_16_ramp_balance}.}
+	\caption[The 3 chosen colors and the transfer functions after optimization for each intensity value.]{The 3 chosen colors (corresponding to different intensity values) and the transfer functions after optimization for each intensity value. The same transfer function as shown in Figure~\ref{fig:tf_CT-Knee_spectrum_16_ramp} is used as input to the optimizer. Note how the transfer functions are enhanced for the specific intensity ranges as compared to the result of global optimization in Figure~\ref{fig:tf_CT-Knee_spectrum_16_ramp_balance}.}
 	\label{fig:CT-Knee_hue_selection}    
 
 	\begin{subfigure}{.33\textwidth}
@@ -591,7 +592,7 @@ Figure~\ref{fig:CT-Knee_series} shows three images of a CT-Knee data set where d
 	        \caption{}
 	        \label{fig:CT-Knee_hue_14.png}
 	\end{subfigure}
-	\caption{The CT-Knee data with transfer functions optimized for the 3 colors in Figure~\ref{fig:CT-Knee_hue_selection}. (a) The materials with intensity values mapped to red are enhanced. Similarly, the materials in green and magenta are enhanced respectively in (b) and (c).}
+	\caption[The CT-Knee data with transfer functions optimized for the 3 colors]{The CT-Knee data with transfer functions optimized for the 3 colors in Figure~\ref{fig:CT-Knee_hue_selection}. (a) The materials with intensity values mapped to red are enhanced. Similarly, the materials in green and magenta are enhanced respectively in (b) and (c).}
 	\label{fig:CT-Knee_series}	
 \end{figure}
 
@@ -639,7 +640,7 @@ As shown in Figure~\ref{fig:VisMale_spectrum_4_clipplane_region_1000}, the skull
 	\caption{~}
 	\label{fig:VisMale_spectrum_4_clipplane_region_1000}
 	\end{subfigure}	
-	\caption{(a) Preliminary view of the VisMale data set. (b) Optimized output. (c) Histogram of the data set. (d) The user selects a region on the skull under a clipping plane. (e) Optimized output: skull is enhanced and the outer layer is de-emphasized.}
+	\caption[The VisMale data set with transfer functions before and after optimization]{(a) Preliminary view of the VisMale data set. (b) Optimized output. (c) Histogram of the data set. (d) The user selects a region on the skull under a clipping plane. (e) Optimized output: skull is enhanced and the outer layer is de-emphasized.}
 	\label{fig:multiple_VisMale_spectrum_4_balance_1000}
 \end{figure}
 
@@ -675,7 +676,7 @@ Figure~\ref{fig:vortex_time_histogram} shows the intensity histograms of the two
 \centering
 \includegraphics[width=\textwidth]{CT-Knee_hue_selection_2.png}
 \end{subfigure}
-\caption{The 3 chosen colors (corresponding to different intensity values) for optimization. Note how different parts of the data set are enhanced respectively in Figure~\ref{fig:vortex_series_time_00} and Figure~\ref{fig:vortex_series_time_50}.}
+\caption[The 3 chosen colors for the vortex data set]{The 3 chosen colors (corresponding to different intensity values) for optimization. Note how different parts of the data set are enhanced respectively in Figure~\ref{fig:vortex_series_time_00} and Figure~\ref{fig:vortex_series_time_50}.}
 \label{fig:vortex_hue_selection}
 
 \begin{subfigure}{.33\textwidth}
@@ -696,7 +697,7 @@ Figure~\ref{fig:vortex_time_histogram} shows the intensity histograms of the two
      \caption{~}
      \label{fig:vortex_time_00_hue_14}
 \end{subfigure}
-\caption{The vortex data at time-step 0. (a) The materials with intensity values mapped to red are enhanced. Similarly, the materials in green and magenta are enhanced respectively in (b) and (c).}
+\caption[Time-step 0 of the vortex data sets with optimized transfer functions]{The vortex data at time-step 0. (a) The materials with intensity values mapped to red are enhanced. Similarly, the materials in green and magenta are enhanced respectively in (b) and (c).}
 \label{fig:vortex_series_time_00}
 
 \begin{subfigure}{.33\textwidth}
@@ -717,7 +718,7 @@ Figure~\ref{fig:vortex_time_histogram} shows the intensity histograms of the two
 	        \caption{~}
      \label{fig:vortex_time_50_hue_14}
 \end{subfigure}
-\caption{The vortex data at time-step 50. These images show similar results as those for time-step 0, because there are only limited changes among the histograms of different time-steps.}
+\caption[Time-step 50 of the vortex data sets with optimized transfer functions]{The vortex data at time-step 50. These images show similar results as those for time-step 0, because there are only limited changes among the histograms of different time-steps.}
 \label{fig:vortex_series_time_50}
 \end{figure}
 
@@ -758,7 +759,7 @@ Figure~\ref{fig:vortex_time_histogram} shows the intensity histograms of the two
 \includegraphics[width=\textwidth]{tf_vortex_time_50_hue_14.png}
 \caption{~}
 \end{subfigure}
-\caption{(a) Histogram of time-step 0.
+\caption[Histograms and transfer functions for time-steps 0 and 50 respectively]{(a) Histogram of time-step 0.
 (b) Transfer function (TF) for Figure~\ref{fig:vortex_time_00_hue_00}.
 (c) TF for Figure~\ref{fig:vortex_time_00_hue_07}.
 (d) TF for Figure~\ref{fig:vortex_time_00_hue_14}.
