@@ -202,6 +202,7 @@ Consider the transfer function in Figure~\ref{fig:drawing_distribution}. The use
 However, if the distribution of voxels follows $ p(x) $ (the blue curve), the voxels of the leftmost intensity intervals may completely occlude voxels of the other two intensity intervals in the resulting image.
 The global optimization in our approach aims at reducing this kind of occlusion by modulating the opacity of the transfer function based on the distribution of scalar values of the volume data set.
 %Figure~\ref{fig:multiple_nucleon} illustrates a transfer function which is more appropriate in this situation.
+Although many shapes can be used in transfer function design, tent-like shapes are often sufficient to model the user's intent \cite{konig_mastering_2000}. In this chapter, results of both transfer functions of tent-like shapes and continuous transfer functions are used as input of the optimization.
 
 \subsection{Entropy of Volume Data}
 In computer graphics, information-theoretic measures, such as entropy and mutual information, have been applied to solve multiple problems in areas such as view selection \cite{bordoloi_view_2005} 
@@ -305,7 +306,7 @@ A greedy strategy is employed in our algorithm to minimize the energy function. 
 \end{itemize}
 %reducing the opacity of the highest control point (with highest significance factor) and increasing the opacity of the lowest control point (with non-zero lowest significance factor).
 
-In our implementation, the optimization ends when it reaches a user-specified iteration count.
+The optimizer terminates when the energy function becomes stable, i.e. further iterations almost do not change the value of energy function.
 The two step sizes in reducing opacity and increasing opacity can both be user-specified, or the first one is user-specified and the second one is computed based on the first one and the ratio of the significance factors of the two chosen control points. The ratio of the two step sizes affects the overall opacity of the resulting image, for instance, the image becomes more opaque or translucent. See Section~\ref{automatic_transfer_function_refinement} for results of this global refinement.
 
 \subsection{Prioritizing Intensity Ranges \label{interaction_methods}}
@@ -472,7 +473,7 @@ After optimization (Figure~\ref{fig:tf_CT-Knee_spectrum_16_ramp_balance}), the s
 Although the continuous transfer function is useful in automatic transfer function generation, in typical volume visualization programs, users often prefer much more simplified transfer functions, e.g. a few control points such as in transfer functions with tent-like shapes. Figure~\ref{fig:tf_CT-Knee_spectrum_6} is the CT-Knee data set rendered with the transfer function. We show in Figure~\ref{fig:tf_CT-Knee_spectrum_6_balance_1000} that our optimization can also benefit such simpler transfer functions.
 
 In practice we observed that the energy function usually converges to a small but non-zero value. As the number of control points increases, it takes more iterations for the optimization to achieve a stable state - a number of tent-like shapes ranging from 4 to 16 was found to be the most effective.
-Our approach is relatively lightweight, e.g. we observed that the optimization finished within one second on the CT-Knee and VisMale data sets with transfer functions consisting of 24 control points and maximum iteration count of 1000.
+Our approach is relatively lightweight, e.g. we observed that the optimization finished within one second on the CT-Knee and VisMale data sets with transfer functions consisting of 24 control points.
 
 \begin{figure}
 \centering
