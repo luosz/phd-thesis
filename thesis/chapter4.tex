@@ -78,6 +78,16 @@ This technique aims to assist users in gaining insight into the internal structu
 
 In this section, we describe in detail the concepts of visibility fields, saliency fields, visibility-weighted saliency fields and visibility-weighted feature saliency. In order to better illustrate the effects of these techniques in our discussion, we present the results of applying these techniques to a synthetic data set from two different viewpoints.
 
+\subsection{Feature Definition \label{feature_definition}}
+Before discussion of the proposed methods, we first define a feature $ F $ as a subset of voxels in the volume $ V $, i.e. 
+\[ F\subseteq V 
+\addtag \]
+
+In the case of intensity-based 1D transfer functions, a feature can also be defined using an intensity interval, i.e.
+\[ F=\{ a \leq i<b | i \in V \} 
+\addtag \]
+where $ [a,b) $ is the intensity interval that contains all the voxels of feature $F$.
+
 \subsection{Visibility Fields \label{visibility_fields}}
 Direct volume rendering (e.g. ray-casting) is a technique that renders a 2D projection of a 3D volume data set. The rendering of a volume, which essentially is a block of 3D data, involves alpha blending and color composition of voxels. The resulting 2D image is acquired by blending the color and opacity of voxels along the view direction. The transfer function determines the color and opacity of individual voxels based on their data attributes such as intensity. However, the contribution of a voxel to the rendered image is determined by both the opacity of this voxel and the opacity of those voxels in front of the current voxel in the view direction.
 This mechanism is described in the front-to-back compositing equations \cite{emsenhuber_visibility_2008}.

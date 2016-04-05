@@ -373,10 +373,17 @@ Visibility histograms (Figure~\ref{fig:correa_visibility-driven_2009}), which su
 Visibility histograms encode the information required to measure the efficacy of transfer functions and are advantageous in guiding and automating the manipulation of transfer functions.
 
 \begin{figure}
-	\centering
-	\includegraphics[width=1\linewidth]{images/correa_visibility-driven_2009}
-	\caption{Visibility histograms \cite{correa_visibility-driven_2009}}
-	\label{fig:correa_visibility-driven_2009}
+\centering
+\begin{minipage}{.49\textwidth}
+\includegraphics[width=1\linewidth]{images/correa_visibility-driven_2009_a}
+\subcaption{A user-defined opacity transfer function}
+\end{minipage}~
+\begin{minipage}{.49\textwidth}
+\includegraphics[width=1\linewidth]{images/correa_visibility-driven_2009_b}
+\subcaption{Match the visibility histogram with the user-defined opacity transfer function}
+\end{minipage}
+\caption{Visibility histograms \cite{correa_visibility-driven_2009}}
+\label{fig:correa_visibility-driven_2009}
 \end{figure}
 
 %Wang et al. \cite{wang_efficient_2011} extended visibility histograms to feature visibility, 
@@ -384,10 +391,17 @@ Wang et al. \cite{wang_efficient_2011} extended the previous work on visibility 
 in order to measure the influence of each feature to the volume rendered image. As shown in Figure~\ref{fig:wang_efficient_2011}, their approach allows the user to directly specify the desired visibility for the features of interest, and subsequently the opacity transfer function is optimized using an active set algorithm \cite{polyak_conjugate_1969}.
 
 \begin{figure}
-	\centering
-	\includegraphics[width=1\linewidth]{images/wang_efficient_2011}
-	\caption{Opacities and feature visibilities of 4 features highlighted in different colors \cite{wang_efficient_2011}}
-	\label{fig:wang_efficient_2011}
+\centering
+\begin{minipage}{.49\textwidth}
+\includegraphics[width=1\linewidth]{images/wang_efficient_2011_a}
+\subcaption{Feature opacities are equal}
+\end{minipage}~
+\begin{minipage}{.49\textwidth}
+\includegraphics[width=1\linewidth]{images/wang_efficient_2011_b}
+\subcaption{Feature visibilities are equal}
+\end{minipage}
+\caption{Opacities and feature visibilities of 4 features highlighted in different colors \cite{wang_efficient_2011}}
+\label{fig:wang_efficient_2011}
 \end{figure}
 
 Ruiz et al. \cite{ruiz_automatic_2011} proposed an information-theoretic framework which obtains opacity transfer functions by minimizing the Kullback-Leibler divergence between the observed visibility distribution and a target distribution provided by the user. Later, Bramon et al. \cite{bramon_information_2013} extended this approach to visualize multimodal volume data.
