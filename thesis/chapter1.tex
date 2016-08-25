@@ -63,8 +63,8 @@ The adjustments users make in transfer function specification are based on subje
 
 %The main goal of our research is to investigate the optimization of visualization parameters (in particular transfer functions) and the use of NPR techniques, and develop a methodology which incorporates these two types of techniques to facilitate the user's exploration of the data sets. NPR techniques are effective forms of abstraction and they have proven their usefulness in expressing features that cannot be shown using realistic depiction of scenes and objects. The combination of standard volume visualization and NPR techniques will bring the opportunity to provide expressive visualization and assist the user in accomplishing his/her task efficiently.
 
-Objective measures such as voxel information \cite{bordoloi_view_2005} \cite{wang_information_2011}, visibility histograms \cite{emsenhuber_visibility_2008} \cite{correa_visibility-driven_2009} and volume saliency \cite{kim_saliency-guided_2006}, provide the basis for powerful feedback mechanisms in volume rendering.
-In current volume rendering systems, appropriate transfer functions are often obtained by trial-and-error.
+Objective measures such as voxel information \cite{bordoloi_view_2005}, visibility histograms \cite{emsenhuber_visibility_2008} \cite{correa_visibility-driven_2009}, feature visiblity \cite{wang_information_2011}, and visual saliency models \cite{emami_selection_2013} such as saliency maps \cite{itti_model_1998} \cite{harel_graph-based_2006} for 2D images and saliency fields \cite{kim_saliency-guided_2006} for volumetric data, provide the basis for powerful feedback mechanisms in volume rendering.
+In current volume rendering systems, appropriate transfer functions are often obtained by trial-and-error \cite{pfister_transfer_2001}.
 It is desirable to take advantage of these objective measures in order to automate the specification of transfer functions for emphasizing features of interest in volume visualization.
 
 The main goal of our research is to investigate the optimization of visualization parameters (in particular transfer functions) with information derived from volume data based on feedback mechanisms from the volume rendering process.
@@ -169,10 +169,13 @@ Chapter~\ref{visibility-weighted_saliency}
 describes visibility-weighted saliency as an important measure of visual saliency of features in volume rendered images, in order to assist users in choosing suitable viewpoints and designing effective transfer functions to visualize the features of interest. Visibility-weighted saliency is based on a computational measure of perceptual importance of voxels and the visibility of features in volume rendered images. The visibility-weighted saliency metric has been published as a full paper in Computer Graphics \& Visual Computing (CGVC) 2015 \cite{borgo_visibility-weighted_2015}.
 
 Chapter~\ref{transfer_function_optimization}
-provides a detailed description of an automated transfer function optimization approach based on the visibility-weighted saliency metric, which indicates the perceptual importance of voxels and the visibility of features in volume rendered images. The work described in this chapter and the perceptual experiment in Chapter~\ref{visibility-weighted_saliency} has been submitted to Computer Graphics International 2016.
+provides a detailed description of an automated transfer function optimization approach based on the visibility-weighted saliency metric, which indicates the perceptual importance of voxels and the visibility of features in volume rendered images.
+%The work described in this chapter and the perceptual experiment in Chapter~\ref{visibility-weighted_saliency} has been submitted to Computer Graphics International 2016.
+The work described in this chapter has been presented as a poster at EG / VGTC Conference on Visualization (EuroVis) 2016 \ref{isenberg_transfer_2016}.
 
 Chapter~\ref{selective_saturation_brightness}
-outlines a novel visualization approach which modulates focus, emphasizing important information, by adjusting saturation and brightness of voxels based on an importance measure derived from temporal and multivariate information. The work described in this chapter has been presented as a poster at EuroVis 2015 \cite{shengzhou_luo_selective_2015}.
+outlines a novel visualization approach which modulates focus, emphasizing important information, by adjusting saturation and brightness of voxels based on an importance measure derived from temporal and multivariate information.
+The work described in this chapter has been presented as a poster at EG / VGTC Conference on Visualization (EuroVis) 2015 \cite{shengzhou_luo_selective_2015}.
 
 Chapter~\ref{conclusions}
 summarizes our contributions and provides a discussion of possible avenues of future work.
