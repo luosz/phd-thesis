@@ -80,7 +80,11 @@ Motivated by scientific visualization and medical imaging, where volume data is 
 
 \subsection{Volume Ray Casting}
 Volume ray casting is a volume rendering technique that can produce very high quality results.
-Since the advent of programmable graphics processing units (GPU) and 3D textures, volume ray casting techniques have been able to exploit the power of GPUs to achieve real-time performance. GPU-based volume ray casting has become one of the most popular techniques for visualizing volume data \cite{meyer-spradow_voreen:_2009}.
+Since the advent of programmable graphics processing units (GPU) and 3D textures, volume ray casting techniques have been able to exploit the power of GPUs to achieve real-time performance.
+GPU-based volume ray casting has become one of the most popular techniques for visualizing volume data \cite{meyer-spradow_voreen:_2009}.
+However, the sizes of volume data are increasing much faster than the sizes of memory available on GPUs \cite{beyer_state---art_2015}. Various scalable volume rendering methods \cite{engel_cera-tvr:_2011} \cite{fogal_analysis_2013} have been proposed to address the challenge of dramatically increasing volume data sizes.
+
+%The development in GPU technology result in powerful parallel processors that enable computation intensive tasks such as ray casting of large volume data sets at interactive rates \cite{beyer_state---art_2015}.
 
 \subsection{Splatting}
 Splatting is a volume rendering technique that trades quality for speed by combining volume projection with a sparse data representation \cite{westover_splatting:_1991}. In splatting, only voxels within certain intensity ranges need to be projected and the projection is done with efficient rasterization schemes \cite{mueller_splatting_1999}.
@@ -105,11 +109,12 @@ However, compared to volume ray casting, shear warp has less accurate sampling a
 Texture-based volume rendering techniques render slices in the volume as texture-mapped polygons with the opacity and color of voxels determined by the transfer function and interpolation and then merge the polygons from back to front in compositing operations support by the hardware \cite{rezk-salama_interactive_2000}.
 Because graphics cards are fast at texturing, texture-based volume rendering \cite{hibbard_interactivity_1989} can efficiently render slices of volume data with the texturing capability of graphics cards.
 %There are 2D texture mapping and 3D texture. The former aligns the slices with the volume data, while the latter aligns the slices with the viewing plane and directly samples from the 3D volume, which requires graphics hardware support for 3D textures \cite{westermann_accelerated_2001}.
-In 2D texture mapping approaches, slices are aligned with the original volume data,
-while in 3D texture mapping approaches, slices are aligned with the viewing plane and directly sampled from the 3D volume,
-which requires graphics hardware support for 3D textures \cite{westermann_accelerated_2001}.
 
-Texture-based volume rendering techniques can produce images of reasonable quality. However, there may be noticeable transitions when the volume is rotated interactively.
+In 2D texture mapping approaches, slices are aligned with the original volume data.
+%Volume rendered images are produced by rendering the slices that are most perpendicular to the viewing direction from back to front. When the view is rotated, switching from one stack of slices to another may cause noticeable changes in the volume rendered image \cite{kruger_new_2010}.
+While in 3D texture mapping approaches, slices are aligned with the viewing plane and directly sampled from the 3D volume, which requires graphics hardware support for 3D textures \cite{westermann_accelerated_2001}.
+
+Texture-based volume rendering techniques can produce images of reasonable quality. However, there may be noticeable transitions when the volume is rotated interactively \cite{kruger_new_2010}. Artifacts may also be noticeable at the edge of the image if the field-of-view angle is relatively large and the proxy geometry is based on planar slices \cite{hadwiger_real-time_2006}.
 
 %\subsubsection{Non-Photorealistic Rendering (NPR)}
 %In contrast to traditional computer graphics, which has focused largely on creating photorealistic images of synthetic objects, non-photorealistic rendering (NPR) is an area of computer graphics that focuses on creating abstract images with a wide variety of expressive styles \cite{haeberli_paint_1990}. NPR has been an active research area for a long time. A number of approaches have been proposed to produce convincing artistic styles for both off-line and on-line rendering. For example, there are various types of commonly used styles including painterly rendering, edge stylization, sketch-shading, cel-shading, hatching.
