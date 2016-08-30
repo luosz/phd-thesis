@@ -224,7 +224,7 @@ In these preliminary results (Figure~\ref{fig:nucleon_naive_tooth_naive_rms}), t
 		\subcaption{}	
 	\end{minipage}
 	\caption[The two methods for estimating descent directions are applied to transfer function optimization on the nucleon data set and a tooth data set]{The two methods for estimating descent directions are applied to transfer function optimization on the nucleon data set (a) and a tooth data set (b).
-		Method 1 converges ($F<0.01$) at step 10 (as in the iteration log (c)) and method 2 converges at step 9 (as in the iteration log (d)) on the nucleon data set with a naive transfer function (assigning equal opacity to each feature).
+		Method 1 converges ($F<0.03$) at step 10 (as in the iteration log (c)) and method 2 converges at step 9 (as in the iteration log (d)) on the nucleon data set with a naive transfer function (assigning equal opacity to each feature).
 		The two methods both converge at step 47 on the tooth data set with a native transfer function.}
 	\label{fig:nucleon_naive_tooth_naive_rms}
 \end{figure}
@@ -294,7 +294,7 @@ Figure~\ref{fig:nucleon_naive_tooth_naive_rms_linesearch} displays results of ap
 		\includegraphics[width=1\linewidth]{images/tooth_naive_rms_fixed_linesearch_parallel}
 		\subcaption{}
 	\end{minipage}
-	\caption[The line search and parallel line search are applied to transfer function optimization on the nuclon data set and the tooth data set respectively.]{The line search and parallel line search are applied to transfer function optimization on the nuclon data set (a) and the tooth data set (b) respectively. The two methods both converge ($F<0.01$) at step 4 for the nucleon data set and both converge at step 5 for the tooth data set. The two line search methods made very similar choices in step sizes.}
+	\caption[The line search and parallel line search are applied to transfer function optimization on the nuclon data set and the tooth data set respectively.]{The line search and parallel line search are applied to transfer function optimization on the nuclon data set (a) and the tooth data set (b) respectively. The two methods both converge ($F<0.03$) at step 4 for the nucleon data set and both converge at step 5 for the tooth data set. The two line search methods made very similar choices in step sizes.}
 	\label{fig:nucleon_naive_tooth_naive_rms_linesearch}
 \end{figure}
 
@@ -302,12 +302,12 @@ Figure~\ref{fig:nucleon_naive_tooth_naive_rms_linesearch} displays results of ap
 \section{Results and Discussions}
 In this section, we present some results to demonstrate the effectiveness of our approach on the nucleon data set ($ 41 \times 41 \times 41 $), a tooth data set ($ 140 \times 120 \times 161 $), a CT-knee (379 $ \times $ 229 $ \times $ 305) data set \cite{website:Roettger_volume_2013} and one time-step of a simulated turbulent vortex flow (128 $\times$ 128 $\times$ 128, 100 time-steps) \cite{website:Ma_repository_2013}.
 %and four volumes of a horse embryo data set, which are the horse embryo at 35, 37, 39 and 42 days.
-Results were obtained in our experimental programs written in Wolfram Mathematica on a computer equipped with an Intel Core i7-950 processor, 16GB of RAM and a NVIDIA GeForce GTX 750 Ti graphics card.
+Results were obtained in our experimental programs written in Wolfram Mathematica 11 on a computer equipped with an Intel Xeon E3-1246 v3 processor, 16GB of RAM and a NVIDIA Quadro K4200 graphics card.
 %Tests were performed on a computer equipped with an Intel Core i5-2410M CPU, 8GB of RAM and a NVIDIA GeForce GT 540M graphics card.
 
 In the results, we display the transfer functions and volume rendered images before and after transfer function optimization, as well as the evolution of visibility-weighted saliency and opacity values of features during the iterations.
 The feature visibility histograms \cite{wang_efficient_2011} are displayed along with the visibility-weighted saliency histograms for comparison.
-0.05 is used as the step size and the objective function $ F $ falling below 0.01 is regarded as convergence.
+0.05 is used as the step size and the objective function $ F $ falling below 0.03 is regarded as convergence.
 The two optimization methods shown in the results are gradient descent with fixed step size and gradient descent with parallel line search, both using the Method 1 discussed in Section~\ref{estimating_descent_directions} for estimating descent directions.
 
 Figure~\ref{fig:nucleon_naive_optimized} shows the optimization results of Figure~\ref{fig:nucleon_naive}. In Figure~\ref{fig:nucleon_naive_optimized} (a), the three features from outside to inside appear in different transparency levels, from weak to strong. This reveals a clear perspective of the three structures.
@@ -330,6 +330,8 @@ In the optimized results of these 4 data sets, the visibility-weighted saliency 
 Figure~\ref{fig:CT-Knee_naive_vortex_naive_rms_linesearch} displays the evolution of the objective function in the optimization of the CT-Knee data set and the vortex data set.
 We noticed the two line search methods require much fewer steps to converge than the fixed step-size method and they made the same choices of adaptive step sizes during the iterations (the two curves completely overlapped).
 Although the two line search methods use the same numbers of steps, our parallel line search method only took about half the time of the sequential line search method (Table~\ref{table:performance_table}).
+
+(See Appendix~\ref{Generality_of_TF} for details of applying the transfer function optimization approach to other transfer functions and other color schemes.)
 
 \subsubsection{Transfer Function Optimization For Time-Varying Data Sets}
 Similar to the approach discussed in Section~\ref{adaptive_transfer_functions_for_time-varying_data_sets}, we apply our transfer function optimization on all the time steps of the vortex data set. Our optimizer dynamically optimizes the transfer function to the same user-specified target (equal weights i.e. (1/3, 1/3, 1/3) were set as target in this test) for each time step of the time-varying data set. 
@@ -569,43 +571,71 @@ Time step 30 and 80 rendered with the static transfer function and the dynamic t
 		\includegraphics[width=1\linewidth]{images/vortex_naive_rms_fixed_linesearch_parallel}
 		\subcaption{}
 	\end{minipage}
-	\caption[The line search and parallel line search are applied to transfer function optimization on the CT-Knee data set and the first time step of the vortex data set respectively.]{The line search and parallel line search are applied to transfer function optimization on the CT-Knee data set (a) and the first time step of the vortex data set (b) respectively. The two methods both converge ($F<0.01$) at step 4 for the nucleon data set and both converge at step 5 for the tooth data set. The two line search methods made very similar choices in step sizes.}
+	\caption[The line search and parallel line search are applied to transfer function optimization on the CT-Knee data set and the first time step of the vortex data set respectively.]{The line search and parallel line search are applied to transfer function optimization on the CT-Knee data set (a) and the first time step of the vortex data set (b) respectively. The two methods both converge ($F<0.03$) at step 4 for the nucleon data set and both converge at step 5 for the tooth data set. The two line search methods made very similar choices in step sizes.}
 	\label{fig:CT-Knee_naive_vortex_naive_rms_linesearch}
 \end{figure}
+
+%\begin{table}[h]
+%	\begin{tabular}{ c | l | l c r }
+%		& & Fixed step size & Line search & Parallel line search \\
+%		\hline
+%		nucleon & Steps to converge & 37 & 4 & 4 \\
+%		& Time (seconds) & 1.91 & 0.83 & 0.55 \\
+%		\hline
+%		tooth & Steps to converge & 47 & 4 & 4 \\
+%		& Time (seconds) & 18.05 & 6.59 & 3.31 \\
+%		\hline
+%		CT-Knee & Steps to converge & 47 & 6 & 6 \\
+%		& Time (seconds) & 120.38 & 59.01 & 33.41 \\
+%		\hline
+%		vortex & Steps to converge & 56 & 21 & 21 \\
+%		& Time (seconds) & 24.95 & 25.42 & 14.92 \\
+%	\end{tabular}
+%	\caption[Performance of the 3 optimization approaches on the 4 volume data sets]{Performance of the 3 optimization approaches on the 4 volume data sets. ($ F<0.01 $ is regarded as convergence.)}
+%	\label{table:performance_table}
+%\end{table}
 
 \begin{table}[h]
 \begin{tabular}{ c | l | l c r }
 & & Fixed step size & Line search & Parallel line search \\
 \hline
-nucleon & Steps to converge & 37 & 4 & 4 \\
-& Time (seconds) & 1.91 & 0.83 & 0.55 \\
+nucleon & Steps to converge & 17 & 2 & 2 \\
+& Time (seconds) & 1.07 & 0.59 & 0.38 \\
 \hline
-tooth & Steps to converge & 47 & 4 & 4 \\
-& Time (seconds) & 18.05 & 6.59 & 3.31 \\
+tooth & Steps to converge & 21 & 2 & 2 \\
+& Time (seconds) & 7.56 & 3.25 & 1.57 \\
 \hline
-CT-Knee & Steps to converge & 47 & 6 & 6 \\
-& Time (seconds) & 120.38 & 59.01 & 33.41 \\
+CT-Knee & Steps to converge & 17 & 2 & 2 \\
+& Time (seconds) & 33.84 & 17.81 & 9.26 \\
 \hline
-vortex & Steps to converge & 56 & 21 & 21 \\
-& Time (seconds) & 24.95 & 25.42 & 14.92 \\
+vortex & Steps to converge & 33 & 13 & 13 \\
+& Time (seconds) & 14.00 & 15.22 & 8.40 \\
 \end{tabular}
-\caption[Performance of the 3 optimization approaches on the 4 volume data sets]{Performance of the 3 optimization approaches on the 4 volume data sets. ($ F<0.01 $ is regarded as convergence.)}
+\caption[Performance of the 3 optimization approaches]{Performance of the 3 optimization approaches showing steps and time (seconds) taken to converge ($ F<0.03 $ is regarded as convergence.)}
 \label{table:performance_table}
 \end{table}
 
-%\begin{figure}
-%	\centering
-%	\begin{minipage}{.49\textwidth}
-%		\includegraphics[width=1\linewidth]{images/vorts_VWS}
-%		\subcaption{}
-%	\end{minipage}~
-%	\begin{minipage}{.49\textwidth}
-%		\includegraphics[width=1\linewidth]{images/vorts_2DFS}
-%		\subcaption{}
-%	\end{minipage}
-%	\caption{(a) VWS and (b) 2DFS of the vortex data set with a naive transfer function}
-%	\label{fig:vorts_naive}
-%\end{figure}
+\begin{figure}
+	\centering
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{nucleon_performance}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{tooth_performance}
+		\subcaption{}
+	\end{minipage}
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{CT-Knee_performance}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.49\textwidth}
+		\includegraphics[width=1\linewidth]{vortex_performance}
+		\subcaption{}
+	\end{minipage}
+	\caption{(a) VWS and (b) 2DFS of the vortex data set with a naive transfer function}
+	\label{fig:parallelsearch_performance}
+\end{figure}
 
 \begin{figure}
 	\centering
