@@ -331,7 +331,51 @@ Figure~\ref{fig:CT-Knee_naive_vortex_naive_rms_linesearch} displays the evolutio
 We noticed the two line search methods require much fewer steps to converge than the fixed step-size method and they made the same choices of adaptive step sizes during the iterations (the two curves completely overlapped).
 Although the two line search methods use the same numbers of steps, our parallel line search method only took about half the time of the sequential line search method (Table~\ref{table:performance_table}).
 
-(See Appendix~\ref{Generality_of_TF} for details of applying the transfer function optimization approach to other transfer functions and other color schemes.)
+Figure~\ref{fig:parallelsearch_performance} shows the convergence time of the parallel line search approach on the 4 data sets over 1, 2, 4 and 8 CPU threads respectively.
+We observed that the computation time decreased as the number of threads increased. However, the speedup from 4 threads to 8 threads is minor, which may due to the fact that the CPU of the experiment computer only has 4 cores.
+
+For the sake of clarity of presentation and convenience of the user study, the results in this section are includes cases of transfer functions with three features and three distinctive feature colors. See Appendix~\ref{Generality_of_TF} for details of applying the transfer function optimization approach to other transfer functions and other color schemes.
+
+%\begin{table}[h]
+%	\begin{tabular}{ c | l | l c r }
+%		& & Fixed step size & Line search & Parallel line search \\
+%		\hline
+%		nucleon & Steps to converge & 37 & 4 & 4 \\
+%		& Time (seconds) & 1.91 & 0.83 & 0.55 \\
+%		\hline
+%		tooth & Steps to converge & 47 & 4 & 4 \\
+%		& Time (seconds) & 18.05 & 6.59 & 3.31 \\
+%		\hline
+%		CT-Knee & Steps to converge & 47 & 6 & 6 \\
+%		& Time (seconds) & 120.38 & 59.01 & 33.41 \\
+%		\hline
+%		vortex & Steps to converge & 56 & 21 & 21 \\
+%		& Time (seconds) & 24.95 & 25.42 & 14.92 \\
+%	\end{tabular}
+%	\caption[Performance of the 3 optimization approaches on the 4 volume data sets]{Performance of the 3 optimization approaches on the 4 volume data sets. ($ F<0.01 $ is regarded as convergence.)}
+%	\label{table:performance_table}
+%\end{table}
+
+\begin{table}[h]
+	\begin{tabular}{ c | l | l c r }
+		& & Fixed step size & Line search & Parallel line search \\
+		\hline
+		nucleon & Steps to converge & 17 & 2 & 2 \\
+		& Time (seconds) & 1.07 & 0.59 & 0.38 \\
+		\hline
+		tooth & Steps to converge & 21 & 2 & 2 \\
+		& Time (seconds) & 7.56 & 3.25 & 1.57 \\
+		\hline
+		CT-Knee & Steps to converge & 17 & 2 & 2 \\
+		& Time (seconds) & 33.84 & 17.81 & 9.26 \\
+		\hline
+		vortex & Steps to converge & 33 & 13 & 13 \\
+		& Time (seconds) & 14.00 & 15.22 & 8.40 \\
+	\end{tabular}
+	\caption[Performance of the 3 optimization approaches]{Performance of the 3 optimization approaches showing steps and time (seconds) taken to converge ($ F<0.03 $ is regarded as convergence.)}
+	\label{table:performance_table}
+\end{table}
+
 
 \subsubsection{Transfer Function Optimization For Time-Varying Data Sets}
 Similar to the approach discussed in Section~\ref{adaptive_transfer_functions_for_time-varying_data_sets}, we apply our transfer function optimization on all the time steps of the vortex data set. Our optimizer dynamically optimizes the transfer function to the same user-specified target (equal weights i.e. (1/3, 1/3, 1/3) were set as target in this test) for each time step of the time-varying data set. 
@@ -575,65 +619,25 @@ Time step 30 and 80 rendered with the static transfer function and the dynamic t
 	\label{fig:CT-Knee_naive_vortex_naive_rms_linesearch}
 \end{figure}
 
-%\begin{table}[h]
-%	\begin{tabular}{ c | l | l c r }
-%		& & Fixed step size & Line search & Parallel line search \\
-%		\hline
-%		nucleon & Steps to converge & 37 & 4 & 4 \\
-%		& Time (seconds) & 1.91 & 0.83 & 0.55 \\
-%		\hline
-%		tooth & Steps to converge & 47 & 4 & 4 \\
-%		& Time (seconds) & 18.05 & 6.59 & 3.31 \\
-%		\hline
-%		CT-Knee & Steps to converge & 47 & 6 & 6 \\
-%		& Time (seconds) & 120.38 & 59.01 & 33.41 \\
-%		\hline
-%		vortex & Steps to converge & 56 & 21 & 21 \\
-%		& Time (seconds) & 24.95 & 25.42 & 14.92 \\
-%	\end{tabular}
-%	\caption[Performance of the 3 optimization approaches on the 4 volume data sets]{Performance of the 3 optimization approaches on the 4 volume data sets. ($ F<0.01 $ is regarded as convergence.)}
-%	\label{table:performance_table}
-%\end{table}
-
-\begin{table}[h]
-\begin{tabular}{ c | l | l c r }
-& & Fixed step size & Line search & Parallel line search \\
-\hline
-nucleon & Steps to converge & 17 & 2 & 2 \\
-& Time (seconds) & 1.07 & 0.59 & 0.38 \\
-\hline
-tooth & Steps to converge & 21 & 2 & 2 \\
-& Time (seconds) & 7.56 & 3.25 & 1.57 \\
-\hline
-CT-Knee & Steps to converge & 17 & 2 & 2 \\
-& Time (seconds) & 33.84 & 17.81 & 9.26 \\
-\hline
-vortex & Steps to converge & 33 & 13 & 13 \\
-& Time (seconds) & 14.00 & 15.22 & 8.40 \\
-\end{tabular}
-\caption[Performance of the 3 optimization approaches]{Performance of the 3 optimization approaches showing steps and time (seconds) taken to converge ($ F<0.03 $ is regarded as convergence.)}
-\label{table:performance_table}
-\end{table}
-
 \begin{figure}
 	\centering
 	\begin{minipage}{.49\textwidth}
 		\includegraphics[width=1\linewidth]{nucleon_performance}
-		\subcaption{}
+		\subcaption{nucleon}
 	\end{minipage}~
 	\begin{minipage}{.49\textwidth}
 		\includegraphics[width=1\linewidth]{tooth_performance}
-		\subcaption{}
+		\subcaption{tooth}
 	\end{minipage}
 	\begin{minipage}{.49\textwidth}
 		\includegraphics[width=1\linewidth]{CT-Knee_performance}
-		\subcaption{}
+		\subcaption{CT-Knee}
 	\end{minipage}~
 	\begin{minipage}{.49\textwidth}
 		\includegraphics[width=1\linewidth]{vortex_performance}
-		\subcaption{}
+		\subcaption{vortex}
 	\end{minipage}
-	\caption{(a) VWS and (b) 2DFS of the vortex data set with a naive transfer function}
+	\caption[Performance of parallel line search]{Performance of parallel line search (seconds taken to converge) over different number of CPU threads}
 	\label{fig:parallelsearch_performance}
 \end{figure}
 
