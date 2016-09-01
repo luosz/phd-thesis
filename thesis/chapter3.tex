@@ -200,7 +200,7 @@ In order to design transfer functions effectively, it is commonly required that 
 Another consideration is that interior structures are likely to comprise far fewer voxels and are often occluded by the surrounding material.
 Consider the transfer function in Figure~\ref{fig:drawing_distribution}. The user finds three intensity intervals of interest and then sets up three sets of control points in order to visualize these intensity intervals. The opacity of the three peak control points are assigned equally as they are equally important.
 However, if the distribution of voxels follows $ p(x) $ (the blue curve), the voxels of the leftmost intensity intervals may completely occlude voxels of the other two intensity intervals in the resulting image.
-The global optimization in our approach aims at reducing this kind of occlusion by modulating the opacity of the transfer function based on the distribution of scalar values of the volume data set.
+The global optimization in our approach aims at reducing this kind of occlusion by modulating the opacity of the transfer function based on the entropy of volume data, which is described in the next subsection.
 %Figure~\ref{fig:multiple_nucleon} illustrates a transfer function which is more appropriate in this situation.
 Although many shapes can be used in transfer function design, tent-like shapes are often sufficient to model the user's intent \cite{konig_mastering_2000}. In this chapter, results of both transfer functions of tent-like shapes and continuous transfer functions are used as input of the optimization.
 

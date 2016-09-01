@@ -98,13 +98,16 @@ The hurricane model is Hurricane Isabel, which was a very strong hurricane in th
 The resolution of the data set is 500 (longitude) $ \times $ 500 (latitude) $ \times $ 100 (height) $ \times $ 48 (time). One time-step is one hour in the simulation.
 The variables we used in the tests are cloud moisture mixing ratio (kg water/kg dry air) and total precipitation mixing ratio (sum of mixing ratios of graupel, rain and snow). The ground in the hurricane data set, which is a height field of the surface topography, is rendered with relief mapping and presented as background in the visualization results.
 
-In Figure~\ref{fig:hurricane_gray}, the cloud, volatility of cloud and precipitation at frame 40 are displayed in grayscale for comparison.
+The cloud, precipitation and volatility of cloud of frame 40 are displayed in Figure~\ref{fig:hurricane_gray} and Figure~\ref{fig:hurricane_std} for reference.
+Figure~\ref{fig:hurricane_gray} shows the cloud and precipitation, and Figure~\ref{fig:hurricane_std} shows the volatility of cloud over 5 frames, 10 frames and 20 frames respectively.
 Figure~\ref{fig:hurricane_hsba} shows images of 3 frames of the hurricane rendered with cloud, volatility of cloud and precipitation. Cloud is used as variable X and precipitation as variable Y. The temporal standard deviation is calculated using the recent 10 frames.
 Figure~\ref{fig:hurricane_40_cyan} (a) displays a 3D perspective view of the visualization in Figure~\ref{fig:hurricane_hsba} (b).
 The strong red color near the hurricane eye indicates where the hurricane was in previous several frames and the clouds with more precipitation are darker in the images.
 %Figure~\ref{fig:hurricane_40_cyan} displays a more realistic rendering of the same frame in Figure~\ref{fig:hurricane_40_defaultangle}, with a cyan hue and used precipitation to adjust both saturation and brightness.
 
-Figure~\ref{fig:hurricane_40_cyan} (b) displays a visualization of the frame 40 of the hurricane in a cyan hue with both saturation and brightness representing the precipitation. Figure~\ref{fig:hurricane_40_cyan} (c) provides a 3D perspective view of the visualization in Figure~\ref{fig:hurricane_40_cyan} (b). Note how parts of the hurricane are desaturated and darkened based on the precipitation.
+Figure~\ref{fig:hurricane_40_cyan} (b) displays a 3D perspective view of the frame 40 of the hurricane in a cyan hue with both saturation and brightness representing the precipitation. Note how parts of the hurricane are desaturated and darkened based on the precipitation.
+
+In addition, Figure~\ref{fig:hurricane_precip} displays an alternative visualization, where the variables X and Y are swapped, i.e. precipitation is used as variable X and cloud as variable Y. Note the precipitation is desaturated based on its volatility over 10 frames and darkened based on the cloud.
 
 \begin{figure}
 \centering
@@ -114,12 +117,12 @@ Figure~\ref{fig:hurricane_40_cyan} (b) displays a visualization of the frame 40 
 %\caption{Cloud at frame 40}
 %\label{fig:hurricane_cloud_gray}
 \end{minipage}~
-\begin{minipage}{.33\textwidth}
-\includegraphics[width=1\linewidth]{images/hurricane_std_gray_40}
-\subcaption{}
-%\caption{Volatility of cloud at frame 40}
-%\label{fig:hurricane_std_gray}
-\end{minipage}~
+%\begin{minipage}{.33\textwidth}
+%\includegraphics[width=1\linewidth]{images/hurricane_std_gray_40}
+%\subcaption{}
+%%\caption{Volatility of cloud at frame 40}
+%%\label{fig:hurricane_std_gray}
+%\end{minipage}~
 \begin{minipage}{.33\textwidth}
 \includegraphics[width=1\linewidth]{images/hurricane_precip_gray_40}
 \subcaption{}
@@ -128,6 +131,24 @@ Figure~\ref{fig:hurricane_40_cyan} (b) displays a visualization of the frame 40 
 \end{minipage}
 \caption{Cloud (a), volatility of cloud (b) and precipitation (c) at frame 40}
 \label{fig:hurricane_gray}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{minipage}{.33\textwidth}
+	\includegraphics[width=1\linewidth]{figures/hurricane_std5_gray_40}
+	\subcaption{}
+\end{minipage}~
+\begin{minipage}{.33\textwidth}
+	\includegraphics[width=1\linewidth]{figures/hurricane_std10_gray_40}
+	\subcaption{}
+\end{minipage}~
+\begin{minipage}{.33\textwidth}
+	\includegraphics[width=1\linewidth]{figures/hurricane_std20_gray_40}
+	\subcaption{}
+\end{minipage}
+\caption{Volatility of cloud over 5 frames (a), 10 frames (b) and 20 frames (c)}
+\label{fig:hurricane_std}
 \end{figure}
 
 \begin{figure}
@@ -148,30 +169,48 @@ Figure~\ref{fig:hurricane_40_cyan} (b) displays a visualization of the frame 40 
 \label{fig:hurricane_hsba}
 \end{figure}
 
+\begin{figure}
+\centering
+\begin{minipage}{.49\textwidth}
+	\includegraphics[width=1\linewidth]{images/hsba_0_10std_1-10precip_cloud_40_defaultangle}
+	\subcaption{}
+\end{minipage}~
+%\begin{minipage}{.32\textwidth}
+%\includegraphics[width=1\linewidth]{images/hsba_cyan_10precip_1-10precip_cloud_40}
+%\subcaption{}
+%\end{minipage}~
+\begin{minipage}{.49\textwidth}
+	\includegraphics[width=1\linewidth]{images/hsba_cyan_10precip_1-10precip_cloud_40_defaultangle}
+	\subcaption{}
+\end{minipage}
+\caption[The hurricane at frame 40]{(a) A 3D perspective view of Figure~\ref{fig:hurricane_hsba} (b); (b) A 3D perspective view of the hurricane at frame 40 rendered with both saturation and brightness representing the precipitation, the hue is cyan, a=10 and b=10}
+\label{fig:hurricane_40_cyan}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{minipage}{.33\textwidth}
+	\includegraphics[width=1\linewidth]{figures/hurricane_hsba_0_10stdprecip_1-4cloud_precip_35}
+	\subcaption{}
+\end{minipage}~
+\begin{minipage}{.33\textwidth}
+	\includegraphics[width=1\linewidth]{figures/hurricane_hsba_0_10stdprecip_1-4cloud_precip_40}
+	\subcaption{}
+\end{minipage}~
+\begin{minipage}{.33\textwidth}
+	\includegraphics[width=1\linewidth]{figures/hurricane_hsba_0_10stdprecip_1-4cloud_precip_45}
+	\subcaption{}
+\end{minipage}
+\caption{The hurricane at frame 35, 40 and 45}
+\label{fig:hurricane_precip}
+\end{figure}
+
 We also tested our method on a time-varying smoke simulation based on an implementation of the approach by Fedkiw et al. \cite{fedkiw_visual_2001}. Figure~\ref{fig:smoke_gray} shows the smoke density, volatility of smoke density and gradient magnitude of smoke density rendered in grayscale for comparison.
 The gradient magnitude is the Euclidean norm of the gradient at a voxel position,
 % approximated using discrete derivatives of Gaussians in each dimension.
 and the temporal standard deviation is calculated using the recent 10 frames.
 In Figure~\ref{fig:smoke_hsba}, the smoke density was used as variable X and gradient magnitude as variable Y and the parameters were $a=10$ and $b=5$.
 The hue was mapped to the smoke density in Figure~\ref{fig:smoke_hsba} (a) and a constant red hue was used in Figure~\ref{fig:smoke_hsba} (b).
-
-\begin{figure}
-\centering
-\begin{minipage}{.34\textwidth}
-\includegraphics[width=1\linewidth]{images/hsba_0_10std_1-10precip_cloud_40_defaultangle}
-\subcaption{}
-\end{minipage}~
-\begin{minipage}{.32\textwidth}
-\includegraphics[width=1\linewidth]{images/hsba_cyan_10precip_1-10precip_cloud_40}
-\subcaption{}
-\end{minipage}~
-\begin{minipage}{.34\textwidth}
-\includegraphics[width=1\linewidth]{images/hsba_cyan_10precip_1-10precip_cloud_40_defaultangle}
-\subcaption{}
-\end{minipage}
-\caption[The hurricane at frame 40 rendered with both saturation and brightness representing the precipitation]{(a) A 3D perspective view of Figure~\ref{fig:hurricane_hsba} (b); (b) The hurricane at frame 40 rendered with both saturation and brightness representing the precipitation, the hue is cyan, a=10 and b=10; (c) A 3D perspective view of (b)}
-\label{fig:hurricane_40_cyan}
-\end{figure}
 
 \begin{figure}
 \centering
