@@ -310,6 +310,7 @@ Results were obtained in our experimental programs written in Wolfram Mathematic
 
 In the results, we display the transfer functions and volume rendered images before and after transfer function optimization, as well as the evolution of visibility-weighted saliency and opacity values of features during the iterations.
 The feature visibility histograms \cite{wang_efficient_2011} are displayed along with the visibility-weighted saliency histograms for comparison.
+
 0.05 is used as the step size and the objective function $ F $ falling below 0.03 is regarded as convergence.
 The two optimization methods shown in the results are gradient descent with fixed step size and gradient descent with parallel line search, both using the Method 1 discussed in Section~\ref{estimating_descent_directions} for estimating descent directions.
 
@@ -618,7 +619,7 @@ Time step 30 and 80 rendered with the static transfer function and the dynamic t
 		\includegraphics[width=1\linewidth]{images/vortex_naive_rms_fixed_linesearch_parallel}
 		\subcaption{}
 	\end{minipage}
-	\caption[The line search and parallel line search are applied to transfer function optimization on the CT-Knee data set and the first time step of the vortex data set respectively.]{The line search and parallel line search are applied to transfer function optimization on the CT-Knee data set (a) and the first time step of the vortex data set (b) respectively. The two methods both converge ($F<0.03$) at step 4 for the nucleon data set and both converge at step 5 for the tooth data set. The two line search methods made very similar choices in step sizes.}
+	\caption[The line search and parallel line search are applied to transfer function optimization on the CT-Knee data set and the first time step of the vortex data set respectively.]{The line search and parallel line search are applied to transfer function optimization on the CT-Knee data set (a) and the first time step of the vortex data set (b) respectively. Note the two methods made very similar choices in step sizes.}
 	\label{fig:CT-Knee_naive_vortex_naive_rms_linesearch}
 \end{figure}
 
