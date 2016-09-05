@@ -246,15 +246,15 @@ Finally, we describe a multivariate visualization approach which modulates focus
 
 \chapter*{Glossary}
 
-\begin{itemize}
+\begin{description}
 	
-\item Entropy 
-	
+\item Entropy
+
 Entropy (or Shannon entropy) is a basic concept in information theory to measure the uncertainty of a random variable.
 	
 \item Feature
 
-A feature in a volume is a subset of voxels in the volume. In this thesis, features are often specified by intensity ranges in transfer functions.
+A feature in a volume is a subset of voxels in the volume. In this thesis, features are specified by intensity ranges in transfer functions.
 
 \item Multivariate volume data
 
@@ -266,7 +266,7 @@ Saliency (or visual saliency) is the distinct subjective perceptual quality whic
 
 \item Saliency field
 
-A saliency field is a field of the saliency of all the voxels in the volume.
+A saliency field for a volume data set represents the salience (see above) of each voxel in the volume dataset. This field itself could be represented in the form of a volume data set.
 	
 \item Saliency model
 
@@ -278,7 +278,7 @@ Saturation is a concept in color theory, which refers to the perceived intensity
 
 \item Time-variant volume data
 
-Time-variant volume data are volume data with series of time-steps (frames) that represent their temporal behaviors.
+Time-variant volume is a form of data that typically consists of a series of time-steps (frames) of volume data representing how a system of model changes over time.
 
 \item Transfer function
 
@@ -290,7 +290,7 @@ The visibility of a voxel is the contribution of a voxel to the rendered image, 
 
 \item Visibility field
 
-A visibility field is a field of the visibility of all the voxels in the volume.
+A visibility field for a volume data set represents the visibility of each voxel in the volume dataset. This field itself could be represented in the form of a volume data set.
 
 \item Visibility histogram
 
@@ -298,13 +298,13 @@ Visibility histograms summarize the distribution of visibility of voxels from a 
 
 \item Volume data
 
-Volume data are discretely sampled along 3D grids and contain scalar values that are usually acquired from medical imaging devices such as CT or MRI machines or computed from scientific simulations such as fluid simulation.
+Volume data are discretely sampled along 3D grids and contain scalar values that are usually acquired from medical imaging devices such as CT or MRI machines or computed from scientific simulations such as fluid simulations.
 
 \item Voxel
 
 Elements in volume data sets are called voxels, which are analogues to pixels in 2D images.
 
-\end{itemize}
+\end{description}
 
 %\newpage
 \cleardoublepage

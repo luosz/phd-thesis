@@ -99,39 +99,39 @@ In order to demonstrate the distribution of the objective function in the parame
 
 \begin{figure}
 \centering
-\begin{minipage}{.3\textwidth}
-	\includegraphics[width=1\linewidth]{images/nucleon_naive}
+\begin{minipage}{.24\textwidth}
+	\includegraphics[width=1\linewidth]{figures/nucleon_naive_proportional}
 	\subcaption{}
 \end{minipage}~
 \begin{minipage}{.15\textwidth}
-	\includegraphics[width=1\linewidth]{images/tf_nucleon_naive}
+	\includegraphics[width=1\linewidth]{figures/tf_nucleon_naive_proportional}
 	\subcaption{}
 \end{minipage}~
-\begin{minipage}{.25\textwidth}
-	\includegraphics[width=1\linewidth]{figures/nucleon_naive_visibility_chart}
+\begin{minipage}{.29\textwidth}
+	\includegraphics[width=1\linewidth]{figures/nucleon_naive_proportional_visibility_chart}
 	\subcaption{}
 \end{minipage}~
-\begin{minipage}{.25\textwidth}
-	\includegraphics[width=1\linewidth]{figures/nucleon_naive_visibility_saliency_weighted_chart}
+\begin{minipage}{.29\textwidth}
+	\includegraphics[width=1\linewidth]{figures/nucleon_naive_proportional_visibility_saliency_weighted_chart}
 	\subcaption{}
 \end{minipage}
-\caption[A nucleon data set with a naive transfer function]{(a) A nucleon data set \cite{website:Voreen_datasets_2013}; (b) A naive transfer function with equal opacitity values for each feature; (c) The feature visibility histogram \cite{wang_efficient_2011}; (d) The visibility-weighted saliency histogram}
+\caption[A nucleon data set]{(a) A nucleon data set \cite{website:Voreen_datasets_2013}; (b) A user-specified transfer function with 3 features (c) The feature visibility histogram \cite{wang_efficient_2011}; (d) The visibility-weighted saliency histogram}
 \label{fig:nucleon_naive}
 \end{figure}
 
 \begin{figure}
 	\centering
 	\begin{minipage}{.3\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_densityplot1}
-		\subcaption{}
+		\includegraphics[width=1\linewidth]{figures/nucleon_strong_red_densityplot1}
+		\subcaption{VWS of feature 1}
 	\end{minipage}~
 	\begin{minipage}{.3\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_densityplot2}
-		\subcaption{}
+		\includegraphics[width=1\linewidth]{figures/nucleon_strong_red_densityplot2}
+		\subcaption{VWS of feature 2}
 	\end{minipage}
 	\begin{minipage}{.3\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_densityplot3}
-		\subcaption{}
+		\includegraphics[width=1\linewidth]{figures/nucleon_strong_red_densityplot3}
+		\subcaption{VWS of feature 3}
 	\end{minipage}
 	\caption[Visibility-weighted saliency of the 3 features are mapped to brightness and opacity respectively.]{Visibility-weighted saliency of the 3 features are mapped to brightness and opacity of the 3D fields in (a), (b) and (c) respectively. The visibility-weighted saliency of Feature 2 (red) is affected by both the opacity of Feature 1 (purple) and Feature 2. The visibility-weighted saliency of Feature 3 (green) is affected by the opacity of Feature 1, Feature 2 and Feature 3.}
 	\label{fig:nucleon_densityplot}
@@ -203,29 +203,32 @@ All the above described methods worked with small step sizes. As the step size i
 Gradient descent was performed on several volume data sets with various transfer functions, using the two normalized descent directions computed from $ [ \frac{\partial F}{\partial W_{1}} b_{1} ... \frac{\partial F}{\partial W_{n}} b_{n} ] $ (Method 1)
  and 
 $ [ \frac{ \nabla_{d}[F](x_{1}) }{ \nabla_{d}[F'](x_{1}) }  ... \frac{ \nabla_{d}[F](x_{n}) }{ \nabla_{d}[F'](x_{n}) } ] $ (Method 2).
-In these preliminary results (Figure~\ref{fig:nucleon_naive_tooth_naive_rms}), the convergence speeds of the two methods were similar, with Method 2 slightly faster in some cases.
+In the preliminary results, the convergence speeds of the two methods were very similar. %, with Method 2 slightly faster in some cases.
+Figure~\ref{fig:nucleon_naive_tooth_naive_rms} shows that the steps made by the two methods overlap most of the time.
 
 \begin{figure}
 	\centering
 	\begin{minipage}{.49\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_naive_rms_fixed_newton}
+		\includegraphics[width=1\linewidth]{figures/nucleon_naive_proportional_rms_fixed_newton}
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.49\textwidth}
-		\includegraphics[width=1\linewidth]{images/tooth_naive_rms_fixed_newton}
+		\includegraphics[width=1\linewidth]{figures/tooth_naive_proportional_rms_fixed_newton}
 		\subcaption{}	
 	\end{minipage}
-	\begin{minipage}{.49\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_naive_table_fixed}
-		\subcaption{}	
-	\end{minipage}~
-	\begin{minipage}{.49\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_naive_table_newton}
-		\subcaption{}	
-	\end{minipage}
-	\caption[The two methods for estimating descent directions are applied to transfer function optimization on the nucleon data set and a tooth data set]{The two methods for estimating descent directions are applied to transfer function optimization on the nucleon data set (a) and a tooth data set (b).
-		Method 1 converges ($F<0.03$) at step 10 (as in the iteration log (c)) and method 2 converges at step 9 (as in the iteration log (d)) on the nucleon data set with a naive transfer function (assigning equal opacity to each feature).
-		The two methods both converge at step 47 on the tooth data set with a native transfer function.}
+%	\begin{minipage}{.49\textwidth}
+%		\includegraphics[width=1\linewidth]{images/nucleon_naive_table_fixed}
+%		\subcaption{}	
+%	\end{minipage}~
+%	\begin{minipage}{.49\textwidth}
+%		\includegraphics[width=1\linewidth]{images/nucleon_naive_table_newton}
+%		\subcaption{}	
+%	\end{minipage}
+	\caption[The two methods for estimating descent directions]
+	{The two methods for estimating descent directions are applied to transfer function optimization on the nucleon data set (a) and a tooth data set (b) respectively. Note that the steps of the two methods overlap most of the time.
+%		with a naive transfer function (assigning equal opacity to each feature).
+%		Method 1 converges ($F<0.03$) at step 10 (as in the iteration log (c)) and method 2 converges at step 9 (as in the iteration log (d)) on the nucleon data set with a naive transfer function (assigning equal opacity to each feature).
+		}
 	\label{fig:nucleon_naive_tooth_naive_rms}
 \end{figure}
 
@@ -287,14 +290,14 @@ Figure~\ref{fig:nucleon_naive_tooth_naive_rms_linesearch} displays results of ap
 \begin{figure}
 	\centering
 	\begin{minipage}{.49\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_naive_rms_fixed_linesearch_parallel}
+		\includegraphics[width=1\linewidth]{figures/nucleon_naive_proportional_rms_fixed_linesearch_parallel}
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.49\textwidth}
-		\includegraphics[width=1\linewidth]{images/tooth_naive_rms_fixed_linesearch_parallel}
+		\includegraphics[width=1\linewidth]{figures/tooth_naive_proportional_rms_fixed_linesearch_parallel}
 		\subcaption{}
 	\end{minipage}
-	\caption[The line search and parallel line search are applied to transfer function optimization on the nuclon data set and the tooth data set respectively.]{The line search and parallel line search are applied to transfer function optimization on the nuclon data set (a) and the tooth data set (b) respectively. The two methods both converge ($F<0.03$) at step 4 for the nucleon data set and both converge at step 5 for the tooth data set. The two line search methods made very similar choices in step sizes.}
+	\caption[The line search and parallel line search]{The line search and parallel line search are applied to transfer function optimization on the nucleon data set (a) and the tooth data set (b) respectively. Note the two curves of line search and parallel line search overlap most of the time, as they made almost the same choices in step sizes.}
 	\label{fig:nucleon_naive_tooth_naive_rms_linesearch}
 \end{figure}
 
@@ -420,38 +423,38 @@ Time step 30 and 80 rendered with the static transfer function and the dynamic t
 
 \begin{figure}
 	\centering
-	\begin{minipage}{.3\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_naive_optimized_linesearch}
+	\begin{minipage}{.24\textwidth}
+		\includegraphics[width=1\linewidth]{figures/nucleon_naive_proportional_optimized_linesearch}
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.15\textwidth}
-		\includegraphics[width=1\linewidth]{images/tf_nucleon_naive_optimized_linesearch}
+		\includegraphics[width=1\linewidth]{figures/tf_nucleon_naive_proportional_optimized_linesearch}
 		\subcaption{}
 	\end{minipage}~
-	\begin{minipage}{.25\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_naive_optimized_linesearch_visibility_chart}
+	\begin{minipage}{.3\textwidth}
+		\includegraphics[width=1\linewidth]{figures/nucleon_naive_proportional_optimized_linesearch_visibility_chart}
 		\subcaption{}
 	\end{minipage}~
-	\begin{minipage}{.25\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_naive_optimized_linesearch_visibility_saliency_weighted_chart}
+	\begin{minipage}{.3\textwidth}
+		\includegraphics[width=1\linewidth]{figures/nucleon_naive_proportional_optimized_linesearch_visibility_saliency_weighted_chart}
 		\subcaption{}
 	\end{minipage}
 	
 	\begin{minipage}{.49\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_naive_saliency_fixed}
+		\includegraphics[width=1\linewidth]{figures/nucleon_naive_proportional_saliency_fixed}
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.49\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_naive_saliency_parallelsearch}
+		\includegraphics[width=1\linewidth]{figures/nucleon_naive_proportional_saliency_parallelsearch}
 		\subcaption{}
 	\end{minipage}
 	
 	\begin{minipage}{.49\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_naive_saliencyopacity_fixed}
+		\includegraphics[width=1\linewidth]{figures/nucleon_naive_proportional_saliencyopacity_fixed}
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.49\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_naive_saliencyopacity_parallelsearch}
+		\includegraphics[width=1\linewidth]{figures/nucleon_naive_proportional_saliencyopacity_parallelsearch}
 		\subcaption{}
 	\end{minipage}
 	\caption[After optimization to target \{0.1, 0.3, 0.6\}, all the 3 features are visible and the green feature inside is particularly emphasized.]{After optimization to target \{0.1, 0.3, 0.6\}, all the 3 features are visible and the green feature inside is particularly emphasized. (a) The optimized volume rendered image of the nucleon data set; (b) The optimized transfer function; (c) The feature visibility histogram \cite{wang_efficient_2011}; (d) The visibility-weighted saliency histogram); (e) \& (g) Gradient descent with fixed step sizes; (f) \& (h) Gradient descent with parallel line search}
@@ -469,20 +472,20 @@ Time step 30 and 80 rendered with the static transfer function and the dynamic t
 		\subcaption{}
 	\end{minipage}
 	
-	\begin{minipage}{.24\textwidth}
-		\includegraphics[width=1\linewidth]{images/tooth_naive_visibility_chart}
+	\begin{minipage}{.25\textwidth}
+		\includegraphics[width=1\linewidth]{figures/tooth_naive_visibility_chart}
 		\subcaption{}
 	\end{minipage}~
-	\begin{minipage}{.24\textwidth}
-		\includegraphics[width=1\linewidth]{images/tooth_naive_visibility_saliency_weighted_chart}
+	\begin{minipage}{.25\textwidth}
+		\includegraphics[width=1\linewidth]{figures/tooth_naive_visibility_saliency_weighted_chart}
 		\subcaption{}
 	\end{minipage}~
-	\begin{minipage}{.24\textwidth}
-		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch_visibility_chart}
+	\begin{minipage}{.25\textwidth}
+		\includegraphics[width=1\linewidth]{figures/tooth_naive_optimized_linesearch_visibility_chart}
 		\subcaption{}
 	\end{minipage}~
-	\begin{minipage}{.24\textwidth}
-		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch_visibility_saliency_weighted_chart}
+	\begin{minipage}{.25\textwidth}
+		\includegraphics[width=1\linewidth]{figures/tooth_naive_optimized_linesearch_visibility_saliency_weighted_chart}
 		\subcaption{}
 	\end{minipage}
 	
@@ -518,20 +521,20 @@ Time step 30 and 80 rendered with the static transfer function and the dynamic t
 		\subcaption{}
 	\end{minipage}
 	
-	\begin{minipage}{.24\textwidth}
-		\includegraphics[width=1\linewidth]{images/CT-Knee_naive_visibility_chart}
+	\begin{minipage}{.25\textwidth}
+		\includegraphics[width=1\linewidth]{figures/CT-Knee_naive_visibility_chart}
 		\subcaption{}
 	\end{minipage}~
-	\begin{minipage}{.24\textwidth}
-		\includegraphics[width=1\linewidth]{images/CT-Knee_naive_visibility_saliency_weighted_chart}
+	\begin{minipage}{.25\textwidth}
+		\includegraphics[width=1\linewidth]{figures/CT-Knee_naive_visibility_saliency_weighted_chart}
 		\subcaption{}
 	\end{minipage}~
-	\begin{minipage}{.24\textwidth}
-		\includegraphics[width=1\linewidth]{images/CT-Knee_naive_optimized_linesearch_visibility_chart}
+	\begin{minipage}{.25\textwidth}
+		\includegraphics[width=1\linewidth]{figures/CT-Knee_naive_optimized_linesearch_visibility_chart}
 		\subcaption{}
 	\end{minipage}~
-	\begin{minipage}{.24\textwidth}
-		\includegraphics[width=1\linewidth]{images/CT-Knee_naive_optimized_linesearch_visibility_saliency_weighted_chart}
+	\begin{minipage}{.25\textwidth}
+		\includegraphics[width=1\linewidth]{figures/CT-Knee_naive_optimized_linesearch_visibility_saliency_weighted_chart}
 		\subcaption{}
 	\end{minipage}	
 	
@@ -567,20 +570,20 @@ Time step 30 and 80 rendered with the static transfer function and the dynamic t
 		\subcaption{}
 	\end{minipage}
 
-	\begin{minipage}{.24\textwidth}
-		\includegraphics[width=1\linewidth]{images/vortex_naive_visibility_chart}
+	\begin{minipage}{.25\textwidth}
+		\includegraphics[width=1\linewidth]{figures/vortex_naive_visibility_chart}
 		\subcaption{}
 	\end{minipage}~
-	\begin{minipage}{.24\textwidth}
-		\includegraphics[width=1\linewidth]{images/vortex_naive_visibility_saliency_weighted_chart}
+	\begin{minipage}{.25\textwidth}
+		\includegraphics[width=1\linewidth]{figures/vortex_naive_visibility_saliency_weighted_chart}
 		\subcaption{}
 	\end{minipage}~
-	\begin{minipage}{.24\textwidth}
-		\includegraphics[width=1\linewidth]{images/vortex_naive_optimized_fixed_visibility_chart}
+	\begin{minipage}{.25\textwidth}
+		\includegraphics[width=1\linewidth]{figures/vortex_naive_optimized_fixed_visibility_chart}
 		\subcaption{}
 	\end{minipage}~
-	\begin{minipage}{.24\textwidth}
-		\includegraphics[width=1\linewidth]{images/vortex_naive_optimized_fixed_visibility_saliency_weighted_chart}
+	\begin{minipage}{.25\textwidth}
+		\includegraphics[width=1\linewidth]{figures/vortex_naive_optimized_fixed_visibility_saliency_weighted_chart}
 		\subcaption{}
 	\end{minipage}	
 	
