@@ -213,7 +213,7 @@ Figure~\ref{fig:nucleon_naive_tooth_naive_rms} shows that the steps made by the 
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.49\textwidth}
-		\includegraphics[width=1\linewidth]{figures/tooth_naive_proportional_rms_fixed_newton}
+		\includegraphics[width=1\linewidth]{figures/tooth_naive_rms_fixed_newton}
 		\subcaption{}	
 	\end{minipage}
 %	\begin{minipage}{.49\textwidth}
@@ -289,17 +289,39 @@ Figure~\ref{fig:nucleon_naive_tooth_naive_rms_linesearch} displays results of ap
 
 \begin{figure}
 	\centering
-	\begin{minipage}{.49\textwidth}
+	\begin{minipage}{.5\textwidth}
 		\includegraphics[width=1\linewidth]{figures/nucleon_naive_proportional_rms_fixed_linesearch_parallel}
 		\subcaption{}
 	\end{minipage}~
-	\begin{minipage}{.49\textwidth}
-		\includegraphics[width=1\linewidth]{figures/tooth_naive_proportional_rms_fixed_linesearch_parallel}
+	\begin{minipage}{.5\textwidth}
+		\includegraphics[width=1\linewidth]{figures/tooth_naive_rms_fixed_linesearch_parallel}
 		\subcaption{}
 	\end{minipage}
-	\caption[The line search and parallel line search]{The line search and parallel line search are applied to transfer function optimization on the nucleon data set (a) and the tooth data set (b) respectively. Note the two curves of line search and parallel line search overlap most of the time, as they made almost the same choices in step sizes.}
+	\begin{minipage}{.5\textwidth}
+		\includegraphics[width=1\linewidth]{figures/CT-Knee_naive_rms_fixed_linesearch_parallel}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.5\textwidth}
+		\includegraphics[width=1\linewidth]{figures/vortex_naive_proportional_rms_fixed_linesearch_parallel}
+		\subcaption{}
+	\end{minipage}	
+	\caption[The line search and parallel line search]{The line search and parallel line search are applied to transfer function optimization on the nucleon data set (a), the tooth data set (b), the CT-Knee data set (c) and the first time step of the vortex data set (d) respectively. Note the curves of line search and parallel line search overlap most of the time, as they made the same step choices in most cases.}
 	\label{fig:nucleon_naive_tooth_naive_rms_linesearch}
 \end{figure}
+
+%\begin{figure}
+%	\centering
+%	\begin{minipage}{.49\textwidth}
+%		\includegraphics[width=1\linewidth]{figures/CT-Knee_naive_rms_fixed_linesearch_parallel}
+%		\subcaption{}
+%	\end{minipage}~
+%	\begin{minipage}{.49\textwidth}
+%		\includegraphics[width=1\linewidth]{figures/vortex_naive_proportional_rms_fixed_linesearch_parallel}
+%		\subcaption{}
+%	\end{minipage}
+%	\caption[The line search and parallel line search are applied to transfer function optimization on the CT-Knee data set and the first time step of the vortex data set respectively.]{The line search and parallel line search are applied to transfer function optimization on the CT-Knee data set (a) and the first time step of the vortex data set (b) respectively. Note the two methods made very similar choices in step sizes.}
+%	\label{fig:CT-Knee_naive_vortex_naive_rms_linesearch}
+%\end{figure}
 
 %-------------------------------------------------------------------------
 \section{Results and Discussions}
@@ -313,19 +335,16 @@ In the results, we examine the transfer functions and volume rendered images bef
 The feature visibility histograms \cite{wang_efficient_2011} are displayed along with the visibility-weighted saliency histograms for comparison.
 
 %0.05 is used as the step size and the objective function $ F $ falling below 0.03 is regarded as convergence.
-
-0.05 is used as the step size and the objective function $ F $ falling below 0.03 is regarded as convergence. For a number of sample datasets we generated an ``ideally optimized'' image using a large number of iterations and compared this, using the SSIM metric ~\cite{Wang2004SSIM}, to images at different progressive stages of optimization. We noted, across all datasets, that for values of the energy function below 0.03, the SSIM scores settled consistently at over 0.99, which was taken as an indicator that further iterations lead to an almost imperceptible change to the rendered image. In practice this threshold can be chosen as demanded by the application or determined using a perceptual study. 
+Moreover, 0.05 is used as the step size and the objective function $ F $ falling below 0.03 is regarded as convergence. For a number of sample datasets we generated an ``ideally optimized'' image using a large number of iterations and compared this, using the SSIM metric ~\cite{Wang2004SSIM}, to images at different progressive stages of optimization. We noted, across all datasets, that for values of the energy function below 0.03, the SSIM scores settled consistently at over 0.99, which was taken as an indicator that further iterations lead to an almost imperceptible change to the rendered image. In practice this threshold can be chosen as demanded by the application or determined using a perceptual study.
 
 The two optimization methods shown in the results are gradient descent with fixed step size and gradient descent with parallel line search, both using the Method 1 discussed in Section~\ref{estimating_descent_directions} for estimating descent directions.
 
 Figure~\ref{fig:nucleon_naive_optimized} shows the optimization results of Figure~\ref{fig:nucleon_naive}. In Figure~\ref{fig:nucleon_naive_optimized} (a), the three features from outside to inside appear in different transparency levels, from weak to strong. This reveals a clear perspective of the three structures.
 Figure~\ref{fig:nucleon_naive_optimized} (b) to (d) are the optimized transfer function, the feature visibility histogram and the visibility-weighted saliency histogram respectively.
-Figure~\ref{fig:nucleon_naive_optimized} (e) and (f) are the evolution of visibility-weighted saliency of each feature in gradient descents with fixed step sizes and parallel line search respectively. Figure~\ref{fig:nucleon_naive_optimized} (g) and (h) show scatter plots of visibility-weighted saliency and opacity in the iteration steps, with lines connecting adjacent steps.
-The evolutions of the objective function are also shown in Figure~\ref{fig:nucleon_naive_tooth_naive_rms} (a) and Figure~\ref{fig:nucleon_naive_tooth_naive_rms_linesearch} (a) respectively.
+Figure~\ref{fig:nucleon_naive_optimized} (e) and (f) are the evolution of visibility-weighted saliency of each feature in gradient descents with fixed step sizes and parallel line search respectively. Figure~\ref{fig:nucleon_naive_optimized} (g) and (h) show the evolution of the opacity of each feature (opacity of the peak control point) in gradient descents with fixed step sizes and parallel line search respectively.
 
 Figure~\ref{fig:tooth_naive_optimized} (a), (c) and (d) display volume rendered images of the tooth data set before transfer function optimization. Figure~\ref{fig:tooth_naive_optimized} (b), (e) and (f) shows the same data sets after transfer function optimization.
 Figure~\ref{fig:tooth_naive_optimized} (g) and (h) are the evolution of visibility-weighted saliency of each feature, over 50 iterations in the gradient descent with fixed step sizes, and over 10 iterations in adaptive step sizes using the parallel line search respectively. Figure~\ref{fig:tooth_naive_optimized} (i) and (j) illustrate the relationship between the visibility-weighted saliency and opacity of features, in the iterations of the two gradient descent methods respectively.
-The evolutions of the objective function are also shown in Figure~\ref{fig:nucleon_naive_tooth_naive_rms} (b) and Figure~\ref{fig:nucleon_naive_tooth_naive_rms_linesearch} (b).
 
 Figure~\ref{fig:CT-Knee_naive_optimized} shows the volume rendered images of a CT-Knee data set ((a) and (b)), and the feature visibility histograms and the visibility-weighted saliency histograms ((c) to (f)) before and after optimization respectively.
 
@@ -335,9 +354,12 @@ The evolution of visibility-weighted saliency and opacity of each feature, in gr
 
 In the optimized results of these 4 data sets, the visibility-weighted saliency values of the 3 features are very close to the user-specified targets, as shown in Figure~\ref{fig:nucleon_naive_optimized} (d), Figure~\ref{fig:tooth_naive_optimized} (f), and Figure~\ref{fig:CT-Knee_naive_optimized} (f).
 
-Figure~\ref{fig:CT-Knee_naive_vortex_naive_rms_linesearch} displays the evolution of the objective function in the optimization of the CT-Knee data set and the vortex data set.
+%The evolutions of the objective function on the 4 data sets are also shown in Figure~\ref{fig:nucleon_naive_tooth_naive_rms} (a), (b), (c) and (d) respectively.
+%Figure~\ref{fig:CT-Knee_naive_vortex_naive_rms_linesearch} displays the evolution of the objective function in the optimization of the CT-Knee data set and the vortex data set.
+
+Table~\ref{table:performance_table} displays the number of iterations and the time taken for the objective function to converge.
 We noticed the two line search methods require much fewer steps to converge than the fixed step-size method and they made the same choices of adaptive step sizes during the iterations (the two curves completely overlapped).
-Although the two line search methods use the same numbers of steps, our parallel line search method only took about half the time of the sequential line search method (Table~\ref{table:performance_table}).
+In addition, although the two line search methods use the same numbers of steps, the parallel line search only took about half the time of the sequential line search.
 
 Figure~\ref{fig:parallelsearch_performance} shows the convergence time of the parallel line search approach on the 4 data sets over 1, 2, 4 and 8 CPU threads respectively.
 We observed that the computation time decreased as the number of threads increased. However, the speedup from 4 threads to 8 threads is minor, which may due to the fact that the CPU of the experiment computer only has 4 cores.
@@ -593,38 +615,24 @@ Time step 30 and 80 rendered with the static transfer function and the dynamic t
 	\end{minipage}	
 	
 	\begin{minipage}{.49\textwidth}
-		\includegraphics[width=1\linewidth]{figures/vortex_naive_saliency_fixed}
+		\includegraphics[width=1\linewidth]{figures/vortex_naive_proportional_saliency_fixed}
 		\subcaption{}
 	\end{minipage}
 	\begin{minipage}{.49\textwidth}
-		\includegraphics[width=1\linewidth]{figures/vortex_naive_saliency_parallelsearch}
+		\includegraphics[width=1\linewidth]{figures/vortex_naive_proportional_saliency_parallelsearch}
 		\subcaption{}
 	\end{minipage}
 	
 	\begin{minipage}{.49\textwidth}
-		\includegraphics[width=1\linewidth]{figures/vortex_naive_opacity_fixed}
+		\includegraphics[width=1\linewidth]{figures/vortex_naive_proportional_opacity_fixed}
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.49\textwidth}
-		\includegraphics[width=1\linewidth]{figures/vortex_naive_opacity_parallelsearch}
+		\includegraphics[width=1\linewidth]{figures/vortex_naive_proportional_opacity_parallelsearch}
 		\subcaption{}
 	\end{minipage}
 	\caption[After optimization to target \{1/3, 1/3, 1/3\}, all the 3 features are visible and the green feature inside is particularly more emphasized in comparison to the unoptimized result.]{After optimization to target \{1/3, 1/3, 1/3\}, all the 3 features are visible and the green feature inside is particularly more emphasized in comparison to the unoptimized result. (g) \& (i) Gradient descent with fixed step sizes; (h) \& (j) Gradient descent with parallel line search}
 	\label{fig:vortex_naive_optimized}
-\end{figure}
-
-\begin{figure}
-	\centering
-	\begin{minipage}{.49\textwidth}
-		\includegraphics[width=1\linewidth]{figures/CT-Knee_naive_rms_fixed_linesearch_parallel}
-		\subcaption{}
-	\end{minipage}~
-	\begin{minipage}{.49\textwidth}
-		\includegraphics[width=1\linewidth]{figures/vortex_naive_rms_fixed_linesearch_parallel}
-		\subcaption{}
-	\end{minipage}
-	\caption[The line search and parallel line search are applied to transfer function optimization on the CT-Knee data set and the first time step of the vortex data set respectively.]{The line search and parallel line search are applied to transfer function optimization on the CT-Knee data set (a) and the first time step of the vortex data set (b) respectively. Note the two methods made very similar choices in step sizes.}
-	\label{fig:CT-Knee_naive_vortex_naive_rms_linesearch}
 \end{figure}
 
 \begin{figure}
