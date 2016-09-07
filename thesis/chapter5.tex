@@ -107,11 +107,11 @@ In order to demonstrate the distribution of the objective function in the parame
 	\includegraphics[width=1\linewidth]{figures/tf_nucleon_naive_proportional}
 	\subcaption{}
 \end{minipage}~
-\begin{minipage}{.29\textwidth}
+\begin{minipage}{.3\textwidth}
 	\includegraphics[width=1\linewidth]{figures/nucleon_naive_proportional_visibility_chart}
 	\subcaption{}
 \end{minipage}~
-\begin{minipage}{.29\textwidth}
+\begin{minipage}{.3\textwidth}
 	\includegraphics[width=1\linewidth]{figures/nucleon_naive_proportional_visibility_saliency_weighted_chart}
 	\subcaption{}
 \end{minipage}
@@ -334,9 +334,6 @@ In the results, we examine the transfer functions and volume rendered images bef
 %In the results, we display the transfer functions and volume rendered images before and after transfer function optimization, as well as the evolution of visibility-weighted saliency and opacity values of features during the iterations.
 The feature visibility histograms \cite{wang_efficient_2011} are displayed along with the visibility-weighted saliency histograms for comparison.
 
-%0.05 is used as the step size and the objective function $ F $ falling below 0.03 is regarded as convergence.
-Moreover, 0.05 is used as the step size and the objective function $ F $ falling below 0.03 is regarded as convergence. For a number of sample datasets we generated an ``ideally optimized'' image using a large number of iterations and compared this, using the SSIM metric ~\cite{Wang2004SSIM}, to images at different progressive stages of optimization. We noted, across all datasets, that for values of the energy function below 0.03, the SSIM scores settled consistently at over 0.99, which was taken as an indicator that further iterations lead to an almost imperceptible change to the rendered image. In practice this threshold can be chosen as demanded by the application or determined using a perceptual study.
-
 The two optimization methods shown in the results are gradient descent with fixed step size and gradient descent with parallel line search, both using the Method 1 discussed in Section~\ref{estimating_descent_directions} for estimating descent directions.
 
 Figure~\ref{fig:nucleon_naive_optimized} shows the optimization results of Figure~\ref{fig:nucleon_naive}. In Figure~\ref{fig:nucleon_naive_optimized} (a), the three features from outside to inside appear in different transparency levels, from weak to strong. This reveals a clear perspective of the three structures.
@@ -352,14 +349,17 @@ Figure~\ref{fig:vortex_naive_optimized} shows the volume rendered images of the 
 
 The evolution of visibility-weighted saliency and opacity of each feature, in gradient descents with fixed step sizes and parallel line search, are displayed in Figure~\ref{fig:CT-Knee_naive_optimized} (g) to (j) and Figure~\ref{fig:vortex_naive_optimized} (g) to (j) for the CT-Knee data set and the vortex data set respectively.
 
-In the optimized results of these 4 data sets, the visibility-weighted saliency values of the 3 features are very close to the user-specified targets, as shown in Figure~\ref{fig:nucleon_naive_optimized} (d), Figure~\ref{fig:tooth_naive_optimized} (f), and Figure~\ref{fig:CT-Knee_naive_optimized} (f).
+In the optimized results of the 4 data sets, the visibility-weighted saliency values of the 3 features are very close to the user-specified targets, as shown in Figure~\ref{fig:nucleon_naive_optimized} (d), Figure~\ref{fig:tooth_naive_optimized} (f), and Figure~\ref{fig:CT-Knee_naive_optimized} (f).
 
 %The evolutions of the objective function on the 4 data sets are also shown in Figure~\ref{fig:nucleon_naive_tooth_naive_rms} (a), (b), (c) and (d) respectively.
 %Figure~\ref{fig:CT-Knee_naive_vortex_naive_rms_linesearch} displays the evolution of the objective function in the optimization of the CT-Knee data set and the vortex data set.
 
+%0.05 is used as the step size and the objective function $ F $ falling below 0.03 is regarded as convergence.
+Moreover, performance tests of the optimization approaches were conducted on the 4 data sets. In the tests, 0.05 is used as the step size and the objective function $ F $ falling below 0.03 is regarded as convergence. For the 4 data sets we generated an ``ideally optimized'' image using a large number of iterations and compared this, using the SSIM metric ~\cite{Wang2004SSIM}, to images at different progressive stages of optimization. We noted, across the 4 data sets, that for values of the energy function below 0.03, the SSIM scores settled consistently at over 0.99, which was taken as an indicator that further iterations lead to an almost imperceptible change to the rendered image. In practice this threshold can be chosen as demanded by the application or determined using a perceptual study.
+
 Table~\ref{table:performance_table} displays the number of iterations and the time taken for the objective function to converge.
 We noticed the two line search methods require much fewer steps to converge than the fixed step-size method and they made the same choices of adaptive step sizes during the iterations (the two curves completely overlapped).
-In addition, although the two line search methods use the same numbers of steps, the parallel line search only took about half the time of the sequential line search.
+In addition, although the two line search methods use the same numbers of steps, the parallel line search is significantly faster than the sequential line search.
 
 Figure~\ref{fig:parallelsearch_performance} shows the convergence time of the parallel line search approach on the 4 data sets over 1, 2, 4 and 8 CPU threads respectively.
 We observed that the computation time decreased as the number of threads increased. However, the speedup from 4 threads to 8 threads is minor, which may due to the fact that the CPU of the experiment computer only has 4 cores.
@@ -484,21 +484,29 @@ Time step 30 and 80 rendered with the static transfer function and the dynamic t
 		\includegraphics[width=1\linewidth]{figures/nucleon_naive_proportional_opacity_parallelsearch}
 		\subcaption{}
 	\end{minipage}
-	\caption[After optimization to target \{0.1, 0.3, 0.6\}, all the 3 features are visible and the green feature inside is particularly emphasized.]{After optimization to target \{0.1, 0.3, 0.6\}, all the 3 features are visible and the green feature inside is particularly emphasized. (a) The optimized volume rendered image of the nucleon data set; (b) The optimized transfer function; (c) The feature visibility histogram \cite{wang_efficient_2011}; (d) The visibility-weighted saliency histogram); (e) \& (g) Gradient descent with fixed step sizes; (f) \& (h) Gradient descent with parallel line search}
+	\caption[Optimization results of nucleon]{Optimization results of nucleon. After optimization to target \{0.1, 0.3, 0.6\}, all the 3 features are visible and the green feature inside is particularly emphasized. (a) The optimized volume rendered image of the nucleon data set; (b) The optimized transfer function; (c) The feature visibility histogram \cite{wang_efficient_2011}; (d) The visibility-weighted saliency histogram; (e) \& (g) Gradient descent with fixed step sizes; (f) \& (h) Gradient descent with parallel line search}
 	\label{fig:nucleon_naive_optimized}
 \end{figure}
 
 \begin{figure}
 	\centering
-	\begin{minipage}{.4\textwidth}
+	\begin{minipage}{.29\textwidth}
 		\includegraphics[width=1\linewidth]{images/tooth_naive}
 		\subcaption{}
 	\end{minipage}~
-	\begin{minipage}{.4\textwidth}
+	\begin{minipage}{.2\textwidth}
+		\includegraphics[width=1\linewidth]{figures/tf_tooth_naive}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.29\textwidth}
 		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch}
 		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.2\textwidth}
+		\includegraphics[width=1\linewidth]{figures/tf_tooth_naive_optimized_linesearch}
+		\subcaption{}
 	\end{minipage}
-	
+		
 	\begin{minipage}{.25\textwidth}
 		\includegraphics[width=1\linewidth]{figures/tooth_naive_visibility_chart}
 		\subcaption{}
@@ -533,21 +541,30 @@ Time step 30 and 80 rendered with the static transfer function and the dynamic t
 		\includegraphics[width=1\linewidth]{figures/tooth_naive_opacity_parallelsearch}
 		\subcaption{}
 	\end{minipage}
-	\caption[After optimization to target \{0.1, 0.3, 0.6\}, all the 3 features are visible and the yellow feature inside is particularly emphasized.]{After optimization to target \{0.1, 0.3, 0.6\}, all the 3 features are visible and the yellow feature inside is particularly emphasized. (g) \& (i) Gradient descent with fixed step sizes; (h) \& (j) Gradient descent with parallel line search}
+	\caption[Optimization results of tooth]
+	{Optimization results of tooth. After optimization to target \{0.1, 0.3, 0.6\}, all the 3 features are visible and the yellow feature inside is particularly emphasized. (i) \& (k) Gradient descent with fixed step sizes; (j) \& (l) Gradient descent with parallel line search}
 	\label{fig:tooth_naive_optimized}
 \end{figure}
 
 \begin{figure}
 	\centering
-	\begin{minipage}{.4\textwidth}
+	\begin{minipage}{.29\textwidth}
 		\includegraphics[width=1\linewidth]{images/CT-Knee_naive}
 		\subcaption{}
 	\end{minipage}~
-	\begin{minipage}{.4\textwidth}
+	\begin{minipage}{.2\textwidth}
+		\includegraphics[width=1\linewidth]{figures/tf_CT-Knee_naive}
+		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.29\textwidth}
 		\includegraphics[width=1\linewidth]{images/CT-Knee_naive_optimized_linesearch}
 		\subcaption{}
+	\end{minipage}~
+	\begin{minipage}{.2\textwidth}
+		\includegraphics[width=1\linewidth]{figures/tf_CT-Knee_naive_optimized_linesearch}
+		\subcaption{}
 	\end{minipage}
-	
+		
 	\begin{minipage}{.25\textwidth}
 		\includegraphics[width=1\linewidth]{figures/CT-Knee_naive_visibility_chart}
 		\subcaption{}
@@ -582,13 +599,13 @@ Time step 30 and 80 rendered with the static transfer function and the dynamic t
 		\includegraphics[width=1\linewidth]{figures/CT-Knee_naive_opacity_parallelsearch}
 		\subcaption{}
 	\end{minipage}
-	\caption[After optimization to target \{0.1, 0.3, 0.6\}, all the 3 features are visible, and the green and the purple features inside become clearer.]{After optimization to target \{0.1, 0.3, 0.6\}, all the 3 features are visible, and the green and the purple features inside become clearer. (g) \& (i) Gradient descent with fixed step sizes; (h) \& (j) Gradient descent with parallel line search}
+	\caption[Optimization results of CT-Knee]{Optimization results of CT-Knee. After optimization to target \{0.1, 0.3, 0.6\}, all the 3 features are visible, and the green and the purple features inside become clearer. (i) \& (k) Gradient descent with fixed step sizes; (j) \& (l) Gradient descent with parallel line search}
 	\label{fig:CT-Knee_naive_optimized}
 \end{figure}
 
 \begin{figure}
 	\centering
-	\begin{minipage}{.3\textwidth}
+	\begin{minipage}{.29\textwidth}
 		\includegraphics[width=1\linewidth]{figures/vortex_naive_proportional}
 		\subcaption{}
 	\end{minipage}~
@@ -596,7 +613,7 @@ Time step 30 and 80 rendered with the static transfer function and the dynamic t
 		\includegraphics[width=1\linewidth]{figures/tf_vortex_naive_proportional}
 		\subcaption{}
 	\end{minipage}~
-	\begin{minipage}{.3\textwidth}
+	\begin{minipage}{.29\textwidth}
 		\includegraphics[width=1\linewidth]{figures/vortex_naive_proportional_optimized_linesearch}
 		\subcaption{}
 	\end{minipage}~
@@ -639,7 +656,7 @@ Time step 30 and 80 rendered with the static transfer function and the dynamic t
 		\includegraphics[width=1\linewidth]{figures/vortex_naive_proportional_opacity_parallelsearch}
 		\subcaption{}
 	\end{minipage}
-	\caption[After optimization to target \{1/3, 1/3, 1/3\}, all the 3 features are visible and the green feature inside is particularly more emphasized in comparison to the unoptimized result.]{After optimization to target \{1/3, 1/3, 1/3\}, all the 3 features are visible and the green feature inside is particularly more emphasized in comparison to the unoptimized result. (g) \& (i) Gradient descent with fixed step sizes; (h) \& (j) Gradient descent with parallel line search}
+	\caption[Optimization results of vortex]{Optimization results of vortex. After optimization to target \{1/3, 1/3, 1/3\}, all the 3 features are visible and the green feature inside is particularly more emphasized in comparison to the unoptimized result. (g) \& (i) Gradient descent with fixed step sizes; (h) \& (j) Gradient descent with parallel line search}
 	\label{fig:vortex_naive_optimized}
 \end{figure}
 
