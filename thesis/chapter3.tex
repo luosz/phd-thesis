@@ -306,8 +306,13 @@ A greedy strategy is employed in our algorithm to minimize the energy function. 
 \end{itemize}
 %reducing the opacity of the highest control point (with highest significance factor) and increasing the opacity of the lowest control point (with non-zero lowest significance factor).
 
-The optimizer terminates when the energy function becomes stable, i.e. further iterations almost do not change the value of energy function.
+The optimizer terminates when further iterations almost do not change the quality of the resulting image.
+In our implementation, the optimization terminates when the energy function falls below a predefined threshold or reach a maximum iteration count.
+We generated images using a large number of iterations and compared this, using the SSIM metric ~\cite{Wang2004SSIM}, to images at different progressive stages of optimization, and then determined satisfactory thresholds for the tested data sets. In practice this threshold can be chosen as demanded by the application or determined using a perceptual study.
+
 The two step sizes in reducing opacity and increasing opacity can both be user-specified, or the first one is user-specified and the second one is computed based on the first one and the ratio of the significance factors of the two chosen control points. The ratio of the two step sizes affects the overall opacity of the resulting image, for instance, the image becomes more opaque or translucent. See Section~\ref{automatic_transfer_function_refinement} for results of this global refinement.
+
+%Moreover, performance tests of the optimization approaches were conducted on the 4 data sets. In the tests, 0.05 is used as the step size and the objective function $ F $ falling below 0.03 is regarded as convergence. For the 4 data sets we generated an ``ideally optimized'' image using a large number of iterations and compared this, using the SSIM metric ~\cite{Wang2004SSIM}, to images at different progressive stages of optimization. We noted, across the 4 data sets, that for values of the energy function below 0.03, the SSIM scores settled consistently at over 0.99, which was taken as an indicator that further iterations lead to an almost imperceptible change to the rendered image. In practice this threshold can be chosen as demanded by the application or determined using a perceptual study.
 
 \subsection{Prioritizing Intensity Ranges \label{interaction_methods}}
 The above described optimizer is an approach to balance the global opacity and thus reduce occlusions in the rendered images. In other words, we de-emphasize the most prevalent voxels, which are considered to have a high probability of occluding the rest of the scene and in particular interior structures of the data.
