@@ -306,9 +306,49 @@ A greedy strategy is employed in our algorithm to minimize the energy function. 
 \end{itemize}
 %reducing the opacity of the highest control point (with highest significance factor) and increasing the opacity of the lowest control point (with non-zero lowest significance factor).
 
-The optimizer terminates when further iterations almost do not change the quality of the resulting image.
-In our implementation, the optimization terminates when the energy function falls below a predefined threshold or reach a maximum iteration count.
-We generated images using a large number of iterations and compared this, using the SSIM metric ~\cite{Wang2004SSIM}, to images at different progressive stages of optimization, and then determined satisfactory thresholds for the tested data sets. In practice this threshold can be chosen as demanded by the application or determined using a perceptual study.
+In our implementation, the optimizer terminates when the energy function becomes stable, i.e. further iterations do not change the resulting transfer function. For the sample data sets we have tested, we observed that there is no further change to the resulting transfer function after 500 iterations.
+In addition, we measured the computation time of the optimization on two data sets with a continuous transfer function and a transfer function of tent-like shapes.
+The tests in Table~\ref{table:tf_refinement_performance} all finished within 0.01 seconds, which suggests that our approach is very lightweight.
+
+%In our implementation, the optimizer terminates when the energy function falls below a predefined threshold or reach a maximum iteration count.
+%We generated images using a large number of iterations and compared this, using the SSIM metric ~\cite{Wang2004SSIM}, to images at different progressive stages of optimization, and then determined satisfactory thresholds for the tested data sets. In practice this threshold can be chosen as demanded by the application or determined using a perceptual study.
+
+%\begin{table}
+%	\centering
+%	%\begin{minipage}{.5\textwidth}
+%	\normalsize
+%	\begin{tabular}{llll}
+%		\hline
+%		air & fat & soft tissue & bone (cancellous/dense)\\
+%		\hline
+%		-1000 & -100 to -50 & +100 to +300 & +700 to +3000\\
+%		\hline
+%	\end{tabular}
+%	\caption{Hounsfield units of some typical substances \cite{feeman_mathematics_2009}}
+%	\label{table:Hounsfield_unit}
+%	%\end{minipage}
+%\end{table}
+
+\begin{table}
+\centering
+%	\begin{minipage}{.5\textwidth}
+\normalsize
+\begin{tabular}{llll}
+	\hline
+	data set & transfer function (TF) & time for 500 iterations & time for 1000 iterations \\
+	\hline
+	CT-Knee & TF in Figure~\ref{fig:tf_CT-Knee_spectrum_6} (b) & 0.002 & 0.005 \\
+	\hline
+	CT-Knee & TF in Figure~\ref{fig:tf_CT-Knee_spectrum_16_ramp} (b) & 0.005 & 0.009 \\
+	\hline
+	VisMale & TF in Figure~\ref{fig:tf_CT-Knee_spectrum_6} (b) & 0.002 & 0.005 \\
+	\hline
+	VisMale & TF in Figure~\ref{fig:tf_CT-Knee_spectrum_16_ramp} (b) & 0.005 & 0.008 \\
+\end{tabular}
+\caption{Computation time (seconds) for optimizations}
+\label{table:tf_refinement_performance}
+%	\end{minipage}
+\end{table}
 
 The two step sizes in reducing opacity and increasing opacity can both be user-specified, or the first one is user-specified and the second one is computed based on the first one and the ratio of the significance factors of the two chosen control points. The ratio of the two step sizes affects the overall opacity of the resulting image, for instance, the image becomes more opaque or translucent. See Section~\ref{automatic_transfer_function_refinement} for results of this global refinement.
 
@@ -478,7 +518,6 @@ After optimization (Figure~\ref{fig:tf_CT-Knee_spectrum_16_ramp_balance}), the s
 Although the continuous transfer function is useful in automatic transfer function generation, in typical volume visualization programs, users often prefer much more simplified transfer functions, e.g. a few control points such as in transfer functions with tent-like shapes. Figure~\ref{fig:tf_CT-Knee_spectrum_6} is the CT-Knee data set rendered with the transfer function. We show in Figure~\ref{fig:tf_CT-Knee_spectrum_6_balance_1000} that our optimization can also benefit such simpler transfer functions.
 
 In practice we observed that the energy function usually converges to a small but non-zero value. As the number of control points increases, it takes more iterations for the optimization to achieve a stable state - a number of tent-like shapes ranging from 4 to 16 was found to be the most effective.
-Our approach is relatively lightweight, e.g. we observed that the optimization finished within one second on the CT-Knee and VisMale data sets with transfer functions consisting of 24 control points.
 
 \begin{figure}
 \centering
@@ -527,8 +566,8 @@ function with a ramp (c) Histogram of the data set}
 \caption{~}
 \label{fig:tf_CT-Knee_spectrum_6_bump_}
 \end{subfigure}
-\caption[Before optimization: CT-Knee rendered with a transfer function consisting 
-of tent-like shapes]{Before optimization: CT-Knee rendered with a transfer function consisting 
+\caption[Before optimization: CT-Knee with a transfer function of tent-like shapes]
+{Before optimization: CT-Knee rendered with a transfer function consisting 
 of tent-like shapes (a) Preliminary view of data set (b) A transfer function with 6 tent-like shapes}
 \label{fig:tf_CT-Knee_spectrum_6}
 
@@ -540,7 +579,8 @@ of tent-like shapes (a) Preliminary view of data set (b) A transfer function wit
 \includegraphics[width=\textwidth]{CT-Knee_spectrum_6_bump_balance.png}
 \caption{~}
 \end{subfigure}
-\caption[After optimization: CT-Knee rendered with the transfer function consisting of tent-like shapes]{The transfer function from Figure~\ref{fig:tf_CT-Knee_spectrum_6} after optimization: (a) Optimized transfer function (b) Optimized output}
+\caption[After optimization: CT-Knee rendered with the transfer function of tent-like shapes]
+{The transfer function from Figure~\ref{fig:tf_CT-Knee_spectrum_6} after optimization: (a) Optimized transfer function (b) Optimized output}
 \label{fig:tf_CT-Knee_spectrum_6_balance_1000}
 \end{figure}
 
