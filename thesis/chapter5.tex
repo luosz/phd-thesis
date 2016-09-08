@@ -232,6 +232,15 @@ Figure~\ref{fig:nucleon_naive_tooth_naive_rms} shows that the steps made by the 
 	\label{fig:nucleon_naive_tooth_naive_rms}
 \end{figure}
 
+\begin{figure}
+	\centering
+	\begin{minipage}{.9\textwidth}
+		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_parameterspace_path}
+	\end{minipage}
+	\caption[The steps of gradient descent methods with fixed step size and adaptive step size are shown in the parameter space]{The steps of gradient descent methods with fixed step size and adaptive step size are shown in the parameter space in Figure~\ref{fig:nucleon_parameterspace} (the step size is 0.1)}
+	\label{fig:nucleon_parameterspace_path}
+\end{figure}
+
 \subsection{Adaptive Step Size with Line Search}
 Performing gradient descent with a small step size may result in converging too slowly and require a lot of evaluations of the objective function, which is rather expensive to compute in our situation. Various approaches have been proposed regarding the choices of step sizes, which lead to various gradient algorithms \cite{yuan_step-sizes_2008}.
 
@@ -256,15 +265,6 @@ The step size $ \gamma_{n} $ is chosen after the above line search procedure.
 This strategy does not find the exact minimum along the line direction, instead it yields reasonable results and descends much faster than using fixed step sizes.
 
 With line search approaches, the optimization algorithm can converge much faster than using fixed step sizes. Figure~\ref{fig:nucleon_parameterspace_path} displays the paths of two gradient descent methods, one progresses regularly with fixed step sizes, the other progresses aggressively with line search. It takes fewer steps for the latter to reach a local minimum.
-
-\begin{figure}
-	\centering
-	\begin{minipage}{.9\textwidth}
-		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_parameterspace_path}
-	\end{minipage}
-	\caption[The steps of gradient descent methods with fixed step size and adaptive step size are shown in the parameter space]{The steps of gradient descent methods with fixed step size and adaptive step size are shown in the parameter space in Figure~\ref{fig:nucleon_parameterspace} (the step size is 0.1)}
-	\label{fig:nucleon_parameterspace_path}
-\end{figure}
 
 \subsubsection{Parallel Line Search}
 The classical gradient descent is a sequential algorithm. In its iterative procedure, the next iteration takes the result from the previous iteration as input.

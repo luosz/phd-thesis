@@ -76,7 +76,7 @@ This technique aims to assist users in gaining insight into the internal structu
 
 %Our method uses the center-surround mechanism to compute visual saliency of voxels. The center-surround mechanism has the intuitive appeal of being able to identify regions that are different from their surrounding context and it has been successfully applied to problems on 2D images \cite{itti_model_1998}, 3D meshes \cite{lee_mesh_2005} and 3D volumetric data \cite{kim_saliency-guided_2006}.
 
-In this section, we describe in detail the concepts of visibility fields, saliency fields, visibility-weighted saliency fields and visibility-weighted feature saliency. In order to better illustrate the effects of these techniques in our discussion, we present the results of applying these techniques to a synthetic data set from two different viewpoints.
+In this section, we describe in detail the concepts of visibility fields, saliency fields, visibility-weighted saliency fields and visibility-weighted saliency. In order to better illustrate the effects of these techniques in our discussion, we present the results of applying these techniques to a synthetic data set from two different viewpoints.
 
 \subsection{Feature Definition \label{feature_definition}}
 Before discussion of the proposed methods, we first define a feature $ F $ as a subset of voxels in the volume $ V $, i.e. $ F\subseteq V $.
@@ -202,10 +202,10 @@ $ S_{F} $ can be used as a score to indicate the saliency of feature $ F $ in te
 Features can be defined by user-specified transfer functions or segmentation of the volume data.
 Figure~\ref{fig:disks_visibility_saliency_fields} illustrates the visibility-weighted saliency fields of the three disk-like features.
 
-\subsection{Visibility-Weighted Feature Saliency Histograms \label{weighted_feature_saliency}}
+\subsection{Visibility-Weighted Saliency (VWS) Histograms \label{weighted_feature_saliency}}
 As mentioned in Section~\ref{saliency_fields}, the saliency field can be computed from different appearance attributes.
 Multiple saliency fields computed from different appearance attributes can be combined together in order to represent different aspects of the visual saliency of voxels.
-In our implementation, we use brightness and saturation respectively to compute visibility-weighted saliency fields and define the weighted sum of the two sets of feature saliency as visibility-weighted feature saliency.
+In our implementation, we use brightness and saturation respectively to compute visibility-weighted saliency fields and define the weighted sum of the two sets of feature saliency as visibility-weighted saliency.
 
 %Similar to the visibility-weighted saliency in the previous section, the visibility-weighted saliency from brightness for voxel $ i $ is
 %$ W_{F}(O_{b},i,\sigma) $ $ W_{F}(O_{s},i,\sigma) $
@@ -220,9 +220,9 @@ where $ u_{1}$ and $ u_{2}$ are weights of different appearance attributes. $ u_
 
 Figure~\ref{fig:disks_saliency_chart_left} and Figure~\ref{fig:disks_saliency_chart_right} display bar charts of our visibility-weighted saliency of the three features and the feature visibility by Wang et al. \cite{wang_efficient_2011} for comparison.
 We compute the saliency fields using brightness and saturation respectively and thus acquire two sets of feature saliency of the three features in the synthetic data set.
-In Figure~\ref{fig:disks_saliency_chart_left} and Figure~\ref{fig:disks_saliency_chart_right}, the feature saliency based on the brightness component shows similar patterns as the feature visibility. However, the feature saliency based on the saturation component gives the highest score to the middle disk (magenta color), which indicates the middle disk is significantly more salient than the other two (light green and dark green) in terms of saturation. The visibility-weighted feature saliency combines the feature saliency from brightness and saturation with user-specified weights. 
+In Figure~\ref{fig:disks_saliency_chart_left} and Figure~\ref{fig:disks_saliency_chart_right}, the feature saliency based on the brightness component shows similar patterns as the feature visibility. However, the feature saliency based on the saturation component gives the highest score to the middle disk (magenta color), which indicates the middle disk is significantly more salient than the other two (light green and dark green) in terms of saturation. The visibility-weighted saliency combines the feature saliency from brightness and saturation with user-specified weights. 
 %which combines the saliency fields derived from brightness and saturation of voxels.
-The visibility-weighted feature saliency can be used as a measure to indicate the saliency of features in volume rendered images.
+The visibility-weighted saliency can be used as a measure to indicate the saliency of features in volume rendered images.
 %The weights of different appearance attributes may be adjusted according to the user's need in specific tasks.
 Equal weights of appearance attributes are assumed for now in our implementation, which is an equivalent assumption to that made in 2D saliency \cite{itti_model_1998}. However, more detailed perceptual studies may determine more ideal weights.
 
@@ -259,25 +259,25 @@ Equal weights of appearance attributes are assumed for now in our implementation
 \begin{figure}
 	\centering
 	\begin{minipage}{.45\textwidth}
-		\includegraphics[width=1\linewidth]{images/disk_visibility_chart_left}
+		\includegraphics[width=1\linewidth]{figures/disk_visibility_chart_left}
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.45\textwidth}
-		\includegraphics[width=1\linewidth]{images/disk_visibility_saliency_brightness_chart_left}
+		\includegraphics[width=1\linewidth]{figures/disk_visibility_saliency_brightness_chart_left}
 		\subcaption{}
 	\end{minipage}
 	\begin{minipage}{.45\textwidth}
-		\includegraphics[width=1\linewidth]{images/disk_visibility_saliency_saturation_chart_left}
+		\includegraphics[width=1\linewidth]{figures/disk_visibility_saliency_saturation_chart_left}
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.45\textwidth}
-		\includegraphics[width=1\linewidth]{images/disk_visibility_saliency_weighted_chart_left}
+		\includegraphics[width=1\linewidth]{figures/disk_visibility_saliency_weighted_chart_left}
 		\subcaption{}
 	\end{minipage}
 	\caption[The feature visibility histogram and the visiblity-weighted saliency histograms from the left viewpoint]{(a) The feature visibility \cite{wang_efficient_2011} histogram shows the sum of visibility values of all the voxels belonging to each feature.
-		(b) \& (c) The two histograms of visibility-weighted feature saliency based on brightness and saturation respectively show the sum of visibility-weighted saliency of all the voxels belonging to each feature ($ W_{F}(O,i,\sigma) $ in Section~\ref{visibility_weighted_saliency}).
-		(d) The histogram of visibility-weighted feature saliency shows the visibility-weighted feature saliency with equal weights of brightness and saturation ($ W_{F} $ in Section~\ref{weighted_feature_saliency}).
-		Feature visibility (a) and visibility-weighted feature saliency from brightness (b) both suggest that the top disk is the most visible and the bottom disk is the least visible.
+		(b) \& (c) The two histograms of visibility-weighted saliency based on brightness and saturation respectively show the sum of visibility-weighted saliency of all the voxels belonging to each feature ($ W_{F}(O,i,\sigma) $ in Section~\ref{visibility_weighted_saliency}).
+		(d) The histogram of visibility-weighted saliency shows the visibility-weighted saliency with equal weights of brightness and saturation ($ W_{F} $ in Section~\ref{weighted_feature_saliency}).
+		Feature visibility (a) and visibility-weighted saliency from brightness (b) both suggest that the top disk is the most visible and the bottom disk is the least visible.
 		However, the middle disk with magenta color is significantly more salient than the other two disks (light green and dark green) in terms of saturation (c).
 	}
 	\label{fig:disks_saliency_chart_left}
@@ -286,22 +286,22 @@ Equal weights of appearance attributes are assumed for now in our implementation
 \begin{figure}
 	\centering
 	\begin{minipage}{.45\textwidth}
-		\includegraphics[width=1\linewidth]{images/disk_visibility_chart_right}
+		\includegraphics[width=1\linewidth]{figures/disk_visibility_chart_right}
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.45\textwidth}
-		\includegraphics[width=1\linewidth]{images/disk_visibility_saliency_brightness_chart_right}
+		\includegraphics[width=1\linewidth]{figures/disk_visibility_saliency_brightness_chart_right}
 		\subcaption{}
 	\end{minipage}
 	\begin{minipage}{.45\textwidth}
-		\includegraphics[width=1\linewidth]{images/disk_visibility_saliency_saturation_chart_right}
+		\includegraphics[width=1\linewidth]{figures/disk_visibility_saliency_saturation_chart_right}
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.45\textwidth}
-		\includegraphics[width=1\linewidth]{images/disk_visibility_saliency_weighted_chart_right}
+		\includegraphics[width=1\linewidth]{figures/disk_visibility_saliency_weighted_chart_right}
 		\subcaption{}
 	\end{minipage}
-	\caption[The feature visibility histogram and the visiblity-weighted saliency histograms from the right viewpoint]{Similar to Figure~\ref{fig:disks_saliency_chart_left}, in the viewpoint on the right in Figure~\ref{fig:disks_combined}, the bottom disk is the most visible according to feature visibility (a) and most salient according to feature saliency from brightness (b). However, feature saliency from saturation (c) suggests that the middle disk (magenta color) is significantly more salient than the other two (light green and dark green) in terms of saturation. The histogram (d) is the visibility-weighted feature saliency with equal weights of brightness and saturation.}
+	\caption[The feature visibility histogram and the visiblity-weighted saliency histograms from the right viewpoint]{Similar to Figure~\ref{fig:disks_saliency_chart_left}, in the viewpoint on the right in Figure~\ref{fig:disks_combined}, the bottom disk is the most visible according to feature visibility (a) and most salient according to feature saliency from brightness (b). However, feature saliency from saturation (c) suggests that the middle disk (magenta color) is significantly more salient than the other two (light green and dark green) in terms of saturation. The histogram (d) is the visibility-weighted saliency with equal weights of brightness and saturation.}
 	\label{fig:disks_saliency_chart_right}
 \end{figure}
 
@@ -332,7 +332,7 @@ In the visibility-weighted saliency fields of the first transfer function (Figur
 % the two outer features have low opacity and the enamel inside has high opacity.
 On the other hand, the visibility-weighted saliency fields of the second transfer function (Figure~\ref{fig:tooth_saliency_field_2}) suggest the enamel has significantly higher visual saliency in the volume rendered image.
 %On the other hand, in Figure~\ref{fig:tooth_2}
-The feature visibility and visibility-weighted feature saliency in Figure~\ref{fig:tooth_saliency_chart} and Figure~\ref{fig:tooth_saliency_chart_2} summarize the visibility and visual saliency of the three features specified by the transfer functions.
+The feature visibility and visibility-weighted saliency in Figure~\ref{fig:tooth_saliency_chart} and Figure~\ref{fig:tooth_saliency_chart_2} summarize the visibility and visual saliency of the three features specified by the transfer functions.
 
 \begin{figure}
 	\centering
@@ -369,7 +369,7 @@ The feature visibility and visibility-weighted feature saliency in Figure~\ref{f
 \begin{figure}
 	\centering
 	\begin{minipage}{.45\textwidth}
-		\includegraphics[width=1\linewidth]{images/tooth_naive_visibility_chart}
+		\includegraphics[width=1\linewidth]{figures/tooth_naive_visibility_chart}
 		\subcaption{}
 	\end{minipage}~
 	%\begin{minipage}{.2\textwidth}
@@ -379,7 +379,7 @@ The feature visibility and visibility-weighted feature saliency in Figure~\ref{f
 	%\includegraphics[width=1\linewidth]{images/tooth_visibility_saliency_saturation_chart.png}
 	%\end{minipage}~
 	\begin{minipage}{.45\textwidth}
-		\includegraphics[width=1\linewidth]{images/tooth_naive_visibility_saliency_weighted_chart}
+		\includegraphics[width=1\linewidth]{figures/tooth_naive_visibility_saliency_weighted_chart}
 		\subcaption{}
 	\end{minipage}
 	\caption[Feature visibility and visibility-weighted saliency of the three features]{Feature visibility \cite{wang_efficient_2011} (a) and visibility-weighted saliency (b) of the three features, computed with the transfer function in Figure~\ref{fig:tooth}.}
@@ -421,7 +421,7 @@ The feature visibility and visibility-weighted feature saliency in Figure~\ref{f
 \begin{figure}
 	\centering
 	\begin{minipage}{.45\textwidth}
-		\includegraphics[width=1\linewidth]{images/tooth_balance_visibility_chart}
+		\includegraphics[width=1\linewidth]{figures/tooth_balance_visibility_chart}
 		\subcaption{}
 	\end{minipage}~
 	%\begin{minipage}{.2\textwidth}
@@ -431,10 +431,10 @@ The feature visibility and visibility-weighted feature saliency in Figure~\ref{f
 	%\includegraphics[width=1\linewidth]{images/tooth_2_visibility_saliency_saturation_chart.png}
 	%\end{minipage}~
 	\begin{minipage}{.45\textwidth}
-		\includegraphics[width=1\linewidth]{images/tooth_balance_visibility_saliency_weighted_chart}
+		\includegraphics[width=1\linewidth]{figures/tooth_balance_visibility_saliency_weighted_chart}
 		\subcaption{}
 	\end{minipage}
-	\caption[Feature visibility and visibility-weighted feature saliency of the three features]{Feature visibility (a) and visibility-weighted feature saliency (b) of the three features, computed with the transfer function in Figure~\ref{fig:tooth_2}.}
+	\caption[Feature visibility and visibility-weighted saliency of the three features]{Feature visibility (a) and visibility-weighted saliency (b) of the three features, computed with the transfer function in Figure~\ref{fig:tooth_2}.}
 	\label{fig:tooth_saliency_chart_2}
 \end{figure}
 
@@ -604,7 +604,7 @@ The analysis of the experiment results indicates that our VWS is better than 2DF
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.25\textwidth}
-		\includegraphics[width=1\linewidth]{images/vismale_week_green_visibility_saliency_weighted_chart}
+		\includegraphics[width=1\linewidth]{figures/vismale_week_green_visibility_saliency_weighted_chart}
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.24\textwidth}
@@ -612,7 +612,7 @@ The analysis of the experiment results indicates that our VWS is better than 2DF
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.25\textwidth}
-		\includegraphics[width=1\linewidth]{images/vismale_naive_visibility_saliency_weighted_chart}
+		\includegraphics[width=1\linewidth]{figures/vismale_naive_visibility_saliency_weighted_chart}
 		\subcaption{}
 	\end{minipage}
 	\begin{minipage}{.24\textwidth}
@@ -620,7 +620,7 @@ The analysis of the experiment results indicates that our VWS is better than 2DF
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.25\textwidth}
-		\includegraphics[width=1\linewidth]{images/vismale_naive_optimized_green_1000_visibility_saliency_weighted_chart}
+		\includegraphics[width=1\linewidth]{figures/vismale_naive_optimized_green_1000_visibility_saliency_weighted_chart}
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.24\textwidth}
@@ -628,7 +628,7 @@ The analysis of the experiment results indicates that our VWS is better than 2DF
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.25\textwidth}
-		\includegraphics[width=1\linewidth]{images/vismale_strong_green_visibility_saliency_weighted_chart}
+		\includegraphics[width=1\linewidth]{figures/vismale_strong_green_visibility_saliency_weighted_chart}
 		\subcaption{}
 	\end{minipage}
 	\caption{Visibility-weighted saliency values of the green feature are represented by the data points in Figure~\ref{fig:mos_vs_metric} (g)}
@@ -642,7 +642,7 @@ The analysis of the experiment results indicates that our VWS is better than 2DF
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.25\textwidth}
-		\includegraphics[width=1\linewidth]{images/vismale_weak_red_visibility_saliency_weighted_chart}
+		\includegraphics[width=1\linewidth]{figures/vismale_weak_red_visibility_saliency_weighted_chart}
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.24\textwidth}
@@ -650,7 +650,7 @@ The analysis of the experiment results indicates that our VWS is better than 2DF
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.25\textwidth}
-		\includegraphics[width=1\linewidth]{images/vismale_naive_visibility_saliency_weighted_chart}
+		\includegraphics[width=1\linewidth]{figures/vismale_naive_visibility_saliency_weighted_chart}
 		\subcaption{}
 	\end{minipage}
 	\begin{minipage}{.24\textwidth}
@@ -658,7 +658,7 @@ The analysis of the experiment results indicates that our VWS is better than 2DF
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.25\textwidth}
-		\includegraphics[width=1\linewidth]{images/vismale_strong_red_visibility_saliency_weighted_chart}
+		\includegraphics[width=1\linewidth]{figures/vismale_strong_red_visibility_saliency_weighted_chart}
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.24\textwidth}
@@ -666,7 +666,7 @@ The analysis of the experiment results indicates that our VWS is better than 2DF
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.25\textwidth}
-		\includegraphics[width=1\linewidth]{images/vismale_naive_optimized_red_1000_visibility_saliency_weighted_chart}
+		\includegraphics[width=1\linewidth]{figures/vismale_naive_optimized_red_1000_visibility_saliency_weighted_chart}
 		\subcaption{}
 	\end{minipage}
 	\caption{Visibility-weighted saliency values of the red feature are represented by the data points in Figure~\ref{fig:mos_vs_metric} (h)}
@@ -686,11 +686,11 @@ On the other hand, the feature visibility is not aware of the saturation change,
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.24\textwidth}
-		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch_visibility_chart}
+		\includegraphics[width=1\linewidth]{figures/tooth_naive_optimized_linesearch_visibility_chart}
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.24\textwidth}
-		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch_visibility_saliency_weighted_chart}
+		\includegraphics[width=1\linewidth]{figures/tooth_naive_optimized_linesearch_visibility_saliency_weighted_chart}
 		\subcaption{}
 	\end{minipage}
 	\caption{(a) The tooth data set; (b) Feature visibility; (c) Visibility-weighted saliency}
@@ -704,11 +704,11 @@ On the other hand, the feature visibility is not aware of the saturation change,
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.24\textwidth}
-		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch_red_low_saturation_visibility_chart}
+		\includegraphics[width=1\linewidth]{figures/tooth_naive_optimized_linesearch_red_low_saturation_visibility_chart}
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.24\textwidth}
-		\includegraphics[width=1\linewidth]{images/tooth_naive_optimized_linesearch_red_low_saturation_visibility_saliency_weighted_chart}
+		\includegraphics[width=1\linewidth]{figures/tooth_naive_optimized_linesearch_red_low_saturation_visibility_saliency_weighted_chart}
 		\subcaption{}
 	\end{minipage}
 	\caption[The saturation of the red feature is reduced.]{(a) The saturation of the red feature is reduced; (b) The feature visibility is the same as Figure~\ref{fig:tooth_naive_optimized_linesearch} (b); (c) The visibility-weighted saliency of (a): the red feature has lower VWS and the yellow has higher VWS.}
