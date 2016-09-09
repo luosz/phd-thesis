@@ -407,48 +407,6 @@ For the sake of clarity of presentation and convenience of the user study, the r
 	\label{table:performance_table}
 \end{table}
 
-
-\subsection{Transfer Function Optimization For Time-Varying Data Sets}
-Similar to the approach discussed in Section~\ref{adaptive_transfer_functions_for_time-varying_data_sets}, we apply our transfer function optimization on all the time steps of the vortex data set. Our optimizer dynamically optimizes the transfer function to the same user-specified target (equal weights i.e. (1/3, 1/3, 1/3) were set as target in this test) for each time step of the time-varying data set. 
-
-Figure~\ref{fig:vorts_static} displays the temporal curves of the visibility-weighted saliency (VWS) and 2D feature saliency (2DFS, discussed in Section~\ref{2d_feature_saliency}) of the visualization with a static transfer function (optimized for the first time step) respectively.
-Similarly, Figure~\ref{fig:vorts_dynamic} displays the temporal curves of the VWS and 2DFS of the visualization with a dynamic transfer function (optimized for each time step) respectively.
-The VWS curves in Figure~\ref{fig:vorts_dynamic} (a) are more converged than the VWS curves in Figure~\ref{fig:vorts_static} (a) because the dynamic transfer function is constantly optimized towards the target (1/3, 1/3, 1/3).
-
-The 2DFS curves in Figure~\ref{fig:vorts_static} (b) and Figure~\ref{fig:vorts_dynamic} (b) are provided as comparison for the fact that 2DFS is an image space technique independent from VWS. We notice that there are more small changes in the 2DFS curves in Figure~\ref{fig:vorts_static} (b) and the three curves (representing the 2DFS of the three features) cross each other more often than the 2DFS curves in Figure~\ref{fig:vorts_static} (b).
-
-Time step 30 and 80 rendered with the static transfer function and the dynamic transfer function are displayed in Figure~\ref{fig:vorts_50_80_static} and Figure~\ref{fig:vorts_50_80_dynamic} respectively. As coherence can be an important factor in time-varying visualization, we notice the dynamic transfer function can maintain similar level of visual saliency for the purple feature when the sizes and proportions of the features change over time.
-
-%Objective function
-%Figure~\ref{fig:nucleon_strong_red_rms}
-
-%Visibility-weighted saliency of each feature
-%Figure~\ref{fig:nucleon_strong_red_saliency}
-%
-%Opacity of each feature
-%Figure~\ref{fig:nucleon_strong_red_opacity}
-
-%Before optimization
-%Figure~\ref{fig:nucleon_strong_red}
-%
-%After optimization
-%Figure~\ref{fig:nucleon_strong_red_optimized}
-
-%\begin{figure}
-%	\centering
-%	\begin{minipage}{.35\textwidth}
-%		\includegraphics[width=1\linewidth]{images/nucleon_strong_red}
-%	\end{minipage}~
-%	\begin{minipage}{.2\textwidth}
-%		\includegraphics[width=1\linewidth]{images/tf_nucleon_strong_red}	
-%	\end{minipage}~
-%	\begin{minipage}{.4\textwidth}
-%		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_visibility_saliency_weighted_chart}
-%	\end{minipage}
-%	\caption{Before optimization, the transfer function strongly emphasizes the red feature, which occludes the green feature inside. (Left: the volume rendered image of the nucleon data set; Middle: the transfer function; Right: the visibility-weighted saliency histogram)}
-%	\label{fig:nucleon_strong_red}
-%\end{figure}
-
 \begin{figure}
 	\centering
 	\begin{minipage}{.24\textwidth}
@@ -507,7 +465,7 @@ Time step 30 and 80 rendered with the static transfer function and the dynamic t
 		\includegraphics[width=1\linewidth]{figures/tf_tooth_naive_optimized_linesearch}
 		\subcaption{}
 	\end{minipage}
-		
+	
 	\begin{minipage}{.25\textwidth}
 		\includegraphics[width=1\linewidth]{figures/tooth_naive_visibility_chart}
 		\subcaption{}
@@ -544,7 +502,7 @@ Time step 30 and 80 rendered with the static transfer function and the dynamic t
 	\end{minipage}
 	\caption[Optimization results of tooth]
 	{Optimization results of tooth. After optimization to target \{0.1, 0.3, 0.6\}, all the 3 features are visible and the yellow feature inside is particularly emphasized.
-	(a) \& (b) Initial volume rendered image and transfer function; (c) \& (d) Optimized volume rendered image and transfer function; (e) \& (f) Feature visibility and VWS of features before optimization; (g) \& (h) Feature visibility and VWS of features after optimization; (i) \& (j) VWS of features for gradient descent with fixed step sizes and parallel line search respectively; (k) \& (l) Opacities of features for gradient descent with fixed step sizes and parallel line search respectively.}
+		(a) \& (b) Initial volume rendered image and transfer function; (c) \& (d) Optimized volume rendered image and transfer function; (e) \& (f) Feature visibility and VWS of features before optimization; (g) \& (h) Feature visibility and VWS of features after optimization; (i) \& (j) VWS of features for gradient descent with fixed step sizes and parallel line search respectively; (k) \& (l) Opacities of features for gradient descent with fixed step sizes and parallel line search respectively.}
 	\label{fig:tooth_naive_optimized}
 \end{figure}
 
@@ -566,7 +524,7 @@ Time step 30 and 80 rendered with the static transfer function and the dynamic t
 		\includegraphics[width=1\linewidth]{figures/tf_CT-Knee_naive_optimized_linesearch}
 		\subcaption{}
 	\end{minipage}
-		
+	
 	\begin{minipage}{.25\textwidth}
 		\includegraphics[width=1\linewidth]{figures/CT-Knee_naive_visibility_chart}
 		\subcaption{}
@@ -602,7 +560,7 @@ Time step 30 and 80 rendered with the static transfer function and the dynamic t
 		\subcaption{}
 	\end{minipage}
 	\caption[Optimization results of CT-Knee]{Optimization results of CT-Knee. After optimization to target \{0.1, 0.3, 0.6\}, all the 3 features are visible, and the green and the purple features inside become clearer.
-	(a) \& (b) Initial volume rendered image and transfer function; (c) \& (d) Optimized volume rendered image and transfer function; (e) \& (f) Feature visibility and VWS of features before optimization; (g) \& (h) Feature visibility and VWS of features after optimization; (i) \& (j) VWS of features for gradient descent with fixed step sizes and parallel line search respectively; (k) \& (l) Opacities of features for gradient descent with fixed step sizes and parallel line search respectively.}
+		(a) \& (b) Initial volume rendered image and transfer function; (c) \& (d) Optimized volume rendered image and transfer function; (e) \& (f) Feature visibility and VWS of features before optimization; (g) \& (h) Feature visibility and VWS of features after optimization; (i) \& (j) VWS of features for gradient descent with fixed step sizes and parallel line search respectively; (k) \& (l) Opacities of features for gradient descent with fixed step sizes and parallel line search respectively.}
 	\label{fig:CT-Knee_naive_optimized}
 \end{figure}
 
@@ -624,7 +582,7 @@ Time step 30 and 80 rendered with the static transfer function and the dynamic t
 		\includegraphics[width=1\linewidth]{figures/tf_vortex_naive_proportional_optimized_linesearch}
 		\subcaption{}
 	\end{minipage}
-
+	
 	\begin{minipage}{.25\textwidth}
 		\includegraphics[width=1\linewidth]{figures/vortex_naive_visibility_chart}
 		\subcaption{}
@@ -660,7 +618,7 @@ Time step 30 and 80 rendered with the static transfer function and the dynamic t
 		\subcaption{}
 	\end{minipage}
 	\caption[Optimization results of vortex]{Optimization results of vortex. After optimization to target \{1/3, 1/3, 1/3\}, all the 3 features are visible and the green feature inside is particularly more emphasized in comparison to the unoptimized result.
-	(a) \& (b) Initial volume rendered image and transfer function; (c) \& (d) Optimized volume rendered image and transfer function; (e) \& (f) Feature visibility and VWS of features before optimization; (g) \& (h) Feature visibility and VWS of features after optimization; (i) \& (j) VWS of features for gradient descent with fixed step sizes and parallel line search respectively; (k) \& (l) Opacities of features for gradient descent with fixed step sizes and parallel line search respectively.}
+		(a) \& (b) Initial volume rendered image and transfer function; (c) \& (d) Optimized volume rendered image and transfer function; (e) \& (f) Feature visibility and VWS of features before optimization; (g) \& (h) Feature visibility and VWS of features after optimization; (i) \& (j) VWS of features for gradient descent with fixed step sizes and parallel line search respectively; (k) \& (l) Opacities of features for gradient descent with fixed step sizes and parallel line search respectively.}
 	\label{fig:vortex_naive_optimized}
 \end{figure}
 
@@ -686,14 +644,55 @@ Time step 30 and 80 rendered with the static transfer function and the dynamic t
 	\label{fig:parallelsearch_performance}
 \end{figure}
 
+\subsection{Transfer Function Optimization For Time-Varying Data Sets}
+Similar to the approach discussed in Section~\ref{adaptive_transfer_functions_for_time-varying_data_sets}, we apply our transfer function optimization on all the time steps of the vortex data set. Our optimizer dynamically optimizes the transfer function to the same user-specified target (equal weights i.e. (1/3, 1/3, 1/3) were set as target in this test) for each time step of the time-varying data set. 
+
+Figure~\ref{fig:vorts_static} displays the temporal curves of the visibility-weighted saliency (VWS) and 2D feature saliency (2DFS, discussed in Section~\ref{2d_feature_saliency}) of the visualization with a static transfer function (optimized for the first time step) respectively.
+Similarly, Figure~\ref{fig:vorts_dynamic} displays the temporal curves of the VWS and 2DFS of the visualization with a dynamic transfer function (optimized for each time step) respectively.
+The VWS curves in Figure~\ref{fig:vorts_dynamic} (a) are more converged than the VWS curves in Figure~\ref{fig:vorts_static} (a) because the dynamic transfer function is constantly optimized towards the target (1/3, 1/3, 1/3).
+
+The 2DFS curves in Figure~\ref{fig:vorts_static} (b) and Figure~\ref{fig:vorts_dynamic} (b) are provided as comparison for the fact that 2DFS is an image space technique independent from VWS. We notice that there are more small changes in the 2DFS curves in Figure~\ref{fig:vorts_static} (b) and the three curves (representing the 2DFS of the three features) cross each other more often than the 2DFS curves in Figure~\ref{fig:vorts_static} (b).
+
+Time step 30 and 80 rendered with the static transfer function and the dynamic transfer function are displayed in Figure~\ref{fig:vorts_50_80_static} and Figure~\ref{fig:vorts_50_80_dynamic} respectively. As coherence can be an important factor in time-varying visualization, we notice the dynamic transfer function can maintain similar level of visual saliency for the purple feature when the sizes and proportions of the features change over time.
+
+%Objective function
+%Figure~\ref{fig:nucleon_strong_red_rms}
+
+%Visibility-weighted saliency of each feature
+%Figure~\ref{fig:nucleon_strong_red_saliency}
+%
+%Opacity of each feature
+%Figure~\ref{fig:nucleon_strong_red_opacity}
+
+%Before optimization
+%Figure~\ref{fig:nucleon_strong_red}
+%
+%After optimization
+%Figure~\ref{fig:nucleon_strong_red_optimized}
+
+%\begin{figure}
+%	\centering
+%	\begin{minipage}{.35\textwidth}
+%		\includegraphics[width=1\linewidth]{images/nucleon_strong_red}
+%	\end{minipage}~
+%	\begin{minipage}{.2\textwidth}
+%		\includegraphics[width=1\linewidth]{images/tf_nucleon_strong_red}	
+%	\end{minipage}~
+%	\begin{minipage}{.4\textwidth}
+%		\includegraphics[width=1\linewidth]{images/nucleon_strong_red_visibility_saliency_weighted_chart}
+%	\end{minipage}
+%	\caption{Before optimization, the transfer function strongly emphasizes the red feature, which occludes the green feature inside. (Left: the volume rendered image of the nucleon data set; Middle: the transfer function; Right: the visibility-weighted saliency histogram)}
+%	\label{fig:nucleon_strong_red}
+%\end{figure}
+
 \begin{figure}
 	\centering
 	\begin{minipage}{.5\textwidth}
-		\includegraphics[width=1\linewidth]{images/vorts_static_VWS}
+		\includegraphics[width=1\linewidth]{figures/vorts_static_VWS}
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.5\textwidth}
-		\includegraphics[width=1\linewidth]{images/vorts_static_2DFS}
+		\includegraphics[width=1\linewidth]{figures/vorts_static_2DFS}
 		\subcaption{}
 	\end{minipage}
 	\caption{(a) VWS and (b) 2DFS of the vortex data set with a static transfer function only optimized for the first time step}
@@ -703,11 +702,11 @@ Time step 30 and 80 rendered with the static transfer function and the dynamic t
 \begin{figure}
 	\centering
 	\begin{minipage}{.5\textwidth}
-		\includegraphics[width=1\linewidth]{images/vorts_optimized_parallelsearch_VWS}
+		\includegraphics[width=1\linewidth]{figures/vorts_optimized_parallelsearch_VWS}
 		\subcaption{}
 	\end{minipage}~
 	\begin{minipage}{.5\textwidth}
-		\includegraphics[width=1\linewidth]{images/vorts_optimized_parallelsearch_2DFS}
+		\includegraphics[width=1\linewidth]{figures/vorts_optimized_parallelsearch_2DFS}
 		\subcaption{}
 	\end{minipage}
 	\caption{(a) VWS and (b) 2DFS of the vortex data set with a dynamic transfer function optimized for each time step}
