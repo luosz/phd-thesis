@@ -307,8 +307,9 @@ A greedy strategy is employed in our algorithm to minimize the energy function. 
 %reducing the opacity of the highest control point (with highest significance factor) and increasing the opacity of the lowest control point (with non-zero lowest significance factor).
 
 In our implementation, the optimizer terminates when the energy function becomes stable, i.e. further iterations do not change the resulting transfer function. For the sample data sets we have tested, we observed that there is no further change to the resulting transfer function after 500 iterations.
-In addition, we measured the computation time of the optimization on two data sets with a continuous transfer function and a transfer function of tent-like shapes.
-The tests in Table~\ref{table:tf_refinement_performance} all finished within 0.01 seconds, which suggests that our approach is very lightweight.
+In addition, we measured the computation time of the optimization on two data sets with a continuous transfer function and a transfer function of tent-like shapes respectively.
+The tests in Table~\ref{table:tf_refinement_performance} all finished within 0.01 seconds, which shows that our approach is very lightweight.
+This suggests that, in practice, it would be viable to let the optimization continue to a conservatively high iteration count to ensure reasonable chance of convergence, without affecting interactivity.
 
 %In our implementation, the optimizer terminates when the energy function falls below a predefined threshold or reach a maximum iteration count.
 %We generated images using a large number of iterations and compared this, using the SSIM metric ~\cite{Wang2004SSIM}, to images at different progressive stages of optimization, and then determined satisfactory thresholds for the tested data sets. In practice this threshold can be chosen as demanded by the application or determined using a perceptual study.

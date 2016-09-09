@@ -460,14 +460,21 @@ The aim of this experiment is to gather subjective opinion scores regarding how 
 %The aim of this experiments is to gather human rating of visual saliency data in order to evaluate the proposed computational visual saliency metric for volume visualization.
 
 \subsection{Source Images and Participants}
-%This section describes the human study and experiments performed using it.
-The volume rendering images used for the study were rendered by Voreen \cite{meyer-spradow_voreen:_2009} with a variety of transfer functions highlighting different features from various viewpoints. The volume data sets used in the experiment are publicly available on the Internet.
-8 volume data sets were used to produce images for the experiment and the images of 2 data sets (CThead and lobster) were only used in the training session at the beginning of the experiment.
-The results of 6 volume data sets were analyzed. As shown in Figure~\ref{fig:experiment_data_sets}, these data sets are engine block, foot, MRbrain, nucleon, tooth and VisMale
-%and horse embryo 
-\cite{website:Roettger_volume_2013} \cite{website:Voreen_datasets_2013}.
-%There were 30 people participated in the experiment. Among the participants, there were 20 males and 10 females, all aged between 22 and 39 years old.
-30 participants (20 male and 10 female) took part in the experiment. All were aged between 22 and 39 years old and consisted of postgraduates, undergraduates and researchers. Over half of the participants had a computer science background. Only one participant reported that he had slight red-green color blindness, but this participant confirmed that he had no problem in distinguishing the colors of features in the experiment.
+%%This section describes the human study and experiments performed using it.
+%The volume rendering images used for the study were rendered by Voreen \cite{meyer-spradow_voreen:_2009} with a variety of transfer functions highlighting different features from various viewpoints. The volume data sets used in the experiment are publicly available on the Internet.
+%8 volume data sets were used to produce images for the experiment and the images of 2 data sets (CThead and lobster) were only used in the training session at the beginning of the experiment.
+%The results of 6 volume data sets were analyzed. As shown in Figure~\ref{fig:experiment_data_sets}, these data sets are engine block, foot, MRbrain, nucleon, tooth and VisMale
+%%and horse embryo 
+%\cite{website:Roettger_volume_2013} \cite{website:Voreen_datasets_2013}.
+%%There were 30 people participated in the experiment. Among the participants, there were 20 males and 10 females, all aged between 22 and 39 years old.
+
+The images used for the study were rendered by Voreen \cite{meyer-spradow_voreen:_2009} using a variety of transfer functions of tent-like shapes, e.g. the transfer function in Figure~\ref{fig:nucleon_naive} (b), highlighting different features. Eight publicly available volume data sets were used to produce images for the experiment. Two of these data sets (CThead~\textsuperscript{1} and lobster~\footnote{Volume Library: http://www9.informatik.uni-erlangen.de/External/vollib/}) were only used in a brief training session at the beginning of the experiment. The remaining six volume data sets comprised the following: 
+nucleon~\footnote{Voreen data sets: http://www.uni-muenster.de/Voreen/}, engine block~\textsuperscript{1}, foot~\textsuperscript{1}, tooth~\textsuperscript{1}, VisMale~\textsuperscript{1}  and MRbrain~\footnote{Stanford volume data archive: https://graphics.stanford.edu/data/voldata/} 
+as shown in Figure~\ref{fig:experiment_data_sets}. For these, we empirically modulated the transfer function to achieve varying degrees of emphasis on individual features. It should be noted that relatively simple transfer functions were used in order to simplify the explanation of the task to participants; for instance, in order to associate a feature with an easily identifiable color.
+
+30 participants (20 male and 10 female) took part in the experiment.
+%All were aged between 22 and 39 years old and consisted of postgraduates, undergraduates and researchers. Over half of the participants had a computer science background. Only one participant reported that he had slight red-green color blindness, but this participant confirmed that he had no problem in distinguishing the colors of features in the experiment.
+All participants were aged between 22 and 39 years old and consisted of postgraduates, undergraduates and researchers. Over half of the participants had a computer science background. One of the male participants reported that he had slight red-green color blindness and his results were excluded from the study; thus the scores of 29 participants were used in the final data analysis.
 
 \begin{figure}
 \centering
@@ -500,18 +507,32 @@ The results of 6 volume data sets were analyzed. As shown in Figure~\ref{fig:exp
 \end{figure}
 
 \subsection{Methods and Measurements}
-In the experiment, participants were asked to sit in front of a computer display viewing images generated from volume visualization. The experiment sought to investigate how participants perceive the visual saliency of different objects in the images. The participants' task was to score the images on a scale of 1 to 5 by keyboard input.
-In each trial, a screen indicating the feature of interest was shown to the participant for 3 seconds, followed by a screen displaying a volume rendered image for 17 seconds.
-The duration of the full experiment was approximately 20 minutes.
+%In the experiment, participants were asked to sit in front of a computer display viewing images generated from volume visualization. The experiment sought to investigate how participants perceive the visual saliency of different objects in the images. The participants' task was to score the images on a scale of 1 to 5 by keyboard input.
+%In each trial, a screen indicating the feature of interest was shown to the participant for 3 seconds, followed by a screen displaying a volume rendered image for 17 seconds.
+%The duration of the full experiment was approximately 20 minutes.
+%
+%Some images were shown more than once in the experiment in order to detect whether the participants's scores were consistent during the experiment. We analyzed the sum of differences of the repeated images's scores and noticed that the scores by the participant with slight red-green color blindness were significantly less consistent than other participants.
+%Hence, the scores by this participant were excluded and the other 29 participants's scores were used in the data analysis.
+
+Participants were asked to sit in front of a computer display viewing the images generated from volume visualization. The participants' task was to score the images on a scale of 1 to 5 by keyboard input, based on how conspicuous a particular feature appeared. In each trial, a screen identifying the feature of interest using a textual task description e.g. \textit{``How clear and distinct is the RED feature?''} was first shown to the participant for 3 seconds, followed by a screen displaying a volume rendered image for 17 seconds (See Appendix~\ref{Experiment_pdf} for a sample questionnaire of the experiment). The duration of the full experiment was approximately 20 minutes.
 
 Some images were shown more than once in the experiment in order to detect whether the participants's scores were consistent during the experiment. We analyzed the sum of differences of the repeated images's scores and noticed that the scores by the participant with slight red-green color blindness were significantly less consistent than other participants.
 Hence, the scores by this participant were excluded and the other 29 participants's scores were used in the data analysis.
 
-\subsection{2D Feature Saliency \label{2d_feature_saliency}}
-A widely used saliency model is the saliency map by Itti et al. \cite{itti_model_1998}.
-The architecture and components of this model mimic the properties of primate early vision.
-Three visual properties, i.e. intensity contrast, color opponency and orientation are considered in the model in order to determine whether an image pixel stands out from its surroundings.
-The saliency map is a 2D image indicating the visual saliency of pixels in the input image. Although 2D saliency maps can not be directly used to estimate the visual saliency of 3D features, an inverse distance weighting \cite{shepard_two-dimensional_1968} can be applied to divide a 2D saliency map into several feature saliency maps, one for each feature (see Appendix~\ref{2d_saliency_map} for details). Subsequently, the visual saliency of each feature can be estimated with the total intensity of each 2D feature saliency map. 
+%{Comment: How many different images/trials? / were partcipants always consistent (wrt following statement}
+%Some images were shown more than once in the experiment in order to detect whether the participants's scores were consistent during the experiment. 
+Our intention was to validate whether the VWS is able to predict how users perceive relative conspicuity of individual features. If VWS is valid, the ordering of features by user scores should correspond to ordering with VWS. The efficacy of the metric was compared to two other approaches from existing literature:
+
+\subsection{2D Feature Saliency (2DFS) \label{2d_feature_saliency}}
+%A widely used saliency model is the saliency map by Itti et al. \cite{itti_model_1998}.
+%The architecture and components of this model mimic the properties of primate early vision.
+%Three visual properties, i.e. intensity contrast, color opponency and orientation are considered in the model in order to determine whether an image pixel stands out from its surroundings.
+%The saliency map is a 2D image indicating the visual saliency of pixels in the input image. Although 2D saliency maps can not be directly used to estimate the visual saliency of 3D features, an inverse distance weighting \cite{shepard_two-dimensional_1968} can be applied to divide a 2D saliency map into several feature saliency maps, one for each feature (see Appendix~\ref{2d_saliency_map} for details). Subsequently, the visual saliency of each feature can be estimated with the total intensity of each 2D feature saliency map.
+
+A widely used saliency model is the saliency map by Itti et al. \cite{itti_model_1998}, based on properties of early primate vision. Three visual attributes, i.e. intensity contrast, color opponency and orientation, are considered in the model in order to determine whether an image pixel stands out from its surroundings. The output from this model is a 2D view-dependent map indicating the visual saliency of pixels in the full rendered image and thus can not directly be used to estimate the visual saliency of 3D voxels. However, using an inverse distance weighting \cite{shepard_two-dimensional_1968} between pixels of the final image and individual 2D feature images (rendered from the same view but each isolating only the individual features), we can estimate the visual saliency of each feature as the weighted total saliency of each 2D feature saliency map (see Appendix~\ref{2d_saliency_map} for details). We refer to this as 2D Feature Saliency (2DFS) in the rest of the thesis.
+
+\subsection{Feature Visibility (FV)}
+Similar in objective to VWS, Wang et al. \cite{wang_efficient_2011} proposed a scheme that measures the influence of individual features on the volume rendered image. Their approach allows the user to directly specify the desired visibility for the features of interest, and subsequently the opacity transfer function is optimized using an active set algorithm towards this target. We refer to their measure as Feature Visibility (FV) and use it as an additional basis to compare against VWS.
 
 \subsection{Data Analysis}
 %Since the opinion scores obtained from participants in the experiment may not be normally distributed or consistently applied across participants and data sets, this structure of data may violate the assumptions of some standard statistical tests \cite{cunningham_experimental_2011}.
