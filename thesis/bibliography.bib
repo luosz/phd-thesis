@@ -205,24 +205,6 @@
 	pages = {773--782}
 }
 
-@article{lorensen_marching_1987,
-	title = {Marching cubes: A high resolution {3D} surface construction algorithm},
-	volume = {21},
-	issn = {0097-8930},
-	shorttitle = {Marching cubes},
-	url = {http://doi.acm.org/10.1145/37402.37422},
-	doi = {10.1145/37402.37422},
-	abstract = {We present a new algorithm, called marching cubes, that creates triangle models of constant density surfaces from {3D} medical data. Using a divide-and-conquer approach to generate inter-slice connectivity, we create a case table that defines triangle topology. The algorithm processes the {3D} medical data in scan-line order and calculates triangle vertices using linear interpolation. We find the gradient of the original data, normalize it, and use it as a basis for shading the models. The detail in images produced from the generated surface models is the result of maintaining the inter-slice connectivity, surface data, and gradient information present in the original {3D} data. Results from computed tomography ({CT)}, magnetic resonance ({MR)}, and single-photon emission computed tomography ({SPECT)} illustrate the quality and functionality of marching cubes. We also discuss improvements that decrease processing time and add solid modeling capabilities.},
-	number = {4},
-	urldate = {2013-05-16},
-	journal = {{SIGGRAPH} Computer Graphics},
-	author = {Lorensen, William E. and Cline, Harvey E.},
-	month = aug,
-	year = {1987},
-	pages = {163-169},
-	file = {ACM Full Text PDF:C:\Users\Joe\AppData\Roaming\Zotero\Zotero\Profiles\vuyr0ioc.default\zotero\storage\T2NQCW78\Lorensen and Cline - 1987 - Marching cubes A high resolution 3D surface const.pdf:application/pdf}
-}
-
 @inproceedings{bajaj_contour_1997,
 	title = {The contour spectrum},
 	doi = {10.1109/VISUAL.1997.663875},
@@ -552,17 +534,17 @@
 	url = {http://dx.doi.org/10.1117/12.2001887},
 	doi = {10.1117/12.2001887},
 	abstract = {Streamline visualization can be formulated as the problem of streamline placement or streamline selection. In this
-paper, we present an importance-driven approach to view-dependent streamline selection that guarantees coherent
-streamline update when the view changes gradually. Given a large number of randomly or uniformly seeded
-and traced streamlines and sample viewpoints, our approach evaluates, for each streamline, the view-dependent
-importance by considering the amount of information shared by the 3D streamline and its 2D projection as well as
-how stereoscopic the streamline’s shape is reflected under each viewpoint. We achieve coherent view-dependent
-streamline selection following a two-pass solution that considers i) the relationships between local viewpoints
-and the global streamline set selected in a view-independent manner and ii) the continuity between adjacent
-viewpoints. We demonstrate the effectiveness of our approach with several synthesized and simulated flow fields
-and compare our view-dependent streamline selection algorithm with a naïve algorithm that selects streamlines
-solely based on the information at the current viewpoint.},
-	urldate = {2016-09-05},
+	paper, we present an importance-driven approach to view-dependent streamline selection that guarantees coherent
+	streamline update when the view changes gradually. Given a large number of randomly or uniformly seeded
+	and traced streamlines and sample viewpoints, our approach evaluates, for each streamline, the view-dependent
+	importance by considering the amount of information shared by the 3D streamline and its 2D projection as well as
+	how stereoscopic the streamline’s shape is reflected under each viewpoint. We achieve coherent view-dependent
+	streamline selection following a two-pass solution that considers i) the relationships between local viewpoints
+	and the global streamline set selected in a view-independent manner and ii) the continuity between adjacent
+	viewpoints. We demonstrate the effectiveness of our approach with several synthesized and simulated flow fields
+	and compare our view-dependent streamline selection algorithm with a naïve algorithm that selects streamlines
+	solely based on the information at the current viewpoint.},
+	urldate = {2016-09-09},
 	author = {Ma, Jun and Wang, Chaoli and Shene, Ching-Kuang},
 	year = {2013},
 	pages = {865407--865407--15}
@@ -1007,27 +989,26 @@ solely based on the information at the current viewpoint.},
 	file = {IEEE Xplore Abstract Record:C:\Users\Joe\AppData\Roaming\Zotero\Zotero\Profiles\3r6072id.default\zotero\storage\HZG84WEV\abs_all.html:text/html;IEEE Xplore Full Text PDF:C:\Users\Joe\AppData\Roaming\Zotero\Zotero\Profiles\3r6072id.default\zotero\storage\63Z8VC5U\Takahashi et al. - 2005 - A feature-driven approach to locating optimal view.pdf:application/pdf}
 }
 
-@article{schlegel_visibility-difference_2013,
+@inproceedings{schlegel_visibility-difference_2013,
 	title = {Visibility-difference entropy for automatic transfer function generation},
+	volume = {8654},
 	url = {http://dx.doi.org/10.1117/12.2002971},
 	doi = {10.1117/12.2002971},
-	abstract = {Direct volume rendering allows for interactive exploration of volumetric data and has become an important tool in many 
-visualization domains. But the insight and information that can be obtained are dependent on the transfer function defining 
-the transparency of voxels. Constructing good transfer functions is one of the most time consuming and cumbersome tasks 
-in volume visualization. We present a novel general purpose method for automatically generating an initial set of best 
-transfer function candidates. The generated transfer functions reveal the major structural features within the volume and 
-allow for an efficient initial visual analysis, serving as a basis for further interactive exploration in particular of originally 
-unknown data. The basic idea is to introduce a metric as a measure of the goodness of a transfer function which indicates the 
-information that can be gained from rendered images by interactive visualization. In contrast to prior methods, our approach 
-does not require a user feedback-loop, operates exclusively in image space and takes the characteristics of interactive data 
-exploration into account. We show how our new transfer function generation method can uncover the major structures of 
-an unknown dataset within only a few minutes.},
-	urldate = {2013-07-17},
+	abstract = {Direct volume rendering allows for interactive exploration of volumetric data and has become an important tool in many
+	visualization domains. But the insight and information that can be obtained are dependent on the transfer function defining
+	the transparency of voxels. Constructing good transfer functions is one of the most time consuming and cumbersome tasks
+	in volume visualization. We present a novel general purpose method for automatically generating an initial set of best
+	transfer function candidates. The generated transfer functions reveal the major structural features within the volume and
+	allow for an efficient initial visual analysis, serving as a basis for further interactive exploration in particular of originally
+	unknown data. The basic idea is to introduce a metric as a measure of the goodness of a transfer function which indicates the
+	information that can be gained from rendered images by interactive visualization. In contrast to prior methods, our approach
+	does not require a user feedback-loop, operates exclusively in image space and takes the characteristics of interactive data
+	exploration into account. We show how our new transfer function generation method can uncover the major structures of
+	an unknown dataset within only a few minutes.},
+	urldate = {2016-09-09},
 	author = {Schlegel, Philipp and Pajarola, Renato},
-	month = feb,
 	year = {2013},
-	pages = {865406--865406},
-	file = {VDE_TF.pdf:C:\Users\Joe\AppData\Roaming\Zotero\Zotero\Profiles\3r6072id.default\zotero\storage\229KG5CU\VDE_TF.pdf:application/pdf}
+	pages = {865406--865406--15}
 }
 
 @inproceedings{lee_motion_2009,
@@ -2433,24 +2414,6 @@ ISSN={1063-9535},}
 	keywords = {Color mapping, Transfer function design, Visibility distribution, volume visualization, Volume visualization},
 	pages = {450--458},
 	file = {ScienceDirect Full Text PDF:C\:\\Users\\JoeShengzhou\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\0m7eflhb.default\\zotero\\storage\\P387H37N\\Cai et al. - 2013 - Automatic transfer function design for medical vis.pdf:application/pdf;ScienceDirect Snapshot:C\:\\Users\\JoeShengzhou\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\0m7eflhb.default\\zotero\\storage\\K6HGS37E\\S0895611113001419.html:text/html}
-}
-
-@article{qin_voxel_2015,
-	title = {The voxel visibility model: {An} efficient framework for transfer function design},
-	volume = {40},
-	issn = {0895-6111},
-	shorttitle = {The voxel visibility model},
-	url = {http://www.sciencedirect.com/science/article/pii/S089561111400189X},
-	doi = {10.1016/j.compmedimag.2014.11.014},
-	abstract = {Volume visualization is a very important work in medical imaging and surgery plan. However, determining an ideal transfer function is still a challenging task because of the lack of measurable metrics for quality of volume visualization. In the paper, we presented the voxel vibility model as a quality metric to design the desired visibility for voxels instead of designing transfer functions directly. Transfer functions are obtained by minimizing the distance between the desired visibility distribution and the actual visibility distribution. The voxel model is a mapping function from the feature attributes of voxels to the visibility of voxels. To consider between-class information and with-class information simultaneously, the voxel visibility model is described as a Gaussian mixture model. To highlight the important features, the matched result can be obtained by changing the parameters in the voxel visibility model through a simple and effective interface. Simultaneously, we also proposed an algorithm for transfer functions optimization. The effectiveness of this method is demonstrated through experimental results on several volumetric data sets.},
-	urldate = {2015-05-23},
-	journal = {Computerized Medical Imaging and Graphics},
-	author = {Qin, Hongxing and Ye, Bin and He, Rui},
-	month = mar,
-	year = {2015},
-	keywords = {Gaussian Mixture Model, GPU, Transfer function design, visibility, volume visualization},
-	pages = {138--146},
-	file = {ScienceDirect Full Text PDF:C\:\\Users\\JoeShengzhou\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\0m7eflhb.default\\zotero\\storage\\DHTU4HSG\\Qin et al. - 2015 - The voxel visibility model An efficient framework.pdf:application/pdf;ScienceDirect Snapshot:C\:\\Users\\JoeShengzhou\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\0m7eflhb.default\\zotero\\storage\\NS5B3W2M\\S089561111400189X.html:text/html}
 }
 
 @article{giesen_conjoint_2007,
@@ -4555,14 +4518,14 @@ The last contribution is a new manipulation tool designed for adding contextual 
 	url = {http://www.sciencedirect.com/science/article/pii/S089561111400189X},
 	doi = {10.1016/j.compmedimag.2014.11.014},
 	abstract = {Volume visualization is a very important work in medical imaging and surgery plan. However, determining an ideal transfer function is still a challenging task because of the lack of measurable metrics for quality of volume visualization. In the paper, we presented the voxel vibility model as a quality metric to design the desired visibility for voxels instead of designing transfer functions directly. Transfer functions are obtained by minimizing the distance between the desired visibility distribution and the actual visibility distribution. The voxel model is a mapping function from the feature attributes of voxels to the visibility of voxels. To consider between-class information and with-class information simultaneously, the voxel visibility model is described as a Gaussian mixture model. To highlight the important features, the matched result can be obtained by changing the parameters in the voxel visibility model through a simple and effective interface. Simultaneously, we also proposed an algorithm for transfer functions optimization. The effectiveness of this method is demonstrated through experimental results on several volumetric data sets.},
-	urldate = {2016-08-04},
+	urldate = {2016-09-09},
 	journal = {Computerized Medical Imaging and Graphics},
 	author = {Qin, Hongxing and Ye, Bin and He, Rui},
 	month = mar,
 	year = {2015},
 	keywords = {Gaussian Mixture Model, GPU, Transfer function design, Visibility, Volume visualization},
 	pages = {138--146},
-	file = {ScienceDirect Full Text PDF:C\:\\Users\\dell\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\lnhf8ovg.default\\zotero\\storage\\R5QMCDI4\\Qin et al. - 2015 - The voxel visibility model An efficient framework.pdf:application/pdf;ScienceDirect Snapshot:C\:\\Users\\dell\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\lnhf8ovg.default\\zotero\\storage\\8MX6VTA9\\S089561111400189X.html:text/html}
+	file = {ScienceDirect Full Text PDF:C\:\\Users\\lazaro\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\9kdnyu8g.default\\zotero\\storage\\VG6NTPRN\\Qin et al. - 2015 - The voxel visibility model An efficient framework.pdf:application/pdf;ScienceDirect Snapshot:C\:\\Users\\lazaro\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\9kdnyu8g.default\\zotero\\storage\\7R5PR94S\\S089561111400189X.html:text/html}
 }
 
 @inproceedings{luo_information-guided_2014,
