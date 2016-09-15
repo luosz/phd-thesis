@@ -16,10 +16,10 @@ visible to the user.
 However, obtaining an effective transfer function is a non-trivial task, which often entails time-consuming tweaking until a desired aesthetic quality is achieved in the resulting rendering.
 Although a number of automatic or semi-automatic approaches have been developed, transfer function design remains a challenging problem \cite{pfister_transfer_2001} \cite{arens_survey_2010}.
 
-%Volume rendering is the process of depicting information within volume data sets, which usually contain complex structures of various materials or dynamic phenomena. The majority of such datasets are discretely sampled along a three-dimensional grid and contain scalar values usually acquired from imaging devices such as CT or MRI machines. In other cases, such as in flow visualization, the datasets are often generated from simulations and may constitute a 3D vector field or multi-variate data of even higher complexity.
+%Volume rendering is the process of depicting information within volume data sets, which usually contain complex structures of various materials or dynamic phenomena. The majority of such data sets are discretely sampled along a three-dimensional grid and contain scalar values usually acquired from imaging devices such as CT or MRI machines. In other cases, such as in flow visualization, the data sets are often generated from simulations and may constitute a 3D vector field or multi-variate data of even higher complexity.
 %%Volume data is stored as an array of voxels (a three-dimensional extension of pixels), the atomic entities that contain information such as the density or other properties of a discretised position in 3D space.
-%Such datasets are ubiquitous in science, medicine and engineering but are difficult to deal with as the data typically does not consist of surfaces and edges, which are the typical primitives of a 3D graphics pipeline. Because of the lack of explicit geometric information, %and limited semantics, 
-%it is a major challenge to provide clear visualizations of the structures contained in a volume dataset.
+%Such data sets are ubiquitous in science, medicine and engineering but are difficult to deal with as the data typically does not consist of surfaces and edges, which are the typical primitives of a 3D graphics pipeline. Because of the lack of explicit geometric information, %and limited semantics, 
+%it is a major challenge to provide clear visualizations of the structures contained in a volume data set.
 
 %A crucial step in volume rendering is transfer function specification.
 
@@ -112,7 +112,7 @@ Ruiz et al. \cite{ruiz_automatic_2011} also used visibility as a main parameter 
 %Jankun-Kelly and Ma \cite{jankun-kelly_study_2001} examined how to combine transfer functions for different time-steps to generate a coherent transfer function.
 %Woodring et al. \cite{woodring_high_2003} considered time-varying volume data as four-dimensional data field and provided a user interface to specify hyperplanes in 4D.
 %Woodring and Shen \cite{woodring_chronovolumes_2003} introduced an alternative approach to render multiple time-steps in a sequence with different colors into a single image. This approach provides the context of surrounding time steps but coherence of color among time-steps is hard to maintain.
-%Tikhonova et al. \cite{tikhonova_exploratory_2010} presented an explorative approach based on a compact representation of each time step of the dataset in the form of ray attenuation functions. Ray attenuation functions are subsequently used for transfer function generation.
+%Tikhonova et al. \cite{tikhonova_exploratory_2010} presented an explorative approach based on a compact representation of each time step of the data set in the form of ray attenuation functions. Ray attenuation functions are subsequently used for transfer function generation.
 %\cite{maciejewski_structuring_2009}
 %\cite{maciejewski_abstracting_2013}
 %\cite{mindek_visual_2013}
@@ -134,7 +134,7 @@ Ruiz et al. \cite{ruiz_automatic_2011} also used visibility as a main parameter 
 
 %A typical class of 1D (intensity-based) transfer function is based on linear ramps between user-specified control points.
 
-%Volume rendering is used to display a 2D image of a three-dimensional (3D) dataset. It can be seen as a projection of a 3D volumetric dataset into a two-dimensional (2D) image.
+%Volume rendering is used to display a 2D image of a three-dimensional (3D) data set. It can be seen as a projection of a 3D volumetric data set into a two-dimensional (2D) image.
 %In volume rendering, every volumetric element (voxel) must be mapped to opacity and a color.
 %This is done with a transfer function, which can be a simple ramp, a piecewise linear function or an arbitrary table.
 %Figure~\ref{fig:konig_mastering_2000} displays four typical shapes used in transfer function design.
